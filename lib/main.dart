@@ -9,7 +9,8 @@ import 'package:theme_provider/theme_provider.dart';
 import 'package:ps/UI/happy_test/should_register.dart';
 import 'package:ps/UI/trackers/main_screen.dart';
 import 'bottom_navigation.dart';
-import 'package:ps/UI/wishes/add_wish.dart';
+import 'package:ps/UI/calendar/calendar_opt.dart';
+import 'package:ps/UI/success/success_note.dart';
 import 'package:ps/UI/emotion_alarm/emotions_calendar.dart';
 // import 'package:ps/page-1/-3X1.dart';
 
@@ -53,7 +54,7 @@ class MyApp extends StatelessWidget {
                   color: const Color(0xff4B3425),
                   fontSize: 32,
                   fontWeight: FontWeight.w500))),
-      home:  Container(child: BottomNavigationScreen(AddedWish())),
+      home:  Container(child: (SuccessNote())),
     );
   }
 }

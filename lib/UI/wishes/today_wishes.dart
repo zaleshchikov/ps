@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -66,7 +68,25 @@ class TodayWishes extends StatelessWidget {
                                 children: [
                                   InkWell(
                                       onTap: () {
-                                        print('tapped');
+                                        showDialog(
+                                            barrierColor: Colors.transparent,
+                                            context: context,
+                                            builder: (_) =>  BackdropFilter(
+                                              filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+                                              child: Dialog(
+                                                surfaceTintColor: Colors.transparent,
+                                                backgroundColor: Colors.transparent,
+                                                child:  Container(
+                                                    alignment: FractionalOffset.center,
+                                                    height: size.height/2.5,
+                                                    padding: const EdgeInsets.all(20.0),
+                                                    child:  Image.asset(
+                                                      'assets/dialog_s.png',
+                                                      fit: BoxFit.cover,
+                                                    )
+                                                ),
+                                              ),
+                                            ));
                                       },
                                       child: Container(
                                           height: size.height / 16.3,

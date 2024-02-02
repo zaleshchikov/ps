@@ -3,17 +3,16 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'dart:ui';
-import 'current_amotions.dart';
 import '../../page-1/utils.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
-class EmotionsNote extends StatefulWidget {
+class SuccessNote extends StatefulWidget {
 
   @override
-  State<EmotionsNote> createState() => _EmotionsNoteState();
+  State<SuccessNote> createState() => _EmotionsNoteState();
 }
 
-class _EmotionsNoteState extends State<EmotionsNote> {
+class _EmotionsNoteState extends State<SuccessNote> {
   final form = FormGroup({
     'text': FormControl<String>(),
   });
@@ -30,7 +29,7 @@ class _EmotionsNoteState extends State<EmotionsNote> {
         width: double.infinity,
         child: Container(
           // 47u (191:5904)
-          padding: EdgeInsets.fromLTRB(26*fem, 8*fem, 26.5*fem, 76*fem),
+          padding: EdgeInsets.fromLTRB(26*fem, 8*fem, 26.5*fem, 0*fem),
           width: double.infinity,
           decoration: const BoxDecoration (
             color: Color(0xfff5ecdf),
@@ -64,12 +63,34 @@ class _EmotionsNoteState extends State<EmotionsNote> {
                         ),
                         Text(
                           // V8f (191:5905)
-                          'Будильник эмоций ',
-                          style: theme.textTheme.bodyLarge!.copyWith(fontSize: 20)
+                            'Журнал успеха ',
+                            style: theme.textTheme.bodyLarge!.copyWith(fontSize: 20)
                         ),
                       ],
                     ),
                   ),
+                ),
+              ),
+              Center(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      height: size.height/25.9,
+                      width: size.width/3.3,
+                      decoration: BoxDecoration(
+                    color: Color(0xffEFD8B4),
+                        borderRadius: BorderRadius.circular(30)
+                ),
+                      child: Center(
+                        child: Text('выбор дат',
+                            style: theme.textTheme.bodySmall!.copyWith(
+                                fontSize: 20, fontWeight: FontWeight.w400)),
+                      ),
+                    ),
+                    Container(width: size.width / 20),
+                    Image(image: AssetImage('assets/calendar_icon.png')),
+                  ],
                 ),
               ),
               Container(
@@ -79,24 +100,12 @@ class _EmotionsNoteState extends State<EmotionsNote> {
                   maxWidth: 344*fem,
                 ),
                 child: Text(
-                  'Чем Вы сейчас занимаетесь?',
-                  textAlign: TextAlign.center,
-                  style: theme.textTheme.titleLarge!.copyWith(fontSize: 28, color: theme.textTheme.bodySmall!.color)
+                    'Ваши успешные\n действия за сегодня',
+                    textAlign: TextAlign.center,
+                    style: theme.textTheme.titleLarge!.copyWith(fontSize: 28, color: theme.textTheme.bodySmall!.color)
                 ),
               ),
-              Container(
-                // HaK (191:5929)
-                margin: EdgeInsets.fromLTRB(1.5*fem, 0*fem, 0*fem, 18*fem),
-                constraints: BoxConstraints (
-                  maxWidth: 376*fem,
-                ),
-                child: Text(
-                  'Описание действий поможет проанализировать причины Вашего состояния.',
-                  textAlign: TextAlign.center,
-                  style: theme.textTheme.bodySmall!
-                      .copyWith(fontWeight: FontWeight.w500, fontSize: 15)
-                ),
-              ),
+
               Container(
                 margin: EdgeInsets.fromLTRB(11*fem, 0*fem, 23.5*fem, 56*fem),
                 width: double.infinity,
@@ -141,16 +150,16 @@ class _EmotionsNoteState extends State<EmotionsNote> {
                                 ),
                               ),
                               !(form.control('text').isNull ||  form.control('text').value == '') ? Container() :Positioned(
-                                // vectorFJB (191:5913)
-                                left: 0*fem,
-                                top: 80*fem,
+                                // vectorSnw (191:5732)
+                                left: 3*fem,
+                                top: 41*fem,
                                 child: Align(
                                   child: SizedBox(
-                                    width: 165*fem,
+                                    width: 187*fem,
                                     height: 34*fem,
                                     child: Container(
-                                      decoration: const BoxDecoration (
-                                        color: Color(0xb2ede6e4),
+                                      decoration: BoxDecoration (
+                                        color: Color(0xffede6e4),
                                       ),
                                     ),
                                   ),
@@ -165,7 +174,7 @@ class _EmotionsNoteState extends State<EmotionsNote> {
                                     width: 191*fem,
                                     height: 114*fem,
                                     child: Text(
-                                      'Что вызвало эти эмоции и чувства',
+                                      'Опишите\nВаш успех',
                                       style: SafeGoogleFont (
                                         'Urbanist',
                                         fontSize: 30*ffem,
@@ -179,53 +188,39 @@ class _EmotionsNoteState extends State<EmotionsNote> {
                                 ),
                               ),
                               !(form.control('text').isNull ||  form.control('text').value == '') ? Container() :Positioned(
-                                // group3Uw (191:5918)
-                                left: 57*fem,
+                                // group323 (191:5737)
+                                left: 0*fem,
                                 top: 38*fem,
                                 child: Align(
                                   child: SizedBox(
                                     width: 6*fem,
                                     height: 36*fem,
                                     child: Image.asset(
-                                      'assets/page-1/images/group-gYB.png',
+                                      'assets/page-1/images/group.png',
                                       width: 6*fem,
                                       height: 36*fem,
                                     ),
                                   ),
                                 ),
                               ),
-                              !(form.control('text').isNull ||  form.control('text').value == '') ?  Container() :Positioned(
-                                // autogroupfvo18Pu (KqnvyrXJWtwx86dw3yFVo1)
-                                left: 0*fem,
-                                top: 110*fem,
-                                child: Align(
-                                  child: SizedBox(
-                                    width: 42*fem,
-                                    height: 37*fem,
-                                    child: Image.asset(
-                                      'assets/page-1/images/auto-group-fvo1.png',
-                                      width: 42*fem,
-                                      height: 37*fem,
-                                    ),
-                                  ),
-                                ),
-                              ),
                               !(form.control('text').isNull ||  form.control('text').value == '') ? Container() :Positioned(
-                                // editfillqZD (191:5925)
-                                left: 10*fem,
-                                top: 115*fem,
+                                // group9qm (191:5740)
+                                left: 187*fem,
+                                top: 38*fem,
                                 child: Align(
                                   child: SizedBox(
-                                    width: 24*fem,
-                                    height: 24*fem,
+                                    width: 6*fem,
+                                    height: 36*fem,
                                     child: Image.asset(
-                                      'assets/page-1/images/editfill-Uks.png',
-                                      width: 24*fem,
-                                      height: 24*fem,
+                                      'assets/page-1/images/group-hbR.png',
+                                      width: 6*fem,
+                                      height: 36*fem,
                                     ),
                                   ),
                                 ),
                               ),
+
+
                               Container(
                                 height: size.height/5,
                                 width: size.width/1.4,
@@ -236,7 +231,7 @@ class _EmotionsNoteState extends State<EmotionsNote> {
                                   onChanged:(_)=> setState(() {
                                   }),
                                   decoration: InputDecoration(
-                                      border: InputBorder.none,
+                                    border: InputBorder.none,
                                   ),
                                   formControlName: 'text',
                                 ),
@@ -296,7 +291,7 @@ class _EmotionsNoteState extends State<EmotionsNote> {
                 width: double.infinity,
                 height: 40*fem,
                 decoration: BoxDecoration (
-                  color: const Color(0xffafa092),
+                  color: const Color(0xffEFD8B4),
                   borderRadius: BorderRadius.circular(1234*fem),
                 ),
                 child: Container(
@@ -310,6 +305,7 @@ class _EmotionsNoteState extends State<EmotionsNote> {
                         width: 12*fem,
                         height: 19*fem,
                         child: Image.asset(
+                          color: Color(0xffC49A71),
                           'assets/page-1/images/monotone-microphone-5Ns.png',
                           width: 12*fem,
                           height: 19*fem,
@@ -323,24 +319,25 @@ class _EmotionsNoteState extends State<EmotionsNote> {
                           fontWeight: FontWeight.w600,
                           height: 1.2*ffem/fem,
                           letterSpacing: -0.16*fem,
-                          color: const Color(0xffffffff),
+                          color: const Color(0xffC49A71),
                         ),
                       ),
                     ],
                   ),
                 ),
               ),
+              Container(height: size.height/5),
               GestureDetector(
-                  onTap: (){
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => CurrentEmotions()));
-                  },
+                onTap: (){
+                  // Navigator.push(
+                  //     context,
+                  //     MaterialPageRoute(builder: (context) => CurrentEmotions()));
+                },
                 child: Container(
                   // autogroupmpyt2n7 (KqnvTTEHwQPnZQcM6NMpYT)
                   margin: EdgeInsets.fromLTRB(13*fem, 0*fem, 21.5*fem, 32*fem),
-                  width: double.infinity,
-                  height: 64*fem,
+                  width: size.width/3,
+                  height: 60*fem,
                   decoration: BoxDecoration (
                     color: const Color(0xffa5b879),
                     borderRadius: BorderRadius.circular(26*fem),
@@ -353,56 +350,21 @@ class _EmotionsNoteState extends State<EmotionsNote> {
                     ],
                   ),
                   child:
-                      Center(
-                        child: Container(
-                          padding: EdgeInsets.only(top: size.height/70),
-                          child: Text(
-                            'Продолжить\n',
-                            style: theme.textTheme.bodySmall!.copyWith( color: Colors.white,
-                          fontSize: 20)
-                          ),
-                        ),
+                  Center(
+                    child: Container(
+                      child: Text(
+                          'Готово',
+                          style: theme.textTheme.bodySmall!.copyWith(fontWeight: FontWeight.w600)
                       ),
-                ),
-              ),
-              GestureDetector(
-                onTap: (){
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => CurrentEmotions()));
-                },
-                child: Container(
-                  // autogroupeamrU8K (KqnvYx58fgzqiezt2HEAMR)
-                  width: double.infinity,
-                  height: 64*fem,
-                  decoration: BoxDecoration (
-                    color: const Color(0x9eea7541),
-                    borderRadius: BorderRadius.circular(26*fem),
-                    boxShadow: [
-                      BoxShadow(
-                        color: const Color(0xff7c4b21),
-                        offset: Offset(0*fem, 4*fem),
-                        blurRadius: 4.5*fem,
-                      ),
-                    ],
+                    ),
                   ),
-                  child:
-                      Center(
-                        child: Container(
-                          padding: EdgeInsets.only(top: size.height/70),
-                          child: Text(
-                            'Пропустить\n',
-                            style: theme.textTheme.bodySmall!.copyWith(
-                                fontSize: 20)
-                          ),
-                        ),
-                      ),
                 ),
               ),
+
             ],
           ),
         ),
-            ),
+      ),
     );
   }
 }
