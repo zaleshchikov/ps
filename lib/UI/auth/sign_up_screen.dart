@@ -29,9 +29,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
   SaveToDB(FormGroup form) async{
     User user = User(
       username: form.control('email').value,
-      password: form.control('password').value
+      password: form.control('password').value,
+      testResult: []
     );
-    await UserDatabase.insertUser(user);
+    await UserDatabase.update(user);
 
   }
 

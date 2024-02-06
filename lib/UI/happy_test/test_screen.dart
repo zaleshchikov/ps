@@ -1,109 +1,155 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:ps/UI/happy_test/result_an.dart';
 import 'to_main_button.dart';
 import 'load_indicator.dart';
-import 'result_an.dart';
+import 'package:ps/db/user_db.dart';
+
 class TestScreen extends StatefulWidget {
+  int sum;
+  int number;
+
+  TestScreen(this.sum, this.number);
 
   @override
   State<TestScreen> createState() => _TestScreenState();
 }
 
 class _TestScreenState extends State<TestScreen> {
- var _selectedIndex = 6;
+  var _selectedIndex = 6;
 
- var listOfDegree = [
-   'Совершенно согласен',
-   'Скорее согласен',
-   'Отчасти согласен',
-   'Скорее не согласен',
-   'Совершенно не согласен'
- ];
+  var listOfQuestions = [
+    'По сравнению с большинством я считаю себя более счастливым',
+    'Почти во всем моя жизнь соответствует моему идеалу',
+    'Любые условия моей жизни превосходные',
+    'Удовлетворенность моей жизнью высока',
+    'В основе я достиг всего, чего всегда хотел',
+    'Если было бы возможно прожить повторно свою жизнь, я бы ничего в ней не менял',
+    'Я смотрю в будущее с наивысшим оптимизмом',
+    'Я ощущаю что жизнь вознаграждает меня по заслугам',
+    'Я с легкостью принимаю даже самые сложные решения в жизни',
+    'Я действительно отлично организую свое время',
+    'Мне часто бывает весело в компании с другими людьми',
+    'Моя жизнь переполнена смыслом и имеет конкретную цель',
+    'Жизнь - это для меня! Мир заботится обо мне!',
+    'Я часто смеюсь',
+    'Некоторые люди счастливы по своей природе. Они радуются жизни несмотря ни на что!',
+    'Я считаю себя привлекательным человеком',
+    'Я часто радуюсь и большую часть времени пребываю в хорошем настроении',
+    'Другие люди не могут повлиять на мое состояние',
+    'Я знаю что могу больше, лучше, сильнее',
+    'Только я несу ответственность за свою жизнь',
+  ];
+
+  var listOfDegree = [
+    'Совершенно согласен',
+    'Скорее согласен',
+    'Отчасти согласен',
+    'Скорее не согласен',
+    'Совершенно не согласен'
+  ];
 
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
     var size = MediaQuery.of(context).size;
-    return SafeArea(
-      child: Scaffold(
-          body:Center(
-        child: Container(
-          width: double.infinity,
-          decoration: const BoxDecoration(
-            image: DecorationImage(
-                image: AssetImage("assets/test.png"), fit: BoxFit.cover),
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Container(
-                  padding: EdgeInsets.only(top:20),
-                  child: ToMainButton()),
-              Container(height: size.height/30),
-              Container(
-                padding: EdgeInsets.only(left:40),
-
-                child: Text(
-                  '1. По сравнению с большинством я считаю себя более счастливым',
-                  textAlign: TextAlign.left,
-                  style: theme.textTheme.titleLarge!.copyWith(fontSize: 28, color: theme.textTheme.bodySmall!.color),
-                ),
+    return Scaffold(
+        body: Center(
+      child: Container(
+        width: double.infinity,
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+              image: AssetImage("assets/test.png"), fit: BoxFit.cover),
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Container(padding: EdgeInsets.only(top: 50), child: ToMainButton()),
+            Container(height: size.height / 30),
+            Container(
+              padding: EdgeInsets.only(left: 40),
+              child: Text(
+                '${widget.number}. ${listOfQuestions[widget.number-1]}',
+                textAlign: TextAlign.left,
+                style: theme.textTheme.titleLarge!.copyWith(
+                    fontSize: 25, color: theme.textTheme.bodySmall!.color),
               ),
-              Container(height: size.height/40,),
-              Container(
-                height: size.height/2,
-                width: size.width/1.1,
-                child: ListView.builder(
-                    padding: const EdgeInsets.all(8),
-                    itemCount: 5,
-                    itemBuilder: (BuildContext context, int index) {
-                      return Container(
-                        height: size.height/11,
-                        padding: EdgeInsets.only(bottom: 25),
-                        width: size.width/1.5,
-                        child: ElevatedButton(
-                          onPressed: () {
-                            setState(() {
-                              _selectedIndex = index;
-                            });
-                            Future.delayed(const Duration(milliseconds: 1000), () {
-                              setState(() {
+            ),
+            Container(
+              height: size.height / 40,
+            ),
+            Container(
+              height: size.height / 2,
+              width: size.width / 1.1,
+              child: ListView.builder(
+                  padding: const EdgeInsets.all(8),
+                  itemCount: 5,
+                  itemBuilder: (BuildContext context, int index) {
+                    return Container(
+                      height: size.height / 11,
+                      padding: EdgeInsets.only(bottom: 25),
+                      width: size.width / 1.5,
+                      child: ElevatedButton(
+                        onPressed: () async {
+                          setState(() {
+                            _selectedIndex = index;
+                          });
+                          Future.delayed(const Duration(milliseconds: 0),
+                              () async {
+                              print(widget.sum);
+                              if (widget.number != 20) {
                                 Navigator.push(
                                     context,
-                                    MaterialPageRoute(builder: (context) => ResultAn()));
-                              });
-                            });
-
-                          },
-                          child: Container(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(listOfDegree[index], style: theme.textTheme.bodySmall!.copyWith(
-                                  color: Colors.black,
-                                  fontFamily: GoogleFonts.inter().fontFamily,
-                                  fontSize: 20
-                                )),
-                                Image(image: AssetImage(_selectedIndex == index? 'assets/enabledTest.png' : 'assets/disabledTest.png'),
-                                )
-                              ],
-                            ),
+                                    MaterialPageRoute(
+                                        builder: (context) => TestScreen(
+                                            widget.sum + (4 - index),
+                                            widget.number + 1)));
+                              } else {
+                                UserDatabase.addResult(
+                                    widget.sum + (4 - index));
+                                var users = await UserDatabase.users();
+                                var user = users[0];
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => ResultAn(
+                                            widget.sum + (4 - index),
+                                            user.testResult)));
+                              }
+                          });
+                        },
+                        child: Container(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(listOfDegree[index],
+                                  style: theme.textTheme.bodySmall!.copyWith(
+                                      color: Colors.black,
+                                      fontFamily:
+                                          GoogleFonts.inter().fontFamily,
+                                      fontSize: 20)),
+                              Image(
+                                image: AssetImage(_selectedIndex == index
+                                    ? 'assets/enabledTest.png'
+                                    : 'assets/disabledTest.png'),
+                              )
+                            ],
                           ),
-                          style: ElevatedButton.styleFrom(
-                              backgroundColor: _selectedIndex == index? theme.hoverColor : theme.disabledColor,
-                              shape: StadiumBorder()),
                         ),
-                      );
-                    }
-                ),
-              ),
-              LoadIndicator(5, 4),
-              Container(
-              ),
-            ],
-          ),
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor: _selectedIndex == index
+                                ? theme.hoverColor
+                                : theme.disabledColor,
+                            shape: StadiumBorder()),
+                      ),
+                    );
+                  }),
+            ),
+            LoadIndicator(20, widget.number),
+            Container(),
+          ],
         ),
-      )),
-    );
+      ),
+    ));
   }
 }

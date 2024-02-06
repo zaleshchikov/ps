@@ -8,8 +8,7 @@ class WelcomeHappyTest extends StatelessWidget {
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
     var size = MediaQuery.of(context).size;
-    return SafeArea(
-      child: Center(
+    return Center(
             child: Container(
               width: double.infinity,
               decoration: const BoxDecoration(
@@ -45,7 +44,7 @@ class WelcomeHappyTest extends StatelessWidget {
                         onPressed: () {
                           Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => TestScreen()));
+                              MaterialPageRoute(builder: (context) => TestScreen(0, 1)));
                         },
                         child: Ink(
                             height: size.height / 12,
@@ -71,7 +70,7 @@ class WelcomeHappyTest extends StatelessWidget {
                 ],
               ),
             ),
-),
+
     );
   }
 }

@@ -1,11 +1,22 @@
+import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'to_main_button.dart';
 import 'result_text.dart';
 import 'package:ps/bottom_navigation.dart';
 
 class ResultAn extends StatelessWidget {
+
+  int sum;
+  List result;
+  ResultAn(this.sum, this.result);
+
+  List<FlSpot> spots = [];
+
   @override
   Widget build(BuildContext context) {
+    for(int i = 0; i < result.length; i ++){
+      spots.add(FlSpot(i.toDouble(), int.parse(result[i]).toDouble()));
+    }
     var theme = Theme.of(context);
     var size = MediaQuery.of(context).size;
     return Scaffold(
@@ -80,10 +91,40 @@ class ResultAn extends StatelessWidget {
                   ),
                   Center(
                       child: Container(
+                        padding: EdgeInsets.only(
+                            top: 50,
+                          left: 50,
+                          right: 70,
+                          bottom: 50,
+
+                        ),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(30),
+                          image: DecorationImage(
+                            image: AssetImage(
+                              'assets/charts.png'
+                            ),
+                          )
+                        ),
                         height: size.height/3,
                           width: size.width/1.3,
-                          child: Image(
-                              image: AssetImage('assets/an_zaglushka.png'))))
+                          child:  LineChart(
+                            LineChartData(
+                              gridData: FlGridData(
+                                show: false
+                              ),
+                                titlesData: FlTitlesData(
+                                  show: false,
+                                ),
+                                borderData: FlBorderData(show: false), lineBarsData: [
+                              LineChartBarData(
+                                color: theme.textTheme.bodySmall!.color,
+                                  dotData: FlDotData(
+                                    show: false,
+                                  ),
+                                  spots: spots)
+                            ]),
+                          ),))
                 ],
               ),
             ),
