@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'emotions_calendar.dart';import 'package:google_fonts/google_fonts.dart';
 import 'to_main_button.dart';
 
 class EmotionsDairy extends StatelessWidget {
@@ -308,7 +307,11 @@ class EmotionsDairy extends StatelessWidget {
                 width: size.width / 1.6,
                 height: size.height / 14.5,
                 child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => EmotionsCalendar()));
+                    },
                     child: Text(
                       'Календарь эмоций',
                       style: theme.textTheme.bodySmall!.copyWith(

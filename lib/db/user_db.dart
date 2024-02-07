@@ -29,6 +29,13 @@ class UserDatabase {
     return result.isNotEmpty;
   }
 
+  static Future<bool> isRegister() async {
+    await open();
+    var _users = await users();
+    var user = _users[0];
+    return user.username != '';
+  }
+
   static Future<int> addResult(int result) async {
     await open();
     var _users = await users();

@@ -62,8 +62,8 @@ class _TestScreenState extends State<CurrentEmotions> {
                   Container(height: size.height/30),
                   Center(
                     child: Text(
-                      'Выберите из какой сферы\n жизни Ваши текущие эмоции', textAlign: TextAlign.left,
-                      style: theme.textTheme.titleLarge!.copyWith(fontSize: 25, color: theme.textTheme.bodySmall!.color),
+                      'Выберите из какой сферы\nжизни Ваши текущие эмоции', textAlign: TextAlign.left,
+                      style: theme.textTheme.titleLarge!.copyWith(fontSize: 22, color: theme.textTheme.bodySmall!.color),
                     ),
                   ),
                   Container(height: size.height/40,),

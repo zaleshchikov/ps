@@ -4,6 +4,7 @@ import 'package:ps/UI/happy_test/result_an.dart';
 import 'to_main_button.dart';
 import 'load_indicator.dart';
 import 'package:ps/db/user_db.dart';
+import 'package:ps/bottom_navigation.dart';
 
 class TestScreen extends StatefulWidget {
   int sum;
@@ -67,7 +68,7 @@ class _TestScreenState extends State<TestScreen> {
             Container(padding: EdgeInsets.only(top: 50), child: ToMainButton()),
             Container(height: size.height / 30),
             Container(
-              padding: EdgeInsets.only(left: 40),
+              padding: EdgeInsets.only(left: 20, right: 20),
               child: Text(
                 '${widget.number}. ${listOfQuestions[widget.number-1]}',
                 textAlign: TextAlign.left,
@@ -94,7 +95,7 @@ class _TestScreenState extends State<TestScreen> {
                           setState(() {
                             _selectedIndex = index;
                           });
-                          Future.delayed(const Duration(milliseconds: 0),
+                          Future.delayed(const Duration(milliseconds: 500),
                               () async {
                               print(widget.sum);
                               if (widget.number != 20) {
@@ -109,32 +110,31 @@ class _TestScreenState extends State<TestScreen> {
                                     widget.sum + (4 - index));
                                 var users = await UserDatabase.users();
                                 var user = users[0];
+                                user.testResult.add((widget.sum + (4 - index)).toString());
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => ResultAn(
+                                        builder: (context) => BottomNavigationScreen(ResultAn(
                                             widget.sum + (4 - index),
-                                            user.testResult)));
+                                            user.testResult))));
                               }
                           });
                         },
-                        child: Container(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(listOfDegree[index],
-                                  style: theme.textTheme.bodySmall!.copyWith(
-                                      color: Colors.black,
-                                      fontFamily:
-                                          GoogleFonts.inter().fontFamily,
-                                      fontSize: 20)),
-                              Image(
-                                image: AssetImage(_selectedIndex == index
-                                    ? 'assets/enabledTest.png'
-                                    : 'assets/disabledTest.png'),
-                              )
-                            ],
-                          ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(listOfDegree[index],
+                                style: theme.textTheme.bodySmall!.copyWith(
+                                    color: Colors.black,
+                                    fontFamily:
+                                        GoogleFonts.inter().fontFamily,
+                                    fontSize: 20)),
+                            Image(
+                              image: AssetImage(_selectedIndex == index
+                                  ? 'assets/enabledTest.png'
+                                  : 'assets/disabledTest.png'),
+                            )
+                          ],
                         ),
                         style: ElevatedButton.styleFrom(
                             backgroundColor: _selectedIndex == index

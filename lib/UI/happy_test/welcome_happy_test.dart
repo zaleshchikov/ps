@@ -18,6 +18,7 @@ class WelcomeHappyTest extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
+                  Container(height: size.height/100),
                   Text(
                     'Сегодня',
                     style: theme.textTheme.titleMedium,

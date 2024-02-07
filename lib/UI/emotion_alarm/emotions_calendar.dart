@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:ps/UI/happy_test/should_register.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../page-1/utils.dart';
 import 'to_main_button.dart';
@@ -103,7 +103,7 @@ class EmotionsCalendar extends StatelessWidget {
                                 fontSize: 25*ffem,
                                 fontWeight: FontWeight.w400,
                                 height: 1.445*ffem/fem,
-                                color: Color(0xff4b3425),
+                                color: Color(0xffFFFFFF5),
                               ),
                             ),
                           ),
@@ -119,7 +119,7 @@ class EmotionsCalendar extends StatelessWidget {
                                     fontSize: 25*ffem,
                                     fontWeight: FontWeight.w400,
                                     height: 1.445*ffem/fem,
-                                    color: Color(0xff4b3425),
+                                    color: Color(0xffFFFFFF5),
                                   ),
                                   children: [
                                     TextSpan(
@@ -129,7 +129,7 @@ class EmotionsCalendar extends StatelessWidget {
                                         fontSize: 25*ffem,
                                         fontWeight: FontWeight.w400,
                                         height: 1.445*ffem/fem,
-                                        color: Color(0xffd1baab),
+                                        color: Color(0xff4B3425),
                                       ),
                                     ),
                                     TextSpan(
@@ -152,7 +152,7 @@ class EmotionsCalendar extends StatelessWidget {
                                   fontSize: 25*ffem,
                                   fontWeight: FontWeight.w400,
                                   height: 1.445*ffem/fem,
-                                  color: Color(0xff4b3425),
+                                  color: Color(0xffFFFFFF5),
                                 ),
                               ),
                             ),
@@ -162,14 +162,14 @@ class EmotionsCalendar extends StatelessWidget {
                               // P7h (191:5657)
                               margin: EdgeInsets.fromLTRB(0*fem, 0*fem, 0*fem, 0*fem),
                               child: Text(
-                                '2     3     4     5    6     7     8',
+                                '9   10   11   12   13   14  15',
                                 textAlign: TextAlign.center,
                                 style: SafeGoogleFont (
                                   'Jost',
                                   fontSize: 25*ffem,
                                   fontWeight: FontWeight.w400,
                                   height: 1.445*ffem/fem,
-                                  color: Color(0xff4b3425),
+                                  color: Color(0xffFFFFFF5),
                                 ),
                               ),
                             ),
@@ -179,14 +179,14 @@ class EmotionsCalendar extends StatelessWidget {
                               // P7h (191:5657)
                               margin: EdgeInsets.fromLTRB(0*fem, 0*fem, 0*fem, 0*fem),
                               child: Text(
-                                '2     3     4     5    6     7     8',
+                                '16   17   18   19   20   21   22',
                                 textAlign: TextAlign.center,
                                 style: SafeGoogleFont (
                                   'Jost',
                                   fontSize: 25*ffem,
                                   fontWeight: FontWeight.w400,
                                   height: 1.445*ffem/fem,
-                                  color: Color(0xff4b3425),
+                                  color: Color(0xffFFFFFF5),
                                 ),
                               ),
                             ),
@@ -196,14 +196,47 @@ class EmotionsCalendar extends StatelessWidget {
                               // P7h (191:5657)
                               margin: EdgeInsets.fromLTRB(0*fem, 0*fem, 0*fem, 0*fem),
                               child: Text(
-                                '2     3     4     5    6     7     8\n',
+                                '23    24   25   26   27   28   29',
                                 textAlign: TextAlign.center,
                                 style: SafeGoogleFont (
                                   'Jost',
                                   fontSize: 25*ffem,
                                   fontWeight: FontWeight.w400,
                                   height: 1.445*ffem/fem,
-                                  color: Color(0xff4b3425),
+                                  color: Color(0xffFFFFFF5),
+                                ),
+                              ),
+                            ),
+                          ),
+                          Center(
+                            child: Container(
+                              // HS3 (191:5656)
+                              margin: EdgeInsets.fromLTRB(0*fem, 0*fem, 0*fem, 13*fem),
+                              child: RichText(
+                                textAlign: TextAlign.center,
+                                text: TextSpan(
+                                  style: SafeGoogleFont (
+                                    'Jost',
+                                    fontSize: 25*ffem,
+                                    fontWeight: FontWeight.w400,
+                                    height: 1.445*ffem/fem,
+                                    color: Color(0xff4B3425),
+                                  ),
+                                  children: [
+                                    TextSpan(
+                                      text: '30   31',
+                                      style: SafeGoogleFont (
+                                        'Jost',
+                                        fontSize: 25*ffem,
+                                        fontWeight: FontWeight.w400,
+                                        height: 1.445*ffem/fem,
+                                        color: Colors.white ,
+                                      ),
+                                    ),
+                                    TextSpan(
+                                      text: '1    2    3    4    5',
+                                    ),
+                                  ],
                                 ),
                               ),
                             ),
@@ -218,7 +251,10 @@ class EmotionsCalendar extends StatelessWidget {
                 width: size.width / 1.2,
                 height: size.height / 14.5,
                 child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      MaterialPageRoute(
+                          builder: (context) => ShouldRegister());
+                    },
                     child: Text(
                       'Перейти в главное меню',
                       style: theme.textTheme.bodySmall!.copyWith(

@@ -62,7 +62,7 @@ class MyApp extends StatelessWidget {
                   color: const Color(0xff4B3425),
                   fontSize: 32,
                   fontWeight: FontWeight.w500))),
-      home:  Container(child: (WelcomeScreen())),
+      home:  Container(child: BottomNavigationScreen(ResultAn(40, ['0','10', '0', '40']))),
     );
   }
 }

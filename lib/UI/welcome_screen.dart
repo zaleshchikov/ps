@@ -10,6 +10,11 @@ class WelcomeScreen extends StatelessWidget {
 
 
   ChooseNextScreen(BuildContext context) async{
+    if(!(await UserDatabase.isRegister())){
+      Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => ( LogInScreen())));
+    } else
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => BottomNavigationScreen(const MainScreen())));
