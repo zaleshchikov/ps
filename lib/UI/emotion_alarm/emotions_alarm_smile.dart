@@ -44,9 +44,13 @@ class EmotionsAlarmSmile extends StatelessWidget {
               ),
               Positioned(
                 // autogrouppqusSGb (KqnBg1rKkMpUDnpMt8PQUs)
-                left: 53.5*fem,
+                left: 50*fem,
                 top: 661*fem,
                 child: Container(
+                  decoration: BoxDecoration(
+                    color: Color(0xffA5B879),
+                    borderRadius: BorderRadius.circular(30)
+                  ),
                   width: 346*fem,
                   height: 71*fem,
                   child: Stack(
@@ -63,34 +67,21 @@ class EmotionsAlarmSmile extends StatelessWidget {
                           top: 0*fem,
                           child: Align(
                             child: SizedBox(
-                              width: 331*fem,
-                              height: 71*fem,
-                              child: Image.asset(
-                                'assets/page-1/images/rectangle-7.png',
-                                width: 331*fem,
-                                height: 71*fem,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                      Positioned(
-                        // 54f (191:5139)
-                        left: 30*fem,
-                        top: 20*fem,
-                        child: Align(
-                          child: InkWell(
-                            onTap: (){
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(builder: (context) => EmotionsAlarm()),);
-                            },
-                            child: SizedBox(
-                              width: 311*fem,
-                              height: 29*fem,
-                              child: Text(
-                                'Посмотреть дневник эмоций \n',
-                                style: theme.textTheme.bodyMedium!.copyWith(fontSize: 20)
+                              child: InkWell(
+                                onTap: (){
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(builder: (context) => EmotionsAlarm()),);
+                                },
+                                child: Center(
+                                  child: Container(
+                                    padding: EdgeInsets.only(top: size.height/50),
+                                    child: Text(
+                                        'Посмотреть дневник эмоций \n',
+                                        style: theme.textTheme.bodyMedium!.copyWith(fontSize: 20)
+                                    ),
+                                  ),
+                                ),
                               ),
                             ),
                           ),
@@ -214,119 +205,6 @@ class EmotionsAlarmSmile extends StatelessWidget {
                       width: 105*fem,
                       height: 105*fem,
                     ),
-                  ),
-                ),
-              ),
-              Positioned(
-                // autogroupvwnoz4T (KqnBpbSMydBnLKBTyAvWno)
-                left: 4.5*fem,
-                top: 835*fem,
-                child: Container(
-                  width: 430*fem,
-                  height: 97*fem,
-                  child: Stack(
-                    children: [
-                      Positioned(
-                        // waterfall6dH (191:5156)
-                        left: 51*fem,
-                        top: 29.5*fem,
-                        child: Align(
-                          child: SizedBox(
-                            width: 45*fem,
-                            height: 40*fem,
-                            child: Image.asset(
-                              'assets/page-1/images/waterfall-b3q.png',
-                              width: 45*fem,
-                              height: 40*fem,
-                            ),
-                          ),
-                        ),
-                      ),
-                      Positioned(
-                        // rectangle962zyZ (227:4428)
-                        left: 0*fem,
-                        top: 0*fem,
-                        child: Align(
-                          child: SizedBox(
-                            width: 430*fem,
-                            height: 97*fem,
-                            child: Container(
-                              decoration: BoxDecoration (
-                                color: Color(0xffeed0b3),
-                                borderRadius: BorderRadius.only (
-                                  topLeft: Radius.circular(50*fem),
-                                  topRight: Radius.circular(50*fem),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                      Positioned(
-                        // waterfallJDZ (227:4429)
-                        left: 42.5*fem,
-                        top: 10.5*fem,
-                        child: Align(
-                          child: SizedBox(
-                            width: 45*fem,
-                            height: 40*fem,
-                            child: Image.asset(
-                              'assets/page-1/images/waterfall-U19.png',
-                              width: 45*fem,
-                              height: 40*fem,
-                            ),
-                          ),
-                        ),
-                      ),
-                      Positioned(
-                        // group10PVu (227:4430)
-                        left: 333.0009384155*fem,
-                        top: 10*fem,
-                        child: Align(
-                          child: SizedBox(
-                            width: 52.34*fem,
-                            height: 49.09*fem,
-                            child: Image.asset(
-                              'assets/page-1/images/group-10-k4T.png',
-                              width: 52.34*fem,
-                              height: 49.09*fem,
-                            ),
-                          ),
-                        ),
-                      ),
-                      Positioned(
-                        // deskaltsxo (227:4445)
-                        left: 144.875*fem,
-                        top: 7.125*fem,
-                        child: Align(
-                          child: SizedBox(
-                            width: 33.25*fem,
-                            height: 45.13*fem,
-                            child: Image.asset(
-                              'assets/page-1/images/deskalt-Gcj.png',
-                              width: 33.25*fem,
-                              height: 45.13*fem,
-                            ),
-                          ),
-                        ),
-                      ),
-                      Positioned(
-                        // group51znX (227:4446)
-                        left: 246*fem,
-                        top: 17*fem,
-                        child: Align(
-                          child: SizedBox(
-                            width: 62*fem,
-                            height: 37*fem,
-                            child: Image.asset(
-                              'assets/page-1/images/group-51-rAF.png',
-                              width: 62*fem,
-                              height: 37*fem,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
                   ),
                 ),
               ),

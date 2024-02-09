@@ -22,7 +22,7 @@ class _BottomNavigationScreenState extends State<BottomNavigationScreen> {
   @override
   Widget build(BuildContext context) {
     var listOfBode = [
-      Trackers(), Trackers(), Trackers(), Trackers(),widget.body
+      Trackers(), MainScreen(), Trackers(), Trackers(),widget.body
     ];
     var theme = Theme.of(context);
     var size = MediaQuery.of(context).size;
@@ -42,9 +42,10 @@ class _BottomNavigationScreenState extends State<BottomNavigationScreen> {
               unselectedLabelStyle: TextStyle(fontWeight: FontWeight.w600),
               showSelectedLabels: true,
               showUnselectedLabels: true,
+              unselectedItemColor: theme.textTheme.bodySmall!.color,
               selectedItemColor: theme.textTheme.bodySmall!.color,
-              unselectedFontSize: 20,
-              selectedFontSize: 20,
+              unselectedFontSize: 18,
+              selectedFontSize: 18,
               type: BottomNavigationBarType.fixed,
               backgroundColor: theme.canvasColor,
               iconSize: 40,

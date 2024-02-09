@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:ps/UI/happy_test/welcome_happy_test.dart';
 
+import '../../page-1/utils.dart';
+
 class MainScreen extends StatelessWidget {
   const MainScreen({super.key});
 
@@ -8,14 +10,23 @@ class MainScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
     var size = MediaQuery.of(context).size;
+    double baseWidth = 430;
+    double fem = MediaQuery.of(context).size.width / baseWidth;
+    double ffem = fem * 0.97;
     return SafeArea(
       child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text('4 простых шага, чтобы стать счастливым',
-                  style: theme.textTheme.bodySmall!
-                      .copyWith(fontWeight: FontWeight.w500)),
+                  style: SafeGoogleFont (
+                    'Jost',
+                    fontSize: 20*ffem,
+                    fontWeight: FontWeight.w400,
+                    height: 1.445*ffem/fem,
+                    letterSpacing: -0.2*fem,
+                    color: Color(0xff4b3425),
+                  )),
               Container(height: size.height/100),
               InkWell(
                 onTap: (){
@@ -26,9 +37,8 @@ class MainScreen extends StatelessWidget {
                 child: Container(
                   child: Image(image: AssetImage('assets/text_img.png')),
                   height: size.height/6.3,
-                  width: size.width/1.4,
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(27),
+                    borderRadius: BorderRadius.circular(40),
                     boxShadow: const [
                       BoxShadow(
                         color: Colors.black12,
@@ -46,7 +56,6 @@ class MainScreen extends StatelessWidget {
               Container(
                 child: Image(image: AssetImage('assets/method_img.png')),
                 height: size.height/6.3,
-                width: size.width/1.4,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(27),
                   boxShadow: const [
@@ -65,7 +74,6 @@ class MainScreen extends StatelessWidget {
               Container(
                 child: Image(image: AssetImage('assets/trackers_img.png')),
                 height: size.height/6.3,
-                width: size.width/1.4,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(27),
                   boxShadow: const [
@@ -84,7 +92,6 @@ class MainScreen extends StatelessWidget {
               Container(
                 child: Image(image: AssetImage('assets/statistic_img.png')),
                 height: size.height/6.3,
-                width: size.width/1.4,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(27),
                   boxShadow: const [

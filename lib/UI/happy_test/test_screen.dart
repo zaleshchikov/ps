@@ -111,6 +111,9 @@ class _TestScreenState extends State<TestScreen> {
                                 var users = await UserDatabase.users();
                                 var user = users[0];
                                 user.testResult.add((widget.sum + (4 - index)).toString());
+                                if(user.testResult.length > 0 && user.testResult[0].toString() == ''){
+                                  user.testResult = user.testResult.sublist(1);
+                                }
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(

@@ -12,7 +12,7 @@ import 'package:ps/UI/trackers/main_screen.dart';
 import 'bottom_navigation.dart';
 import 'package:ps/UI/calendar/calendar_opt.dart';
 import 'package:ps/UI/success/success_note.dart';
-import 'package:ps/UI/emotion_alarm/emotions_calendar.dart';
+import 'package:ps/UI/emotion_alarm/emotions_alarm_smile.dart';
 // import 'package:ps/page-1/-3X1.dart';
 import 'package:ps/db/user_db.dart';
 
@@ -62,7 +62,7 @@ class MyApp extends StatelessWidget {
                   color: const Color(0xff4B3425),
                   fontSize: 32,
                   fontWeight: FontWeight.w500))),
-      home:  Container(child: BottomNavigationScreen(ResultAn(40, ['0','10', '0', '40']))),
+      home:  Container(child: (ResultAn(10, ['10', '50', '80', '10']))),
     );
   }
 }

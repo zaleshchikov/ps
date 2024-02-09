@@ -1,5 +1,6 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:ps/UI/trackers/main_screen.dart';
 import 'to_main_button.dart';
 import 'result_text.dart';
 import 'package:ps/bottom_navigation.dart';
@@ -12,13 +13,16 @@ class ResultAn extends StatelessWidget {
 
   ResultAn(this.sum, this.result);
 
-  List<FlSpot> spots = [];
+  List<FlSpot> spots = [const FlSpot(0, 0)];
 
   @override
   Widget build(BuildContext context) {
     for (int i = 0; i < result.length; i++) {
-      spots.add(FlSpot(i.toDouble(), int.parse(result[i]).toDouble()));
+      spots.add(FlSpot((i+1).toDouble(), int.parse(result[i]).toDouble()));
     }
+    double baseWidth = 430;
+    double fem = MediaQuery.of(context).size.width / baseWidth;
+    double ffem = fem * 0.97;
     var theme = Theme.of(context);
     var size = MediaQuery.of(context).size;
     return Scaffold(
@@ -39,10 +43,15 @@ class ResultAn extends StatelessWidget {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => ShouldRegister()));
+                            builder: (context) => const ShouldRegister()));
+                  } else{
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const MainScreen()));
                   }
                 },
-                child: ToMainButton()),
+                child: const ToMainButton()),
             Container(
               height: size.height / 15,
             ),
@@ -61,22 +70,21 @@ class ResultAn extends StatelessWidget {
                       height: size.height / 14,
                       width: size.width / 1.5,
                       decoration: BoxDecoration(
-                          gradient: LinearGradient(
+                          gradient: const LinearGradient(
                               begin: Alignment.topCenter,
                               end: Alignment.bottomCenter,
                               colors: [
-                                Color(0xffA5B879),
-                                Color(0xffE8FEB7),
-                                Color(0xffE5EAD7)
+                                Color(0xff7E9349),
+                                Color(0xffE8FEB7)
                               ]),
                           borderRadius: BorderRadius.circular(20)),
                       child: Center(
                           child: Text('Ваши показатели',
-                              style: theme.textTheme.titleMedium)))),
+                              style: theme.textTheme.titleMedium!.copyWith(fontSize: 30))))),
             ),
             Container(height: size.height / 15),
             Container(
-              padding: EdgeInsets.all(10),
+              padding: const EdgeInsets.all(10),
               child: Row(
                 children: [
                   Container(
@@ -85,7 +93,7 @@ class ResultAn extends StatelessWidget {
                     decoration: BoxDecoration(
                       color: theme.highlightColor,
                       border: Border.all(width: 0, color: theme.highlightColor),
-                      borderRadius: BorderRadius.all(Radius.circular(
+                      borderRadius: const BorderRadius.all(Radius.circular(
                               30) //                 <--- border radius here
                           ),
                     ),
@@ -105,14 +113,14 @@ class ResultAn extends StatelessWidget {
                     children: [
                       Container(
                         padding: EdgeInsets.only(
-                      top: 50,
-                      left: 50,
-                      right: 70,
-                      bottom: 50,
+                      top: size.height/20,
+                      left: size.width/7,
+                      right: size.width/5.8,
+                      bottom: size.height/20,
                         ),
                         decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(30),
-                        image: DecorationImage(
+                        image: const DecorationImage(
                           image: AssetImage('assets/charts.png'),
                         )),
                         height: size.height / 3,
@@ -146,11 +154,11 @@ class ResultAn extends StatelessWidget {
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.end,
                                   children: [
-                                    Image(image: AssetImage('assets/lol_group.png'), height: size.height/27),
+                                    Image(image: const AssetImage('assets/lol_group.png'), height: size.height/27),
                                     Container(width: size.width/14)
                                   ],
                                 ),
-                                Container(height: size.height/4.8/80*(sum)+1),
+                                Container(height: size.height/4.8/80*(sum)-size.height/200),
                                 Container(height: size.height/17)
                               ],
                             )),
@@ -165,11 +173,11 @@ class ResultAn extends StatelessWidget {
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
-                                    Container(width: size.width/11),
-                                    Image(image: AssetImage('assets/Lol.png'), height: size.height/35,),
+                                    Container(width: size.width/9),
+                                    Image(image: const AssetImage('assets/Lol.png'), height: size.height/35,),
                                   ],
                                 ),
-                                Container(height: size.height/4.8/80*(int.parse(result[0]))+5),
+                                Container(height: size.height/4.8/80*(0)+size.height/100),
                                 Container(height: size.height/17)
                               ],
                             )),
@@ -195,7 +203,7 @@ class ResultAn extends StatelessWidget {
                         context,
                         MaterialPageRoute(
                             builder: (context) =>
-                                BottomNavigationScreen(TextResult())));
+                                BottomNavigationScreen(const TextResult())));
                   },
                   child: Ink(
                       height: size.height / 12,
