@@ -2,12 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:ps/UI/emotion_alarm/emotons_dairy.dart';
 import 'dart:ui';
 import 'current_amotions.dart';
 import '../../page-1/utils.dart';
 import 'package:reactive_forms/reactive_forms.dart';
+import 'tracker_model.dart';
 
 class EmotionsNote extends StatefulWidget {
+
+  TrackerUser user;
+  EmotionsNote(this.user);
 
   @override
   State<EmotionsNote> createState() => _EmotionsNoteState();
@@ -332,9 +337,12 @@ class _EmotionsNoteState extends State<EmotionsNote> {
               ),
               GestureDetector(
                   onTap: (){
+                    if(!form.control('text').isNull){
+                      widget.user.feelings = form.control('text').value;
+                    }
                     Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => CurrentEmotions()));
+                        MaterialPageRoute(builder: (context) => CurrentEmotions(widget.user)));
                   },
                 child: Container(
                   // autogroupmpyt2n7 (KqnvTTEHwQPnZQcM6NMpYT)
@@ -369,7 +377,7 @@ class _EmotionsNoteState extends State<EmotionsNote> {
                 onTap: (){
                   Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => CurrentEmotions()));
+                      MaterialPageRoute(builder: (context) => EmotionsDairy()));
                 },
                 child: Container(
                   // autogroupeamrU8K (KqnvYx58fgzqiezt2HEAMR)

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:ps/UI/auth/log_in_screen.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:ps/db/user_db.dart';
-
+import 'package:ps/db/user_model.dart';
 import '../../bottom_navigation.dart';
 import '../trackers/main_screen.dart';
 
@@ -30,7 +30,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
     User user = User(
       username: form.control('email').value,
       password: form.control('password').value,
-      testResult: []
+      testResult: [],
+      calendar: {}
     );
     await UserDatabase.update(user);
 

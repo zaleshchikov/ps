@@ -1,29 +1,35 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:ps/UI/auth/sign_up_screen.dart';
 import 'package:ps/UI/happy_test/result_an.dart';
-import 'package:ps/UI/happy_test/test_screen.dart';
-import 'package:ps/UI/welcome_screen.dart';
-import 'package:ps/UI/happy_test/result_an.dart';
-import 'package:ps/UI/wishes/day_wish.dart';
-import 'package:theme_provider/theme_provider.dart';
-import 'package:ps/UI/happy_test/should_register.dart';
-import 'package:ps/UI/trackers/main_screen.dart';
-import 'bottom_navigation.dart';
-import 'package:ps/UI/calendar/calendar_opt.dart';
-import 'package:ps/UI/success/success_note.dart';
-import 'package:ps/UI/emotion_alarm/emotions_alarm_smile.dart';
-// import 'package:ps/page-1/-3X1.dart';
+import 'db/user_model.dart';
 import 'package:ps/db/user_db.dart';
+import 'package:ps/UI/emotion_alarm/emotons_dairy.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
+  // await UserDatabase.isNotEmpty() ? print('yes') : await UserDatabase.insertUser(User(
+  //     username: '', password: '', testResult: [], calendar: {}
+  // ));
+  // var s = await UserDatabase.users();
+  // User user = User(username: '', password: '', testResult: [], calendar: {
+  //   '01.01.1970' : {
+  //     'alarm' :[
+  //       ['списокalarm']
+  //     ]
+  //   },
+  //   '02.01.1970' : {
+  //     'alarm' :[
+  //       ['списокalarm']
+  //     ]
+  //   }
+  // });
+  // print(user.toMap());
   await UserDatabase.isNotEmpty() ? print('yes') : await UserDatabase.insertUser(User(
-      username: '', password: '', testResult: []
+      username: '', password: '', testResult: [], calendar: {}
   ));
-  var s = await UserDatabase.users();
-  print(s[0].testResult);
   runApp(const MyApp());
 }
 
@@ -62,7 +68,7 @@ class MyApp extends StatelessWidget {
                   color: const Color(0xff4B3425),
                   fontSize: 32,
                   fontWeight: FontWeight.w500))),
-      home:  Container(child: (ResultAn(10, ['10', '50', '80', '10']))),
+      home:  Container(child: EmotionsDairy()),
     );
   }
 }

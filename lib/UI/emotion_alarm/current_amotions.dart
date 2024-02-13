@@ -3,9 +3,11 @@ import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'to_main_button.dart';
 import 'emotons_dairy.dart';
+import 'tracker_model.dart';
 
 class CurrentEmotions extends StatefulWidget {
-
+  TrackerUser user;
+  CurrentEmotions(this.user);
   @override
   State<CurrentEmotions> createState() => _TestScreenState();
 }
@@ -85,6 +87,7 @@ class _TestScreenState extends State<CurrentEmotions> {
                                 });
                                 Future.delayed(const Duration(milliseconds: 1000), () {
                                   setState(() {
+                                    widget.user.sphere = listOfDegree[index];
                                     Navigator.push(
                                         context,
                                         MaterialPageRoute(builder: (context) => EmotionsDairy()));

@@ -2,11 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'dart:ui';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:ps/UI/emotion_alarm/emotons_dairy.dart';
 import 'package:ps/UI/emotion_alarm/to_main_button.dart';
 import 'package:ps/page-1/utils.dart';
 import 'emotion_alarm.dart';
+import 'tracker_model.dart';
 
 class EmotionsAlarmSmile extends StatelessWidget {
+
+  TrackerUser user = TrackerUser(0, '', '', '');
+
+  goToNextScreen(int smileNumber, BuildContext context){
+    user.smileNumber = smileNumber;
+    Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => EmotionsAlarm(user)));
+  }
+
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
@@ -59,7 +71,7 @@ class EmotionsAlarmSmile extends StatelessWidget {
                         onTap: (){
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => EmotionsAlarm()),);
+                            MaterialPageRoute(builder: (context) => EmotionsDairy()));
                         },
                         child: Positioned(
                           // rectangle7xkj (191:5138)
@@ -67,19 +79,12 @@ class EmotionsAlarmSmile extends StatelessWidget {
                           top: 0*fem,
                           child: Align(
                             child: SizedBox(
-                              child: InkWell(
-                                onTap: (){
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(builder: (context) => EmotionsAlarm()),);
-                                },
-                                child: Center(
-                                  child: Container(
-                                    padding: EdgeInsets.only(top: size.height/50),
-                                    child: Text(
-                                        'Посмотреть дневник эмоций \n',
-                                        style: theme.textTheme.bodyMedium!.copyWith(fontSize: 20)
-                                    ),
+                              child: Center(
+                                child: Container(
+                                  padding: EdgeInsets.only(top: size.height/50),
+                                  child: Text(
+                                      'Посмотреть дневник эмоций \n',
+                                      style: theme.textTheme.bodyMedium!.copyWith(fontSize: 20)
                                   ),
                                 ),
                               ),
@@ -126,64 +131,70 @@ class EmotionsAlarmSmile extends StatelessWidget {
                         ),
                       ),
 
-                      Positioned(
-                        // happy
-                        left: 0*fem,
-                        top: 184*fem,
-                        child: Align(
-                          child: SizedBox(
-                            child: Stack(
-                              children: [
-                                Center(
-                                  child: Image.asset(
-                                    'assets/page-1/images/happyy.png',
-                                    width: 110*fem,
-                                    height: 110*fem,
+                      InkWell(
+                        onTap: goToNextScreen(2, context),
+                        child: Positioned(
+                          // happy
+                          left: 0*fem,
+                          top: 184*fem,
+                          child: Align(
+                            child: SizedBox(
+                              child: Stack(
+                                children: [
+                                  Center(
+                                    child: Image.asset(
+                                      'assets/page-1/images/happyy.png',
+                                      width: 110*fem,
+                                      height: 110*fem,
+                                    ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                           ),
                         ),
                       ),
 
-                      Positioned(
+                      InkWell(
+                        onTap: goToNextScreen(0, context),
+                        child: Positioned(
 
 
-                        // sad
-                        left: 279*fem,
-                        top: 184*fem,
-                        child: Align(
-                          child: SizedBox(
-                            width: 105*fem,
-                            height: 105*fem,
-                            child: Stack(
-                              children: [
-                                Center(
-                                  child: SizedBox(
-                                    width: 85*fem,
-                                    height: 85*fem,
-                                    child: Container(
-                                      decoration: BoxDecoration (
-                                        borderRadius: BorderRadius.circular(42.5*fem),
-                                        color: Color(0xffffd8c5),
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color: Color(0x77000000),
-                                            offset: Offset(0*fem, 4*fem),
-                                            blurRadius: 4.5*fem,
-                                          ),
-                                        ],
+                          // sad
+                          left: 279*fem,
+                          top: 184*fem,
+                          child: Align(
+                            child: SizedBox(
+                              width: 105*fem,
+                              height: 105*fem,
+                              child: Stack(
+                                children: [
+                                  Center(
+                                    child: SizedBox(
+                                      width: 85*fem,
+                                      height: 85*fem,
+                                      child: Container(
+                                        decoration: BoxDecoration (
+                                          borderRadius: BorderRadius.circular(42.5*fem),
+                                          color: Color(0xffffd8c5),
+                                          boxShadow: [
+                                            BoxShadow(
+                                              color: Color(0x77000000),
+                                              offset: Offset(0*fem, 4*fem),
+                                              blurRadius: 4.5*fem,
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                     ),
                                   ),
-                                ),
-                                Image.asset(
-                                  'assets/page-1/images/sadalt-PZu.png',
-                                  width: 105*fem,
-                                  height: 105*fem,
-                                ),
-                              ],
+                                  Image.asset(
+                                    'assets/page-1/images/sadalt-PZu.png',
+                                    width: 105*fem,
+                                    height: 105*fem,
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         ),
@@ -192,18 +203,21 @@ class EmotionsAlarmSmile extends StatelessWidget {
                   ),
                 ),
               ),
-              Positioned(
-                // wow
-                left: 168.5*fem,
-                top: 430*fem,
-                child: Align(
-                  child: SizedBox(
-                    width: 105*fem,
-                    height: 105*fem,
-                    child: Image.asset(
-                      'assets/page-1/images/Wow.png',
+              InkWell(
+                onTap: goToNextScreen(1, context),
+                child: Positioned(
+                  // wow
+                  left: 168.5*fem,
+                  top: 430*fem,
+                  child: Align(
+                    child: SizedBox(
                       width: 105*fem,
                       height: 105*fem,
+                      child: Image.asset(
+                        'assets/page-1/images/Wow.png',
+                        width: 105*fem,
+                        height: 105*fem,
+                      ),
                     ),
                   ),
                 ),

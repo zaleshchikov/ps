@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'to_main_button.dart';
 import 'emotions_note.dart';
-
+import 'tracker_model.dart';
 class EmotionsAlarm extends StatefulWidget {
+  TrackerUser user;
+  EmotionsAlarm(this.user, {super.key});
 
   @override
   State<EmotionsAlarm> createState() => _TestScreenState();
@@ -74,9 +76,10 @@ class _TestScreenState extends State<EmotionsAlarm> {
                                 });
                                 Future.delayed(const Duration(milliseconds: 1000), () {
                                   setState(() {
+                                    widget.user.currentEmotions = listOfDegree[index];
                                     Navigator.push(
                                         context,
-                                        MaterialPageRoute(builder: (context) => EmotionsNote()));
+                                        MaterialPageRoute(builder: (context) => EmotionsNote(widget.user)));
                                   });
                                 });
 
