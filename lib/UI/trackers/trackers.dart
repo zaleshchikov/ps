@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:ps/UI/wishes/day_wish.dart';
 import 'package:ps/UI/wishes/today_wishes.dart';
 import 'package:ps/bottom_navigation.dart';
 import 'package:ps/UI/emotion_alarm/emotions_alarm_smile.dart';
+import 'package:ps/db/user_db.dart';
 
 class Trackers extends StatelessWidget {
   const Trackers({super.key});
@@ -16,12 +18,12 @@ class Trackers extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             InkWell(
-              onTap: () {
-                Navigator.push(
+              onTap: () { WidgetsBinding.instance.addPostFrameCallback((_){
+                  Navigator.push(
                     context,
                     MaterialPageRoute(
                         builder: (context) =>
-                            BottomNavigationScreen(EmotionsAlarmSmile())));
+                            BottomNavigationScreen(EmotionsAlarmSmile())));});
               },
               child: Container(
                 child: Image(image: AssetImage('assets/emalarm.png')),
@@ -43,11 +45,18 @@ class Trackers extends StatelessWidget {
             ),
             Container(height: size.height / 40),
             InkWell(
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => TodayWishes()));
+              onTap: () async {
+                if(await UserDatabase.isWishes()){
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => BottomNavigationScreen( TodayWishes())));
+                } else{
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => DayWish()));
+                }
               },
               child: Container(
                 child: Image(image: AssetImage('assets/wishlist.png')),

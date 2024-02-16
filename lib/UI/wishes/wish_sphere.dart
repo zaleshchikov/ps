@@ -2,14 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ps/UI/emotion_alarm/to_main_button.dart';
+import 'package:ps/UI/wishes/sorted_wish_list.dart';
 
-class CurrentEmotions extends StatefulWidget {
+class WishSphere extends StatefulWidget {
 
   @override
-  State<CurrentEmotions> createState() => _TestScreenState();
+  State<WishSphere> createState() => _TestScreenState();
 }
 
-class _TestScreenState extends State<CurrentEmotions> {
+class _TestScreenState extends State<WishSphere> {
   var _selectedIndex = 6;
 
   var listOfDegree = [
@@ -62,7 +63,7 @@ class _TestScreenState extends State<CurrentEmotions> {
                   Center(
                     child: Text(
                       'Выберите, какой сфере\n жизни относится Ваше\n желание', textAlign: TextAlign.left,
-                      style: theme.textTheme.titleLarge!.copyWith(fontSize: 25, color: theme.textTheme.bodySmall!.color),
+                      style: theme.textTheme.titleLarge!.copyWith(fontSize: 20, color: theme.textTheme.bodySmall!.color),
                     ),
                   ),
                   Container(height: size.height/40,),
@@ -84,9 +85,9 @@ class _TestScreenState extends State<CurrentEmotions> {
                                 });
                                 Future.delayed(const Duration(milliseconds: 1000), () {
                                   setState(() {
-                                    // Navigator.push(
-                                    //     context,
-                                    //     MaterialPageRoute(builder: (context) => EmotionsDairy()));
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(builder: (context) => SortedWishList()));
                                   });
                                 });
 

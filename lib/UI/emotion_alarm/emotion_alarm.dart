@@ -77,10 +77,10 @@ class _TestScreenState extends State<EmotionsAlarm> {
                                 Future.delayed(const Duration(milliseconds: 1000), () {
                                   setState(() {
                                     widget.user.currentEmotions = listOfDegree[index];
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(builder: (context) => EmotionsNote(widget.user)));
                                   });
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(builder: (context) => EmotionsNote(widget.user)));
                                 });
 
                               },

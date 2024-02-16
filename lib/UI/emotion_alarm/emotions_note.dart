@@ -8,6 +8,7 @@ import 'current_amotions.dart';
 import '../../page-1/utils.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'tracker_model.dart';
+import 'package:ps/db/user_db.dart';
 
 class EmotionsNote extends StatefulWidget {
 
@@ -375,6 +376,7 @@ class _EmotionsNoteState extends State<EmotionsNote> {
               ),
               GestureDetector(
                 onTap: (){
+                  UserDatabase.addEmotionsAlarm(DateTime.now(), widget.user);
                   Navigator.push(
                       context,
                       MaterialPageRoute(builder: (context) => EmotionsDairy()));

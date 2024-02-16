@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:ps/UI/welcome_screen.dart';
+import 'package:ps/db/user_db.dart';
 import 'dart:ui';
+import '../../bottom_navigation.dart';
 import '../../page-1/utils.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
@@ -21,10 +24,21 @@ class WishBank extends StatefulWidget {
 class _EmotionsNoteState extends State<WishBank> {
 
 
-  List<Wish> listOfWishes = [
-    Wish('1 января', 'Попрыгать на батуте'),
-    Wish('20 января', 'Купить цветы'),
-  ];
+  // List<Wish> listOfWishes = [
+  //   Wish('1 января', 'Попрыгать на батуте'),
+  //   Wish('20 января', 'Купить цветы'),
+  // ];
+
+  Future<List<Wish>> getCompletedWishes() async {
+    List<Wish> result= [];
+    var l = await UserDatabase.completedWishes();
+    for(var i in l){
+      for( var j in i[1]){
+        result.add(Wish(i[0], j));
+      }
+    }
+    return result;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -100,66 +114,71 @@ class _EmotionsNoteState extends State<WishBank> {
                         fontSize: 28, color: theme.textTheme.bodySmall!.color)),
               ),
               Container(height: size.height/20),
-              SingleChildScrollView(
-                  child: Container(
-                      height: size.height / 1.8,
-                      child: ListView.builder(
-                          padding: const EdgeInsets.all(8),
-                          itemCount: listOfWishes.length,
-                          itemBuilder: (BuildContext context, int index) {
-                            return Column(
-                              children: [
-                                Container(
-                                    height: size.height / 6,
-                                    width: size.width / 1.2,
-                                    decoration: BoxDecoration(
-                                      color: index % 2 == 0 ? theme.highlightColor : theme.indicatorColor,
-                                      borderRadius: BorderRadius.circular(30),
-                                      boxShadow: [
-                                        const BoxShadow(
-                                          color: Color(0xff95735180),
-                                          offset: Offset(0, 4),
-                                          blurRadius: 4.5,
-                                        ),
-                                      ],
-                                    ),
-                                    child: Column(
-                                      children: [
-                                        Container(height: size.height/100),
-
-                                        Center(
-                                            child: Text(
-                                              listOfWishes[index].date,
-                                              style: theme.textTheme.bodySmall!.copyWith(fontSize: 15),
-                                              textAlign: TextAlign.center,
-                                            )),
-                                        Container(height: size.height/50),
-                                        Center(
-                                            child: Text(
-                                              listOfWishes[index].name,
-                                              style: theme.textTheme.titleMedium!.copyWith(fontSize: 22),
-                                              textAlign: TextAlign.center,
-                                            )),
-                                        Container(height: size.height/120),
-                                        Row(
-                                          mainAxisAlignment: MainAxisAlignment.end,
-                                          children: [
-                                            TextButton(onPressed: (){}, child: Text('Повторить', style: theme.textTheme.bodySmall!.copyWith(fontSize: 15))),Container(width: size.width/10,)
+              FutureBuilder(future: getCompletedWishes(), builder: (context, snapshot){
+                if(snapshot.hasData){
+                  return SingleChildScrollView(
+                      child: Container(
+                          height: size.height / 1.8,
+                          child: ListView.builder(
+                              padding: const EdgeInsets.all(8),
+                              itemCount: snapshot.data!.length,
+                              itemBuilder: (BuildContext context, int index) {
+                                return Column(
+                                  children: [
+                                    Container(
+                                        height: size.height / 6,
+                                        width: size.width / 1.2,
+                                        decoration: BoxDecoration(
+                                          color: index % 2 == 0 ? theme.highlightColor : theme.indicatorColor,
+                                          borderRadius: BorderRadius.circular(30),
+                                          boxShadow: [
+                                            const BoxShadow(
+                                              color: Color(0xff95735180),
+                                              offset: Offset(0, 4),
+                                              blurRadius: 4.5,
+                                            ),
                                           ],
-                                        )
-                                      ],
-                                    )),
-                                Container(height: size.height/40),
-                              ],
-                            );
-                          }))),
+                                        ),
+                                        child: Column(
+                                          children: [
+                                            Container(height: size.height/100),
 
+                                            Center(
+                                                child: Text(
+                                                  snapshot.data![index].date,
+                                                  style: theme.textTheme.bodySmall!.copyWith(fontSize: 15),
+                                                  textAlign: TextAlign.center,
+                                                )),
+                                            Container(height: size.height/50),
+                                            Center(
+                                                child: Text(
+                                                  snapshot.data![index].name,
+                                                  style: theme.textTheme.titleMedium!.copyWith(fontSize: 22),
+                                                  textAlign: TextAlign.center,
+                                                )),
+                                            Container(height: size.height/120),
+                                            Row(
+                                              mainAxisAlignment: MainAxisAlignment.end,
+                                              children: [
+                                                TextButton(onPressed: (){}, child: Text('Повторить', style: theme.textTheme.bodySmall!.copyWith(fontSize: 15))),Container(width: size.width/10,)
+                                              ],
+                                            )
+                                          ],
+                                        )),
+                                    Container(height: size.height/40),
+                                  ],
+                                );
+                              })));
+                } else{
+                  return Container();
+                }
+              }),
 
               GestureDetector(
                 onTap: () {
-                  // Navigator.push(
-                  //     context,
-                  //     MaterialPageRoute(builder: (context) => CurrentEmotions()));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => BottomNavigationScreen(WelcomeScreen())));
                 },
                 child: Container(
                   // autogroupmpyt2n7 (KqnvTTEHwQPnZQcM6NMpYT)

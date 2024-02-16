@@ -26,32 +26,34 @@ class _SignUpScreenState extends State<SignUpScreen> {
     ]),
   });
 
-  SaveToDB(FormGroup form) async{
+  SaveToDB(FormGroup form) async {
     User user = User(
-      username: form.control('email').value,
-      password: form.control('password').value,
-      testResult: [],
-      calendar: {}
-    );
+        username: form.control('email').value,
+        password: form.control('password').value,
+        testResult: [],
+        calendar: {},
+        Wishes: []);
     await UserDatabase.update(user);
-
   }
 
-  bool CheckForm(FormGroup form){
-    if(form.control('email').isNull || form.control('password').isNull || form.control('second_password').isNull){
-      emailLabelText = form.control('email').isNull ? 'Обязательное поле' : 'Почта';
-      passwordLabelText = form.control('password').isNull ? 'Обязательное поле' : 'Пароль';
-      secondPasswordLabelText = form.control('second_password').isNull ? 'Обязательное поле' : 'Повторите пароль';
-      setState(() {
-
-      });
+  bool CheckForm(FormGroup form) {
+    if (form.control('email').isNull ||
+        form.control('password').isNull ||
+        form.control('second_password').isNull) {
+      emailLabelText =
+          form.control('email').isNull ? 'Обязательное поле' : 'Почта';
+      passwordLabelText =
+          form.control('password').isNull ? 'Обязательное поле' : 'Пароль';
+      secondPasswordLabelText = form.control('second_password').isNull
+          ? 'Обязательное поле'
+          : 'Повторите пароль';
+      setState(() {});
       return false;
     }
-    if(form.control('password').value != form.control('second_password').value){
-      secondPasswordLabelText =  'Пароли не совпадают';
-      setState(() {
-
-      });
+    if (form.control('password').value !=
+        form.control('second_password').value) {
+      secondPasswordLabelText = 'Пароли не совпадают';
+      setState(() {});
       return false;
     }
     return true;
@@ -76,18 +78,17 @@ class _SignUpScreenState extends State<SignUpScreen> {
               child: Column(
                 children: <Widget>[
                   Container(
-                    height: size.height/4,
+                    height: size.height / 4,
                   ),
                   Card(
                     shape: OutlineInputBorder(
                         borderSide: BorderSide.none,
-                        borderRadius: BorderRadius.circular(20)
-                    ),
+                        borderRadius: BorderRadius.circular(20)),
                     elevation: 10,
                     shadowColor: Colors.black,
                     child: SizedBox(
-                      width: size.width/1.2,
-                      height: size.height/14,
+                      width: size.width / 1.2,
+                      height: size.height / 14,
                       child: ReactiveTextField(
                         style: theme.textTheme.bodySmall,
                         cursorColor: theme.textTheme.bodySmall!.color,
@@ -98,32 +99,29 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               Text(emailLabelText),
                             ],
                           ),
-                          labelStyle: theme.textTheme.bodySmall!.copyWith(
-                          ),
+                          labelStyle: theme.textTheme.bodySmall!.copyWith(),
                           filled: true,
                           fillColor: Colors.white,
                           border: OutlineInputBorder(
                               borderSide: BorderSide.none,
-                              borderRadius: BorderRadius.circular(20)
-                          ),
+                              borderRadius: BorderRadius.circular(20)),
                         ),
                         formControlName: 'email',
                       ),
                     ),
                   ),
                   Container(
-                    height: size.height/14,
+                    height: size.height / 14,
                   ),
                   Card(
                     shape: OutlineInputBorder(
                         borderSide: BorderSide.none,
-                        borderRadius: BorderRadius.circular(20)
-                    ),
+                        borderRadius: BorderRadius.circular(20)),
                     elevation: 10,
                     shadowColor: Colors.black,
-                    child:  SizedBox(
-                      width: size.width/1.2,
-                      height: size.height/14,
+                    child: SizedBox(
+                      width: size.width / 1.2,
+                      height: size.height / 14,
                       child: ReactiveTextField(
                         style: theme.textTheme.bodySmall,
                         cursorColor: theme.textTheme.bodySmall!.color,
@@ -134,32 +132,29 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               Text(passwordLabelText),
                             ],
                           ),
-                          labelStyle: theme.textTheme.bodySmall!.copyWith(
-                          ),
+                          labelStyle: theme.textTheme.bodySmall!.copyWith(),
                           filled: true,
                           fillColor: Colors.white,
                           border: OutlineInputBorder(
                               borderSide: BorderSide.none,
-                              borderRadius: BorderRadius.circular(20)
-                          ),
+                              borderRadius: BorderRadius.circular(20)),
                         ),
                         formControlName: 'password',
                       ),
                     ),
                   ),
                   Container(
-                    height: size.height/14,
+                    height: size.height / 14,
                   ),
                   Card(
                     shape: OutlineInputBorder(
                         borderSide: BorderSide.none,
-                        borderRadius: BorderRadius.circular(20)
-                    ),
+                        borderRadius: BorderRadius.circular(20)),
                     elevation: 10,
                     shadowColor: Colors.black,
-                    child:  SizedBox(
-                      width: size.width/1.2,
-                      height: size.height/14,
+                    child: SizedBox(
+                      width: size.width / 1.2,
+                      height: size.height / 14,
                       child: ReactiveTextField(
                         style: theme.textTheme.bodySmall,
                         cursorColor: theme.textTheme.bodySmall!.color,
@@ -170,22 +165,19 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               Text(secondPasswordLabelText),
                             ],
                           ),
-                          labelStyle: theme.textTheme.bodySmall!.copyWith(
-                          ),
+                          labelStyle: theme.textTheme.bodySmall!.copyWith(),
                           filled: true,
                           fillColor: Colors.white,
                           border: OutlineInputBorder(
                               borderSide: BorderSide.none,
-                              borderRadius: BorderRadius.circular(20)
-                          ),
+                              borderRadius: BorderRadius.circular(20)),
                         ),
                         formControlName: 'second_password',
                       ),
                     ),
                   ),
                   Container(
-                    height: size.height/14
-                    ,
+                    height: size.height / 14,
                   ),
                   ReactiveFormConsumer(builder: (context, form, child) {
                     return Card(
@@ -200,11 +192,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   borderRadius: BorderRadius.circular(30))),
                           onPressed: () {
                             var checkResult = CheckForm(form);
-                            if(checkResult){
+                            if (checkResult) {
                               SaveToDB(form);
                               Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => BottomNavigationScreen(const MainScreen())));
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          BottomNavigationScreen(
+                                              const MainScreen())));
                             }
                           },
                           child: Ink(
@@ -215,21 +210,29 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   borderRadius: BorderRadius.circular(30)),
                               child: Center(
                                   child: Text('Регистрация',
-                                      style: theme.textTheme.titleMedium!.copyWith(color: theme.primaryColor, fontSize: 24))))),
+                                      style: theme.textTheme.titleMedium!
+                                          .copyWith(
+                                              color: theme.primaryColor,
+                                              fontSize: 24))))),
                     );
                   }),
                   Container(
-                    height: size.height/100,
+                    height: size.height / 100,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text('Уже есть аккаунт?', style: theme.textTheme.bodySmall!.copyWith(fontWeight: FontWeight.w200),),
+                      Text(
+                        'Уже есть аккаунт?',
+                        style: theme.textTheme.bodySmall!
+                            .copyWith(fontWeight: FontWeight.w200),
+                      ),
                       TextButton(
                           onPressed: () {
                             Navigator.push(
                                 context,
-                                MaterialPageRoute(builder: (context) => LogInScreen()));
+                                MaterialPageRoute(
+                                    builder: (context) => LogInScreen()));
                           },
                           child: Text(
                             'Войти',

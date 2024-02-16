@@ -22,7 +22,7 @@ class _BottomNavigationScreenState extends State<BottomNavigationScreen> {
   @override
   Widget build(BuildContext context) {
     var listOfBode = [
-      Trackers(), MainScreen(), Trackers(), Trackers(),widget.body
+      MainScreen(), Trackers(), Trackers(), Trackers(),widget.body
     ];
     var theme = Theme.of(context);
     var size = MediaQuery.of(context).size;

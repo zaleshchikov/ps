@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../../db/user_db.dart';
 import 'to_main_button.dart';
 import 'emotons_dairy.dart';
 import 'tracker_model.dart';
@@ -88,6 +89,7 @@ class _TestScreenState extends State<CurrentEmotions> {
                                 Future.delayed(const Duration(milliseconds: 1000), () {
                                   setState(() {
                                     widget.user.sphere = listOfDegree[index];
+                                    UserDatabase.addEmotionsAlarm(DateTime.now(), widget.user);
                                     Navigator.push(
                                         context,
                                         MaterialPageRoute(builder: (context) => EmotionsDairy()));

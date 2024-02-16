@@ -1,10 +1,18 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:ps/UI/wishes/add_wish.dart';
+import 'package:ps/UI/wishes/wish_sphere.dart';
+import 'package:ps/db/user_db.dart';
 import 'dart:ui';
+import '../../bottom_navigation.dart';
 import '../../page-1/utils.dart';
 import 'package:reactive_forms/reactive_forms.dart';
+
+import '../trackers/main_screen.dart';
 
 class WishList extends StatefulWidget {
   @override
@@ -16,11 +24,18 @@ class _EmotionsNoteState extends State<WishList> {
     'text': FormControl<String>(),
   });
 
+  Random random = new Random();
+
+
   List<String> listOfWishes = [
     'Обнять трех человек',
     'Улыбнуться незнакомцу',
     'Подарить цветы маме/бабушке/сестре',
-    'Съесть мороженое'
+    'Съесть мороженое',
+    'Покататься на велосипеде',
+    'Желание 6',
+    'Желание 7',
+    'Желание 8'
   ];
 
   @override
@@ -56,7 +71,10 @@ class _EmotionsNoteState extends State<WishList> {
                 child: GestureDetector(
                   behavior: HitTestBehavior.translucent,
                   onTap: () {
-                    print(1);
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => BottomNavigationScreen(MainScreen())));
                   },
                   child: Container(
                     child: Row(
@@ -103,23 +121,33 @@ class _EmotionsNoteState extends State<WishList> {
                           padding: const EdgeInsets.all(8),
                           itemCount: listOfWishes.length,
                           itemBuilder: (BuildContext context, int index) {
+                            var ind = random.nextInt(listOfWishes.length);
                             return Column(
                               children: [
-                                Container(
-                                    height: size.height / 11,
-                                    width: size.width / 1.2,
-                                    decoration: BoxDecoration(
-                                      color: theme.highlightColor,
-                                      borderRadius: BorderRadius.circular(30),
-                                    ),
-                                    child: Center(
-                                        child: Text(
-                                      listOfWishes[index],
-                                      style: theme.textTheme.bodySmall!.copyWith(
-                                          fontWeight: FontWeight.w600,
-                                          fontSize: 20),
-                                      textAlign: TextAlign.center,
-                                    ))),
+                                InkWell(
+                                  onTap: () async {
+                                    await UserDatabase.addWish(listOfWishes[ind]);
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => AddedWish(listOfWishes[ind])));
+                            },
+                                  child: Container(
+                                      height: size.height / 11,
+                                      width: size.width / 1.2,
+                                      decoration: BoxDecoration(
+                                        color: theme.highlightColor,
+                                        borderRadius: BorderRadius.circular(30),
+                                      ),
+                                      child: Center(
+                                          child: Text(
+                                        listOfWishes[ind],
+                                        style: theme.textTheme.bodySmall!.copyWith(
+                                            fontWeight: FontWeight.w600,
+                                            fontSize: 20),
+                                        textAlign: TextAlign.center,
+                                      ))),
+                                ),
                                 Container(height: size.height/40),
                               ],
                             );
@@ -127,13 +155,15 @@ class _EmotionsNoteState extends State<WishList> {
               Container(
                 height: size.height / 20,
               ),
-              Column(
-                children: [
-                  Positioned(
-                    // Rxf (191:4314)
-                    left: 0*fem,
-                    top: 368*fem,
-                    child: Align(
+              InkWell(
+                onTap: (){
+                  setState(() {
+
+                  });
+                },
+                child: Column(
+                  children: [
+                    Align(
                       child: SizedBox(
                         width: 53*fem,
                         height: 35*fem,
@@ -149,15 +179,10 @@ class _EmotionsNoteState extends State<WishList> {
                         ),
                       ),
                     ),
-                  ),
-                  Row(
-                    children: [
-                      Container(width: size.width/2.6),
-                      Positioned(
-                        // arrowdropdownbigqLo (191:4334)
-                        left: 0*fem,
-                        top: 705*fem,
-                        child: Align(
+                    Row(
+                      children: [
+                        Container(width: size.width/2.6),
+                        Align(
                           child: SizedBox(
                             width: 40*fem,
                             height: 40*fem,
@@ -168,20 +193,20 @@ class _EmotionsNoteState extends State<WishList> {
                             ),
                           ),
                         ),
-                      ),
-                    ],
-                  ),
+                      ],
+                    ),
 
-                ],
+                  ],
+                ),
               ),
               Container(
-                height: size.height/20
+                height: size.height/25
               ),
               GestureDetector(
                 onTap: () {
-                  // Navigator.push(
-                  //     context,
-                  //     MaterialPageRoute(builder: (context) => CurrentEmotions()));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => WishSphere()));
                 },
                 child: Container(
                   // autogroupmpyt2n7 (KqnvTTEHwQPnZQcM6NMpYT)

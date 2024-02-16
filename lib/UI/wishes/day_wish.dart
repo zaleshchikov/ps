@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:ps/UI/wishes/day_wish_note.dart';
+import 'package:ps/UI/wishes/wishlist.dart';
+import 'package:ps/db/user_db.dart';
 import '../../page-1/utils.dart';
 import 'package:ps/UI/emotion_alarm/to_main_button.dart';
 
@@ -46,7 +49,12 @@ class DayWish extends StatelessWidget {
                       )),
                   Container(height: size.height/30),
                   InkWell(
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => WishList()));
+                      },
                       child: Container(
                           height: size.height / 7.26,
                           width: size.width / 1.2,
@@ -74,6 +82,12 @@ class DayWish extends StatelessWidget {
                   Container(height: size.height / 50),
 
                   InkWell(
+                    onTap: (){
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => DayWishNote()));
+                    },
                     child: Container(
                       width: size.width/1.43,
                       height: size.height/12.6,
@@ -107,42 +121,48 @@ class DayWish extends StatelessWidget {
                   Container(
                     height: size.height/30,
                   ),
-                  GestureDetector(
-                    onTap: (){
-                      // Navigator.push(
-                      //     context,
-                      //     MaterialPageRoute(builder: (context) => CurrentEmotions()));
-                    },
-                    child: Container(
-                      // autogroupmpyt2n7 (KqnvTTEHwQPnZQcM6NMpYT)
-                      width: size.width/1.17,
-                      height: size.height/10.4,
-                      decoration: BoxDecoration (
-                        color: const Color(0xffa5b879),
-                        borderRadius: BorderRadius.circular(26),
-                        boxShadow: [
-                          BoxShadow(
-                            color: const Color(0xff7c4b21),
-                            offset: Offset(0, 4),
-                            blurRadius: 4.5,
-                          ),
-                        ],
-                      ),
-                      child:
-                      Center(
+                  FutureBuilder(future: UserDatabase.isCompletedWishes(), builder: (context, snapshot) {
+                    if(snapshot.hasData){
+                      return snapshot.data! ? GestureDetector(
+                        onTap: (){
+                          // Navigator.push(
+                          //     context,
+                          //     MaterialPageRoute(builder: (context) => CurrentEmotions()));
+                        },
                         child: Container(
-                          padding: EdgeInsets.only(top: size.height/70),
-                          child: Text(
-                              'Посмотреть список\n выполненных желаний', textAlign: TextAlign.center,
-                              style: theme.textTheme.bodySmall!.copyWith( color: theme.textTheme.titleLarge!.color,
-                                  fontSize: 18, fontWeight: FontWeight.w600)
+                          // autogroupmpyt2n7 (KqnvTTEHwQPnZQcM6NMpYT)
+                          width: size.width/1.17,
+                          height: size.height/10.4,
+                          decoration: BoxDecoration (
+                            color: const Color(0xffa5b879),
+                            borderRadius: BorderRadius.circular(26),
+                            boxShadow: [
+                              BoxShadow(
+                                color: const Color(0xff7c4b21),
+                                offset: Offset(0, 4),
+                                blurRadius: 4.5,
+                              ),
+                            ],
                           ),
+                          child:
+                          Center(
+                            child: Container(
+                              padding: EdgeInsets.only(top: size.height/70),
+                              child: Text(
+                                  'Посмотреть список\n выполненных желаний', textAlign: TextAlign.center,
+                                  style: theme.textTheme.bodySmall!.copyWith( color: theme.textTheme.titleLarge!.color,
+                                      fontSize: 18, fontWeight: FontWeight.w600)
+                              ),
+                            ),
+                          ),
+
+
                         ),
-                      ),
-
-
-                    ),
-                  ),
+                      ) : Container();
+                    } else{
+                      return Container();
+                    }
+                  }),
                 ],
               ),
             ),
