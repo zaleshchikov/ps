@@ -234,7 +234,7 @@ class UserDatabase {
 
   static Future<List<List>> completedWishes() async {
     if (!(await isCompletedWishes())) return [[]];
-    List<List<String>> completedWishes = [];
+    List<List> completedWishes = [];
     var _users = await users();
     User user = _users[0];
     for (var element in user.calendar.entries) {
@@ -245,6 +245,7 @@ class UserDatabase {
         ]);
       }
     }
+
     return completedWishes;
   }
 

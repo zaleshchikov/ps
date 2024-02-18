@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ps/UI/wishes/day_wish_note.dart';
+import 'package:ps/UI/wishes/wish_bank.dart';
 import 'package:ps/UI/wishes/wishlist.dart';
 import 'package:ps/db/user_db.dart';
 import '../../page-1/utils.dart';
@@ -125,9 +126,9 @@ class DayWish extends StatelessWidget {
                     if(snapshot.hasData){
                       return snapshot.data! ? GestureDetector(
                         onTap: (){
-                          // Navigator.push(
-                          //     context,
-                          //     MaterialPageRoute(builder: (context) => CurrentEmotions()));
+                           Navigator.push(
+                               context,
+                               MaterialPageRoute(builder: (context) => WishBank()));
                         },
                         child: Container(
                           // autogroupmpyt2n7 (KqnvTTEHwQPnZQcM6NMpYT)

@@ -37,6 +37,8 @@ void main() async {
           testResult: [],
           calendar: {},
       Wishes: []));
+  var s = await UserDatabase.completedWishes();
+  print(s);
   runApp(const MyApp());
 }
 

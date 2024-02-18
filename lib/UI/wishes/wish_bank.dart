@@ -2,12 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:ps/UI/trackers/main_screen.dart';
 import 'package:ps/UI/welcome_screen.dart';
 import 'package:ps/db/user_db.dart';
 import 'dart:ui';
 import '../../bottom_navigation.dart';
 import '../../page-1/utils.dart';
 import 'package:reactive_forms/reactive_forms.dart';
+
+import 'add_wish.dart';
 
 class Wish{
   String date;
@@ -37,6 +40,7 @@ class _EmotionsNoteState extends State<WishBank> {
         result.add(Wish(i[0], j));
       }
     }
+    result = result.where((e) => e.name != '').toList();
     return result;
   }
 
@@ -116,9 +120,10 @@ class _EmotionsNoteState extends State<WishBank> {
               Container(height: size.height/20),
               FutureBuilder(future: getCompletedWishes(), builder: (context, snapshot){
                 if(snapshot.hasData){
+                  print('Данные есть');
                   return SingleChildScrollView(
                       child: Container(
-                          height: size.height / 1.8,
+                          height: size.height / 1.7,
                           child: ListView.builder(
                               padding: const EdgeInsets.all(8),
                               itemCount: snapshot.data!.length,
@@ -160,7 +165,13 @@ class _EmotionsNoteState extends State<WishBank> {
                                             Row(
                                               mainAxisAlignment: MainAxisAlignment.end,
                                               children: [
-                                                TextButton(onPressed: (){}, child: Text('Повторить', style: theme.textTheme.bodySmall!.copyWith(fontSize: 15))),Container(width: size.width/10,)
+                                                TextButton(onPressed: () async{
+                                                  await UserDatabase.addWish(snapshot.data![index].name);
+                                                  Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                          builder: (context) => AddedWish(snapshot.data![index].name)));
+                                                }, child: Text('Повторить', style: theme.textTheme.bodySmall!.copyWith(fontSize: 15))),Container(width: size.width/10,)
                                               ],
                                             )
                                           ],
@@ -170,15 +181,16 @@ class _EmotionsNoteState extends State<WishBank> {
                                 );
                               })));
                 } else{
+                  print('Данных нет');
                   return Container();
                 }
               }),
-
+              Container(height: size.height/20,),
               GestureDetector(
                 onTap: () {
                   Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => BottomNavigationScreen(WelcomeScreen())));
+                      MaterialPageRoute(builder: (context) => BottomNavigationScreen(MainScreen())));
                 },
                 child: Container(
                   // autogroupmpyt2n7 (KqnvTTEHwQPnZQcM6NMpYT)

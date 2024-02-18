@@ -6,12 +6,15 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:ps/UI/emotion_alarm/to_main_button.dart';
 import 'package:ps/UI/trackers/main_screen.dart';
 import 'package:ps/UI/wishes/day_wish_note.dart';
+import 'package:ps/UI/wishes/wish_bank.dart';
 import 'package:ps/UI/wishes/wishlist.dart';
 import 'package:ps/bottom_navigation.dart';
 import 'package:ps/db/user_db.dart';
 import '../../page-1/utils.dart';
 
 class TodayWishes extends StatefulWidget {
+  const TodayWishes({super.key});
+
 
   @override
   State<TodayWishes> createState() => _TodayWishesState();
@@ -52,7 +55,7 @@ class _TodayWishesState extends State<TodayWishes> {
               Container(height: size.height / 40),
               SingleChildScrollView(
                 child: Container(
-                  height: size.height / 3,
+                  height: size.height / 3.4,
                   child:
                   FutureBuilder(
                     future: getWishes(),
@@ -184,7 +187,7 @@ class _TodayWishesState extends State<TodayWishes> {
 
                 ),
               )),
-              Container(height: size.height/100),
+              Container(height: size.height/40),
               InkWell(
                   onTap: () {
                     Navigator.push(
@@ -255,7 +258,7 @@ class _TodayWishesState extends State<TodayWishes> {
                     onTap: (){
                        Navigator.push(
                            context,
-                           MaterialPageRoute(builder: (context) => BottomNavigationScreen(MainScreen())));
+                           MaterialPageRoute(builder: (context) => WishBank()));
                     },
                     child: Container(
                       // autogroupmpyt2n7 (KqnvTTEHwQPnZQcM6NMpYT)
