@@ -9,14 +9,15 @@ import 'dart:ui';
 import '../../bottom_navigation.dart';
 import '../../page-1/utils.dart';
 import 'package:reactive_forms/reactive_forms.dart';
+import 'package:ps/db/wish_model.dart';
 
 import 'add_wish.dart';
 
-class Wish{
+class WishWithDate{
+  Wish wish;
   String date;
-  String name;
 
-  Wish(this.date, this.name);
+  WishWithDate(this.wish, this.date);
 }
 
 class WishBank extends StatefulWidget {
@@ -32,15 +33,15 @@ class _EmotionsNoteState extends State<WishBank> {
   //   Wish('20 января', 'Купить цветы'),
   // ];
 
-  Future<List<Wish>> getCompletedWishes() async {
-    List<Wish> result= [];
+  Future<List<WishWithDate>> getCompletedWishes() async {
+    List<WishWithDate> result= [];
     var l = await UserDatabase.completedWishes();
     for(var i in l){
       for( var j in i[1]){
-        result.add(Wish(i[0], j));
+        result.add(WishWithDate( Wish(j[0], j[1]), i[0]));
       }
     }
-    result = result.where((e) => e.name != '').toList();
+    result = result.where((e) => e.wish.toString() != '').toList();
     return result;
   }
 
@@ -157,7 +158,7 @@ class _EmotionsNoteState extends State<WishBank> {
                                             Container(height: size.height/50),
                                             Center(
                                                 child: Text(
-                                                  snapshot.data![index].name,
+                                                  snapshot.data![index].wish.wish,
                                                   style: theme.textTheme.titleMedium!.copyWith(fontSize: 22),
                                                   textAlign: TextAlign.center,
                                                 )),
@@ -166,11 +167,11 @@ class _EmotionsNoteState extends State<WishBank> {
                                               mainAxisAlignment: MainAxisAlignment.end,
                                               children: [
                                                 TextButton(onPressed: () async{
-                                                  await UserDatabase.addWish(snapshot.data![index].name);
+                                                  await UserDatabase.addWish(snapshot.data![index].wish.wish, snapshot.data![index].wish.sphere);
                                                   Navigator.push(
                                                       context,
                                                       MaterialPageRoute(
-                                                          builder: (context) => AddedWish(snapshot.data![index].name)));
+                                                          builder: (context) => AddedWish(snapshot.data![index].wish.wish)));
                                                 }, child: Text('Повторить', style: theme.textTheme.bodySmall!.copyWith(fontSize: 15))),Container(width: size.width/10,)
                                               ],
                                             )

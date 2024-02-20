@@ -8,10 +8,15 @@ import 'dart:ui';
 import '../../db/user_db.dart';
 import '../../page-1/utils.dart';
 import 'package:reactive_forms/reactive_forms.dart';
+import 'package:ps/db/wish_model.dart';
 
 import 'add_wish.dart';
 
 class SortedWishList extends StatefulWidget {
+
+  String sphere;
+  SortedWishList(this.sphere);
+
   @override
   State<SortedWishList> createState() => _EmotionsNoteState();
 }
@@ -116,7 +121,7 @@ class _EmotionsNoteState extends State<SortedWishList> {
                               children: [
                                 InkWell(
                                   onTap: () async {
-                                    await UserDatabase.addWish(listOfWishes[ind]);
+                                    await UserDatabase.addWish(listOfWishes[ind], widget.sphere);
                                     Navigator.push(
                                         context,
                                         MaterialPageRoute(

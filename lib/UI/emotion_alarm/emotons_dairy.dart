@@ -14,38 +14,9 @@ class _EmotionsDairyState extends State<EmotionsDairy> {
   var selectedName = 'Сегодня';
   int maxLenght = 5;
 
-  Future<Map<dynamic, dynamic>> getDate() async {
-    var s = await UserDatabase.getDataByDate(DateTime.now(), selectedName);
+  Future<Map<String, List>> getDate() async {
+    var s = await UserDatabase.groupData(DateTime.now(), selectedName);
     return s;
-  }
-
-  FormatDate() async {
-    var date = await getDate();
-    List formatDate = [];
-    switch (selectedName) {
-      case 'Сегодня':
-        for( var element in date.values){
-          formatDate.add(element);
-        }
-        break;
-      case 'Неделя':
-        for( var element in date.values){
-          element.add();
-          formatDate.add(element);
-        }
-        break;
-      case 'Месяц':
-        for( var element in date.values){
-          formatDate.add(element);
-        }
-        break;
-      case 'Год':
-        for( var element in date.values){
-          formatDate.add(element);
-        }
-        break;
-
-    }
   }
 
   @override
@@ -53,11 +24,16 @@ class _EmotionsDairyState extends State<EmotionsDairy> {
     var theme = Theme.of(context);
     var size = MediaQuery.of(context).size;
 
-    tableRow(int index) {
+    tableRow(int index, String date, String name, String emotions, String feelings) {
       return TableRow(
           decoration: BoxDecoration(color: theme.indicatorColor),
           children: [
             Container(
+              child: Center(
+                  child: Text(
+                    date,
+                    style: TextStyle(color: theme.focusColor),
+                  )),
               height: size.height / 18,
               width: size.width / 5,
               decoration: index == (maxLenght - 1)
@@ -71,6 +47,11 @@ class _EmotionsDairyState extends State<EmotionsDairy> {
                     )),
             ),
             Container(
+              child: Center(
+                  child: Text(
+                    name,
+                    style: TextStyle(color: theme.focusColor),
+                  )),
               height: size.height / 18,
               width: size.width / 5,
               decoration: BoxDecoration(
@@ -82,6 +63,11 @@ class _EmotionsDairyState extends State<EmotionsDairy> {
               )),
             ),
             Container(
+              child: Center(
+                  child: Text(
+                    emotions,
+                    style: TextStyle(color: theme.focusColor),
+                  )),
               height: size.height / 18,
               width: size.width / 5,
               decoration: BoxDecoration(
@@ -93,6 +79,11 @@ class _EmotionsDairyState extends State<EmotionsDairy> {
               )),
             ),
             Container(
+              child: Center(
+                  child: Text(
+                    feelings,
+                    style: TextStyle(color: theme.focusColor),
+                  )),
               height: size.height / 18,
               width: size.width / 5,
               decoration: index == (maxLenght - 1)
@@ -113,7 +104,17 @@ class _EmotionsDairyState extends State<EmotionsDairy> {
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           var TableRows = [];
-          for (var element in snapshot.data!.entries) {}
+
+          if (selectedName == 'Сегодня') {
+            for (var element in snapshot.data!.entries) {
+              TableRows.add(tableRow(1, element.key, element.value[0], element.value[1],element.value[2]));
+            }
+          } else{
+            for (var element in snapshot.data!.entries) {
+              TableRows.add(tableRow(1,element.key, element.value[0],'', ''));
+            }
+          }
+
           return SafeArea(
             child: Scaffold(
                 body: Center(
@@ -196,108 +197,103 @@ class _EmotionsDairyState extends State<EmotionsDairy> {
                       ),
                     ),
                     Container(height: size.height / 10),
-                    SingleChildScrollView(
-                      child: Container(
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(30)),
-                          padding: EdgeInsets.all(10),
-                          child: Table(
-                            columnWidths: const {
-                              0: FixedColumnWidth(60),
-                              1: FlexColumnWidth(),
-                              2: FlexColumnWidth(),
-                              3: FlexColumnWidth(),
-                              4: FlexColumnWidth(),
-                              5: FlexColumnWidth(),
-                              6: FlexColumnWidth(),
-                              7: FlexColumnWidth(),
-                              8: FlexColumnWidth(),
-                              9: FlexColumnWidth(),
-                              10: FlexColumnWidth(),
-                              11: FlexColumnWidth(),
-                              12: FlexColumnWidth(),
-                              13: FlexColumnWidth(),
-                              14: FlexColumnWidth(),
-                            },
-                            children: [
-                              TableRow(
-                                  decoration: BoxDecoration(
-                                      color: theme.indicatorColor,
-                                      borderRadius: BorderRadius.only(
-                                          topLeft: Radius.circular(30),
-                                          topRight: Radius.circular(30))),
-                                  children: [
-                                    Container(
-                                      height: size.height / 18,
-                                      width: size.width / 5,
-                                      child: Center(
-                                          child: Text(
-                                        'Дата',
-                                        style:
-                                            TextStyle(color: theme.focusColor),
-                                      )),
-                                    ),
-                                    Container(
-                                      child: Center(
-                                          child: Text(
-                                        'Эмоции',
-                                        style:
-                                            TextStyle(color: theme.focusColor),
-                                      )),
-                                      height: size.height / 18,
-                                      width: size.width / 5,
-                                      decoration: BoxDecoration(
-                                          border: Border(
-                                        right: BorderSide(
-                                            color: theme.dividerColor),
-                                        top: BorderSide(
-                                            color: theme.dividerColor),
-                                        bottom: BorderSide(
-                                            color: theme.dividerColor),
-                                        left: BorderSide(
-                                            color: theme.dividerColor),
-                                      )),
-                                    ),
-                                    Container(
-                                      child: Center(
-                                          child: Text(
-                                        'Чувство',
-                                        style:
-                                            TextStyle(color: theme.focusColor),
-                                      )),
-                                      height: size.height / 18,
-                                      width: size.width / 5,
-                                      decoration: BoxDecoration(
-                                          border: Border(
-                                        right: BorderSide(
-                                            color: theme.dividerColor),
-                                        top: BorderSide(
-                                            color: theme.dividerColor),
-                                        bottom: BorderSide(
-                                            color: theme.dividerColor),
-                                        left: BorderSide(
-                                            color: theme.dividerColor),
-                                      )),
-                                    ),
-                                    Container(
-                                      child: Center(
-                                          child: Text(
-                                        'Действие',
-                                        style:
-                                            TextStyle(color: theme.focusColor),
-                                      )),
-                                      height: size.height / 18,
-                                      width: size.width / 5,
-                                    )
-                                  ]),
-                            ],
-                            border: TableBorder.all(
-                              width: 1,
-                              color: theme.indicatorColor,
-                              borderRadius: BorderRadius.circular(30),
-                            ),
-                          )),
-                    ),
+                    Container(
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(50)),
+                        padding: EdgeInsets.all(10),
+                        child: Table(
+                          columnWidths: const {
+                            0: FixedColumnWidth(60),
+                            1: FlexColumnWidth(),
+                            2: FlexColumnWidth(),
+                            3: FlexColumnWidth(),
+                            4: FlexColumnWidth(),
+                            5: FlexColumnWidth(),
+                            6: FlexColumnWidth(),
+                            7: FlexColumnWidth(),
+                            8: FlexColumnWidth(),
+                            9: FlexColumnWidth(),
+                            10: FlexColumnWidth(),
+                            11: FlexColumnWidth(),
+                            12: FlexColumnWidth(),
+                            13: FlexColumnWidth(),
+                            14: FlexColumnWidth(),
+                          },
+                          children: [
+                            TableRow(
+                                decoration: BoxDecoration(
+                                    color: theme.indicatorColor,
+                                    borderRadius: BorderRadius.only(
+                                        topLeft: Radius.circular(30),
+                                        topRight: Radius.circular(30))),
+                                children: [
+                                  Container(
+                                    height: size.height / 18,
+                                    width: size.width / 5,
+                                    child: Center(
+                                        child: Text(
+                                      'Дата',
+                                      style: TextStyle(color: theme.focusColor),
+                                    )),
+                                  ),
+                                  Container(
+                                    child: Center(
+                                        child: Text(
+                                      'Эмоции',
+                                      style: TextStyle(color: theme.focusColor),
+                                    )),
+                                    height: size.height / 18,
+                                    width: size.width / 5,
+                                    decoration: BoxDecoration(
+                                        border: Border(
+                                      right:
+                                          BorderSide(color: theme.dividerColor),
+                                      top:
+                                          BorderSide(color: theme.dividerColor),
+                                      bottom:
+                                          BorderSide(color: theme.dividerColor),
+                                      left:
+                                          BorderSide(color: theme.dividerColor),
+                                    )),
+                                  ),
+                                  Container(
+                                    child: Center(
+                                        child: Text(
+                                      'Чувство',
+                                      style: TextStyle(color: theme.focusColor),
+                                    )),
+                                    height: size.height / 18,
+                                    width: size.width / 5,
+                                    decoration: BoxDecoration(
+                                        border: Border(
+                                      right:
+                                          BorderSide(color: theme.dividerColor),
+                                      top:
+                                          BorderSide(color: theme.dividerColor),
+                                      bottom:
+                                          BorderSide(color: theme.dividerColor),
+                                      left:
+                                          BorderSide(color: theme.dividerColor),
+                                    )),
+                                  ),
+                                  Container(
+                                    child: Center(
+                                        child: Text(
+                                      'Действие',
+                                      style: TextStyle(color: theme.focusColor),
+                                    )),
+                                    height: size.height / 18,
+                                    width: size.width / 5,
+                                  )
+                                ]),
+                            ...TableRows
+                          ],
+                          border: TableBorder.all(
+                            width: 1,
+                            color: theme.indicatorColor,
+                            borderRadius: BorderRadius.circular(30),
+                          ),
+                        )),
                     Container(
                       height: size.height / 7,
                     ),

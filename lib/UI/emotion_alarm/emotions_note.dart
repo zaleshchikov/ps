@@ -35,8 +35,9 @@ class _EmotionsNoteState extends State<EmotionsNote> {
       child: Container(
         width: double.infinity,
         child: Container(
+          height: size.height,
           // 47u (191:5904)
-          padding: EdgeInsets.fromLTRB(26*fem, 8*fem, 26.5*fem, 76*fem),
+          padding: EdgeInsets.fromLTRB(26*fem, 8*fem, 26.5*fem, 40*fem),
           width: double.infinity,
           decoration: const BoxDecoration (
             color: Color(0xfff5ecdf),
@@ -297,7 +298,7 @@ class _EmotionsNoteState extends State<EmotionsNote> {
               ),
               Container(
                 // framejuV (191:5931)
-                margin: EdgeInsets.fromLTRB(67*fem, 0*fem, 81.5*fem, 20*fem),
+                margin: EdgeInsets.fromLTRB(67*fem, 0*fem, 81.5*fem, 10*fem),
                 padding: EdgeInsets.fromLTRB(22*fem, 10.5*fem, 3*fem, 9.5*fem),
                 width: double.infinity,
                 height: 40*fem,

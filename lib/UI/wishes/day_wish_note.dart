@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:ps/UI/wishes/wish_sphere.dart';
 import 'dart:ui';
 import '../../db/user_db.dart';
 import '../../page-1/utils.dart';
@@ -339,12 +340,17 @@ class _EmotionsNoteState extends State<DayWishNote> {
               GestureDetector(
                 onTap: () async {
                   if (!form.control('text').isNull) {
-                    await UserDatabase.addWish(form.control('text').value);
+                    // await UserDatabase.addWish(form.control('text').value);
+                    // Navigator.push(
+                    //     context,
+                    //     MaterialPageRoute(
+                    //         builder: (context) =>
+                    //             AddedWish(form.control('text').value)));
                     Navigator.push(
                         context,
                         MaterialPageRoute(
                             builder: (context) =>
-                                AddedWish(form.control('text').value)));
+                                WishSphere(form.control('text').value)));
                   }
                 },
                 child: Container(

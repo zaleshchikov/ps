@@ -2,21 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ps/UI/emotion_alarm/to_main_button.dart';
-import 'package:ps/UI/wishes/add_wish.dart';
 import 'package:ps/UI/wishes/sorted_wish_list.dart';
 
-import '../../db/user_db.dart';
+class WishListSphere extends StatefulWidget {
 
-class WishSphere extends StatefulWidget {
-
-  String wish;
-  WishSphere(this.wish);
 
   @override
-  State<WishSphere> createState() => _TestScreenState();
+  State<WishListSphere> createState() => _TestScreenState();
 }
 
-class _TestScreenState extends State<WishSphere> {
+class _TestScreenState extends State<WishListSphere> {
   var _selectedIndex = 6;
 
   var listOfDegree = [
@@ -85,16 +80,15 @@ class _TestScreenState extends State<WishSphere> {
                             padding: EdgeInsets.only(bottom: 25),
                             width: size.width/1.5,
                             child: ElevatedButton(
-                              onPressed: () async {
+                              onPressed: () {
                                 setState(() {
                                   _selectedIndex = index;
                                 });
-                                Future.delayed(const Duration(milliseconds: 1000), () async {
-                                  await UserDatabase.addWish(widget.wish, listOfDegree[index]);
+                                Future.delayed(const Duration(milliseconds: 1000), () {
                                   setState(() {
                                     Navigator.push(
                                         context,
-                                        MaterialPageRoute(builder: (context) => AddedWish(widget.wish)));
+                                        MaterialPageRoute(builder: (context) => SortedWishList(listOfDegree[index])));
                                   });
                                 });
 

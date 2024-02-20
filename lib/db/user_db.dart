@@ -4,6 +4,7 @@ import 'package:sqflite/sqflite.dart';
 import 'user_model.dart';
 import 'package:path/path.dart';
 import 'package:ps/UI/emotion_alarm/tracker_model.dart';
+import 'wish_model.dart';
 
 class UserDatabase {
   static Database? _database;
@@ -18,6 +19,101 @@ class UserDatabase {
       },
       version: 1,
     );
+  }
+
+  static sortState(List states) {
+    Map<String, int> frequency = {};
+
+    for (String state in states) {
+      if (frequency.containsKey(state)) {
+        frequency[state] = frequency[state]! + 1;
+      } else {
+        frequency[state] = 1;
+      }
+    }
+    String returnedValue = '';
+    int max = 0;
+
+    frequency.forEach((key, value) {
+      if (value > max) {
+        max = value;
+        returnedValue = key;
+      }
+    });
+    return [returnedValue];
+  }
+
+  static getSortedValue(
+      Map data, Map<String, List> result, int minDays, maxDays, weekNumber, int whatDate) {
+    var statesToSort = [];
+    for (var element in data.entries) {
+      if (int.parse(element.key.split('/')[whatDate]) < maxDays &&
+          int.parse(element.key.split('/')[whatDate]) >= minDays) {
+        for(List alarmList in element.value){
+          if(alarmList.isNotEmpty){
+            statesToSort.add(alarmList[1]);
+          }
+        }
+      } else {
+        if (statesToSort.isNotEmpty) {
+          result.addEntries({MapEntry('$weekNumber', sortState(statesToSort))});
+        }
+      }
+    }
+    if (statesToSort.isNotEmpty) {
+      result.addEntries({MapEntry('$weekNumber', sortState(statesToSort))});
+    }
+  }
+
+  static dayNameFromNumber(int number){
+    switch (number) {
+      case 1:
+        return 'Понедельник';
+      case 2:
+        return 'Вторник';
+      case 3:
+        return 'Среда';
+      case 4:
+        return 'Четверг';
+      case 5:
+        return 'Пятница';
+      case 6:
+        return 'Суббота';
+      case 7:
+        return 'Воскресенье';
+
+  }}
+
+  static groupData(DateTime time, String grade) async {
+    var data = await getDataByDate(time, grade);
+    Map<String, List> result = {};
+    var statesToSort = [];
+    switch (grade) {
+      case 'Сегодня':
+        for (var element in data.entries) {
+          for(List alarmList in element.value){
+          result.addEntries({MapEntry(alarmList[0], alarmList.sublist(1))});}
+        }
+        break;
+      case 'Неделя':
+        int weekBegin = DateTime.now().day - DateTime.now().weekday+1;
+
+        for(int i = 0; i < 7; i++){
+          getSortedValue(data, result, weekBegin+i, weekBegin+1+i, dayNameFromNumber(i+1), 0);
+        }
+        break;
+      case 'Месяц':
+        getSortedValue(data, result, 0, 7, 1, 0);
+        getSortedValue(data, result, 8, 15, 2, 0);
+        getSortedValue(data, result, 15, 22, 3, 0);
+        getSortedValue(data, result, 25, 32, 4, 0);
+        break;
+      case 'Год':
+        for(int i = 0; i < 12; i++){
+          getSortedValue(data, result, i, i+2, monthNumberToName(i+1), 2);
+        }
+    }
+    return result;
   }
 
   static Future<Map> getDataByDate(DateTime time, String grade) async {
@@ -146,7 +242,7 @@ class UserDatabase {
   static Future<bool> isWishes() async {
     var _users = await users();
     var user = _users[0];
-    return user.Wishes.isNotEmpty ? user.Wishes[0] != '' : false;
+    return user.Wishes.isNotEmpty ? user.Wishes[0].toString() != '' : false;
   }
 
   static Future<bool> isCompletedWishes() async {
@@ -159,7 +255,8 @@ class UserDatabase {
     return false;
   }
 
-  static Future<int> addCompletedWish(DateTime time, String wish) async {
+  static Future<int> addCompletedWish(
+      DateTime time, String wish, String sphere) async {
     await open();
     var _users = await users();
     User user = _users[0];
@@ -168,14 +265,16 @@ class UserDatabase {
       user.calendar[
               '${time.day}/${weekNumber(time)}/${time.month}/${time.year}']![
               'completedWishes']!
-          .add(wish);
+          .add([wish, sphere]);
     } else {
       final entry = {
         '${time.day}/${weekNumber(time)}/${time.month}/${time.year}': {
           'emotionAlarm': [<String>[]],
           'wishesBank': [<String>[]],
           'successJournal': [<String>[]],
-          'completedWishes': [wish]
+          'completedWishes': [
+            [wish, sphere]
+          ]
         }
       };
       user.calendar.addEntries(entry.entries);
@@ -189,11 +288,15 @@ class UserDatabase {
     );
   }
 
-  static Future<int> deleteWish(String wish) async {
+  static Future<int> deleteWish(Wish wish) async {
     await open();
     var _users = await users();
     User user = _users[0];
-    user.Wishes.remove(wish);
+    List nameOfWishes = [];
+    for (var element in user.Wishes) {
+      nameOfWishes.add(element.wish);
+    }
+    user.Wishes.removeAt(nameOfWishes.indexOf(wish.wish));
 
     return await _database!.update(
       'users',
@@ -249,11 +352,11 @@ class UserDatabase {
     return completedWishes;
   }
 
-  static Future<int> addWish(String wish) async {
+  static Future<int> addWish(String wish, String sphere) async {
     await open();
     var _users = await users();
     User user = _users[0];
-    user.Wishes.add(wish);
+    user.Wishes.add(Wish(wish, sphere));
     if (user.Wishes.length > 0 && user.Wishes[0].toString() == '') {
       user.Wishes = user.Wishes.sublist(1);
     }
@@ -285,7 +388,12 @@ class UserDatabase {
           password: maps[i]['password'],
           testResult: maps[i]['testResult'].split('_'),
           calendar: json.decode(maps[i]['calendar']),
-          Wishes: maps[i]['Wishes'].split('_'));
+          Wishes: <Wish>[
+            ...maps[i]['Wishes']
+                .split('_')
+                .map((i) => Wish.fromString(i))
+                .toList()
+          ]);
     });
   }
 

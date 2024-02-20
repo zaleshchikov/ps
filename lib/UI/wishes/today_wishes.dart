@@ -10,22 +10,22 @@ import 'package:ps/UI/wishes/wish_bank.dart';
 import 'package:ps/UI/wishes/wishlist.dart';
 import 'package:ps/bottom_navigation.dart';
 import 'package:ps/db/user_db.dart';
+import 'package:ps/db/wish_model.dart';
 import '../../page-1/utils.dart';
 
 class TodayWishes extends StatefulWidget {
   const TodayWishes({super.key});
-
 
   @override
   State<TodayWishes> createState() => _TodayWishesState();
 }
 
 class _TodayWishesState extends State<TodayWishes> {
-  Future<List> getWishes() async{
-    var _users = await UserDatabase.users();
-    var user = _users[0];
-    if(user.Wishes.isNotEmpty){
-      if(user.Wishes[0] == ''){
+  Future<List<Wish>> getWishes() async {
+    var users = await UserDatabase.users();
+    var user = users[0];
+    if (user.Wishes.isNotEmpty) {
+      if (user.Wishes[0].toString() == '') {
         return [];
       }
     }
@@ -54,14 +54,13 @@ class _TodayWishesState extends State<TodayWishes> {
                       color: Color(0xff4B3425))),
               Container(height: size.height / 40),
               SingleChildScrollView(
-                child: Container(
-                  height: size.height / 3.4,
-                  child:
-                  FutureBuilder(
+                  child: Container(
+                height: size.height / 3.4,
+                child: FutureBuilder(
                     future: getWishes(),
-                  builder: (context, snapshot){
-                      if(snapshot.hasData){
-                        return                   ListView.builder(
+                    builder: (context, snapshot) {
+                      if (snapshot.hasData) {
+                        return ListView.builder(
                             padding: const EdgeInsets.all(8),
                             itemCount: snapshot.data!.length,
                             itemBuilder: (BuildContext context, int index) {
@@ -74,14 +73,16 @@ class _TodayWishesState extends State<TodayWishes> {
                                         width: size.width / 1.16,
                                         decoration: BoxDecoration(
                                             color: theme.highlightColor,
-                                            borderRadius: BorderRadius.circular(25)),
+                                            borderRadius:
+                                                BorderRadius.circular(25)),
                                         child: Center(
                                           child: Text(
-                                            snapshot.data![index],
-                                            style:
-                                            theme.textTheme.titleLarge!.copyWith(
+                                            snapshot.data![index].wish,
+                                            style: theme.textTheme.titleLarge!
+                                                .copyWith(
                                               fontSize: 23,
-                                              color: theme.textTheme.bodySmall!.color,
+                                              color: theme
+                                                  .textTheme.bodySmall!.color,
                                             ),
                                           ),
                                         )),
@@ -90,41 +91,63 @@ class _TodayWishesState extends State<TodayWishes> {
                                     padding: EdgeInsets.only(top: 50),
                                     child: Row(
                                       mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
+                                          MainAxisAlignment.spaceEvenly,
                                       children: [
                                         InkWell(
                                             onTap: () async {
-                                              await UserDatabase.addCompletedWish(DateTime.now(), snapshot.data![index]);
-                                              await UserDatabase.deleteWish(snapshot.data![index]);
+                                              await UserDatabase
+                                                  .addCompletedWish(
+                                                      DateTime.now(),
+                                                      snapshot
+                                                          .data![index]!.wish,
+                                                      snapshot.data![index]!
+                                                          .sphere);
+                                              await UserDatabase.deleteWish(
+                                                  snapshot.data![index]);
                                               showDialog(
-                                                  barrierColor: Colors.transparent,
+                                                  barrierColor:
+                                                      Colors.transparent,
                                                   context: context,
-                                                  builder: (_) =>  BackdropFilter(
-                                                    filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-                                                    child: Dialog(
-                                                      surfaceTintColor: Colors.transparent,
-                                                      backgroundColor: Colors.transparent,
-                                                      child:  Container(
-                                                          alignment: FractionalOffset.center,
-                                                          height: size.height/2.5,
-                                                          padding: const EdgeInsets.all(20.0),
-                                                          child:  Image.asset(
-                                                            'assets/dialog_s.png',
-                                                            fit: BoxFit.cover,
-                                                          )
-                                                      ),
-                                                    ),
-                                                  ));
-                                              setState(() {
-
-                                              });
+                                                  builder: (_) =>
+                                                      BackdropFilter(
+                                                        filter:
+                                                            ImageFilter.blur(
+                                                                sigmaX: 10,
+                                                                sigmaY: 10),
+                                                        child: Dialog(
+                                                          surfaceTintColor:
+                                                              Colors
+                                                                  .transparent,
+                                                          backgroundColor:
+                                                              Colors
+                                                                  .transparent,
+                                                          child: Container(
+                                                              alignment:
+                                                                  FractionalOffset
+                                                                      .center,
+                                                              height:
+                                                                  size.height /
+                                                                      2.5,
+                                                              padding:
+                                                                  const EdgeInsets
+                                                                      .all(
+                                                                      20.0),
+                                                              child:
+                                                                  Image.asset(
+                                                                'assets/dialog_s.png',
+                                                                fit: BoxFit
+                                                                    .cover,
+                                                              )),
+                                                        ),
+                                                      ));
+                                              setState(() {});
                                             },
                                             child: Container(
                                                 height: size.height / 16.3,
                                                 width: size.width / 2.54,
                                                 decoration: BoxDecoration(
                                                   borderRadius:
-                                                  BorderRadius.circular(50),
+                                                      BorderRadius.circular(50),
                                                   boxShadow: [
                                                     BoxShadow(
                                                       color: Color(0xe36a7b3b),
@@ -139,23 +162,23 @@ class _TodayWishesState extends State<TodayWishes> {
                                                 ),
                                                 child: Center(
                                                     child: Text('Да',
-                                                        style: theme
-                                                            .textTheme.bodyMedium!
+                                                        style: theme.textTheme
+                                                            .bodyMedium!
                                                             .copyWith(
-                                                            fontSize: 30))))),
+                                                                fontSize:
+                                                                    30))))),
                                         InkWell(
                                             onTap: () async {
-                                              await UserDatabase.deleteWish(snapshot.data![index]);
-                                              setState(() {
-
-                                              });
+                                              await UserDatabase.deleteWish(
+                                                  snapshot.data![index]);
+                                              setState(() {});
                                             },
                                             child: Container(
                                                 height: size.height / 16.3,
                                                 width: size.width / 2.54,
                                                 decoration: BoxDecoration(
                                                   borderRadius:
-                                                  BorderRadius.circular(50),
+                                                      BorderRadius.circular(50),
                                                   boxShadow: [
                                                     BoxShadow(
                                                       color: Color(0xffA55A26),
@@ -170,30 +193,27 @@ class _TodayWishesState extends State<TodayWishes> {
                                                 ),
                                                 child: Center(
                                                     child: Text('Нет',
-                                                        style: theme
-                                                            .textTheme.bodyMedium!
+                                                        style: theme.textTheme
+                                                            .bodyMedium!
                                                             .copyWith(
-                                                            fontSize: 30)))))
+                                                                fontSize:
+                                                                    30)))))
                                       ],
                                     ),
                                   )
                                 ],
                               );
                             });
-                      } else{
+                      } else {
                         return Container();
                       }
-                  }
-
-                ),
+                    }),
               )),
-              Container(height: size.height/40),
+              Container(height: size.height / 40),
               InkWell(
                   onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => WishList()));
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => WishList()));
                   },
                   child: Container(
                       height: size.height / 11,
@@ -219,13 +239,11 @@ class _TodayWishesState extends State<TodayWishes> {
                             .copyWith(fontWeight: FontWeight.w600),
                         textAlign: TextAlign.center,
                       )))),
-              Container(height: size.height/50),
+              Container(height: size.height / 50),
               InkWell(
                   onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => DayWishNote()));
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => DayWishNote()));
                   },
                   child: Container(
                       height: size.height / 17.5,
@@ -246,54 +264,61 @@ class _TodayWishesState extends State<TodayWishes> {
                       ),
                       child: Center(
                           child: Text(
-                            'Добавить своё желание',
-                            style: theme.textTheme.bodySmall!
-                                .copyWith(fontWeight: FontWeight.w600),
-                            textAlign: TextAlign.center,
-                          )))),
-              Container(height: size.height/100),
-              FutureBuilder(future: UserDatabase.isCompletedWishes(), builder: (context, snapshot) {
-                if(snapshot.hasData){
-                  return snapshot.data! ? GestureDetector(
-                    onTap: (){
-                       Navigator.push(
-                           context,
-                           MaterialPageRoute(builder: (context) => WishBank()));
-                    },
-                    child: Container(
-                      // autogroupmpyt2n7 (KqnvTTEHwQPnZQcM6NMpYT)
-                      width: size.width/1.17,
-                      height: size.height/10.4,
-                      decoration: BoxDecoration (
-                        color: const Color(0xffa5b879),
-                        borderRadius: BorderRadius.circular(26),
-                        boxShadow: [
-                          BoxShadow(
-                            color: const Color(0xff7c4b21),
-                            offset: Offset(0, 4),
-                            blurRadius: 4.5,
-                          ),
-                        ],
-                      ),
-                      child:
-                      Center(
-                        child: Container(
-                          padding: EdgeInsets.only(top: size.height/70),
-                          child: Text(
-                              'Посмотреть список\n выполненных желаний', textAlign: TextAlign.center,
-                              style: theme.textTheme.bodySmall!.copyWith( color: theme.textTheme.titleLarge!.color,
-                                  fontSize: 18, fontWeight: FontWeight.w600)
-                          ),
-                        ),
-                      ),
-
-
-                    ),
-                  ) : Container();
-                } else{
-                  return Container();
-                }
-              })
+                        'Добавить своё желание',
+                        style: theme.textTheme.bodySmall!
+                            .copyWith(fontWeight: FontWeight.w600),
+                        textAlign: TextAlign.center,
+                      )))),
+              Container(height: size.height / 100),
+              FutureBuilder(
+                  future: UserDatabase.isCompletedWishes(),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      return snapshot.data!
+                          ? GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => WishBank()));
+                              },
+                              child: Container(
+                                // autogroupmpyt2n7 (KqnvTTEHwQPnZQcM6NMpYT)
+                                width: size.width / 1.17,
+                                height: size.height / 10.4,
+                                decoration: BoxDecoration(
+                                  color: const Color(0xffa5b879),
+                                  borderRadius: BorderRadius.circular(26),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: const Color(0xff7c4b21),
+                                      offset: Offset(0, 4),
+                                      blurRadius: 4.5,
+                                    ),
+                                  ],
+                                ),
+                                child: Center(
+                                  child: Container(
+                                    padding:
+                                        EdgeInsets.only(top: size.height / 70),
+                                    child: Text(
+                                        'Посмотреть список\n выполненных желаний',
+                                        textAlign: TextAlign.center,
+                                        style: theme.textTheme.bodySmall!
+                                            .copyWith(
+                                                color: theme.textTheme
+                                                    .titleLarge!.color,
+                                                fontSize: 18,
+                                                fontWeight: FontWeight.w600)),
+                                  ),
+                                ),
+                              ),
+                            )
+                          : Container();
+                    } else {
+                      return Container();
+                    }
+                  })
               // GestureDetector(
               //   onTap: (){
               //     // Navigator.push(

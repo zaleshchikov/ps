@@ -2,12 +2,16 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:ps/UI/emotion_alarm/tracker_model.dart';
 import 'package:ps/UI/happy_test/result_an.dart';
 import 'package:ps/UI/welcome_screen.dart';
 import 'package:ps/bottom_navigation.dart';
+import 'UI/wishes/wish_bank.dart';
 import 'db/user_model.dart';
 import 'package:ps/db/user_db.dart';
 import 'package:ps/UI/emotion_alarm/emotons_dairy.dart';
+
+import 'db/wish_model.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -37,8 +41,9 @@ void main() async {
           testResult: [],
           calendar: {},
       Wishes: []));
-  var s = await UserDatabase.completedWishes();
-  print(s);
+  // var s = await UserDatabase.addEmotionsAlarm(DateTime(2024, 2, 24), TrackerUser('13:45', 2, 'Негатив', '', 'sphere'));
+  var sk = await UserDatabase.groupData(DateTime.now(), 'Сегодня');
+  print(sk);
   runApp(const MyApp());
 }
 
@@ -77,7 +82,7 @@ class MyApp extends StatelessWidget {
                   color: const Color(0xff4B3425),
                   fontSize: 32,
                   fontWeight: FontWeight.w500))),
-      home: Container(child: (WelcomeScreen())),
+      home: Container(child: (EmotionsDairy())),
     );
   }
 }

@@ -3,13 +3,13 @@
 
 
 import 'dart:convert';
-
+import 'wish_model.dart';
 class User {
   String username;
   String password;
   List testResult;
   Map<String, dynamic> calendar;
-  List Wishes;
+  List<Wish> Wishes;
 
   User(
       {required this.username,

@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ps/UI/wishes/add_wish.dart';
 import 'package:ps/UI/wishes/wish_sphere.dart';
+import 'package:ps/UI/wishes/wishlist_sphere.dart';
 import 'package:ps/db/user_db.dart';
 import 'dart:ui';
 import '../../bottom_navigation.dart';
@@ -126,11 +127,15 @@ class _EmotionsNoteState extends State<WishList> {
                               children: [
                                 InkWell(
                                   onTap: () async {
-                                    await UserDatabase.addWish(listOfWishes[ind]);
+                                    // await UserDatabase.addWish(listOfWishes[ind]);
+                                    // Navigator.push(
+                                    //     context,
+                                    //     MaterialPageRoute(
+                                    //         builder: (context) => AddedWish(listOfWishes[ind])));
                                     Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                            builder: (context) => AddedWish(listOfWishes[ind])));
+                                            builder: (context) => WishSphere(listOfWishes[ind])));
                             },
                                   child: Container(
                                       height: size.height / 11,
@@ -206,7 +211,7 @@ class _EmotionsNoteState extends State<WishList> {
                 onTap: () {
                   Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => WishSphere()));
+                      MaterialPageRoute(builder: (context) => WishListSphere()));
                 },
                 child: Container(
                   // autogroupmpyt2n7 (KqnvTTEHwQPnZQcM6NMpYT)
