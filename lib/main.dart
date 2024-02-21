@@ -1,7 +1,9 @@
 import 'dart:convert';
-
+import 'package:intl/date_symbol_data_local.dart';
+import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:ps/UI/emotion_alarm/emotions_calendar.dart';
 import 'package:ps/UI/emotion_alarm/tracker_model.dart';
 import 'package:ps/UI/happy_test/result_an.dart';
 import 'package:ps/UI/welcome_screen.dart';
@@ -43,6 +45,8 @@ void main() async {
       Wishes: []));
   // var s = await UserDatabase.addEmotionsAlarm(DateTime(2024, 2, 24), TrackerUser('13:45', 2, 'Негатив', '', 'sphere'));
   var sk = await UserDatabase.groupData(DateTime.now(), 'Сегодня');
+  initializeDateFormatting('ru_RU', null);
+
   print(sk);
   runApp(const MyApp());
 }
@@ -82,7 +86,7 @@ class MyApp extends StatelessWidget {
                   color: const Color(0xff4B3425),
                   fontSize: 32,
                   fontWeight: FontWeight.w500))),
-      home: Container(child: (EmotionsDairy())),
+      home: Container(child: (EmotionsCalendar())),
     );
   }
 }

@@ -5,35 +5,91 @@ import 'package:google_fonts/google_fonts.dart';
 import 'to_main_button.dart';
 
 class EmotionsDairy extends StatefulWidget {
+
+  DateTime time = DateTime.now();
+  var isNow = true;
+  EmotionsDairy();
+  EmotionsDairy.notNow(
+      DateTime time
+      ){
+    this.time = time;
+    this.isNow = false;
+  }
+
   @override
   State<EmotionsDairy> createState() => _EmotionsDairyState();
 }
 
 class _EmotionsDairyState extends State<EmotionsDairy> {
+
+
+
   var ListOfName = ['Сегодня', 'Неделя', 'Месяц', 'Год'];
   var selectedName = 'Сегодня';
   int maxLenght = 5;
 
   Future<Map<String, List>> getDate() async {
-    var s = await UserDatabase.groupData(DateTime.now(), selectedName);
+    var s = await UserDatabase.groupData(widget.time, selectedName);
     return s;
+  }
+
+  String genericEmotion = 'Усталость';
+
+  String getImageOfEmotions(String emotion) {
+    print(emotion);
+    switch (emotion) {
+      case 'Расслабленность':
+        return 'assets/hap.png';
+      case 'Радость':
+        return 'assets/hap.png';
+      case 'Счастье':
+        return 'assets/hap.png';
+      case 'Эйфория':
+        return 'assets/hap.png';
+      case 'Скука':
+        return 'assets/wow.png';
+      case 'Рутина':
+        return 'assets/wow.png';
+      case 'Меланхолия':
+        return 'assets/wow.png';
+      case 'Пассивность':
+        return 'assets/wow.png';
+      case 'Напряжение':
+        return 'assets/sad.png';
+      case 'Грусть':
+        return 'assets/sad.png';
+      case 'Печаль':
+        return 'assets/sad.png';
+      case 'Отчаяние/депрессия':
+        return 'assets/sad.png';
+    }
+    return '';
   }
 
   @override
   Widget build(BuildContext context) {
+
+    var hintText = selectedName;
+
+
+    if(!widget.isNow){
+      hintText = '${widget.time.day} ${UserDatabase.monthNumberToName(widget.time.month)}';
+    }
+
     var theme = Theme.of(context);
     var size = MediaQuery.of(context).size;
 
-    tableRow(int index, String date, String name, String emotions, String feelings) {
+    tableRow(
+        int index, String date, String name, String emotions, String feelings) {
       return TableRow(
           decoration: BoxDecoration(color: theme.indicatorColor),
           children: [
             Container(
               child: Center(
                   child: Text(
-                    date,
-                    style: TextStyle(color: theme.focusColor),
-                  )),
+                date,
+                style: TextStyle(color: theme.focusColor),
+              )),
               height: size.height / 18,
               width: size.width / 5,
               decoration: index == (maxLenght - 1)
@@ -48,9 +104,10 @@ class _EmotionsDairyState extends State<EmotionsDairy> {
             ),
             Container(
               child: Center(
-                  child: Text(
-                    name,
-                    style: TextStyle(color: theme.focusColor),
+                  child: name == '' ? Container() : Image(height: size.height/25,
+                    image: AssetImage(
+                      getImageOfEmotions(name)
+                    ),
                   )),
               height: size.height / 18,
               width: size.width / 5,
@@ -65,9 +122,9 @@ class _EmotionsDairyState extends State<EmotionsDairy> {
             Container(
               child: Center(
                   child: Text(
-                    emotions,
-                    style: TextStyle(color: theme.focusColor),
-                  )),
+                name,
+                style: TextStyle(color: theme.focusColor),
+              )),
               height: size.height / 18,
               width: size.width / 5,
               decoration: BoxDecoration(
@@ -81,9 +138,9 @@ class _EmotionsDairyState extends State<EmotionsDairy> {
             Container(
               child: Center(
                   child: Text(
-                    feelings,
-                    style: TextStyle(color: theme.focusColor),
-                  )),
+                feelings,
+                style: TextStyle(color: theme.focusColor),
+              )),
               height: size.height / 18,
               width: size.width / 5,
               decoration: index == (maxLenght - 1)
@@ -104,16 +161,28 @@ class _EmotionsDairyState extends State<EmotionsDairy> {
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           var TableRows = [];
-
+          var statesToSort = [];
           if (selectedName == 'Сегодня') {
             for (var element in snapshot.data!.entries) {
-              TableRows.add(tableRow(1, element.key, element.value[0], element.value[1],element.value[2]));
+              statesToSort.add(element.value[0]);
+              TableRows.add(tableRow(1, element.key, element.value[0],
+                  element.value[1], element.value[1]));
             }
-          } else{
+          } else {
             for (var element in snapshot.data!.entries) {
-              TableRows.add(tableRow(1,element.key, element.value[0],'', ''));
+              statesToSort.add(element.value[0]);
+              TableRows.add(tableRow(1, element.key, element.value[0], '', ''));
             }
           }
+
+          if(TableRows.length < 5){
+            for(int i = 0; i < (8 - TableRows.length) ; i++){
+            TableRows.add(tableRow(0, '', '', '', ''));}
+          }
+
+
+          
+          genericEmotion = UserDatabase.sortState(statesToSort)[0];
 
           return SafeArea(
             child: Scaffold(
@@ -136,11 +205,11 @@ class _EmotionsDairyState extends State<EmotionsDairy> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          Image(
-                            image: AssetImage('assets/tired.png'),
+                          genericEmotion == '' ? Container() : Image(
+                             image: AssetImage(getImageOfEmotions(genericEmotion)),
                             height: size.height / 15,
                           ),
-                          Text('Усталость',
+                          Text(genericEmotion,
                               style: theme.textTheme.bodyLarge!
                                   .copyWith(fontSize: 20)),
                           Container(width: size.width / 20),
@@ -167,6 +236,8 @@ class _EmotionsDairyState extends State<EmotionsDairy> {
                               onChanged: (value) {
                                 setState(() {
                                   selectedName = value.toString();
+                                  widget.isNow = true;
+                                  widget.time = DateTime.now();
                                 });
                               },
                               items: ListOfName.map((itemone) {
@@ -199,7 +270,7 @@ class _EmotionsDairyState extends State<EmotionsDairy> {
                     Container(height: size.height / 10),
                     Container(
                         decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(50)),
+                            borderRadius: BorderRadius.circular(100)),
                         padding: EdgeInsets.all(10),
                         child: Table(
                           columnWidths: const {
@@ -224,8 +295,8 @@ class _EmotionsDairyState extends State<EmotionsDairy> {
                                 decoration: BoxDecoration(
                                     color: theme.indicatorColor,
                                     borderRadius: BorderRadius.only(
-                                        topLeft: Radius.circular(30),
-                                        topRight: Radius.circular(30))),
+                                        topLeft: Radius.circular(20),
+                                        topRight: Radius.circular(20))),
                                 children: [
                                   Container(
                                     height: size.height / 18,
@@ -291,7 +362,7 @@ class _EmotionsDairyState extends State<EmotionsDairy> {
                           border: TableBorder.all(
                             width: 1,
                             color: theme.indicatorColor,
-                            borderRadius: BorderRadius.circular(30),
+                            borderRadius: BorderRadius.circular(1000),
                           ),
                         )),
                     Container(

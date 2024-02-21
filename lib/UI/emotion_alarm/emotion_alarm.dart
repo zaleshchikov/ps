@@ -21,8 +21,34 @@ class _TestScreenState extends State<EmotionsAlarm> {
     'Эйфория',
   ];
 
+  getCorrectDegree(){
+    switch(widget.user.smileNumber){
+      case 0: listOfDegree = [
+        'Напряжение',
+        'Грусть',
+        'Печаль',
+        'Отчаяние/депрессия'
+      ];
+      case 1: listOfDegree = [
+        'Скука',
+        'Рутина',
+        'Меланхолия',
+        'Пассивность'
+      ];
+      case 2: listOfDegree = [
+        'Расслабленность',
+        'Радость',
+        'Счастье',
+        'Эйфория'
+      ];
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+
+    getCorrectDegree();
+
     var theme = Theme.of(context);
     var size = MediaQuery.of(context).size;
     return SafeArea(

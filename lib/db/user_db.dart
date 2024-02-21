@@ -110,7 +110,7 @@ class UserDatabase {
         break;
       case 'Год':
         for(int i = 0; i < 12; i++){
-          getSortedValue(data, result, i, i+2, monthNumberToName(i+1), 2);
+          getSortedValue(data, result, i+1, i+2, monthNumberToNameDairy(i+1), 2);
         }
     }
     return result;
@@ -180,7 +180,7 @@ class UserDatabase {
         '${time.day}/${weekNumber(time)}/${time.month}/${time.year}': {
           'emotionAlarm': [
             [
-              '${time.hour}:${time.minute}',
+              '${time.hour}:${time.minute < 10 ? 0 : ''}${time.minute}',
               trackerUser.currentEmotions,
               trackerUser.feelings,
               trackerUser.sphere
@@ -304,6 +304,35 @@ class UserDatabase {
       where: "id = ?",
       whereArgs: [1],
     );
+  }
+
+  static monthNumberToNameDairy(int number) {
+    switch (number) {
+      case 1:
+        return 'Январь';
+      case 2:
+        return 'Февраль';
+      case 3:
+        return 'Март';
+      case 4:
+        return 'Апрель';
+      case 5:
+        return 'Май';
+      case 6:
+        return 'Июнь';
+      case 7:
+        return 'Июль';
+      case 8:
+        return 'Август';
+      case 9:
+        return 'Сентебрь';
+      case 10:
+        return 'Октябрь';
+      case 11:
+        return 'Ноябрь';
+      case 12:
+        return 'Декабрь';
+    }
   }
 
   static monthNumberToName(int number) {

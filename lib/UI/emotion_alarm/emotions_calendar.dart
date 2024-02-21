@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:ps/UI/emotion_alarm/emotons_dairy.dart';
 import 'package:ps/UI/happy_test/should_register.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:table_calendar/table_calendar.dart';
 import '../../page-1/utils.dart';
 import 'to_main_button.dart';
 
@@ -93,155 +95,229 @@ class EmotionsCalendar extends StatelessWidget {
                               ),
                             ),
                           ),
-                          Center(
-                            child: Text(
-                              // kwu (191:5665)
-                              'пн   вт    ср    чт    пт   сб   вс',
-                              textAlign: TextAlign.center,
-                              style: SafeGoogleFont (
-                                'Jost',
-                                fontSize: 25*ffem,
-                                fontWeight: FontWeight.w400,
-                                height: 1.445*ffem/fem,
-                                color: Color(0xffFFFFFF5),
-                              ),
-                            ),
-                          ),
-                          Center(
-                            child: Container(
-                              // HS3 (191:5656)
-                              margin: EdgeInsets.fromLTRB(0*fem, 0*fem, 0*fem, 13*fem),
-                              child: RichText(
-                                textAlign: TextAlign.center,
-                                text: TextSpan(
-                                  style: SafeGoogleFont (
-                                    'Jost',
-                                    fontSize: 25*ffem,
-                                    fontWeight: FontWeight.w400,
-                                    height: 1.445*ffem/fem,
-                                    color: Color(0xffFFFFFF5),
-                                  ),
-                                  children: [
-                                    TextSpan(
-                                      text: '25   26   27   28   29   30',
-                                      style: SafeGoogleFont (
-                                        'Jost',
-                                        fontSize: 25*ffem,
-                                        fontWeight: FontWeight.w400,
-                                        height: 1.445*ffem/fem,
-                                        color: Color(0xff4B3425),
-                                      ),
-                                    ),
-                                    TextSpan(
-                                      text: '   1',
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
-                          Center(
-                            child: Container(
-                              // P7h (191:5657)
-                              margin: EdgeInsets.fromLTRB(0*fem, 0*fem, 0*fem, 13*fem),
-                              child: Text(
-                                '2     3     4     5    6     7     8',
-                                textAlign: TextAlign.center,
-                                style: SafeGoogleFont (
-                                  'Jost',
-                                  fontSize: 25*ffem,
-                                  fontWeight: FontWeight.w400,
-                                  height: 1.445*ffem/fem,
-                                  color: Color(0xffFFFFFF5),
-                                ),
-                              ),
-                            ),
-                          ),
-                          Center(
-                            child: Container(
-                              // P7h (191:5657)
-                              margin: EdgeInsets.fromLTRB(0*fem, 0*fem, 0*fem, 0*fem),
-                              child: Text(
-                                '9   10   11   12   13   14  15',
-                                textAlign: TextAlign.center,
-                                style: SafeGoogleFont (
-                                  'Jost',
-                                  fontSize: 25*ffem,
-                                  fontWeight: FontWeight.w400,
-                                  height: 1.445*ffem/fem,
-                                  color: Color(0xffFFFFFF5),
-                                ),
-                              ),
-                            ),
-                          ),
-                          Center(
-                            child: Container(
-                              // P7h (191:5657)
-                              margin: EdgeInsets.fromLTRB(0*fem, 0*fem, 0*fem, 0*fem),
-                              child: Text(
-                                '16   17   18   19   20   21   22',
-                                textAlign: TextAlign.center,
-                                style: SafeGoogleFont (
-                                  'Jost',
-                                  fontSize: 25*ffem,
-                                  fontWeight: FontWeight.w400,
-                                  height: 1.445*ffem/fem,
-                                  color: Color(0xffFFFFFF5),
-                                ),
-                              ),
-                            ),
-                          ),
-                          Center(
-                            child: Container(
-                              // P7h (191:5657)
-                              margin: EdgeInsets.fromLTRB(0*fem, 0*fem, 0*fem, 0*fem),
-                              child: Text(
-                                '23    24   25   26   27   28   29',
-                                textAlign: TextAlign.center,
-                                style: SafeGoogleFont (
-                                  'Jost',
-                                  fontSize: 25*ffem,
-                                  fontWeight: FontWeight.w400,
-                                  height: 1.445*ffem/fem,
-                                  color: Color(0xffFFFFFF5),
-                                ),
-                              ),
-                            ),
-                          ),
-                          Center(
-                            child: Container(
-                              // HS3 (191:5656)
-                              margin: EdgeInsets.fromLTRB(0*fem, 0*fem, 0*fem, 13*fem),
-                              child: RichText(
-                                textAlign: TextAlign.center,
-                                text: TextSpan(
-                                  style: SafeGoogleFont (
-                                    'Jost',
-                                    fontSize: 25*ffem,
-                                    fontWeight: FontWeight.w400,
-                                    height: 1.445*ffem/fem,
-                                    color: Color(0xff4B3425),
-                                  ),
-                                  children: [
-                                    TextSpan(
-                                      text: '30   31',
-                                      style: SafeGoogleFont (
-                                        'Jost',
-                                        fontSize: 25*ffem,
-                                        fontWeight: FontWeight.w400,
-                                        height: 1.445*ffem/fem,
-                                        color: Colors.white ,
-                                      ),
-                                    ),
-                                    TextSpan(
-                                      text: '1    2    3    4    5',
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
+                          // Center(
+                          //   child: Text(
+                          //     // kwu (191:5665)
+                          //     'пн   вт    ср    чт    пт   сб   вс',
+                          //     textAlign: TextAlign.center,
+                          //     style: SafeGoogleFont (
+                          //       'Jost',
+                          //       fontSize: 25*ffem,
+                          //       fontWeight: FontWeight.w400,
+                          //       height: 1.445*ffem/fem,
+                          //       color: Color(0xffFFFFFF5),
+                          //     ),
+                          //   ),
+                          // ),
+                          // Center(
+                          //   child: Container(
+                          //     // HS3 (191:5656)
+                          //     margin: EdgeInsets.fromLTRB(0*fem, 0*fem, 0*fem, 13*fem),
+                          //     child: RichText(
+                          //       textAlign: TextAlign.center,
+                          //       text: TextSpan(
+                          //         style: SafeGoogleFont (
+                          //           'Jost',
+                          //           fontSize: 25*ffem,
+                          //           fontWeight: FontWeight.w400,
+                          //           height: 1.445*ffem/fem,
+                          //           color: Color(0xffFFFFFF5),
+                          //         ),
+                          //         children: [
+                          //           TextSpan(
+                          //             text: '25   26   27   28   29   30',
+                          //             style: SafeGoogleFont (
+                          //               'Jost',
+                          //               fontSize: 25*ffem,
+                          //               fontWeight: FontWeight.w400,
+                          //               height: 1.445*ffem/fem,
+                          //               color: Color(0xff4B3425),
+                          //             ),
+                          //           ),
+                          //           TextSpan(
+                          //             text: '   1',
+                          //           ),
+                          //         ],
+                          //       ),
+                          //     ),
+                          //   ),
+                          // ),
+                          // Center(
+                          //   child: Container(
+                          //     // P7h (191:5657)
+                          //     margin: EdgeInsets.fromLTRB(0*fem, 0*fem, 0*fem, 13*fem),
+                          //     child: Text(
+                          //       '2     3     4     5    6     7     8',
+                          //       textAlign: TextAlign.center,
+                          //       style: SafeGoogleFont (
+                          //         'Jost',
+                          //         fontSize: 25*ffem,
+                          //         fontWeight: FontWeight.w400,
+                          //         height: 1.445*ffem/fem,
+                          //         color: Color(0xffFFFFFF5),
+                          //       ),
+                          //     ),
+                          //   ),
+                          // ),
+                          // Center(
+                          //   child: Container(
+                          //     // P7h (191:5657)
+                          //     margin: EdgeInsets.fromLTRB(0*fem, 0*fem, 0*fem, 0*fem),
+                          //     child: Text(
+                          //       '9   10   11   12   13   14  15',
+                          //       textAlign: TextAlign.center,
+                          //       style: SafeGoogleFont (
+                          //         'Jost',
+                          //         fontSize: 25*ffem,
+                          //         fontWeight: FontWeight.w400,
+                          //         height: 1.445*ffem/fem,
+                          //         color: Color(0xffFFFFFF5),
+                          //       ),
+                          //     ),
+                          //   ),
+                          // ),
+                          // Center(
+                          //   child: Container(
+                          //     // P7h (191:5657)
+                          //     margin: EdgeInsets.fromLTRB(0*fem, 0*fem, 0*fem, 0*fem),
+                          //     child: Text(
+                          //       '16   17   18   19   20   21   22',
+                          //       textAlign: TextAlign.center,
+                          //       style: SafeGoogleFont (
+                          //         'Jost',
+                          //         fontSize: 25*ffem,
+                          //         fontWeight: FontWeight.w400,
+                          //         height: 1.445*ffem/fem,
+                          //         color: Color(0xffFFFFFF5),
+                          //       ),
+                          //     ),
+                          //   ),
+                          // ),
+                          // Center(
+                          //   child: Container(
+                          //     // P7h (191:5657)
+                          //     margin: EdgeInsets.fromLTRB(0*fem, 0*fem, 0*fem, 0*fem),
+                          //     child: Text(
+                          //       '23    24   25   26   27   28   29',
+                          //       textAlign: TextAlign.center,
+                          //       style: SafeGoogleFont (
+                          //         'Jost',
+                          //         fontSize: 25*ffem,
+                          //         fontWeight: FontWeight.w400,
+                          //         height: 1.445*ffem/fem,
+                          //         color: Color(0xffFFFFFF5),
+                          //       ),
+                          //     ),
+                          //   ),
+                          // ),
+                          // Center(
+                          //   child: Container(
+                          //     // HS3 (191:5656)
+                          //     margin: EdgeInsets.fromLTRB(0*fem, 0*fem, 0*fem, 13*fem),
+                          //     child: RichText(
+                          //       textAlign: TextAlign.center,
+                          //       text: TextSpan(
+                          //         style: SafeGoogleFont (
+                          //           'Jost',
+                          //           fontSize: 25*ffem,
+                          //           fontWeight: FontWeight.w400,
+                          //           height: 1.445*ffem/fem,
+                          //           color: Color(0xff4B3425),
+                          //         ),
+                          //         children: [
+                          //           TextSpan(
+                          //             text: '30   31',
+                          //             style: SafeGoogleFont (
+                          //               'Jost',
+                          //               fontSize: 25*ffem,
+                          //               fontWeight: FontWeight.w400,
+                          //               height: 1.445*ffem/fem,
+                          //               color: Colors.white ,
+                          //             ),
+                          //           ),
+                          //           TextSpan(
+                          //             text: '1    2    3    4    5',
+                          //           ),
+                          //         ],
+                          //       ),
+                          //     ),
+                          //   ),
+                          // ),
+
                         ],
+                      ),
+                    ),
+                    Expanded(
+                      child: Center(
+                        child: SizedBox(
+                          height: 1000,
+                            width: 300,
+                            child: TableCalendar(
+                              onDaySelected: (time, t){
+
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            EmotionsDairy.notNow(time)));
+                              },
+                              daysOfWeekHeight: size.height/20,
+                              daysOfWeekStyle: DaysOfWeekStyle(
+                                weekdayStyle: SafeGoogleFont(
+                                  'Jost',
+                                  fontSize: 25*ffem,
+                                  fontWeight: FontWeight.w400,
+                                  color: Color(0xff6b6969),
+                                ),
+                                weekendStyle: SafeGoogleFont(
+                                  'Jost',
+                                  fontSize: 25*ffem,
+                                  fontWeight: FontWeight.w400,
+                                  color: Color(0xff6b6969),
+                                ),
+                              ),
+                              startingDayOfWeek: StartingDayOfWeek.monday,
+                              headerStyle: HeaderStyle(
+                                titleTextStyle: theme.textTheme.titleMedium!.copyWith(
+                                  fontSize: 25*ffem
+                                ),
+                                titleCentered: true,
+                                formatButtonVisible : false,
+                              ),
+                              calendarFormat: CalendarFormat.month,
+                              rowHeight: size.height/20,
+                              locale: 'ru_RU',
+                              firstDay: DateTime.utc(2010,10,20),
+                              lastDay: DateTime.utc(2040,10,20),
+                              focusedDay: DateTime.now(),
+                              daysOfWeekVisible: true,
+                              calendarStyle: CalendarStyle(
+                                todayDecoration: BoxDecoration(
+                                  color: Color(0x7c9bb068),
+                                    borderRadius: BorderRadius.circular(20)                                ),
+                                weekendTextStyle: SafeGoogleFont (
+                                  'Jost',
+                                  fontSize: 25*ffem,
+                                  fontWeight: FontWeight.w400,
+                                  height: 1.445*ffem/fem,
+                                  color: Color(0xffFFFFFF5),
+                                ),
+                                defaultTextStyle: SafeGoogleFont (
+                                          'Jost',
+                                          fontSize: 25*ffem,
+                                          fontWeight: FontWeight.w400,
+                                          height: 1.445*ffem/fem,
+                                          color: Color(0xffFFFFFF5),
+                                        ),
+                                  outsideTextStyle: SafeGoogleFont (
+                                                  'Jost',
+                                                  fontSize: 25*ffem,
+                                                  fontWeight: FontWeight.w400,
+                                                  height: 1.445*ffem/fem,
+                                                  color: Color(0xff4B3425),
+                                                ),
+                                  todayTextStyle: TextStyle(fontSize:20, color: Colors.white, fontWeight: FontWeight.bold )),
+                            )),
                       ),
                     ),
                   ],

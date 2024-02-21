@@ -203,7 +203,7 @@ class ResultAn extends StatelessWidget {
                         context,
                         MaterialPageRoute(
                             builder: (context) =>
-                                BottomNavigationScreen(const TextResult())));
+                                BottomNavigationScreen( TextResult(sum))));
                   },
                   child: Ink(
                       height: size.height / 12,
