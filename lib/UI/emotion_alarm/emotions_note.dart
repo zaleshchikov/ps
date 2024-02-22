@@ -376,8 +376,9 @@ class _EmotionsNoteState extends State<EmotionsNote> {
                 ),
               ),
               GestureDetector(
-                onTap: (){
-                  UserDatabase.addEmotionsAlarm(DateTime.now(), widget.user);
+                onTap: ()async{
+                  await UserDatabase.addEmotionsAlarm(DateTime.now(), widget.user);
+                  Future.delayed(Duration(microseconds: 500));
                   Navigator.push(
                       context,
                       MaterialPageRoute(builder: (context) => EmotionsDairy()));

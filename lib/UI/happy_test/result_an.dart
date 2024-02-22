@@ -158,8 +158,8 @@ class ResultAn extends StatelessWidget {
                                     Container(width: size.width/14)
                                   ],
                                 ),
-                                Container(height: size.height/5/80*(sum)-size.height/200),
-                                Container(height: size.height/17)
+                                Container(height: (size.height / 3 - size.height/20 - size.height/20)/80*sum-1),
+                                Container(height: size.height/20)
                               ],
                             )),
                       ),

@@ -24,7 +24,7 @@ class _TodayWishesState extends State<TodayWishes> {
   Future<List<Wish>> getWishes() async {
     var users = await UserDatabase.users();
     var user = users[0];
-    if (user.Wishes.isNotEmpty) {
+    if (user.Wishes != null) {
       if (user.Wishes[0].toString() == '') {
         return [];
       }

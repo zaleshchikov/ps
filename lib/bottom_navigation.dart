@@ -52,28 +52,28 @@ class _BottomNavigationScreenState extends State<BottomNavigationScreen> {
               items: [
                 BottomNavigationBarItem(
                   icon: ImageIcon(
-                    AssetImage("assets/statistic_icon.png"),
+                    AssetImage("assets/statistic_icon_new.png"),
                     color: theme.textTheme.bodySmall!.color,
                   ),
                   label: 'Статистика',
                 ),
                 BottomNavigationBarItem(
                   icon: ImageIcon(
-                    AssetImage("assets/tracker_icon.png"),
+                    AssetImage("assets/tracker_icon_new.png"),
                     color: theme.textTheme.bodySmall!.color,
                   ),
                   label: 'Трекеры',
                 ),
                 BottomNavigationBarItem(
                   icon: ImageIcon(
-                    AssetImage("assets/method_icon.png"),
+                    AssetImage("assets/method_icon_new.png"),
                     color: theme.textTheme.bodySmall!.color,
                   ),
                   label: 'Методики',
                 ),
                 BottomNavigationBarItem(
                   icon: ImageIcon(
-                    AssetImage("assets/chat_icon.png"),
+                    AssetImage("assets/chat_icon_new.png"),
                     color: theme.textTheme.bodySmall!.color,
                   ),
                   label: 'Чат',

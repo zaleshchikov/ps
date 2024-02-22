@@ -63,18 +63,12 @@ class _EmotionsDairyState extends State<EmotionsDairy> {
       case 'Отчаяние/депрессия':
         return 'assets/sad.png';
     }
-    return '';
+    return 'Записей нет';
   }
 
   @override
   Widget build(BuildContext context) {
 
-    var hintText = selectedName;
-
-
-    if(!widget.isNow){
-      hintText = '${widget.time.day} ${UserDatabase.monthNumberToName(widget.time.month)}';
-    }
 
     var theme = Theme.of(context);
     var size = MediaQuery.of(context).size;
@@ -209,7 +203,7 @@ class _EmotionsDairyState extends State<EmotionsDairy> {
                              image: AssetImage(getImageOfEmotions(genericEmotion)),
                             height: size.height / 15,
                           ),
-                          Text(genericEmotion,
+                          Text(genericEmotion == '' ? 'Записей нет' : genericEmotion,
                               style: theme.textTheme.bodyLarge!
                                   .copyWith(fontSize: 20)),
                           Container(width: size.width / 20),

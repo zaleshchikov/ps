@@ -104,9 +104,9 @@ class UserDatabase {
         break;
       case 'Месяц':
         getSortedValue(data, result, 0, 7, 1, 0);
-        getSortedValue(data, result, 8, 15, 2, 0);
+        getSortedValue(data, result, 7, 15, 2, 0);
         getSortedValue(data, result, 15, 22, 3, 0);
-        getSortedValue(data, result, 25, 32, 4, 0);
+        getSortedValue(data, result, 22, 32, 4, 0);
         break;
       case 'Год':
         for(int i = 0; i < 12; i++){
@@ -188,7 +188,7 @@ class UserDatabase {
           ],
           'wishesBank': [<String>[]],
           'successJournal': [<String>[]],
-          'Wishes': []
+          'completedWishes': []
         }
       };
       user.calendar.addEntries(entry.entries);
@@ -250,7 +250,7 @@ class UserDatabase {
     var user = _users[0];
     if (user.calendar.isEmpty || user.calendar.keys.isEmpty) return false;
     for (Map<String, dynamic> element in user.calendar.values) {
-      if (element['completedWishes'].isNotEmpty) return true;
+      if (element['completedWishes'] != null && element['completedWishes'].isNotEmpty) return true;
     }
     return false;
   }
