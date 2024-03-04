@@ -4,8 +4,13 @@ import 'package:ps/bottom_navigation.dart';
 
 class ToMainButton extends StatelessWidget {
   String name;
+  Widget widget = BottomNavigationScreen(MainScreen());
 
   ToMainButton(this.name);
+
+  ToMainButton.CustomWidget(
+      this.name, this.widget
+      );
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +22,7 @@ class ToMainButton extends StatelessWidget {
           onTap: () => Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) => BottomNavigationScreen(MainScreen()))),
+                  builder: (context) => widget)),
           child: Row(children: [
             Image(image: AssetImage('assets/K.png')),
             Container(width: size.width / 50),

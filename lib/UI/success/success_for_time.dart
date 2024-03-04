@@ -1,12 +1,78 @@
+import 'dart:collection';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'dart:ui';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:ps/UI/success/current_success.dart';
+import 'package:ps/UI/success/success_note.dart';
+import '../../db/user_db.dart';
+import '../../db/user_model.dart';
 import '../../page-1/utils.dart';
 import 'package:ps/UI/emotion_alarm/to_main_button.dart';
 
-class SuccessForTime extends StatelessWidget {
-  var listOfAchievement = ['Сходил на тренировку', 'Сделал зарядку','Сходил на тренировку', 'Сделал зарядку','Сходил на тренировку', 'Сделал зарядку','Сходил на тренировку', 'Сделал зарядку'];
+class BankSuccess {
+  String date;
+  String success;
+
+  BankSuccess(this.date, this.success);
+}
+
+class SuccessForTime extends StatefulWidget {
+  @override
+  State<SuccessForTime> createState() => _SuccessForTimeState();
+}
+
+class _SuccessForTimeState extends State<SuccessForTime> {
+  var ListOfName = ['Сегодня', 'Неделя', 'Месяц'];
+  var selectedName = 'Сегодня';
+  DateTime time = DateTime.now();
+
+  var listOfHappiness = ['Расслабленность', 'Радость', 'Счастье', 'Эйфория'];
+
+  Future<List<BankSuccess>> getAchievement(DateTime start, DateTime end) async {
+    print(DateTime.now().compareTo(DateTime.now()));
+    // Map<String, String> s = await UserDatabase.groupData(time, selectedName);
+    List<BankSuccess> listOfAchievement = [];
+    var users = await UserDatabase.users();
+    User user = users[0];
+    for (var date in user.calendar.keys) {
+      var dateList = date.split('/');
+      print(start);
+      if (DateTime(int.parse(dateList[3]), int.parse(dateList[2]),
+                      int.parse(dateList[0]))
+                  .compareTo(DateTime(start.year, start.month, start.day)) >=
+              0 &&
+          DateTime(int.parse(dateList[3]), int.parse(dateList[2]),
+                      int.parse(dateList[0]))
+                  .compareTo(DateTime(end.year, end.month, end.day)) <=
+              0) {
+        for (var completedWish in user.calendar[date]!['completedWishes']) {
+          listOfAchievement.add(BankSuccess(dateList[0], completedWish[0]));
+        }
+        for (var emotionAlarm in user.calendar[date]!['emotionAlarm']) {
+          if (emotionAlarm.length > 0 &&
+              listOfHappiness.contains(emotionAlarm[1])) {
+            listOfAchievement.add(
+                BankSuccess(date.split('/')[0], 'Позитивый результат теста'));
+          }
+        }
+        for (var calendarKey in user.calendar[date]!['calendarWish'].keys) {
+          if (user.calendar[date]!['calendarWish'][calendarKey].isNotEmpty &&
+              user.calendar[date]!['calendarWish'][calendarKey][1]) {
+            listOfAchievement.add(BankSuccess(date.split('/')[0],
+                user.calendar[date]!['calendarWish'][calendarKey][0]));
+          }
+        }
+        for (List success in user.calendar[date]!['successJournal']) {
+          listOfAchievement.add(BankSuccess(dateList[0], success[0]));
+          print(listOfAchievement);
+        }
+      }
+    }
+    listOfAchievement.sort((a, b) => a.date.compareTo(b.date));
+    return listOfAchievement;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,11 +105,43 @@ class SuccessForTime extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text('За сегодня',
-                        style: theme.textTheme.bodySmall!.copyWith(
-                            fontSize: 24, fontWeight: FontWeight.w400)),
-                    Container(width: size.width / 20),
-                    Image(image: AssetImage('assets/calendar_icon.png')),
+                    Container(
+                      width: size.width / 20,
+                    ),
+                    TextButton(
+                      onPressed: () {},
+                      //make onPressed callback empty
+                      child: DropdownButton(
+                        style:
+                            theme.textTheme.bodyLarge!.copyWith(fontSize: 20),
+                        //Dropdown font color
+                        icon: Container(
+                            padding: EdgeInsets.only(
+                                left: selectedName.length * size.height / 400),
+                            child: ImageIcon(
+                              AssetImage('assets/calendar_icon.png'),
+                              color: theme.highlightColor,
+                            )),
+                        //dropdown indicator icon
+                        underline: Container(),
+                        //make underline empty
+                        value: selectedName,
+                        onChanged: (value) {
+                          setState(() {
+                            selectedName = value.toString();
+                          });
+                        },
+                        items: ListOfName.map((itemone) {
+                          return DropdownMenuItem(
+                              value: itemone,
+                              child: Text(
+                                itemone,
+                                style: theme.textTheme.bodyLarge!
+                                    .copyWith(fontSize: 20),
+                              ));
+                        }).toList(),
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -90,73 +188,201 @@ class SuccessForTime extends StatelessWidget {
                           width: 350 * fem,
                           height: 480 * fem,
                           child: Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(32 * fem),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Color(0xff624F3B),
-                                ),
-                                BoxShadow(
-                                  offset: Offset(0, 3),
-                                  color: Color(0xffEFD8B4),
-                                  spreadRadius: -1.0,
-                                  blurRadius: 5.0,
-                                ),
-                              ],
-                            ),
-                            child: Column(
-                              children: [
-                                Container(height: size.height / 70),
-                                Text('01.01.2023- 07.01.2023', style: theme.textTheme.bodySmall!
-                                    .copyWith(
-                                  fontWeight:
-                                  FontWeight.w400,)),
-                                Container(height: size.height / 70),
-                                Text('Ваш успех',
-                                    textAlign: TextAlign.center,
-                                    style: theme.textTheme.titleMedium!
-                                        .copyWith(fontSize: 26)),
-                                SingleChildScrollView(
-                                  child: Container(
-                                    height: size.height / 2.8,
-                                    child: ListView.builder(
-                                        padding: const EdgeInsets.all(8),
-                                        itemCount: listOfAchievement.length,
-                                        itemBuilder:
-                                            (BuildContext context, int index) {
-                                          return Column(
-                                            children: [
-                                              Row(
-                                                mainAxisAlignment: MainAxisAlignment.start,
-                                                children: [
-                                                  Container(width: size.width/30),
-                                                  Text('23', style: theme.textTheme.titleMedium!.copyWith(fontSize: 25),)
-                                                ],
-                                              ),
-                                              Row(
-                                                mainAxisAlignment: MainAxisAlignment.start,
-                                                children: [
-                                                  Container(width: size.width/30),
-                                                  Image(image: AssetImage('assets/thumb_up.png')),
-                                                  Container(width: size.width/50),
-                                                  Text(
-                                                    listOfAchievement[index],
-                                                    style: theme.textTheme.bodySmall!
-                                                        .copyWith(
-                                                            fontWeight:
-                                                                FontWeight.w600),
-                                                  ),
-                                                ],
-                                              ),
-                                            ],
-                                          );
-                                        }),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(32 * fem),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Color(0xff624F3B),
                                   ),
-                                ),
-
-                              ],
-                            ),
-                          ),
+                                  BoxShadow(
+                                    offset: Offset(0, 3),
+                                    color: Color(0xffEFD8B4),
+                                    spreadRadius: -1.0,
+                                    blurRadius: 5.0,
+                                  ),
+                                ],
+                              ),
+                              child: FutureBuilder(
+                                  future: getAchievement(
+                                    selectedName == 'Сегодня'
+                                        ? DateTime.now()
+                                        : selectedName == 'Неделя'
+                                            ? DateTime(
+                                                DateTime.now().year,
+                                                DateTime.now().month,
+                                                DateTime.now().day -
+                                                    DateTime.now().weekday +
+                                                    1)
+                                            : DateTime(DateTime.now().year,
+                                                DateTime.now().month),
+                                    selectedName == 'Сегодня'
+                                        ? DateTime.now()
+                                        : selectedName == 'Неделя'
+                                            ? DateTime(
+                                                DateTime.now().year,
+                                                DateTime.now().month,
+                                                DateTime.now().day -
+                                                    DateTime.now().weekday +
+                                                    1 +
+                                                    7)
+                                            : DateTime(
+                                                DateTime.now().year,
+                                                DateTime.now().month,
+                                                DateTime(
+                                                        DateTime.now().year,
+                                                        DateTime.now().month +
+                                                            1,
+                                                        0)
+                                                    .day),
+                                  ),
+                                  builder: (context, snapshot) {
+                                    var start = selectedName == 'Сегодня'
+                                        ? DateTime.now()
+                                        : selectedName == 'Неделя'
+                                            ? DateTime(
+                                                DateTime.now().year,
+                                                DateTime.now().month,
+                                                DateTime.now().day -
+                                                    DateTime.now().weekday +
+                                                    1)
+                                            : DateTime(DateTime.now().year,
+                                                DateTime.now().month);
+                                    var end = selectedName == 'Сегодня'
+                                        ? DateTime.now()
+                                        : selectedName == 'Неделя'
+                                            ? DateTime(
+                                                DateTime.now().year,
+                                                DateTime.now().month,
+                                                DateTime.now().day -
+                                                    DateTime.now().weekday +
+                                                    1 +
+                                                    7)
+                                            : DateTime(
+                                                DateTime.now().year,
+                                                DateTime.now().month,
+                                                DateTime(
+                                                        DateTime.now().year,
+                                                        DateTime.now().month +
+                                                            1,
+                                                        0)
+                                                    .day);
+                                    if (snapshot.hasData) {
+                                      return Column(
+                                        children: [
+                                          Container(height: size.height / 70),
+                                          selectedName != 'Неделя'
+                                              ? Container()
+                                              : Text(
+                                                  '${start.day}.${start.month}.${start.year}- ${end.day}.${end.month}.${end.year}',
+                                                  style: theme
+                                                      .textTheme.bodySmall!
+                                                      .copyWith(
+                                                    fontWeight: FontWeight.w400,
+                                                  )),
+                                          Container(height: size.height / 70),
+                                          Text('Ваш успех',
+                                              textAlign: TextAlign.center,
+                                              style: theme
+                                                  .textTheme.titleMedium!
+                                                  .copyWith(fontSize: 26)),
+                                          SingleChildScrollView(
+                                            child: Container(
+                                              height: size.height / 2.3,
+                                              child: ListView.builder(
+                                                  padding:
+                                                      const EdgeInsets.all(8),
+                                                  itemCount:
+                                                      snapshot.data!.length,
+                                                  itemBuilder:
+                                                      (BuildContext context,
+                                                          int index) {
+                                                    return Column(
+                                                      children: [
+                                                        Container(
+                                                          padding:
+                                                              EdgeInsets.only(
+                                                                  top: 10),
+                                                          child: Row(
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .start,
+                                                            children: [
+                                                              Container(
+                                                                  width:
+                                                                      size.width /
+                                                                          30),
+                                                              selectedName !=
+                                                                          'Месяц' ||
+                                                                      (index > 0 &&
+                                                                          snapshot.data!.elementAt(index -1 ).date ==
+                                                                              snapshot.data!.elementAt(index).date)
+                                                                  ? Container()
+                                                                  : Text(
+                                                                      snapshot
+                                                                          .data!
+                                                                          .elementAt(
+                                                                              index)
+                                                                          .date,
+                                                                      style: theme
+                                                                          .textTheme
+                                                                          .titleMedium!
+                                                                          .copyWith(
+                                                                              fontSize: 25),
+                                                                    )
+                                                            ],
+                                                          ),
+                                                        ),
+                                                        Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .start,
+                                                          children: [
+                                                            Container(
+                                                                width:
+                                                                    size.width /
+                                                                        30),
+                                                            Image(
+                                                                image: AssetImage(
+                                                                    'assets/thumb_up.png')),
+                                                            Container(
+                                                                width:
+                                                                    size.width /
+                                                                        50),
+                                                            Container(
+                                                              width:
+                                                                  size.width /
+                                                                      1.8,
+                                                              child: Text(
+                                                                snapshot.data!
+                                                                    .elementAt(
+                                                                        index)
+                                                                    .success,
+                                                                style: theme
+                                                                    .textTheme
+                                                                    .bodySmall!
+                                                                    .copyWith(
+                                                                        fontWeight:
+                                                                            FontWeight.w600),
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ],
+                                                    );
+                                                  }),
+                                            ),
+                                          ),
+                                        ],
+                                      );
+                                    } else {
+                                      return Center(
+                                        child: Text(
+                                          'Данных нет',
+                                          style: theme.textTheme.bodyLarge,
+                                        ),
+                                      );
+                                    }
+                                  })),
                         ),
                       ),
                     ),
@@ -166,26 +392,47 @@ class SuccessForTime extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Container(width: size.width/15),
-
-                  Container(
-                    width: size.width/2.6,
-                    height: size.height/12.7,
-                    decoration: BoxDecoration(
-                        color: theme.highlightColor,
-                        borderRadius: BorderRadius.circular(30)
+                  Container(width: size.width / 15),
+                  InkWell(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => SuccessNote()));
+                    },
+                    child: Container(
+                      width: size.width / 2.6,
+                      height: size.height / 12.7,
+                      decoration: BoxDecoration(
+                          color: theme.highlightColor,
+                          borderRadius: BorderRadius.circular(30)),
+                      child: Center(
+                          child: Text('Добавить \nсвой вариант',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(fontSize: 18))),
                     ),
-                    child: Center(child: Text('Добавить \nсвой вариант', textAlign: TextAlign.center,style: TextStyle(fontSize: 18))),
                   ),
-                  Container(width: size.width/20),
-                  Container(
-                    width: size.width/2.6,
-                    height: size.height/12.7,
-                    decoration: BoxDecoration(
-                        color: Color(0xffD1BEB5),
-                        borderRadius: BorderRadius.circular(30)
+                  Container(width: size.width / 20),
+                  InkWell(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => CurrentSuccess()));
+                    },
+                    child: Container(
+                      width: size.width / 2.6,
+                      height: size.height / 12.7,
+                      decoration: BoxDecoration(
+                          color: Color(0xffD1BEB5),
+                          borderRadius: BorderRadius.circular(30)),
+                      child: Center(
+                          child: Text(
+                        'Выбрать\n из списка',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(fontSize: 18),
+                      )),
                     ),
-                    child: Center(child: Text('Выбрать\n из списка', textAlign: TextAlign.center, style: TextStyle(fontSize: 18),)),
                   ),
                 ],
               )

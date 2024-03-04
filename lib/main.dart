@@ -3,9 +3,15 @@ import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:ps/UI/calendar/auto_calendar.dart';
+import 'package:ps/UI/calendar/auto_challenge_screen.dart';
+import 'package:ps/UI/calendar/choice_calendar.dart';
+import 'package:ps/UI/calendar/your_calendar.dart';
+import 'package:ps/UI/calendar/your_challenge_screen.dart';
 import 'package:ps/UI/emotion_alarm/emotions_calendar.dart';
 import 'package:ps/UI/emotion_alarm/tracker_model.dart';
 import 'package:ps/UI/happy_test/result_an.dart';
+import 'package:ps/UI/success/success_for_time.dart';
 import 'package:ps/UI/welcome_screen.dart';
 import 'package:ps/bottom_navigation.dart';
 import 'UI/wishes/today_wishes.dart';
@@ -69,7 +75,7 @@ class MyApp extends StatelessWidget {
           canvasColor: const Color(0xffEED0B3),
           textTheme: TextTheme(
               bodyLarge: GoogleFonts.urbanist(
-                  fontWeight: FontWeight.w400,
+                  fontWeight: FontWeight.w500,
                   fontSize: 24,
                   color: Colors.black),
               bodySmall: GoogleFonts.jost(
@@ -85,7 +91,7 @@ class MyApp extends StatelessWidget {
                   color: const Color(0xff4B3425),
                   fontSize: 32,
                   fontWeight: FontWeight.w500))),
-      home: Container(child: (WelcomeScreen())),
+      home: Container(child: SuccessForTime()),
     );
   }
 }

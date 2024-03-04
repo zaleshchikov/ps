@@ -21,6 +21,169 @@ class UserDatabase {
     );
   }
 
+  static Future<int> addSuccessToBank(
+      DateTime time, String success, String sphere) async {
+    await open();
+    var _users = await users();
+    User user = _users[0];
+    if (user.calendar.keys.contains(
+        '${time.day}/${weekNumber(time)}/${time.month}/${time.year}')) {
+      user.calendar[
+      '${time.day}/${weekNumber(time)}/${time.month}/${time.year}']![
+      'successJournal']!.add([success, sphere]);
+    } else {
+      final entry = {
+        '${time.day}/${weekNumber(time)}/${time.month}/${time.year}': {
+          'emotionAlarm': [
+
+
+          ],
+          'wishesBank': [<String>[]],
+          'successJournal': [[success, sphere]],
+          'completedWishes': [],
+          'calendarWish':{
+            'autoCalendar': [],
+            'yourCalendar': [],
+            'smartCalendar': []
+          }
+        }
+      };
+      user.calendar.addEntries(entry.entries);
+    }
+
+    return await _database!.update(
+      'users',
+      user.toMap(),
+      where: "id = ?",
+      whereArgs: [1],
+    );
+  }
+
+
+  static Future<bool> isAnyYourWishes(DateTime time, String calendar)async{
+    await open();
+    var _users = await users();
+    User user = _users[0];
+    for(int i = 0; i < DateTime(DateTime.now().year, DateTime.now().month + 1, 0).day; i++){
+      if (user.calendar.keys.contains(
+          '${i+1}/${weekNumber(DateTime(time.year, time.month, i+1))}/${time.month}/${time.year}')){
+        if(user.calendar[
+        '${time.day}/${weekNumber(time)}/${time.month}/${time.year}']![
+        'calendarWish']![calendar].length > 0) return true;
+      }
+    }
+    return false;
+  }
+
+  static Future<String> getCalendarWish(DateTime time, String calendar)async{
+    await open();
+    var _users = await users();
+    User user = _users[0];
+    if (!user.calendar.keys.contains(
+        '${time.day}/${weekNumber(time)}/${time.month}/${time.year}')){
+      return 'Ничего не запланировано';
+    }
+    var res = user.calendar[
+    '${time.day}/${weekNumber(time)}/${time.month}/${time.year}']![
+    'calendarWish']![calendar][0];
+    return res;
+  }
+
+  static Future<bool> getStatusOfWish(DateTime time, String calendar)async{
+    await open();
+    var _users = await users();
+    User user = _users[0];
+    if (!user.calendar.keys.contains(
+        '${time.day}/${weekNumber(time)}/${time.month}/${time.year}')){
+      return false;
+    }
+    var res = user.calendar[
+    '${time.day}/${weekNumber(time)}/${time.month}/${time.year}']![
+    'calendarWish']![calendar][1];
+    return res;
+  }
+
+  static changeCalendarWish(DateTime time, String calendar, String newWish) async{
+    await open();
+    var _users = await users();
+    User user = _users[0];
+    user.calendar[
+    '${time.day}/${weekNumber(time)}/${time.month}/${time.year}']![
+    'calendarWish']![calendar] = [newWish, false];
+    return await _database!.update(
+      'users',
+      user.toMap(),
+      where: "id = ?",
+      whereArgs: [1],
+    );
+  }
+
+  static completeCalendarWish(DateTime time, String calendar, bool status) async{
+    await open();
+    var _users = await users();
+    User user = _users[0];
+    user.calendar[
+    '${time.day}/${weekNumber(time)}/${time.month}/${time.year}']![
+    'calendarWish']![calendar][1] = status;
+    return await _database!.update(
+      'users',
+      user.toMap(),
+      where: "id = ?",
+      whereArgs: [1],
+    );
+  }
+
+  static addCalendarWish(DateTime time, String calendar, String wish) async {
+    await open();
+    var _users = await users();
+    User user = _users[0];
+    if (user.calendar.keys.contains(
+        '${time.day}/${weekNumber(time)}/${time.month}/${time.year}')) {
+      if(user.calendar[
+      '${time.day}/${weekNumber(time)}/${time.month}/${time.year}']![
+      'calendarWish']![calendar].length > 0){
+        return;
+      }
+      user.calendar[
+      '${time.day}/${weekNumber(time)}/${time.month}/${time.year}']![
+      'calendarWish']![calendar].addAll(
+        [wish, false]
+      );
+    } else {
+      final entry = {
+        '${time.day}/${weekNumber(time)}/${time.month}/${time.year}': {
+          'emotionAlarm': [
+            [
+
+            ]
+          ],
+          'wishesBank': [<String>[]],
+          'successJournal': [<String>[]],
+          'completedWishes': [],
+          'calendarWish':{
+            'autoCalendar': calendar == 'autoCalendar' ? [wish, false] : [
+
+            ],
+            'yourCalendar': calendar == 'yourCalendar' ? [wish, false] : [
+
+            ],
+            'smartCalendar': calendar == 'smartCalendar' ? [wish, false] : [
+
+            ]
+          }
+        }
+      };
+      user.calendar.addEntries(entry.entries);
+    }
+
+    return await _database!.update(
+      'users',
+      user.toMap(),
+      where: "id = ?",
+      whereArgs: [1],
+    );
+  }
+
   static sortState(List states) {
     Map<String, int> frequency = {};
 
@@ -188,7 +351,12 @@ class UserDatabase {
           ],
           'wishesBank': [<String>[]],
           'successJournal': [<String>[]],
-          'completedWishes': []
+          'completedWishes': [],
+          'calendarWish':{
+            'autoCalendar': [],
+            'yourCalendar': [],
+            'smartCalendar': []
+          }
         }
       };
       user.calendar.addEntries(entry.entries);
@@ -274,7 +442,12 @@ class UserDatabase {
           'successJournal': [<String>[]],
           'completedWishes': [
             [wish, sphere]
-          ]
+          ],
+          'calendarWish':{
+            'autoCalendar': [],
+            'yourCalendar': [],
+            'smartCalendar': []
+          }
         }
       };
       user.calendar.addEntries(entry.entries);

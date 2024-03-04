@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:ps/UI/calendar/auto_calendar.dart';
+import 'package:ps/UI/calendar/auto_challenge_screen.dart';
+import 'package:ps/UI/calendar/choose_day.dart';
+import 'package:ps/UI/calendar/your_calendar.dart';
 import 'package:ps/UI/emotion_alarm/to_main_button.dart';
 import 'dart:ui';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:ps/db/user_db.dart';
 import '../../page-1/utils.dart';
+import 'choice_calendar.dart';
 
 class CalendarOpt extends StatelessWidget {
   @override
@@ -44,7 +50,7 @@ class CalendarOpt extends StatelessWidget {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => Container()));
+                              builder: (context) => AutoCalendar()));
                     },
                     child: Container(
                       child: Image(image: AssetImage('assets/auto_calendar.png'), fit: BoxFit.fitWidth,),
@@ -67,11 +73,19 @@ class CalendarOpt extends StatelessWidget {
                   ),
                   Container(height: size.height / 40),
                   InkWell(
-                    onTap: (){
+                    onTap: () async {
+                      var isWishes = await UserDatabase.isAnyYourWishes(DateTime.now(), 'yourCalendar');
+                      if(isWishes){
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => Container()));
+                              builder: (context) => YourCalendar()));}
+                      else{
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ChoiceCalendar()));
+                      }
                     },
                     child: Container(
                       child: Image(image: AssetImage('assets/your_calendar.png'), fit: BoxFit.fitWidth,),

@@ -18,7 +18,8 @@ class EmotionsDairy extends StatefulWidget {
 
   @override
   State<EmotionsDairy> createState() => _EmotionsDairyState();
-}
+}  var listOfAchievement = [];
+
 
 class _EmotionsDairyState extends State<EmotionsDairy> {
 

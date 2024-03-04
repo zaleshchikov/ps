@@ -1,14 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ps/UI/emotion_alarm/to_main_button.dart';
+import 'package:ps/UI/success/seccess_model.dart';
+import 'package:ps/UI/success/success_for_time.dart';
+
+import '../../db/user_db.dart';
 
 class Finance extends StatefulWidget {
+  Success success;
+  Finance(this.success);
   @override
   State<Finance> createState() => _TestScreenState();
 }
 
 class _TestScreenState extends State<Finance> {
-  var _selectedIndex = 0;
+  var _selectedIndex = 6;
 
   var listOfDegree = ['Получил премию', '', '', '', ''];
 
@@ -56,19 +62,24 @@ class _TestScreenState extends State<Finance> {
                         padding: EdgeInsets.only(bottom: 25),
                         width: size.width / 1.5,
                         child: ElevatedButton(
-                          onPressed: () {
+                          onPressed: () async {
+                            await UserDatabase.addSuccessToBank(
+                                DateTime.now(), listOfDegree[index],
+                                widget.success.sphere);
                             setState(() {
                               _selectedIndex = index;
                             });
-                            Future.delayed(const Duration(milliseconds: 1000),
-                                () {
+                            Future.delayed(
+                                const Duration(milliseconds: 1000), () {
                               setState(() {
-                                // Navigator.push(
-                                //     context,
-                                //     MaterialPageRoute(builder: (context) => EmotionsNote()));
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            SuccessForTime()));
                               });
                             });
-                          },
+                            },
                           child: Container(
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,

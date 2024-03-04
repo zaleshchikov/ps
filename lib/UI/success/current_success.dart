@@ -2,8 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ps/UI/emotion_alarm/to_main_button.dart';
+import 'package:ps/UI/success/finance.dart';
+import 'package:ps/UI/success/seccess_model.dart';
+import 'package:ps/UI/success/success_for_time.dart';
+import 'package:ps/db/user_db.dart';
 
 class CurrentSuccess extends StatefulWidget {
+
+  Success success = Success('', '');
+  CurrentSuccess();
+  CurrentSuccess.Note(this.success);
 
   @override
   State<CurrentSuccess> createState() => _TestScreenState();
@@ -78,19 +86,33 @@ class _TestScreenState extends State<CurrentSuccess> {
                             padding: EdgeInsets.only(bottom: 25),
                             width: size.width/1.5,
                             child: ElevatedButton(
-                              onPressed: () {
+                              onPressed: ()async {
                                 setState(() {
                                   _selectedIndex = index;
                                 });
-                                Future.delayed(const Duration(milliseconds: 1000), () {
-                                  setState(() {
-                                    // Navigator.push(
-                                    //     context,
-                                    //     MaterialPageRoute(builder: (context) => EmotionsDairy()));
+                                if(widget.success.success != '') {
+                                  await UserDatabase.addSuccessToBank(
+                                      DateTime.now(), widget.success.success,
+                                      listOfDegree[index]);
+                                  Future.delayed(
+                                      const Duration(milliseconds: 1000), () {
+                                    setState(() {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  SuccessForTime()));
+                                    });
                                   });
-                                });
-
-                              },
+                                } else{
+                                  widget.success.sphere = listOfDegree[index];
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              Finance(widget.success)));
+                                }
+    },
                               child: Container(
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
