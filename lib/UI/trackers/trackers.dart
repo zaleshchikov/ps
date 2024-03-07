@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ps/UI/calendar/calendar_opt.dart';
+import 'package:ps/UI/success/success_for_time.dart';
+import 'package:ps/UI/success/success_note.dart';
 import 'package:ps/UI/wishes/day_wish.dart';
 import 'package:ps/UI/wishes/today_wishes.dart';
 import 'package:ps/bottom_navigation.dart';
@@ -104,21 +106,29 @@ class Trackers extends StatelessWidget {
               ),
             ),
             Container(height: size.height / 40),
-            Container(
-              child: Image(image: AssetImage('assets/sucsessm_new.png')),
-              height: size.height / 6.3,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(40),
-                boxShadow: const [
-                  BoxShadow(
-                    color: Colors.black12,
-                  ),
-                  BoxShadow(
-                    color: Colors.white,
-                    spreadRadius: -4.0,
-                    blurRadius: 5.0,
-                  ),
-                ],
+            InkWell(
+              onTap: (){
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => SuccessForTime()));
+              },
+              child: Container(
+                child: Image(image: AssetImage('assets/sucsessm_new.png')),
+                height: size.height / 6.3,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(40),
+                  boxShadow: const [
+                    BoxShadow(
+                      color: Colors.black12,
+                    ),
+                    BoxShadow(
+                      color: Colors.white,
+                      spreadRadius: -4.0,
+                      blurRadius: 5.0,
+                    ),
+                  ],
+                ),
               ),
             ),
             Container(height: size.height / 100),

@@ -65,7 +65,8 @@ class _SuccessForTimeState extends State<SuccessForTime> {
           }
         }
         for (List success in user.calendar[date]!['successJournal']) {
-          listOfAchievement.add(BankSuccess(dateList[0], success[0]));
+          if(success.isNotEmpty){
+          listOfAchievement.add(BankSuccess(dateList[0], success[0]));}
           print(listOfAchievement);
         }
       }

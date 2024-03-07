@@ -11,6 +11,8 @@ import 'package:ps/UI/calendar/your_challenge_screen.dart';
 import 'package:ps/UI/emotion_alarm/emotions_calendar.dart';
 import 'package:ps/UI/emotion_alarm/tracker_model.dart';
 import 'package:ps/UI/happy_test/result_an.dart';
+import 'package:ps/UI/statistic/round_statistic.dart';
+import 'package:ps/UI/statistic/tree_statistic.dart';
 import 'package:ps/UI/success/success_for_time.dart';
 import 'package:ps/UI/welcome_screen.dart';
 import 'package:ps/bottom_navigation.dart';
@@ -91,7 +93,9 @@ class MyApp extends StatelessWidget {
                   color: const Color(0xff4B3425),
                   fontSize: 32,
                   fontWeight: FontWeight.w500))),
-      home: Container(child: SuccessForTime()),
+      home: Container(child: BottomNavigationScreen(TreeStatistic())),
     );
   }
 }
+
+
