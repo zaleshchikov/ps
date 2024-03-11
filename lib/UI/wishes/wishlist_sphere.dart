@@ -12,6 +12,11 @@ class WishListSphere extends StatefulWidget {
 }
 
 class _TestScreenState extends State<WishListSphere> {
+
+
+
+
+
   var _selectedIndex = 6;
 
   var listOfDegree = [

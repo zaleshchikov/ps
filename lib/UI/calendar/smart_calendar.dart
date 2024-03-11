@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'dart:ui';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:ps/UI/calendar/calendar_opt.dart';
+import 'package:ps/bottom_navigation.dart';
 import '../../page-1/utils.dart';
 import 'package:ps/UI/emotion_alarm/to_main_button.dart';
 
@@ -29,7 +31,7 @@ class SmartCalendar extends StatelessWidget {
               Container(
                 height: size.height/15,
               ),
-              ToMainButton('Трекеры'),
+              ToMainButton.CustomWidget('Трекеры', BottomNavigationScreen(CalendarOpt())),
               Container(
                 // autogroupjz2oSrX (KqnUtwKY3k8Qy6ZiWgjz2o)
                 margin: EdgeInsets.fromLTRB(5*fem, 0*fem, 12.33*fem, 0*fem),

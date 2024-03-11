@@ -1,7 +1,7 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:ps/UI/calendar/your_calendar.dart';
-import 'package:ps/UI/happy_test/should_register.dart';
+import 'package:ps/UI/should_register.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ps/db/user_db.dart';
 import 'package:table_calendar/table_calendar.dart';

@@ -68,7 +68,7 @@ class UserDatabase {
       if (user.calendar.keys.contains(
           '${i+1}/${weekNumber(DateTime(time.year, time.month, i+1))}/${time.month}/${time.year}')){
         if(user.calendar[
-        '${time.day}/${weekNumber(time)}/${time.month}/${time.year}']![
+        '${i+1}/${weekNumber(DateTime(time.year, time.month, i+1))}/${time.month}/${time.year}']![
         'calendarWish']![calendar].length > 0) return true;
       }
     }
@@ -386,8 +386,7 @@ class UserDatabase {
     await open();
     var _users = await users();
     var user = _users[0];
-    print(user.username);
-    return user.username != Null && user.username != '';
+    return user.username != '';
   }
 
   static Future<int> addResult(int result) async {

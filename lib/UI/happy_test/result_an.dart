@@ -4,7 +4,7 @@ import 'package:ps/UI/trackers/main_screen.dart';
 import 'to_main_button.dart';
 import 'result_text.dart';
 import 'package:ps/bottom_navigation.dart';
-import 'should_register.dart';
+import '../should_register.dart';
 import 'package:ps/db/user_db.dart';
 
 class ResultAn extends StatelessWidget {
@@ -43,7 +43,7 @@ class ResultAn extends StatelessWidget {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const ShouldRegister()));
+                            builder: (context) =>  ShouldRegister(MainScreen())));
                   } else{
                     Navigator.push(
                         context,
@@ -155,7 +155,7 @@ class ResultAn extends StatelessWidget {
                                   mainAxisAlignment: MainAxisAlignment.end,
                                   children: [
                                     Image(image: const AssetImage('assets/lol_group.png'), height: size.height/27),
-                                    Container(width: size.width/14)
+                                    Container(width: fem*30)
                                   ],
                                 ),
                                 Container(height: (size.height / 3 - size.height/20 - size.height/20)/80*sum-1),

@@ -10,11 +10,11 @@ class WelcomeScreen extends StatelessWidget {
 
 
   ChooseNextScreen(BuildContext context) async{
-    if(!(await UserDatabase.isRegister())){
-      Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => ( LogInScreen())));
-    } else
+    // if(!(await UserDatabase.isRegister())){
+    //   Navigator.push(
+    //       context,
+    //       MaterialPageRoute(builder: (context) => ( LogInScreen())));
+    // } else
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => BottomNavigationScreen(const MainScreen())));
@@ -75,16 +75,16 @@ class WelcomeScreen extends StatelessWidget {
             Container(
               height: size.height / 100,
             ),
-            TextButton(
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => LogInScreen()));
-                },
-                child: Text(
-                  'Войти в аккаунт',
-                  style: theme.textTheme.bodySmall,
-                ))
+            // TextButton(
+            //     onPressed: () {
+            //       Navigator.push(
+            //           context,
+            //           MaterialPageRoute(builder: (context) => LogInScreen()));
+            //     },
+            //     child: Text(
+            //       'Войти в аккаунт',
+            //       style: theme.textTheme.bodySmall,
+            //     ))
           ],
       ),
     ),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:ps/UI/calendar/auto_calendar.dart';
 import 'package:ps/UI/calendar/auto_challenge_screen.dart';
 import 'package:ps/UI/calendar/choose_day.dart';
+import 'package:ps/UI/calendar/smart_calendar.dart';
 import 'package:ps/UI/calendar/your_calendar.dart';
 import 'package:ps/UI/emotion_alarm/to_main_button.dart';
 import 'dart:ui';
@@ -112,7 +113,7 @@ class CalendarOpt extends StatelessWidget {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => Container()));
+                              builder: (context) => SmartCalendar()));
                     },
                     child: Container(
                       child: Image(image: AssetImage('assets/smart_calendar.png'), fit: BoxFit.fitWidth,),

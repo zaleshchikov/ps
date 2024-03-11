@@ -3,8 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'dart:ui';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:ps/UI/happy_test/welcome_happy_test.dart';
+import 'package:ps/UI/statistic/round_statistic.dart';
 import 'package:ps/page-1/utils.dart';
 
+import '../../bottom_navigation.dart';
 import '../../db/user_db.dart';
 import '../../db/user_model.dart';
 
@@ -35,15 +38,15 @@ class _RoundStatisticState extends State<TreeStatistic> {
       var dateList = date.split('/');
       print(start);
       if (DateTime(int.parse(dateList[3]), int.parse(dateList[2]),
-          int.parse(dateList[0]))
-          .compareTo(DateTime(start.year, start.month, start.day)) >=
-          0 &&
+                      int.parse(dateList[0]))
+                  .compareTo(DateTime(start.year, start.month, start.day)) >=
+              0 &&
           DateTime(int.parse(dateList[3]), int.parse(dateList[2]),
-              int.parse(dateList[0]))
-              .compareTo(DateTime(end.year, end.month, end.day)) <=
+                      int.parse(dateList[0]))
+                  .compareTo(DateTime(end.year, end.month, end.day)) <=
               0) {
         for (var completedWish in user.calendar[date]!['completedWishes']) {
-          sphereCount[completedWish[1]] = sphereCount[completedWish[1]]!+1;
+          sphereCount[completedWish[1]] = sphereCount[completedWish[1]]! + 1;
         }
         for (List emotionAlarm in user.calendar[date]!['emotionAlarm']) {
           if (emotionAlarm.isNotEmpty && emotionAlarm[3] != '')
@@ -62,23 +65,18 @@ class _RoundStatisticState extends State<TreeStatistic> {
     sphereCount.forEach((k, v) {
       sum += v;
     });
-    if(sum < 10) return 1;
-    if(sum > 100) return 10;
-    return (sum/10).floor();
+    if (sum < 10) return 1;
+    if (sum > 100) return 10;
+    return (sum / 10).floor();
   }
 
   @override
   Widget build(BuildContext context) {
     double baseWidth = 430;
-    double fem = MediaQuery
-        .of(context)
-        .size
-        .width / baseWidth;
+    double fem = MediaQuery.of(context).size.width / baseWidth;
     double ffem = fem * 0.97;
     var theme = Theme.of(context);
-    var size = MediaQuery
-        .of(context)
-        .size;
+    var size = MediaQuery.of(context).size;
     return Material(
       child: Container(
         width: double.infinity,
@@ -133,22 +131,23 @@ class _RoundStatisticState extends State<TreeStatistic> {
               ),
               Container(
                 // autogrouptjqmcgs (Kqn7tYKh1Cihow1AKPTjqM)
-                margin: EdgeInsets.fromLTRB(11*fem, 0*fem, 29*fem, 92*fem),
+                margin:
+                    EdgeInsets.fromLTRB(11 * fem, 0 * fem, 29 * fem, 92 * fem),
                 width: double.infinity,
-                height: 61*fem,
+                height: 61 * fem,
                 child: Stack(
                   children: [
                     Positioned(
                       // rectangle3Xoq (191:5070)
-                      left: 5*fem,
-                      top: 0*fem,
+                      left: 5 * fem,
+                      top: 0 * fem,
                       child: Align(
                         child: SizedBox(
-                          width: 375*fem,
-                          height: 61*fem,
+                          width: 375 * fem,
+                          height: 61 * fem,
                           child: Container(
-                            decoration: BoxDecoration (
-                              borderRadius: BorderRadius.circular(26*fem),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(26 * fem),
                               color: Color(0xffc49a71),
                             ),
                           ),
@@ -157,15 +156,15 @@ class _RoundStatisticState extends State<TreeStatistic> {
                     ),
                     Positioned(
                       // rectangle963SR1 (191:5071)
-                      left: 91*fem,
-                      top: 0*fem,
+                      left: 91 * fem,
+                      top: 0 * fem,
                       child: Align(
                         child: SizedBox(
-                          width: 170*fem,
-                          height: 61*fem,
+                          width: 170 * fem,
+                          height: 61 * fem,
                           child: Container(
-                            decoration: BoxDecoration (
-                              borderRadius: BorderRadius.circular(26*fem),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(26 * fem),
                               color: Color(0xffc5ada1),
                             ),
                           ),
@@ -174,15 +173,15 @@ class _RoundStatisticState extends State<TreeStatistic> {
                     ),
                     Positioned(
                       // rectangle6YD9 (191:5072)
-                      left: 0*fem,
-                      top: 0*fem,
+                      left: 0 * fem,
+                      top: 0 * fem,
                       child: Align(
                         child: SizedBox(
-                          width: 143*fem,
-                          height: 61*fem,
+                          width: 143 * fem,
+                          height: 61 * fem,
                           child: Container(
-                            decoration: BoxDecoration (
-                              borderRadius: BorderRadius.circular(26*fem),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(26 * fem),
                               color: Color(0xffa5b879),
                             ),
                           ),
@@ -191,19 +190,19 @@ class _RoundStatisticState extends State<TreeStatistic> {
                     ),
                     Positioned(
                       // emy (191:5073)
-                      left: 39*fem,
-                      top: 3*fem,
+                      left: 39 * fem,
+                      top: 3 * fem,
                       child: Align(
                         child: SizedBox(
-                          width: 82*fem,
-                          height: 50*fem,
+                          width: 82 * fem,
+                          height: 50 * fem,
                           child: Text(
                             'Уровень счастья\n',
-                            style: SafeGoogleFont (
+                            style: SafeGoogleFont(
                               'Jost',
-                              fontSize: 17*ffem,
+                              fontSize: 17 * ffem,
                               fontWeight: FontWeight.w600,
-                              height: 1.445*ffem/fem,
+                              height: 1.445 * ffem / fem,
                               color: Color(0xff4b3425),
                             ),
                           ),
@@ -212,20 +211,28 @@ class _RoundStatisticState extends State<TreeStatistic> {
                     ),
                     Positioned(
                       // 8x3 (191:5074)
-                      left: 284*fem,
-                      top: 12*fem,
-                      child: Align(
-                        child: SizedBox(
-                          width: 101*fem,
-                          height: 39*fem,
-                          child: Text(
-                            'Колесо баланса ',
-                            style: SafeGoogleFont (
-                              'Jost',
-                              fontSize: 17*ffem,
-                              fontWeight: FontWeight.w500,
-                              height: 1.145000009*ffem/fem,
-                              color: Color(0xffffffff),
+                      left: 284 * fem,
+                      top: 12 * fem,
+                      child: InkWell(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => BottomNavigationScreen(RoundStatistic())));
+                        },
+                        child: Align(
+                          child: SizedBox(
+                            width: 101 * fem,
+                            height: 39 * fem,
+                            child: Text(
+                              'Колесо баланса ',
+                              style: SafeGoogleFont(
+                                'Jost',
+                                fontSize: 17 * ffem,
+                                fontWeight: FontWeight.w500,
+                                height: 1.145000009 * ffem / fem,
+                                color: Color(0xffffffff),
+                              ),
                             ),
                           ),
                         ),
@@ -233,20 +240,28 @@ class _RoundStatisticState extends State<TreeStatistic> {
                     ),
                     Positioned(
                       // q5m (191:5075)
-                      left: 174*fem,
-                      top: 21*fem,
-                      child: Align(
-                        child: SizedBox(
-                          width: 41*fem,
-                          height: 20*fem,
-                          child: Text(
-                            'Тест',
-                            style: SafeGoogleFont (
-                              'Jost',
-                              fontSize: 17*ffem,
-                              fontWeight: FontWeight.w500,
-                              height: 1.145000009*ffem/fem,
-                              color: Color(0xffffffff),
+                      left: 174 * fem,
+                      top: 21 * fem,
+                      child: InkWell(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => WelcomeHappyTest()));
+                        },
+                        child: Align(
+                          child: SizedBox(
+                            width: 41 * fem,
+                            height: 20 * fem,
+                            child: Text(
+                              'Тест',
+                              style: SafeGoogleFont(
+                                'Jost',
+                                fontSize: 17 * ffem,
+                                fontWeight: FontWeight.w500,
+                                height: 1.145000009 * ffem / fem,
+                                color: Color(0xffffffff),
+                              ),
                             ),
                           ),
                         ),
@@ -260,65 +275,37 @@ class _RoundStatisticState extends State<TreeStatistic> {
                     selectedName == 'Сегодня'
                         ? DateTime.now()
                         : selectedName == 'Неделя'
-                        ? DateTime(
-                        DateTime
-                            .now()
-                            .year,
-                        DateTime
-                            .now()
-                            .month,
-                        DateTime
-                            .now()
-                            .day - DateTime
-                            .now()
-                            .weekday + 1)
-                        : DateTime(
-                        DateTime
-                            .now()
-                            .year, DateTime
-                        .now()
-                        .month),
+                            ? DateTime(
+                                DateTime.now().year,
+                                DateTime.now().month,
+                                DateTime.now().day - DateTime.now().weekday + 1)
+                            : DateTime(
+                                DateTime.now().year, DateTime.now().month),
                     selectedName == 'Сегодня'
                         ? DateTime.now()
                         : selectedName == 'Неделя'
-                        ? DateTime(
-                        DateTime
-                            .now()
-                            .year,
-                        DateTime
-                            .now()
-                            .month,
-                        DateTime
-                            .now()
-                            .day -
-                            DateTime
-                                .now()
-                                .weekday +
-                            1 +
-                            7)
-                        : DateTime(
-                        DateTime
-                            .now()
-                            .year,
-                        DateTime
-                            .now()
-                            .month,
-                        DateTime(DateTime
-                            .now()
-                            .year,
-                            DateTime
-                                .now()
-                                .month + 1, 0)
-                            .day),
+                            ? DateTime(
+                                DateTime.now().year,
+                                DateTime.now().month,
+                                DateTime.now().day -
+                                    DateTime.now().weekday +
+                                    1 +
+                                    7)
+                            : DateTime(
+                                DateTime.now().year,
+                                DateTime.now().month,
+                                DateTime(DateTime.now().year,
+                                        DateTime.now().month + 1, 0)
+                                    .day),
                   ),
                   builder: (context, snapshot) {
-                    if(snapshot.hasData){
+                    if (snapshot.hasData) {
                       return Stack(
                         children: [
                           Container(
                             child: Image(
-                              image:
-                              AssetImage('assets/tree/tree${snapshot.data}.png'),
+                              image: AssetImage(
+                                  'assets/tree/tree${snapshot.data}.png'),
                               height: size.height / 2,
                             ),
                           ),

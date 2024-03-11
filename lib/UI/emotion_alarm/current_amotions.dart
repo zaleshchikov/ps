@@ -82,19 +82,17 @@ class _TestScreenState extends State<CurrentEmotions> {
                             padding: EdgeInsets.only(bottom: 25),
                             width: size.width/1.5,
                             child: ElevatedButton(
-                              onPressed: () {
+                              onPressed: () async {
                                 setState(() {
                                   _selectedIndex = index;
                                 });
+                                widget.user.sphere = listOfDegree[index];
+                                await UserDatabase.addEmotionsAlarm(DateTime.now(), widget.user);
                                 Future.delayed(const Duration(milliseconds: 1000), () async {
-                                  widget.user.sphere = listOfDegree[index];
-                                  UserDatabase.addEmotionsAlarm(DateTime.now(), widget.user);
-                                  setState(() {
                                     Navigator.push(
                                         context,
                                         MaterialPageRoute(builder: (context) => EmotionsDairy()));
                                   });
-                                });
 
                               },
                               child: Container(

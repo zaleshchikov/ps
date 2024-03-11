@@ -3,10 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'dart:ui';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:ps/UI/statistic/tree_statistic.dart';
+import 'package:ps/bottom_navigation.dart';
 import 'package:ps/page-1/utils.dart';
 
 import '../../db/user_db.dart';
 import '../../db/user_model.dart';
+import '../happy_test/welcome_happy_test.dart';
 
 class RoundStatistic extends StatefulWidget {
   @override
@@ -204,18 +207,26 @@ class _RoundStatisticState extends State<RoundStatistic> {
                       // jmd (191:5553)
                       left: 41 * fem,
                       top: 3 * fem,
-                      child: Align(
-                        child: SizedBox(
-                          width: 79 * fem,
-                          height: 50 * fem,
-                          child: Text(
-                            'Уровень счастья\n',
-                            style: SafeGoogleFont(
-                              'Jost',
-                              fontSize: 17 * ffem,
-                              fontWeight: FontWeight.w500,
-                              height: 1.445 * ffem / fem,
-                              color: Color(0xffffffff),
+                      child: InkWell(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => BottomNavigationScreen(TreeStatistic())));
+                        },
+                        child: Align(
+                          child: SizedBox(
+                            width: 79 * fem,
+                            height: 50 * fem,
+                            child: Text(
+                              'Уровень счастья\n',
+                              style: SafeGoogleFont(
+                                'Jost',
+                                fontSize: 17 * ffem,
+                                fontWeight: FontWeight.w500,
+                                height: 1.445 * ffem / fem,
+                                color: Color(0xffffffff),
+                              ),
                             ),
                           ),
                         ),
@@ -246,18 +257,26 @@ class _RoundStatisticState extends State<RoundStatistic> {
                       // Kjq (191:5555)
                       left: 169 * fem,
                       top: 21 * fem,
-                      child: Align(
-                        child: SizedBox(
-                          width: 41 * fem,
-                          height: 20 * fem,
-                          child: Text(
-                            'Тест',
-                            style: SafeGoogleFont(
-                              'Jost',
-                              fontSize: 17 * ffem,
-                              fontWeight: FontWeight.w500,
-                              height: 1.145000009 * ffem / fem,
-                              color: Color(0xffffffff),
+                      child: InkWell(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => WelcomeHappyTest()));
+                        },
+                        child: Align(
+                          child: SizedBox(
+                            width: 41 * fem,
+                            height: 20 * fem,
+                            child: Text(
+                              'Тест',
+                              style: SafeGoogleFont(
+                                'Jost',
+                                fontSize: 17 * ffem,
+                                fontWeight: FontWeight.w500,
+                                height: 1.145000009 * ffem / fem,
+                                color: Color(0xffffffff),
+                              ),
                             ),
                           ),
                         ),
@@ -340,13 +359,12 @@ class _RoundStatisticState extends State<RoundStatistic> {
                             child: Image(
                               image:
                               AssetImage('assets/round_statstic_back.png'),
-                              height: size.height / 2,
+                              width: size.width,
                             ),
                           ),
                           Container(
-                            padding: EdgeInsets.only(right: fem * 10,
-                                top: fem * 5),
-                            height: size.height / 2,
+                            padding: EdgeInsets.only(top: 5*fem),
+                            height: size.width,
                             child: PieChart(PieChartData(
                                 pieTouchData: PieTouchData(enabled: false),
                                 sectionsSpace: 0,

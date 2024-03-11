@@ -14,12 +14,107 @@ class Finance extends StatefulWidget {
 }
 
 class _TestScreenState extends State<Finance> {
+
+  final List<String> finance = [
+    'Повысили зарплату',
+    'Получил премию',
+    'Выполнил план',
+    'Заключил договор',
+    'Завел полезные знакомства на работе',
+    'Выросла прибыль',
+    'Появились свободные средства, чтобы откладывать',
+    'Предложили сотрудничество',
+    'Успешно прошел собеседование',
+    'Увеличил объем продаж',
+    'Устроился на работу',
+    'Успел на работу во время',
+    'Выполнил все задачи на день',
+    'Расширил клиентскую базу',
+    'Привлёк новых клиентов',
+    'Успешно провёл презентацию'
+  ];
+
+  final List<String> health = [
+    'Сдал анализы',
+    'Посетил врача',
+    'Вылечил зубы',
+    'Не ел сладкого',
+    'Не ел мучного',
+    'Не употреблял фастфуд',
+    'Сделал утреннюю пробежку',
+    'Сделал зарядку',
+    'Сходил на тренировку',
+    'Похудел',
+    'Набрал мышечную массу',
+    'Съел витамины',
+    'Вылечил простуду'
+  ];
+
+  final List<String> love = [
+    'День без ссоры',
+    'Удивил близкого',
+    'Получил благодарность от близкого',
+    'Провели день вместе с семьей',
+    'Ребенок порадовал поведением',
+    'Познакомился с новыми людьми',
+    'Признался в симпатии',
+    'Ответили взаимностью',
+    'Сходил на свидание',
+    'Сделали комплимент',
+    'Пригласили на свидание',
+  ];
+
+  final List<String> friends = [
+    'Встретил старого друга',
+    'Познакомился с новым человеком',
+    'Хорошо провёл время в компании друзей',
+    'Встретился с другом детства',
+    'Съездил к другу в другой город',
+    'Встретил интересного собеседника'
+  ];
+
+  final List<String> hobby = [
+    "Сходил на мастер-класс",
+    "Начал читать книгу",
+    "Прочитал книгу",
+    "Сходил на занятие"
+  ];
+
+  final List<String> evolution = [
+    'Начал изучать новый язык',
+    'Прочитал книгу',
+    'Начал читать книгу',
+    'Сходил на конференцию',
+    'Сходил на выставку',
+    'Посмотрел образовательное видео',
+    'Начился новому'
+  ];
+
+
   var _selectedIndex = 6;
 
   var listOfDegree = ['Получил премию', '', '', '', ''];
 
   @override
   Widget build(BuildContext context) {
+
+    switch(widget.success.sphere){
+      case 'Финансы/Карьера':
+        listOfDegree = finance;
+      case 'Здоровье':
+        listOfDegree = health;
+      case 'Семья/Любовь':
+        listOfDegree = love;
+      case 'Друзья/Окружение':
+        listOfDegree = friends;
+      case 'Развитие':
+        listOfDegree = evolution;
+      case 'Хобби':
+        listOfDegree = hobby;
+    }
+
+    _selectedIndex = listOfDegree.length+1;
+
     var theme = Theme.of(context);
     var size = MediaQuery.of(context).size;
     return SafeArea(
@@ -40,7 +135,7 @@ class _TestScreenState extends State<Finance> {
               Container(height: size.height / 30),
               Center(
                 child: Text(
-                  'Финансы',
+                  widget.success.sphere,
                   textAlign: TextAlign.center,
                   style: theme.textTheme.titleLarge!.copyWith(
                       fontSize: 28,
@@ -89,7 +184,7 @@ class _TestScreenState extends State<Finance> {
                                         color: Colors.black,
                                         fontFamily:
                                             GoogleFonts.inter().fontFamily,
-                                        fontSize: 20)),
+                                        fontSize: 15), maxLines: 3,),
                                 Image(
                                   image: AssetImage(_selectedIndex == index
                                       ? 'assets/enabledTest.png'

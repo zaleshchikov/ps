@@ -27,24 +27,9 @@ import 'db/wish_model.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // await UserDatabase.isNotEmpty() ? print('yes') : await UserDatabase.insertUser(User(
-  //     username: '', password: '', testResult: [], calendar: {}
-  // ));
-  // var s = await UserDatabase.users();
-  // User user = User(username: '', password: '', testResult: [], calendar: {
-  //   '01.01.1970' : {
-  //     'alarm' :[
-  //       ['списокalarm']
-  //     ]
-  //   },
-  //   '02.01.1970' : {
-  //     'alarm' :[
-  //       ['списокalarm']
-  //     ]
-  //   }
-  // });
-  // print(user.toMap());
-  await UserDatabase.isNotEmpty()
+
+  bool isUser = await UserDatabase.isNotEmpty();
+  isUser
       ? print('yes')
       : await UserDatabase.insertUser(User(
           username: '',
@@ -93,7 +78,7 @@ class MyApp extends StatelessWidget {
                   color: const Color(0xff4B3425),
                   fontSize: 32,
                   fontWeight: FontWeight.w500))),
-      home: Container(child: BottomNavigationScreen(TreeStatistic())),
+      home: Container(child: WelcomeScreen()),
     );
   }
 }

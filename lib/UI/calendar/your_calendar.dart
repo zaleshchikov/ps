@@ -3,7 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:ps/UI/calendar/your_challenge_screen.dart';
 import 'package:ps/UI/emotion_alarm/emotons_dairy.dart';
-import 'package:ps/UI/happy_test/should_register.dart';
+import 'package:ps/UI/should_register.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ps/UI/trackers/trackers.dart';
 import 'package:ps/bottom_navigation.dart';
@@ -166,7 +166,7 @@ class YourCalendar extends StatelessWidget {
                           child: Container(
                             padding: EdgeInsets.fromLTRB(2.5*fem, 25*fem, 2.5*fem, 74*fem),
                             width: 372*fem,
-                            height: 350*fem,
+                            height: 400*fem,
                             decoration: BoxDecoration (
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(40*fem),
@@ -430,9 +430,10 @@ class YourCalendar extends StatelessWidget {
                     width: size.width / 1.2,
                     height: size.height / 14.5,
                     child: ElevatedButton(
-                        onPressed: () {
+                        onPressed: () {Navigator.push(
+                            context,
                           MaterialPageRoute(
-                              builder: (context) => BottomNavigationScreen(Trackers()));
+                              builder: (context) => BottomNavigationScreen(Trackers())));
                         },
                         child: Text(
                           'Перейти в главное меню',

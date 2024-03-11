@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:ps/UI/auth/log_in_screen.dart';
+import 'package:ps/UI/auth/sign_up_screen.dart';
 
 class ShouldRegister extends StatelessWidget {
-  const ShouldRegister({super.key});
+
+  Widget nextScreen;
+  ShouldRegister(this.nextScreen);
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +40,11 @@ class ShouldRegister extends StatelessWidget {
                       padding: EdgeInsets.zero,
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(20))),
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => SignUpScreen()));
+                  },
                   child: Ink(
                       height: size.height / 14,
                       width: size.width / 1.5,
@@ -64,7 +72,11 @@ class ShouldRegister extends StatelessWidget {
                       padding: EdgeInsets.zero,
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(20))),
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) =>  nextScreen));
+                  },
                   child: Ink(
                       height: size.height / 12,
                       width: size.width / 1.5,
