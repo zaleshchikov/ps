@@ -254,79 +254,79 @@ class EmotionsCalendar extends StatelessWidget {
                       ),
                     ),
                     Positioned(
-                      child: Expanded(
-                        child: Center(
-                          child: SizedBox(
-                              height: 1000,
-                              width: 300,
-                              child: TableCalendar(
-                                onDaySelected: (time, t) {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              EmotionsDairy.notNow(time)));
-                                },
-                                daysOfWeekHeight: size.height / 20,
-                                daysOfWeekStyle: DaysOfWeekStyle(
-                                  weekdayStyle: SafeGoogleFont(
+                      top: fem*5,
+                      left: fem*60,
+                      child: Center(
+                        child: SizedBox(
+                            height: 1000,
+                            width: 300,
+                            child: TableCalendar(
+                              onDaySelected: (time, t) {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            EmotionsDairy.notNow(time)));
+                              },
+                              daysOfWeekHeight: size.height / 20,
+                              daysOfWeekStyle: DaysOfWeekStyle(
+                                weekdayStyle: SafeGoogleFont(
+                                  'Jost',
+                                  fontSize: 25 * ffem,
+                                  fontWeight: FontWeight.w400,
+                                  color: Color(0xff6b6969),
+                                ),
+                                weekendStyle: SafeGoogleFont(
+                                  'Jost',
+                                  fontSize: 25 * ffem,
+                                  fontWeight: FontWeight.w400,
+                                  color: Color(0xff6b6969),
+                                ),
+                              ),
+                              startingDayOfWeek: StartingDayOfWeek.monday,
+                              headerStyle: HeaderStyle(
+                                titleTextStyle: theme.textTheme.titleMedium!
+                                    .copyWith(fontSize: 25 * ffem),
+                                titleCentered: true,
+                                formatButtonVisible: false,
+                              ),
+                              calendarFormat: CalendarFormat.month,
+                              rowHeight: size.height / 20,
+                              locale: 'ru_RU',
+                              firstDay: DateTime.utc(2010, 10, 20),
+                              lastDay: DateTime.utc(2040, 10, 20),
+                              focusedDay: DateTime.now(),
+                              daysOfWeekVisible: true,
+                              calendarStyle: CalendarStyle(
+                                  todayDecoration: BoxDecoration(
+                                      color: Color(0x7c9bb068),
+                                      borderRadius: BorderRadius.circular(20)),
+                                  weekendTextStyle: SafeGoogleFont(
                                     'Jost',
                                     fontSize: 25 * ffem,
                                     fontWeight: FontWeight.w400,
-                                    color: Color(0xff6b6969),
+                                    height: 1.445 * ffem / fem,
+                                    color: Color(0xffFFFFFF5),
                                   ),
-                                  weekendStyle: SafeGoogleFont(
+                                  defaultTextStyle: SafeGoogleFont(
                                     'Jost',
                                     fontSize: 25 * ffem,
                                     fontWeight: FontWeight.w400,
-                                    color: Color(0xff6b6969),
+                                    height: 1.445 * ffem / fem,
+                                    color: Color(0xffFFFFFF5),
                                   ),
-                                ),
-                                startingDayOfWeek: StartingDayOfWeek.monday,
-                                headerStyle: HeaderStyle(
-                                  titleTextStyle: theme.textTheme.titleMedium!
-                                      .copyWith(fontSize: 25 * ffem),
-                                  titleCentered: true,
-                                  formatButtonVisible: false,
-                                ),
-                                calendarFormat: CalendarFormat.month,
-                                rowHeight: size.height / 20,
-                                locale: 'ru_RU',
-                                firstDay: DateTime.utc(2010, 10, 20),
-                                lastDay: DateTime.utc(2040, 10, 20),
-                                focusedDay: DateTime.now(),
-                                daysOfWeekVisible: true,
-                                calendarStyle: CalendarStyle(
-                                    todayDecoration: BoxDecoration(
-                                        color: Color(0x7c9bb068),
-                                        borderRadius: BorderRadius.circular(20)),
-                                    weekendTextStyle: SafeGoogleFont(
-                                      'Jost',
-                                      fontSize: 25 * ffem,
-                                      fontWeight: FontWeight.w400,
-                                      height: 1.445 * ffem / fem,
-                                      color: Color(0xffFFFFFF5),
-                                    ),
-                                    defaultTextStyle: SafeGoogleFont(
-                                      'Jost',
-                                      fontSize: 25 * ffem,
-                                      fontWeight: FontWeight.w400,
-                                      height: 1.445 * ffem / fem,
-                                      color: Color(0xffFFFFFF5),
-                                    ),
-                                    outsideTextStyle: SafeGoogleFont(
-                                      'Jost',
-                                      fontSize: 25 * ffem,
-                                      fontWeight: FontWeight.w400,
-                                      height: 1.445 * ffem / fem,
-                                      color: Color(0xff4B3425),
-                                    ),
-                                    todayTextStyle: TextStyle(
-                                        fontSize: 20,
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold)),
-                              )),
-                        ),
+                                  outsideTextStyle: SafeGoogleFont(
+                                    'Jost',
+                                    fontSize: 25 * ffem,
+                                    fontWeight: FontWeight.w400,
+                                    height: 1.445 * ffem / fem,
+                                    color: Color(0xff4B3425),
+                                  ),
+                                  todayTextStyle: TextStyle(
+                                      fontSize: 20,
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold)),
+                            )),
                       ),
                     ),
                   ],

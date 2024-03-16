@@ -8,6 +8,9 @@ import 'package:ps/UI/emotion_alarm/to_main_button.dart';
 import 'package:ps/bottom_navigation.dart';
 import 'package:ps/db/user_db.dart';
 import 'package:ps/page-1/utils.dart';
+import 'package:auto_size_text/auto_size_text.dart';
+
+import 'change_challenge.dart';
 
 class ChallengeScreen extends StatefulWidget {
   DateTime date;
@@ -76,7 +79,7 @@ class _ChallengeScreenState extends State<ChallengeScreen> {
                                     Positioned(
                                       // vector466xRH (191:4452)
                                       left: 37 * fem,
-                                      top: 181 * fem,
+                                      top: 130 * fem,
                                       child: Align(
                                         child: SizedBox(
                                           width: 48 * fem,
@@ -96,7 +99,7 @@ class _ChallengeScreenState extends State<ChallengeScreen> {
                                       child: Align(
                                         child: SizedBox(
                                           width: 305 * fem,
-                                          height: 191 * fem,
+                                          height: 150 * fem,
                                           child: Container(
                                             decoration: BoxDecoration(
                                               borderRadius:
@@ -129,7 +132,7 @@ class _ChallengeScreenState extends State<ChallengeScreen> {
                                             textAlign: TextAlign.center,
                                             style: SafeGoogleFont(
                                               'Jost',
-                                              fontSize: 20 * ffem,
+                                              fontSize: 15 * ffem,
                                               fontWeight: FontWeight.w400,
                                               height: 1.445 * ffem / fem,
                                               color: Color(0xff4b3425),
@@ -161,13 +164,14 @@ class _ChallengeScreenState extends State<ChallengeScreen> {
                                 top: 230 * fem,
                                 child: Align(
                                   child: SizedBox(
-                                    width: 246 * fem,
-                                    height: 93 * fem,
-                                    child: Text(
+                                    width: 300 * fem,
+                                    height: 80 * fem,
+                                    child: AutoSizeText(
+                                      maxLines: 2,
                                       widget.challenge,
                                       style: SafeGoogleFont(
                                         'Jost',
-                                        fontSize: 32 * ffem,
+                                        fontSize: 25 * ffem,
                                         fontWeight: FontWeight.w500,
                                         height: 1.445 * ffem / fem,
                                         color: Color(0xff4b3425),
@@ -183,7 +187,7 @@ class _ChallengeScreenState extends State<ChallengeScreen> {
                                 child: Align(
                                   child: SizedBox(
                                     width: 330 * fem,
-                                    height: 87 * fem,
+                                    height: 90 * fem,
                                     child: Text(
                                       'Выполняя позитивные действия каждый день, Вы становитесь счастливее',
                                       textAlign: TextAlign.center,
@@ -270,11 +274,11 @@ class _ChallengeScreenState extends State<ChallengeScreen> {
                                   children: [
                                     Container(
                                       width: size.width/2,
-                                      child: Text(
+                                      child: AutoSizeText(
                                         widget.challenge,
                                         style: SafeGoogleFont(
                                           'Jost',
-                                          fontSize: 28 * ffem,
+                                          fontSize: 25 * ffem,
                                           fontWeight: FontWeight.w500,
                                           height: 1.445 * ffem / fem,
                                           color: Color(0xff4b3425),
@@ -310,7 +314,40 @@ class _ChallengeScreenState extends State<ChallengeScreen> {
                             ),
                           ),
                         ),
-                      )
+                      ),
+                      Positioned(
+                        // X71 (191:4454)
+                          left: 110 * fem,
+                          top: 580 * fem,
+                          child: InkWell(
+                            onTap: () {
+                              if (widget.challenge !=
+                                  'Ничего не запланировано') {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            BottomNavigationScreen(
+                                                ChangeChallenge(
+                                                    widget
+                                                        .date, 'autoCalendar'))));
+                              }
+                            },
+                            child: Container(
+                              width: size.width / 2,
+                              height: size.height / 15.8,
+                              decoration: BoxDecoration(
+                                  borderRadius:
+                                  BorderRadius.circular(30),
+                                  color: Color(0xff9B6C4A)),
+                              child: Center(
+                                child: Text(
+                                  'Заменить действие',
+                                  style: TextStyle(fontSize: 20),
+                                ),
+                              ),
+                            ),
+                          ))
                     ],
                   ),
                 ),

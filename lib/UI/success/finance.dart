@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ps/UI/emotion_alarm/to_main_button.dart';
@@ -179,7 +180,7 @@ class _TestScreenState extends State<Finance> {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text(listOfDegree[index],
+                                AutoSizeText(listOfDegree[index],
                                     style: theme.textTheme.bodySmall!.copyWith(
                                         color: Colors.black,
                                         fontFamily:

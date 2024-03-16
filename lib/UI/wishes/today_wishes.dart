@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -53,162 +54,178 @@ class _TodayWishesState extends State<TodayWishes> {
                       fontSize: 18,
                       color: Color(0xff4B3425))),
               Container(height: size.height / 40),
-              SingleChildScrollView(
-                  child: Container(
-                height: size.height / 3.4,
-                child: FutureBuilder(
-                    future: getWishes(),
-                    builder: (context, snapshot) {
-                      if (snapshot.hasData) {
-                        return ListView.builder(
-                            padding: const EdgeInsets.all(8),
-                            itemCount: snapshot.data!.length,
-                            itemBuilder: (BuildContext context, int index) {
-                              return Stack(
-                                children: [
-                                  Container(height: size.height / 7),
-                                  Center(
-                                    child: Container(
-                                        height: size.height / 13.5,
-                                        width: size.width / 1.16,
-                                        decoration: BoxDecoration(
-                                            color: theme.highlightColor,
-                                            borderRadius:
-                                                BorderRadius.circular(25)),
-                                        child: Center(
-                                          child: Text(
-                                            snapshot.data![index].wish,
-                                            style: theme.textTheme.titleLarge!
-                                                .copyWith(
-                                              fontSize: 23,
-                                              color: theme
-                                                  .textTheme.bodySmall!.color,
-                                            ),
-                                          ),
-                                        )),
-                                  ),
-                                  Container(
-                                    padding: EdgeInsets.only(top: 50),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceEvenly,
-                                      children: [
-                                        InkWell(
-                                            onTap: () async {
-                                              await UserDatabase
-                                                  .addCompletedWish(
-                                                      DateTime.now(),
-                                                      snapshot
-                                                          .data![index]!.wish,
-                                                      snapshot.data![index]!
-                                                          .sphere);
-                                              await UserDatabase.deleteWish(
-                                                  snapshot.data![index]);
-                                              showDialog(
-                                                  barrierColor:
-                                                      Colors.transparent,
-                                                  context: context,
-                                                  builder: (_) =>
-                                                      BackdropFilter(
-                                                        filter:
-                                                            ImageFilter.blur(
-                                                                sigmaX: 10,
-                                                                sigmaY: 10),
-                                                        child: Dialog(
-                                                          surfaceTintColor:
-                                                              Colors
-                                                                  .transparent,
-                                                          backgroundColor:
-                                                              Colors
-                                                                  .transparent,
-                                                          child: Container(
-                                                              alignment:
-                                                                  FractionalOffset
-                                                                      .center,
-                                                              height:
-                                                                  size.height /
-                                                                      2.5,
-                                                              padding:
-                                                                  const EdgeInsets
-                                                                      .all(
-                                                                      20.0),
-                                                              child:
-                                                                  Image.asset(
-                                                                'assets/dialog_s.png',
-                                                                fit: BoxFit
-                                                                    .cover,
-                                                              )),
+              Scrollbar(
+                child: SingleChildScrollView(
+                    child: Container(
+                  height: size.height / 3.4,
+                  child: FutureBuilder(
+                      future: getWishes(),
+                      builder: (context, snapshot) {
+                        if (snapshot.hasData) {
+                          return Scrollbar(
+                            thumbVisibility: true,
+                            child: ListView.builder(
+                                padding: const EdgeInsets.all(8),
+                                itemCount: snapshot.data!.length,
+                                itemBuilder: (BuildContext context, int index) {
+                                  return Stack(
+                                    children: [
+                                      Container(height: size.height / 7),
+                                      Center(
+                                        child: Container(
+                                            height: size.height / 13.5,
+                                            width: size.width / 1.16,
+                                            decoration: BoxDecoration(
+                                                color: theme.highlightColor,
+                                                borderRadius:
+                                                    BorderRadius.circular(25)),
+                                            child: Center(
+                                              child: SizedBox(
+                                                width: size.width / 1.2,
+                                                child: AutoSizeText(
+                                                  snapshot.data![index].wish,
+                                                  style: theme.textTheme.titleLarge!
+                                                      .copyWith(
+                                                    fontSize: 18,
+                                                    color: theme
+                                                        .textTheme.bodySmall!.color,
+                                                  ),
+                                                ),
+                                              ),
+                                            )),
+                                      ),
+                                      Container(
+                                        padding: EdgeInsets.only(top: 50),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceEvenly,
+                                          children: [
+                                            InkWell(
+                                                onTap: () async {
+                                                  if (await UserDatabase
+                                                      .isRegister()) {
+                                                    await UserDatabase
+                                                        .addCompletedWish(
+                                                            DateTime.now(),
+                                                            snapshot
+                                                                .data![index]!.wish,
+                                                            snapshot.data![index]!
+                                                                .sphere);
+                                                  }
+                                                  await UserDatabase.deleteWish(
+                                                      snapshot.data![index]);
+                                                  showDialog(
+                                                      barrierColor:
+                                                          Colors.transparent,
+                                                      context: context,
+                                                      builder: (_) =>
+                                                          BackdropFilter(
+                                                            filter:
+                                                                ImageFilter.blur(
+                                                                    sigmaX: 10,
+                                                                    sigmaY: 10),
+                                                            child: GestureDetector(
+                                                              onTap: () =>
+                                                                  Navigator.pop(
+                                                                      context),
+                                                              child: Dialog(
+                                                                surfaceTintColor:
+                                                                    Colors
+                                                                        .transparent,
+                                                                backgroundColor:
+                                                                    Colors
+                                                                        .transparent,
+                                                                child: Container(
+                                                                    alignment:
+                                                                        FractionalOffset
+                                                                            .center,
+                                                                    height:
+                                                                        size.height /
+                                                                            2.5,
+                                                                    padding:
+                                                                        const EdgeInsets
+                                                                            .all(
+                                                                            20.0),
+                                                                    child:
+                                                                        Image.asset(
+                                                                      'assets/dialog_s.png',
+                                                                      fit: BoxFit
+                                                                          .cover,
+                                                                    )),
+                                                              ),
+                                                            ),
+                                                          ));
+                                                  setState(() {});
+                                                },
+                                                child: Container(
+                                                    height: size.height / 16.3,
+                                                    width: size.width / 2.54,
+                                                    decoration: BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius.circular(50),
+                                                      boxShadow: [
+                                                        BoxShadow(
+                                                          color: Color(0xe36a7b3b),
                                                         ),
-                                                      ));
-                                              setState(() {});
-                                            },
-                                            child: Container(
-                                                height: size.height / 16.3,
-                                                width: size.width / 2.54,
-                                                decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(50),
-                                                  boxShadow: [
-                                                    BoxShadow(
-                                                      color: Color(0xe36a7b3b),
+                                                        BoxShadow(
+                                                          offset: Offset(0, 3),
+                                                          color: Color(0xffA5B879),
+                                                          spreadRadius: -3.0,
+                                                          blurRadius: 5.0,
+                                                        ),
+                                                      ],
                                                     ),
-                                                    BoxShadow(
-                                                      offset: Offset(0, 3),
-                                                      color: Color(0xffA5B879),
-                                                      spreadRadius: -3.0,
-                                                      blurRadius: 5.0,
+                                                    child: Center(
+                                                        child: Text('Да',
+                                                            style: theme.textTheme
+                                                                .bodyMedium!
+                                                                .copyWith(
+                                                                    fontSize:
+                                                                        30))))),
+                                            InkWell(
+                                                onTap: () async {
+                                                  await UserDatabase.deleteWish(
+                                                      snapshot.data![index]);
+                                                  setState(() {});
+                                                },
+                                                child: Container(
+                                                    height: size.height / 16.3,
+                                                    width: size.width / 2.54,
+                                                    decoration: BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius.circular(50),
+                                                      boxShadow: [
+                                                        BoxShadow(
+                                                          color: Color(0xffA55A26),
+                                                        ),
+                                                        BoxShadow(
+                                                          offset: Offset(0, 3),
+                                                          color: Color(0xffEEA27D),
+                                                          spreadRadius: -3.0,
+                                                          blurRadius: 5.0,
+                                                        ),
+                                                      ],
                                                     ),
-                                                  ],
-                                                ),
-                                                child: Center(
-                                                    child: Text('Да',
-                                                        style: theme.textTheme
-                                                            .bodyMedium!
-                                                            .copyWith(
-                                                                fontSize:
-                                                                    30))))),
-                                        InkWell(
-                                            onTap: () async {
-                                              await UserDatabase.deleteWish(
-                                                  snapshot.data![index]);
-                                              setState(() {});
-                                            },
-                                            child: Container(
-                                                height: size.height / 16.3,
-                                                width: size.width / 2.54,
-                                                decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(50),
-                                                  boxShadow: [
-                                                    BoxShadow(
-                                                      color: Color(0xffA55A26),
-                                                    ),
-                                                    BoxShadow(
-                                                      offset: Offset(0, 3),
-                                                      color: Color(0xffEEA27D),
-                                                      spreadRadius: -3.0,
-                                                      blurRadius: 5.0,
-                                                    ),
-                                                  ],
-                                                ),
-                                                child: Center(
-                                                    child: Text('Нет',
-                                                        style: theme.textTheme
-                                                            .bodyMedium!
-                                                            .copyWith(
-                                                                fontSize:
-                                                                    30)))))
-                                      ],
-                                    ),
-                                  )
-                                ],
-                              );
-                            });
-                      } else {
-                        return Container();
-                      }
-                    }),
-              )),
+                                                    child: Center(
+                                                        child: Text('Нет',
+                                                            style: theme.textTheme
+                                                                .bodyMedium!
+                                                                .copyWith(
+                                                                    fontSize:
+                                                                        30)))))
+                                          ],
+                                        ),
+                                      )
+                                    ],
+                                  );
+                                }),
+                          );
+                        } else {
+                          return Container();
+                        }
+                      }),
+                )),
+              ),
               Container(height: size.height / 40),
               InkWell(
                   onTap: () {

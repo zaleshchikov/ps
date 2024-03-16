@@ -53,7 +53,7 @@ class Trackers extends StatelessWidget {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => BottomNavigationScreen( TodayWishes())));
+                          builder: (context) => BottomNavigationScreen(TodayWishes())));
                 } else{
                   Navigator.push(
                       context,

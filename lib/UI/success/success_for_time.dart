@@ -1,5 +1,6 @@
 import 'dart:collection';
 
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'dart:ui';
@@ -135,7 +136,7 @@ class _SuccessForTimeState extends State<SuccessForTime> {
                         items: ListOfName.map((itemone) {
                           return DropdownMenuItem(
                               value: itemone,
-                              child: Text(
+                              child: AutoSizeText(
                                 itemone,
                                 style: theme.textTheme.bodyLarge!
                                     .copyWith(fontSize: 20),
@@ -273,7 +274,7 @@ class _SuccessForTimeState extends State<SuccessForTime> {
                                           Container(height: size.height / 70),
                                           selectedName != 'Неделя'
                                               ? Container()
-                                              : Text(
+                                              : AutoSizeText(
                                                   '${start.day}.${start.month}.${start.year}- ${end.day}.${end.month}.${end.year}',
                                                   style: theme
                                                       .textTheme.bodySmall!
@@ -281,29 +282,61 @@ class _SuccessForTimeState extends State<SuccessForTime> {
                                                     fontWeight: FontWeight.w400,
                                                   )),
                                           Container(height: size.height / 70),
-                                          Text('Ваш успех',
+                                          AutoSizeText('Ваш успех',
                                               textAlign: TextAlign.center,
                                               style: theme
                                                   .textTheme.titleMedium!
                                                   .copyWith(fontSize: 26)),
-                                          SingleChildScrollView(
-                                            child: Container(
-                                              height: size.height / 2.3,
-                                              child: ListView.builder(
-                                                  padding:
-                                                      const EdgeInsets.all(8),
-                                                  itemCount:
-                                                      snapshot.data!.length,
-                                                  itemBuilder:
-                                                      (BuildContext context,
-                                                          int index) {
-                                                    return Column(
-                                                      children: [
-                                                        Container(
-                                                          padding:
-                                                              EdgeInsets.only(
-                                                                  top: 10),
-                                                          child: Row(
+                                          Scrollbar(
+                                          thumbVisibility: true,
+                                            child: SingleChildScrollView(
+                                              child: Container(
+                                                height: size.height / 2.3,
+                                                child: ListView.builder(
+                                                    padding:
+                                                        const EdgeInsets.all(8),
+                                                    itemCount:
+                                                        snapshot.data!.length,
+                                                    itemBuilder:
+                                                        (BuildContext context,
+                                                            int index) {
+                                                      return Column(
+                                                        children: [
+                                                          Container(
+                                                            padding:
+                                                                EdgeInsets.only(
+                                                                    top: 10),
+                                                            child: Row(
+                                                              mainAxisAlignment:
+                                                                  MainAxisAlignment
+                                                                      .start,
+                                                              children: [
+                                                                Container(
+                                                                    width:
+                                                                        size.width /
+                                                                            30),
+                                                                selectedName !=
+                                                                            'Месяц' ||
+                                                                        (index > 0 &&
+                                                                            snapshot.data!.elementAt(index -1 ).date ==
+                                                                                snapshot.data!.elementAt(index).date)
+                                                                    ? Container()
+                                                                    : AutoSizeText(
+                                                                        snapshot
+                                                                            .data!
+                                                                            .elementAt(
+                                                                                index)
+                                                                            .date,
+                                                                        style: theme
+                                                                            .textTheme
+                                                                            .titleMedium!
+                                                                            .copyWith(
+                                                                                fontSize: 25),
+                                                                      )
+                                                              ],
+                                                            ),
+                                                          ),
+                                                          Row(
                                                             mainAxisAlignment:
                                                                 MainAxisAlignment
                                                                     .start,
@@ -312,65 +345,37 @@ class _SuccessForTimeState extends State<SuccessForTime> {
                                                                   width:
                                                                       size.width /
                                                                           30),
-                                                              selectedName !=
-                                                                          'Месяц' ||
-                                                                      (index > 0 &&
-                                                                          snapshot.data!.elementAt(index -1 ).date ==
-                                                                              snapshot.data!.elementAt(index).date)
-                                                                  ? Container()
-                                                                  : Text(
-                                                                      snapshot
-                                                                          .data!
-                                                                          .elementAt(
-                                                                              index)
-                                                                          .date,
-                                                                      style: theme
-                                                                          .textTheme
-                                                                          .titleMedium!
-                                                                          .copyWith(
-                                                                              fontSize: 25),
-                                                                    )
+                                                              Image(
+                                                                  image: AssetImage(
+                                                                      'assets/thumb_up.png')),
+                                                              Container(
+                                                                  width:
+                                                                      size.width /
+                                                                          50),
+                                                              Container(
+                                                                width:
+                                                                    size.width /
+                                                                        1.8,
+                                                                child: AutoSizeText
+                                                                  (
+                                                                  snapshot.data!
+                                                                      .elementAt(
+                                                                          index)
+                                                                      .success,
+                                                                  style: theme
+                                                                      .textTheme
+                                                                      .bodySmall!
+                                                                      .copyWith(
+                                                                          fontWeight:
+                                                                              FontWeight.w600),
+                                                                ),
+                                                              ),
                                                             ],
                                                           ),
-                                                        ),
-                                                        Row(
-                                                          mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .start,
-                                                          children: [
-                                                            Container(
-                                                                width:
-                                                                    size.width /
-                                                                        30),
-                                                            Image(
-                                                                image: AssetImage(
-                                                                    'assets/thumb_up.png')),
-                                                            Container(
-                                                                width:
-                                                                    size.width /
-                                                                        50),
-                                                            Container(
-                                                              width:
-                                                                  size.width /
-                                                                      1.8,
-                                                              child: Text(
-                                                                snapshot.data!
-                                                                    .elementAt(
-                                                                        index)
-                                                                    .success,
-                                                                style: theme
-                                                                    .textTheme
-                                                                    .bodySmall!
-                                                                    .copyWith(
-                                                                        fontWeight:
-                                                                            FontWeight.w600),
-                                                              ),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      ],
-                                                    );
-                                                  }),
+                                                        ],
+                                                      );
+                                                    }),
+                                              ),
                                             ),
                                           ),
                                         ],

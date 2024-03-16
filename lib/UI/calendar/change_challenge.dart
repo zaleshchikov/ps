@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'package:ps/UI/calendar/choose_day.dart';
@@ -18,7 +19,8 @@ import 'auto_calendar.dart';
 class ChangeChallenge extends StatefulWidget {
 
   DateTime time;
-  ChangeChallenge(this.time);
+  String calendar;
+  ChangeChallenge(this.time, this.calendar);
 
   @override
   State<ChangeChallenge> createState() => _ChoiceCalendarState();
@@ -30,6 +32,7 @@ class _ChoiceCalendarState extends State<ChangeChallenge> {
   List listOfWish = [];
   List lastIndex = [];
   List wishes = [];
+
 
   Random random = Random();
 
@@ -173,7 +176,7 @@ class _ChoiceCalendarState extends State<ChangeChallenge> {
                     height: size.height / 50,
                   ),
                   Text(
-                    'Выберите из каталога позитивные\nдействия на каждый день\nкалендаря. Из трех вариантов,\nвыберете один. ',
+                    'Выберите позитивное действие\nна каждый день вашего календаря.',
                     style: SafeGoogleFont(
                       'Jost',
                       fontSize: 16 * ffem,
@@ -213,7 +216,7 @@ class _ChoiceCalendarState extends State<ChangeChallenge> {
                                       child: Container(
                                         padding: EdgeInsets.all(10),
                                         child: Center(
-                                          child: Text(
+                                          child: AutoSizeText(
                                             wishes[index],
                                             style: theme.textTheme.bodyLarge!
                                                 .copyWith(fontSize: 17),
@@ -258,7 +261,7 @@ class _ChoiceCalendarState extends State<ChangeChallenge> {
                     child: InkWell(
                       onTap: () async{
                         if(listOfWish.length > 0){
-                        await UserDatabase.changeCalendarWish(widget.time, 'yourCalendar', listOfWish[0]);
+                        await UserDatabase.changeCalendarWish(widget.time, widget.calendar, listOfWish[0]);
                         Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(

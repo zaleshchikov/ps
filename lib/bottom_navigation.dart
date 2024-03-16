@@ -26,7 +26,7 @@ class _BottomNavigationScreenState extends State<BottomNavigationScreen> {
   @override
   Widget build(BuildContext context) {
     var listOfBode = [
-      RoundStatistic(), Trackers(), Container(
+      MainScreen(), Trackers(), Container(
         decoration: BoxDecoration(
           color: Color(0xffF5ECDF)
         ),
@@ -36,17 +36,7 @@ class _BottomNavigationScreenState extends State<BottomNavigationScreen> {
               fontSize: 36,
               fontWeight: FontWeight.w700),),
         ),
-      ), Container(
-        decoration: BoxDecoration(
-            color: Color(0xffF5ECDF)
-        ),
-        child: Center(
-          child: Text('В разработке...', style: GoogleFonts.jost(
-              color: const Color(0xff7C4B21),
-              fontSize: 36,
-              fontWeight: FontWeight.w700),),
-        ),
-      ),widget.body
+      ),RoundStatistic() ,widget.body
     ];
     var theme = Theme.of(context);
     var size = MediaQuery.of(context).size;
@@ -75,12 +65,13 @@ class _BottomNavigationScreenState extends State<BottomNavigationScreen> {
               iconSize: 40,
               items: [
                 BottomNavigationBarItem(
-                  icon: ImageIcon(
-                    AssetImage("assets/statistic_icon_new.png"),
+                  icon: Icon(
+                    Icons.menu,
                     color: theme.textTheme.bodySmall!.color,
                   ),
-                  label: 'Статистика',
+                  label: 'Меню',
                 ),
+
                 BottomNavigationBarItem(
                   icon: ImageIcon(
                     AssetImage("assets/tracker_icon_new.png"),
@@ -97,10 +88,10 @@ class _BottomNavigationScreenState extends State<BottomNavigationScreen> {
                 ),
                 BottomNavigationBarItem(
                   icon: ImageIcon(
-                    AssetImage("assets/chat_icon_new.png"),
+                    AssetImage("assets/statistic_icon_new.png"),
                     color: theme.textTheme.bodySmall!.color,
                   ),
-                  label: 'Чат',
+                  label: 'Статистика',
                 ),
               ],
             ),

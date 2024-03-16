@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'package:ps/UI/calendar/choose_day.dart';
@@ -180,7 +181,7 @@ class _ChoiceCalendarState extends State<ChoiceCalendar> {
                 height: size.height / 50,
               ),
               Text(
-                'Выберите из каталога позитивные\nдействия на каждый день\nкалендаря. Из трех вариантов,\nвыберете один. ',
+                'Выберите позитивное действие\nна каждый день вашего календаря.',
                 style: SafeGoogleFont(
                   'Jost',
                   fontSize: 16 * ffem,
@@ -218,12 +219,12 @@ class _ChoiceCalendarState extends State<ChoiceCalendar> {
                                   decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(20),
                                       color: listOfWish.contains(wishes[index])
-                                          ? Color(0xffa1d25d)
+                                          ? Color(0xffd2c752)
                                           : Color(0xffA5B879)),
                                   child: Container(
                                     padding: EdgeInsets.all(10),
                                     child: Center(
-                                      child: Text(
+                                      child: AutoSizeText(
                                         wishes[index],
                                         style: theme.textTheme.bodyLarge!
                                             .copyWith(fontSize: 17),

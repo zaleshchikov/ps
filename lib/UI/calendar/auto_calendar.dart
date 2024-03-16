@@ -139,11 +139,11 @@ class AutoCalendar extends StatelessWidget {
                   Container(height: size.height / 100),
                   Center(
                       child: Text(
-                        ' Чтобы посмотреть задание\nна сегодня, нажмите на дату.',
+                        'Чтобы посмотреть задание\nна сегодня, нажмите на дату.',
                         style: theme.textTheme.titleMedium!.copyWith(
                           fontWeight: FontWeight.w900,
                           fontSize: 18
-                        ), textAlign: TextAlign.center,)),
+                        ), textAlign: TextAlign.center)),
                   Container(height: size.height / 50),
                   Container(
                     height: size.height/2,
@@ -196,7 +196,7 @@ class AutoCalendar extends StatelessWidget {
                                                       width: size.width/15,
                                                       height: size.height/120,
                                                       decoration: BoxDecoration(
-                                                        color: snapshot.data! ? Color(0xffA5B879) : Color(0xffEEA27D)
+                                                        color: snapshot.data == true ? Color(0xffA5B879) : Color(0xffEEA27D)
                                                       ),
                                                     )
                                                   ],
@@ -207,25 +207,32 @@ class AutoCalendar extends StatelessWidget {
                                           else {
                                             print('Данных нет');
                                             return Container(
-                                              decoration: BoxDecoration(
-                                                color: Colors.white,
-                                                borderRadius: BorderRadius.all(
-                                                  Radius.circular(8.0),
-                                                ),
-                                              ),
                                               child: Center(
-                                                child: Text(
-                                                  '${day.day}',
-                                                  style:  SafeGoogleFont (
-                                                    'Jost',
-                                                    fontSize: 25*ffem,
-                                                    fontWeight: FontWeight.w400,
-                                                    height: 1.445*ffem/fem,
-                                                    color: Color(0xff4B3425),
-                                                  ),
+                                                child: Column(
+                                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                  children: [
+                                                    Text(
+                                                      '${day.day}',
+                                                      style:  SafeGoogleFont (
+                                                        'Jost',
+                                                        fontSize: 25*ffem,
+                                                        fontWeight: FontWeight.w400,
+                                                        height: 1.445*ffem/fem,
+                                                        color: Color(0xff4B3425),
+                                                      ),
+                                                    ),
+                                                    Container(
+                                                      width: size.width/15,
+                                                      height: size.height/120,
+                                                      decoration: BoxDecoration(
+                                                          color: Color(0xffEEA27D)
+                                                      ),
+                                                    )
+                                                  ],
                                                 ),
                                               ),
-                                            );}
+                                            );
+                                          }
                                         },
                                       );
                                     },
@@ -254,7 +261,7 @@ class AutoCalendar extends StatelessWidget {
                                                       width: size.width/15,
                                                       height: size.height/120,
                                                       decoration: BoxDecoration(
-                                                          color: snapshot.data! ? Color(0xffA5B879) : Color(0xffEEA27D)
+                                                          color: snapshot.data == true ? Color(0xffA5B879) : Color(0xffEEA27D)
                                                       ),
                                                     )
                                                   ],
@@ -265,25 +272,32 @@ class AutoCalendar extends StatelessWidget {
                                           else {
                                             print('Данных нет');
                                             return Container(
-                                              decoration: BoxDecoration(
-                                                color: Colors.white,
-                                                borderRadius: BorderRadius.all(
-                                                  Radius.circular(8.0),
-                                                ),
-                                              ),
                                               child: Center(
-                                                child: Text(
-                                                    '${day.day}',
-                                                    style:  SafeGoogleFont (
-                                                      'Jost',
-                                                      fontSize: 25*ffem,
-                                                      fontWeight: FontWeight.w400,
-                                                      height: 1.445*ffem/fem,
-                                                      color: Color(0xff4B3425),
+                                                child: Column(
+                                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                  children: [
+                                                    Text(
+                                                      '${day.day}',
+                                                      style:  SafeGoogleFont (
+                                                        'Jost',
+                                                        fontSize: 25*ffem,
+                                                        fontWeight: FontWeight.w400,
+                                                        height: 1.445*ffem/fem,
+                                                        color: Color(0xff4B3425),
+                                                      ),
                                                     ),
+                                                    Container(
+                                                      width: size.width/15,
+                                                      height: size.height/120,
+                                                      decoration: BoxDecoration(
+                                                          color: Color(0xffEEA27D)
+                                                      ),
+                                                    )
+                                                  ],
                                                 ),
                                               ),
-                                            );}
+                                            );
+                                          }
                                         },
                                       );
                                     },
@@ -312,7 +326,7 @@ class AutoCalendar extends StatelessWidget {
                                                       width: size.width/15,
                                                       height: size.height/120,
                                                       decoration: BoxDecoration(
-                                                          color: snapshot.data! ? Color(0xffA5B879) : Color(0xffEEA27D)
+                                                          color: snapshot.data == true ? Color(0xffA5B879) : Color(0xffEEA27D)
                                                       ),
                                                     )
                                                   ],
@@ -323,25 +337,32 @@ class AutoCalendar extends StatelessWidget {
                                           else {
                                             print('Данных нет');
                                             return Container(
-                                              decoration: BoxDecoration(
-                                                color: Colors.white,
-                                                borderRadius: BorderRadius.all(
-                                                  Radius.circular(8.0),
-                                                ),
-                                              ),
                                               child: Center(
-                                                child: Text(
-                                                    '${day.day}',
-                                                    style:  SafeGoogleFont (
-                                                      'Jost',
-                                                      fontSize: 25*ffem,
-                                                      fontWeight: FontWeight.w400,
-                                                      height: 1.445*ffem/fem,
-                                                      color: Color(0xff4B3425),
+                                                child: Column(
+                                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                  children: [
+                                                    Text(
+                                                      '${day.day}',
+                                                      style:  SafeGoogleFont (
+                                                        'Jost',
+                                                        fontSize: 25*ffem,
+                                                        fontWeight: FontWeight.w400,
+                                                        height: 1.445*ffem/fem,
+                                                        color: Color(0xff4B3425),
+                                                      ),
                                                     ),
+                                                    Container(
+                                                      width: size.width/15,
+                                                      height: size.height/120,
+                                                      decoration: BoxDecoration(
+                                                          color: Color(0xffEEA27D)
+                                                      ),
+                                                    )
+                                                  ],
                                                 ),
                                               ),
-                                            );}
+                                            );
+                                          }
                                         },
                                       );
                                     },
@@ -424,11 +445,12 @@ class AutoCalendar extends StatelessWidget {
                         onPressed: () async {
                           var isReg = await UserDatabase.isRegister();
                           if(!isReg){
+                            Navigator.push(context,
                           MaterialPageRoute(
-                              builder: (context) => ShouldRegister(MainScreen()));}
-                          else{
+                              builder: (context) => ShouldRegister(MainScreen())));}
+                          else{Navigator.push(context,
                             MaterialPageRoute(
-                                builder: (context) => MainScreen());
+                                builder: (context) => BottomNavigationScreen(MainScreen())));
                           }
                         },
                         child: Text(

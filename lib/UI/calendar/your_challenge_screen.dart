@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter_svg/svg.dart';
@@ -76,7 +77,7 @@ class _ChallengeScreenState extends State<YourChallengeScreen> {
                                 height: 309.53 * fem,
                                 child: Stack(
                                   children: [
-                                    Positioned(
+                                    widget.isSelected ?Positioned(
                                       // vector466xRH (191:4452)
                                       left: 37 * fem,
                                       top: 110 * fem,
@@ -91,8 +92,8 @@ class _ChallengeScreenState extends State<YourChallengeScreen> {
                                           ),
                                         ),
                                       ),
-                                    ),
-                                    Positioned(
+                                    ) : Positioned(child: Container()),
+                                    widget.isSelected ? Positioned(
                                       // rectangle963U8j (191:4453)
                                       left: 0 * fem,
                                       top: 0 * fem,
@@ -118,8 +119,8 @@ class _ChallengeScreenState extends State<YourChallengeScreen> {
                                           ),
                                         ),
                                       ),
-                                    ),
-                                    Positioned(
+                                    ) : Positioned(child: Container()),
+                                   widget.isSelected ? Positioned(
                                       // X71 (191:4454)
                                       left: 26 * fem,
                                       top: 16 * fem,
@@ -140,7 +141,7 @@ class _ChallengeScreenState extends State<YourChallengeScreen> {
                                           ),
                                         ),
                                       ),
-                                    ),
+                                    ) : Positioned(child: Container()),
                                     Positioned(
                                         // X71 (191:4454)
                                         left: 50 * fem,
@@ -156,7 +157,7 @@ class _ChallengeScreenState extends State<YourChallengeScreen> {
                                                           BottomNavigationScreen(
                                                               ChangeChallenge(
                                                                   widget
-                                                                      .date))));
+                                                                      .date, 'yourCalendar'))));
                                             }
                                           },
                                           child: Container(
@@ -198,7 +199,7 @@ class _ChallengeScreenState extends State<YourChallengeScreen> {
                                   child: SizedBox(
                                     width: 246 * fem,
                                     height: 93 * fem,
-                                    child: Text(
+                                    child: AutoSizeText(
                                       widget.challenge,
                                       style: SafeGoogleFont(
                                         'Jost',
@@ -311,7 +312,7 @@ class _ChallengeScreenState extends State<YourChallengeScreen> {
                                   children: [
                                     Container(
                                       width: size.width / 2,
-                                      child: Text(
+                                      child: AutoSizeText(
                                         widget.challenge,
                                         style: SafeGoogleFont(
                                           'Jost',

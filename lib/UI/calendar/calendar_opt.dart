@@ -16,6 +16,7 @@ class CalendarOpt extends StatelessWidget {
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
     var size = MediaQuery.of(context).size;
+    var baseW = size.width/1.26*1.1;
 
     double baseWidth = 430;
     double fem = MediaQuery.of(context).size.width / baseWidth;
@@ -55,8 +56,8 @@ class CalendarOpt extends StatelessWidget {
                     },
                     child: Container(
                       child: Image(image: AssetImage('assets/auto_calendar.png'), fit: BoxFit.fitWidth,),
-                      height:  size.width/1.26/2.2,
-                      width: size.width/1.26,
+                      height:  baseW/2.2,
+                      width: baseW,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(50),
                         boxShadow: const [
@@ -90,8 +91,8 @@ class CalendarOpt extends StatelessWidget {
                     },
                     child: Container(
                       child: Image(image: AssetImage('assets/your_calendar.png'), fit: BoxFit.fitWidth,),
-                      height:  size.width/1.26/2.2,
-                      width: size.width/1.26,
+                      height:  baseW/2.2,
+                      width: baseW,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(50),
                         boxShadow: const [
@@ -117,8 +118,8 @@ class CalendarOpt extends StatelessWidget {
                     },
                     child: Container(
                       child: Image(image: AssetImage('assets/smart_calendar.png'), fit: BoxFit.fitWidth,),
-                      height:  size.width/1.26/2.2,
-                      width: size.width/1.26,
+                      height:  baseW/2.2,
+                      width: baseW,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(50),
                         boxShadow: const [

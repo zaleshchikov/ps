@@ -289,51 +289,51 @@ class _EmotionsNoteState extends State<DayWishNote> {
                   ],
                 ),
               ),
-              Container(
-                // framejuV (191:5931)
-                margin: EdgeInsets.fromLTRB(
-                    67 * fem, 0 * fem, 81.5 * fem, 20 * fem),
-                padding: EdgeInsets.fromLTRB(
-                    22 * fem, 10.5 * fem, 3 * fem, 9.5 * fem),
-                width: double.infinity,
-                height: 40 * fem,
-                decoration: BoxDecoration(
-                  color: const Color(0xffEFD8B4),
-                  borderRadius: BorderRadius.circular(1234 * fem),
-                ),
-                child: Container(
-                  // frameTKh (191:5932),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Container(
-                        // monotonemicrophoneD3y (191:5933)
-                        margin: EdgeInsets.fromLTRB(
-                            0 * fem, 0 * fem, 14 * fem, 0 * fem),
-                        width: 12 * fem,
-                        height: 19 * fem,
-                        child: Image.asset(
-                          'assets/page-1/images/monotone-microphone-5Ns.png',
-                          color: Color(0xffC49A71),
-                          width: 12 * fem,
-                          height: 19 * fem,
-                        ),
-                      ),
-                      Text(
-                        // usevoiceinsteadWYs (191:5934)
-                        'использовать голос',
-                        style: GoogleFonts.urbanist(
-                          fontSize: 16 * ffem,
-                          fontWeight: FontWeight.w600,
-                          height: 1.2 * ffem / fem,
-                          letterSpacing: -0.16 * fem,
-                          color: const Color(0xffC49A71),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
+              // Container(
+              //   // framejuV (191:5931)
+              //   margin: EdgeInsets.fromLTRB(
+              //       67 * fem, 0 * fem, 81.5 * fem, 20 * fem),
+              //   padding: EdgeInsets.fromLTRB(
+              //       22 * fem, 10.5 * fem, 3 * fem, 9.5 * fem),
+              //   width: double.infinity,
+              //   height: 40 * fem,
+              //   decoration: BoxDecoration(
+              //     color: const Color(0xffEFD8B4),
+              //     borderRadius: BorderRadius.circular(1234 * fem),
+              //   ),
+              //   child: Container(
+              //     // frameTKh (191:5932),
+              //     child: Row(
+              //       crossAxisAlignment: CrossAxisAlignment.center,
+              //       children: [
+              //         Container(
+              //           // monotonemicrophoneD3y (191:5933)
+              //           margin: EdgeInsets.fromLTRB(
+              //               0 * fem, 0 * fem, 14 * fem, 0 * fem),
+              //           width: 12 * fem,
+              //           height: 19 * fem,
+              //           child: Image.asset(
+              //             'assets/page-1/images/monotone-microphone-5Ns.png',
+              //             color: Color(0xffC49A71),
+              //             width: 12 * fem,
+              //             height: 19 * fem,
+              //           ),
+              //         ),
+              //         Text(
+              //           // usevoiceinsteadWYs (191:5934)
+              //           'использовать голос',
+              //           style: GoogleFonts.urbanist(
+              //             fontSize: 16 * ffem,
+              //             fontWeight: FontWeight.w600,
+              //             height: 1.2 * ffem / fem,
+              //             letterSpacing: -0.16 * fem,
+              //             color: const Color(0xffC49A71),
+              //           ),
+              //         ),
+              //       ],
+              //     ),
+              //   ),
+              // ),
               Container(
                 height: size.height / 20,
               ),

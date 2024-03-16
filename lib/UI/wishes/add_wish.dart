@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'dart:ui';
@@ -111,13 +112,13 @@ class AddedWish extends StatelessWidget {
                 top: 235*fem,
                 child: Align(
                   child: SizedBox(
-                    width: 350*fem,
-                    height: 44*fem,
-                    child: Text(
+                    width: 300*fem,
+                    height: 100*fem,
+                    child: AutoSizeText(
                       wish,
                       style: SafeGoogleFont (
                         'Jost',
-                        fontSize: 25*ffem,
+                        fontSize: 20*ffem,
                         fontWeight: FontWeight.w600,
                         height: 1.445*ffem/fem,
                         color: Color(0xff4b3425),

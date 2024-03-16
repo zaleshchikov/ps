@@ -330,48 +330,58 @@ class _EmotionsNoteState extends State<WishList> {
                     style: theme.textTheme.titleLarge!.copyWith(
                         fontSize: 28, color: theme.textTheme.bodySmall!.color)),
               ),
-              SingleChildScrollView(
-                  child: Container(
-                      height: size.height / 2.2,
-                      child: ListView.builder(
-                          padding: const EdgeInsets.all(8),
-                          itemCount: listOfWishes.length,
-                          itemBuilder: (BuildContext context, int index) {
-                            var ind = random.nextInt(listOfWishes.length);
-                            return Column(
-                              children: [
-                                InkWell(
-                                  onTap: () async {
-                                    // await UserDatabase.addWish(listOfWishes[ind]);
-                                    // Navigator.push(
-                                    //     context,
-                                    //     MaterialPageRoute(
-                                    //         builder: (context) => AddedWish(listOfWishes[ind])));
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => WishSphere(listOfWishes[ind])));
-                            },
-                                  child: Container(
-                                      height: size.height / 11,
-                                      width: size.width / 1.2,
-                                      decoration: BoxDecoration(
-                                        color: theme.highlightColor,
-                                        borderRadius: BorderRadius.circular(30),
-                                      ),
-                                      child: Center(
-                                          child: Text(
-                                        listOfWishes[ind],
-                                        style: theme.textTheme.bodySmall!.copyWith(
-                                            fontWeight: FontWeight.w600,
-                                            fontSize: 15),maxLines: 3,
-                                        textAlign: TextAlign.center,
-                                      ))),
-                                ),
-                                Container(height: size.height/40),
-                              ],
-                            );
-                          }))),
+              RawScrollbar(
+                child: SingleChildScrollView(
+                    child: Container(
+                        height: size.height / 2.2,
+                        child: ListView.builder(
+                            padding: const EdgeInsets.all(8),
+                            itemCount: listOfWishes.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              var ind = random.nextInt(listOfWishes.length);
+                              return Column(
+                                children: [
+                                  InkWell(
+                                    onTap: () async {
+                                      String sp = 'Развитие';
+                                      if(hobby.contains(listOfWishes[ind])) sp = 'Хобби';
+                                      if(finance.contains(listOfWishes[ind])) sp = 'Финансы/Карьера';
+                                      if(health.contains(listOfWishes[ind])) sp = 'Здоровье';
+                                      if(love.contains(listOfWishes[ind])) sp = 'Семья/Любовь';
+                                      if(friends.contains(listOfWishes[ind])) sp = 'Друзья/Окружение';
+                                      if(evolution.contains(listOfWishes[ind])) sp = 'Развитие';
+                                      await UserDatabase.addWish(listOfWishes[ind], sp);
+                                      // await UserDatabase.addWish(listOfWishes[ind]);
+                                      // Navigator.push(
+                                      //     context,
+                                      //     MaterialPageRoute(
+                                      //         builder: (context) => AddedWish(listOfWishes[ind])));
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) => AddedWish(listOfWishes[ind])));
+                              },
+                                    child: Container(
+                                        height: size.height / 11,
+                                        width: size.width / 1.2,
+                                        decoration: BoxDecoration(
+                                          color: theme.highlightColor,
+                                          borderRadius: BorderRadius.circular(30),
+                                        ),
+                                        child: Center(
+                                            child: Text(
+                                          listOfWishes[ind],
+                                          style: theme.textTheme.bodySmall!.copyWith(
+                                              fontWeight: FontWeight.w600,
+                                              fontSize: 15),maxLines: 3,
+                                          textAlign: TextAlign.center,
+                                        ))),
+                                  ),
+                                  Container(height: size.height/40),
+                                ],
+                              );
+                            }))),
+              ),
               Container(
                 height: size.height / 20,
               ),

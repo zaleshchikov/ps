@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ps/UI/happy_test/result_an.dart';
+import 'package:ps/UI/should_register.dart';
 import 'to_main_button.dart';
 import 'load_indicator.dart';
 import 'package:ps/db/user_db.dart';
@@ -117,9 +118,9 @@ class _TestScreenState extends State<TestScreen> {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => BottomNavigationScreen(ResultAn(
+                                        builder: (context) => ShouldRegister(BottomNavigationScreen(ResultAn(
                                             widget.sum + (4 - index),
-                                            user.testResult))));
+                                            user.testResult)))));
                               }
                           });
                         },

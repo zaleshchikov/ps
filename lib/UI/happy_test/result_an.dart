@@ -91,23 +91,11 @@ class ResultAn extends StatelessWidget {
                     width: size.width / 10,
                     height: size.height / 3.55,
                     decoration: BoxDecoration(
-                      color: theme.highlightColor,
-                      border: Border.all(width: 0, color: theme.highlightColor),
                       borderRadius: const BorderRadius.all(Radius.circular(
                               30) //                 <--- border radius here
                           ),
                     ),
-                    child: Center(
-                      child: Text(
-                        'У\nр\nо\nв\nе\nн\nь\n\n1',
-                        style: theme.textTheme.bodySmall!.copyWith(
-                            fontSize: 25,
-                            height: 0.8,
-                            color: Colors.white,
-                            fontStyle: FontStyle.italic,
-                            fontWeight: FontWeight.w600),
-                      ),
-                    ),
+
                   ),
                   Stack(
                     children: [

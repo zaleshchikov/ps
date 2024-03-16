@@ -279,11 +279,11 @@ class _ChoiceYourCalendarState extends State<ChoiceYourCalendar> {
                 height: size.height / 14.5,
                 child: ElevatedButton(
                     onPressed: () async {
-
+                      if(await UserDatabase.isRegister()){
                         for (int i = 0; i < dayWithWish.length; i++) {
                           await UserDatabase.addCalendarWish(
                               dayWithWish[i], 'yourCalendar', widget.wishes[i]);
-
+                        }
                         Future.delayed(Duration(microseconds: 500)).then(
                             (value) => Navigator.push(
                                 context,
