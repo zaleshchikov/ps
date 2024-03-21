@@ -21,13 +21,10 @@ import 'UI/wishes/wish_bank.dart';
 import 'db/user_model.dart';
 import 'package:ps/db/user_db.dart';
 import 'package:ps/UI/emotion_alarm/emotons_dairy.dart';
-
 import 'db/wish_model.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
-
   bool isUser = await UserDatabase.isNotEmpty();
   isUser
       ? print('yes')

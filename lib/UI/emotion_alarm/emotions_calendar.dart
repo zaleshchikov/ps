@@ -254,8 +254,8 @@ class EmotionsCalendar extends StatelessWidget {
                       ),
                     ),
                     Positioned(
-                      top: fem*5,
                       left: fem*60,
+                      right: fem*60,
                       child: Center(
                         child: SizedBox(
                             height: 1000,
@@ -338,9 +338,9 @@ class EmotionsCalendar extends StatelessWidget {
                 child: ElevatedButton(
                     onPressed: () async {
                       var isReg = await UserDatabase.isRegister();
-                      if (!isReg) {
+                      if (!isReg) { Navigator.push(context,
                         MaterialPageRoute(
-                            builder: (context) => ShouldRegister(MainScreen()));
+                            builder: (context) => ShouldRegister(MainScreen())));
                       }
                     },
                     child: Text(
