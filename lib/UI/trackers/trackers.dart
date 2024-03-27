@@ -8,6 +8,8 @@ import 'package:ps/bottom_navigation.dart';
 import 'package:ps/UI/emotion_alarm/emotions_alarm_smile.dart';
 import 'package:ps/db/user_db.dart';
 
+import '../../page-1/utils.dart';
+
 class Trackers extends StatelessWidget {
   const Trackers({super.key});
 
@@ -15,11 +17,24 @@ class Trackers extends StatelessWidget {
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
     var size = MediaQuery.of(context).size;
+    double baseWidth = 430;
+    double fem = MediaQuery.of(context).size.width / baseWidth;
+    double ffem = fem * 0.97;
+
     return SafeArea(
       child: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            Text('4 простых шага, чтобы стать счастливым',
+                style: SafeGoogleFont(
+                  'Jost',
+                  fontSize: 20 * ffem,
+                  fontWeight: FontWeight.w400,
+                  height: 1.445 * ffem / fem,
+                  letterSpacing: -0.2 * fem,
+                  color: Color(0xff4b3425),
+                )),
             InkWell(
               onTap: () { WidgetsBinding.instance.addPostFrameCallback((_){
                   Navigator.push(

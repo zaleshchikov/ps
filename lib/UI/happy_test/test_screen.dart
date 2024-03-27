@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ps/UI/happy_test/result_an.dart';
@@ -69,8 +70,9 @@ class _TestScreenState extends State<TestScreen> {
             Container(padding: EdgeInsets.only(top: 50), child: ToMainButton()),
             Container(height: size.height / 30),
             Container(
+              height: size.height/8,
               padding: EdgeInsets.only(left: 20, right: 20),
-              child: Text(
+              child: AutoSizeText(
                 '${widget.number}. ${listOfQuestions[widget.number-1]}',
                 textAlign: TextAlign.left,
                 style: theme.textTheme.titleLarge!.copyWith(
@@ -96,16 +98,36 @@ class _TestScreenState extends State<TestScreen> {
                           setState(() {
                             _selectedIndex = index;
                           });
-                          Future.delayed(const Duration(milliseconds: 500),
+                          Future.delayed(const Duration(milliseconds: 100),
                               () async {
                               print(widget.sum);
                               if (widget.number != 20) {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => TestScreen(
-                                            widget.sum + (4 - index),
-                                            widget.number + 1)));
+                                Navigator.of(context).push(
+                                  PageRouteBuilder(
+                                    pageBuilder:
+                                        (context, animation, secondaryAnimation) {
+                                      // Navigate to the SecondScreen
+                                      return TestScreen(
+                                          widget.sum + (4 - index),
+                                          widget.number + 1);
+                                    },
+                                    transitionsBuilder: (context, animation,
+                                        secondaryAnimation, child) {
+                                      const begin = Offset(1.0, 0.0);
+                                      const end = Offset.zero;
+                                      const curve = Curves.easeInOut;
+                                      var tween = Tween(begin: begin, end: end)
+                                          .chain(CurveTween(curve: curve));
+                                      var offsetAnimation = animation.drive(tween);
+
+                                      return SlideTransition(
+                                        // Apply slide transition
+                                        position: offsetAnimation,
+                                        child: child,
+                                      );
+                                    },
+                                  ),
+                                );
                               } else {
                                 UserDatabase.addResult(
                                     widget.sum + (4 - index));

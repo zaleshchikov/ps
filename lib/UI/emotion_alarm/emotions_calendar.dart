@@ -56,7 +56,7 @@ class EmotionsCalendar extends StatelessWidget {
                         padding: EdgeInsets.fromLTRB(
                             2.5 * fem, 25 * fem, 2.5 * fem, 74 * fem),
                         width: 372 * fem,
-                        height: 350 * fem,
+                        height: 400 * fem,
                         decoration: BoxDecoration(
                           color: theme.highlightColor,
                           borderRadius: BorderRadius.circular(40 * fem),

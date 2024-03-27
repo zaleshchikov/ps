@@ -399,7 +399,7 @@ class _EmotionsNoteState extends State<EmotionsNote> {
                   child:
                       Center(
                         child: Container(
-                          padding: EdgeInsets.only(top: size.height/70),
+                          padding: EdgeInsets.only(top: size.height/60),
                           child: Text(
                             'Пропустить\n',
                             style: theme.textTheme.bodySmall!.copyWith(

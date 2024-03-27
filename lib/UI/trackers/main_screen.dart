@@ -36,8 +36,12 @@ class MainScreen extends StatelessWidget {
               onTap: () {
                 Navigator.push(
                     context,
-                    MaterialPageRoute(
-                        builder: (context) => WelcomeHappyTest()));
+                  PageRouteBuilder(
+                    pageBuilder: (_, __, ___) => WelcomeHappyTest(),
+                    transitionDuration: Duration(milliseconds: 400),
+                    transitionsBuilder: (_, a, __, c) =>
+                        FadeTransition(opacity: a, child: c),
+                  ),);
               },
               child: Container(
                 child: Image(image: AssetImage('assets/test_img.png')),
@@ -80,9 +84,12 @@ class MainScreen extends StatelessWidget {
               onTap: () {
                 Navigator.push(
                     context,
-                    MaterialPageRoute(
-                        builder: (context) =>
-                            BottomNavigationScreen(Trackers())));
+                    PageRouteBuilder(
+                      pageBuilder: (_, __, ___) => BottomNavigationScreen(Trackers()),
+                      transitionDuration: Duration(milliseconds: 400),
+                      transitionsBuilder: (_, a, __, c) =>
+                          FadeTransition(opacity: a, child: c),
+                    ),);
               },
               child: Container(
                 child: Image(image: AssetImage('assets/trackers_img_new.png')),
@@ -107,9 +114,12 @@ class MainScreen extends StatelessWidget {
               onTap: () {
                 Navigator.push(
                     context,
-                    MaterialPageRoute(
-                        builder: (context) =>
-                            BottomNavigationScreen(TreeStatistic())));
+                    PageRouteBuilder(
+                      pageBuilder: (_, __, ___) => BottomNavigationScreen(TreeStatistic()),
+                      transitionDuration: Duration(milliseconds: 400),
+                      transitionsBuilder: (_, a, __, c) =>
+                          FadeTransition(opacity: a, child: c),
+                    ));
               },
               child: Container(
                 child: Image(image: AssetImage('assets/statistic_img_new.png')),

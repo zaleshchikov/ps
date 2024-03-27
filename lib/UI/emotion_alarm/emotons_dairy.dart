@@ -5,26 +5,23 @@ import 'package:google_fonts/google_fonts.dart';
 import 'to_main_button.dart';
 
 class EmotionsDairy extends StatefulWidget {
-
   DateTime time = DateTime.now();
   var isNow = true;
+
   EmotionsDairy();
-  EmotionsDairy.notNow(
-      DateTime time
-      ){
+
+  EmotionsDairy.notNow(DateTime time) {
     this.time = time;
     this.isNow = false;
   }
 
   @override
   State<EmotionsDairy> createState() => _EmotionsDairyState();
-}  var listOfAchievement = [];
+}
 
+var listOfAchievement = [];
 
 class _EmotionsDairyState extends State<EmotionsDairy> {
-
-
-
   var ListOfName = ['Сегодня', 'Неделя', 'Месяц', 'Год'];
   var selectedName = 'Сегодня';
   int maxLenght = 5;
@@ -69,8 +66,6 @@ class _EmotionsDairyState extends State<EmotionsDairy> {
 
   @override
   Widget build(BuildContext context) {
-
-
     var theme = Theme.of(context);
     var size = MediaQuery.of(context).size;
 
@@ -99,11 +94,12 @@ class _EmotionsDairyState extends State<EmotionsDairy> {
             ),
             Container(
               child: Center(
-                  child: name == '' ? Container() : Image(height: size.height/25,
-                    image: AssetImage(
-                      getImageOfEmotions(name)
-                    ),
-                  )),
+                  child: name == ''
+                      ? Container()
+                      : Image(
+                          height: size.height / 25,
+                          image: AssetImage(getImageOfEmotions(name)),
+                        )),
               height: size.height / 18,
               width: size.width / 5,
               decoration: BoxDecoration(
@@ -159,24 +155,28 @@ class _EmotionsDairyState extends State<EmotionsDairy> {
           var statesToSort = [];
           if (selectedName == 'Сегодня') {
             for (var element in snapshot.data!.entries) {
-              statesToSort.add(element.value[0]);
-              TableRows.add(tableRow(1, element.key, element.value[0],
-                  element.value[1], element.value[1]));
+              if (element.value.isNotEmpty) {
+                statesToSort.add(element.value[0]);
+                TableRows.add(tableRow(1, element.key, element.value[0],
+                    element.value[1], element.value[1]));
+              }
             }
           } else {
             for (var element in snapshot.data!.entries) {
-              statesToSort.add(element.value[0]);
-              TableRows.add(tableRow(1, element.key, element.value[0], '', ''));
+              if (element.value.isNotEmpty) {
+                statesToSort.add(element.value[0]);
+                TableRows.add(
+                    tableRow(1, element.key, element.value[0], '', ''));
+              }
             }
           }
 
-          if(TableRows.length < 5){
-            for(int i = 0; i < (8 - TableRows.length) ; i++){
-            TableRows.add(tableRow(0, '', '', '', ''));}
+          if (TableRows.length < 5) {
+            for (int i = 0; i < (8 - TableRows.length); i++) {
+              TableRows.add(tableRow(0, '', '', '', ''));
+            }
           }
 
-
-          
           genericEmotion = UserDatabase.sortState(statesToSort)[0];
 
           return SafeArea(
@@ -200,11 +200,17 @@ class _EmotionsDairyState extends State<EmotionsDairy> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          genericEmotion == '' ? Container() : Image(
-                             image: AssetImage(getImageOfEmotions(genericEmotion)),
-                            height: size.height / 15,
-                          ),
-                          Text(genericEmotion == '' ? 'Записей нет' : genericEmotion,
+                          genericEmotion == ''
+                              ? Container()
+                              : Image(
+                                  image: AssetImage(
+                                      getImageOfEmotions(genericEmotion)),
+                                  height: size.height / 15,
+                                ),
+                          Text(
+                              genericEmotion == ''
+                                  ? 'Записей нет'
+                                  : genericEmotion,
                               style: theme.textTheme.bodyLarge!
                                   .copyWith(fontSize: 20)),
                           Container(width: size.width / 20),
