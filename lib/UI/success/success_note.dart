@@ -150,11 +150,11 @@ class _EmotionsNoteState extends State<SuccessNote> {
                                         child: SizedBox(
                                           width: 132 * fem,
                                           height: 34 * fem,
-                                          child: Container(
-                                            decoration: const BoxDecoration(
-                                              color: Color(0xb2ede6e4),
-                                            ),
-                                          ),
+                                          // child: Container(
+                                          //   decoration: const BoxDecoration(
+                                          //     color: Color(0xb2ede6e4),
+                                          //   ),
+                                          // ),
                                         ),
                                       ),
                                     ),
@@ -169,11 +169,11 @@ class _EmotionsNoteState extends State<SuccessNote> {
                                         child: SizedBox(
                                           width: 187 * fem,
                                           height: 34 * fem,
-                                          child: Container(
-                                            decoration: BoxDecoration(
-                                              color: Color(0xffede6e4),
-                                            ),
-                                          ),
+                                          // child: Container(
+                                          //   decoration: BoxDecoration(
+                                          //     color: Color(0xffede6e4),
+                                          //   ),
+                                          // ),
                                         ),
                                       ),
                                     ),
@@ -213,11 +213,11 @@ class _EmotionsNoteState extends State<SuccessNote> {
                                         child: SizedBox(
                                           width: 6 * fem,
                                           height: 36 * fem,
-                                          child: Image.asset(
-                                            'assets/page-1/images/group.png',
-                                            width: 6 * fem,
-                                            height: 36 * fem,
-                                          ),
+                                          // child: Image.asset(
+                                          //   'assets/page-1/images/group.png',
+                                          //   width: 6 * fem,
+                                          //   height: 36 * fem,
+                                          // ),
                                         ),
                                       ),
                                     ),
@@ -232,11 +232,11 @@ class _EmotionsNoteState extends State<SuccessNote> {
                                         child: SizedBox(
                                           width: 6 * fem,
                                           height: 36 * fem,
-                                          child: Image.asset(
-                                            'assets/page-1/images/group-hbR.png',
-                                            width: 6 * fem,
-                                            height: 36 * fem,
-                                          ),
+                                          // child: Image.asset(
+                                          //   'assets/page-1/images/group-hbR.png',
+                                          //   width: 6 * fem,
+                                          //   height: 36 * fem,
+                                          // ),
                                         ),
                                       ),
                                     ),
@@ -244,6 +244,7 @@ class _EmotionsNoteState extends State<SuccessNote> {
                                 height: size.height / 5,
                                 width: size.width / 1.4,
                                 child: ReactiveTextField(
+                                  autofocus: true,
                                   inputFormatters: [
                                     LengthLimitingTextInputFormatter(250)
                                   ],

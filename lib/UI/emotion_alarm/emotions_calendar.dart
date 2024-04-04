@@ -36,7 +36,7 @@ class EmotionsCalendar extends StatelessWidget {
               Container(height: size.height / 20),
               Center(
                   child: Text(
-                'Счастье — это когда то, что ты думаешь, \nговоришь и делаешь, находится в \nгармонии.',
+                'Календарь отображает Ваше среднее состояние за день,\nсогласно вашим отметкам в трекере',
                 style: theme.textTheme.bodySmall!.copyWith(
                     fontWeight: FontWeight.w400,
                     fontSize: 18,
@@ -254,8 +254,8 @@ class EmotionsCalendar extends StatelessWidget {
                       ),
                     ),
                     Positioned(
-                      left: fem*60,
-                      right: fem*60,
+                      left: fem * 60,
+                      right: fem * 60,
                       child: Center(
                         child: SizedBox(
                             height: 1000,
@@ -274,13 +274,13 @@ class EmotionsCalendar extends StatelessWidget {
                                   'Jost',
                                   fontSize: 25 * ffem,
                                   fontWeight: FontWeight.w400,
-                                  color: Color(0xff6b6969),
+                                  color: Colors.white,
                                 ),
                                 weekendStyle: SafeGoogleFont(
                                   'Jost',
                                   fontSize: 25 * ffem,
                                   fontWeight: FontWeight.w400,
-                                  color: Color(0xff6b6969),
+                                  color: Colors.white,
                                 ),
                               ),
                               startingDayOfWeek: StartingDayOfWeek.monday,
@@ -332,33 +332,36 @@ class EmotionsCalendar extends StatelessWidget {
                   ],
                 ),
               ),
-              Container(
-                width: size.width / 1.2,
-                height: size.height / 14.5,
-                child: ElevatedButton(
-                    onPressed: () async {
-                      var isReg = await UserDatabase.isRegister();
-                      if (!isReg) { Navigator.push(context,
-                        MaterialPageRoute(
-                            builder: (context) => ShouldRegister(MainScreen())));
-                      }
-                    },
-                    child: Text(
-                      'Перейти в главное меню',
-                      style: theme.textTheme.bodySmall!.copyWith(
-                          fontFamily: GoogleFonts.inter().fontFamily,
-                          fontSize: 20),
-                    ),
-                    style: ButtonStyle(
-                        backgroundColor:
-                            MaterialStateProperty.all<Color>(theme.hoverColor),
-                        shape:
-                            MaterialStateProperty.all<RoundedRectangleBorder>(
-                                RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(30),
-                                    side:
-                                        BorderSide(color: theme.hoverColor))))),
-              )
+              // Container(
+              //   width: size.width / 1.2,
+              //   height: size.height / 14.5,
+              //   child: ElevatedButton(
+              //       onPressed: () async {
+              //         var isReg = await UserDatabase.isRegister();
+              //         if (!isReg) {
+              //           Navigator.push(
+              //               context,
+              //               MaterialPageRoute(
+              //                   builder: (context) =>
+              //                       ShouldRegister(MainScreen())));
+              //         }
+              //       },
+              //       child: Text(
+              //         'Перейти в главное меню',
+              //         style: theme.textTheme.bodySmall!.copyWith(
+              //             fontFamily: GoogleFonts.inter().fontFamily,
+              //             fontSize: 20),
+              //       ),
+              //       style: ButtonStyle(
+              //           backgroundColor:
+              //               MaterialStateProperty.all<Color>(theme.hoverColor),
+              //           shape:
+              //               MaterialStateProperty.all<RoundedRectangleBorder>(
+              //                   RoundedRectangleBorder(
+              //                       borderRadius: BorderRadius.circular(30),
+              //                       side:
+              //                           BorderSide(color: theme.hoverColor))))),
+              // )
             ],
           ),
         ),

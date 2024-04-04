@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ps/bottom_navigation.dart';
 import 'package:ps/db/user_db.dart';
 import 'emotions_calendar.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -194,7 +195,7 @@ class _EmotionsDairyState extends State<EmotionsDairy> {
                   children: [
                     Container(
                         padding: EdgeInsets.only(top: 20),
-                        child: ToMainButton('Дневник эмоций')),
+                        child: ToMainButton('Будильник эмоций')),
                     Container(height: size.height / 20),
                     Center(
                       child: Row(
@@ -377,7 +378,7 @@ class _EmotionsDairyState extends State<EmotionsDairy> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => EmotionsCalendar()));
+                                    builder: (context) => BottomNavigationScreen(EmotionsCalendar())));
                           },
                           child: Text(
                             'Календарь эмоций',
@@ -626,7 +627,7 @@ class _EmotionsDairyState extends State<EmotionsDairy> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => EmotionsCalendar()));
+                                  builder: (context) => BottomNavigationScreen(EmotionsCalendar())));
                         },
                         child: Text(
                           'Календарь эмоций',

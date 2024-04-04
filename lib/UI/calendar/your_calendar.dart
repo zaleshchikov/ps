@@ -396,7 +396,6 @@ class YourCalendar extends StatelessWidget {
                                   focusedDay: DateTime.now(),
                                   daysOfWeekVisible: true,
                                   calendarStyle: CalendarStyle(
-
                                       weekendTextStyle: SafeGoogleFont (
                                         'Jost',
                                         fontSize: 25*ffem,

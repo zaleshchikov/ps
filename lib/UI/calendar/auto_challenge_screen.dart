@@ -10,6 +10,7 @@ import 'package:ps/db/user_db.dart';
 import 'package:ps/page-1/utils.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 
+import '../success/success_for_time.dart';
 import 'change_challenge.dart';
 
 class ChallengeScreen extends StatefulWidget {
@@ -76,71 +77,49 @@ class _ChallengeScreenState extends State<ChallengeScreen> {
                                 height: 309.53 * fem,
                                 child: Stack(
                                   children: [
-                                    Positioned(
-                                      // vector466xRH (191:4452)
-                                      left: 37 * fem,
-                                      top: 130 * fem,
-                                      child: Align(
-                                        child: SizedBox(
-                                          width: 48 * fem,
-                                          height: 52 * fem,
-                                          child: Image.asset(
-                                            'assets/page-1/images/vector-466-ca7.png',
-                                            width: 48 * fem,
-                                            height: 52 * fem,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    Positioned(
-                                      // rectangle963U8j (191:4453)
-                                      left: 0 * fem,
-                                      top: 0 * fem,
-                                      child: Align(
-                                        child: SizedBox(
-                                          width: 305 * fem,
-                                          height: 150 * fem,
-                                          child: Container(
-                                            decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(
-                                                      26 * fem),
-                                              gradient: LinearGradient(
-                                                begin: Alignment(0.004, 1.956),
-                                                end: Alignment(0.004, -1.571),
-                                                colors: <Color>[
-                                                  Color(0xffd9ba8a),
-                                                  Color(0x00f0dab8)
-                                                ],
-                                                stops: <double>[0.307, 1],
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    Positioned(
-                                      // X71 (191:4454)
-                                      left: 26 * fem,
-                                      top: 16 * fem,
-                                      child: Align(
-                                        child: SizedBox(
-                                          width: 260 * fem,
-                                          height: 203 * fem,
-                                          child: Text(
-                                            'Поздравляем, у Вас прекрасное позитивное задание на этот день. Позже Вам нужно сделать отметку о его выполнении. Мы напомним Вам об этом.',
-                                            textAlign: TextAlign.center,
-                                            style: SafeGoogleFont(
-                                              'Jost',
-                                              fontSize: 15 * ffem,
-                                              fontWeight: FontWeight.w400,
-                                              height: 1.445 * ffem / fem,
-                                              color: Color(0xff4b3425),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
+                                    // Positioned(
+                                    //   // vector466xRH (191:4452)
+                                    //   left: 37 * fem,
+                                    //   top: 130 * fem,
+                                    //   child: Align(
+                                    //     child: SizedBox(
+                                    //       width: 48 * fem,
+                                    //       height: 52 * fem,
+                                    //       child: Image.asset(
+                                    //         'assets/page-1/images/vector-466-ca7.png',
+                                    //         width: 48 * fem,
+                                    //         height: 52 * fem,
+                                    //       ),
+                                    //     ),
+                                    //   ),
+                                    // ),
+                                    // Positioned(
+                                    //   // rectangle963U8j (191:4453)
+                                    //   left: 0 * fem,
+                                    //   top: 0 * fem,
+                                    //   child: Align(
+                                    //     child: SizedBox(
+                                    //       width: 305 * fem,
+                                    //       height: 150 * fem,
+                                    //       child: Container(
+                                    //         decoration: BoxDecoration(
+                                    //           borderRadius:
+                                    //               BorderRadius.circular(
+                                    //                   26 * fem),
+                                    //           gradient: LinearGradient(
+                                    //             begin: Alignment(0.004, 1.956),
+                                    //             end: Alignment(0.004, -1.571),
+                                    //             colors: <Color>[
+                                    //               Color(0xffd9ba8a),
+                                    //               Color(0x00f0dab8)
+                                    //             ],
+                                    //             stops: <double>[0.307, 1],
+                                    //           ),
+                                    //         ),
+                                    //       ),
+                                    //     ),
+                                    //   ),
+                                    // ),
                                   ],
                                 ),
                               ),
@@ -215,13 +194,13 @@ class _ChallengeScreenState extends State<ChallengeScreen> {
                                                 BottomNavigationScreen(
                                                     AutoCalendar()))),
                                     child: SizedBox(
-                                      width: 137 * fem,
-                                      height: 35 * fem,
+                                      width: 200 * fem,
+                                      height: 50 * fem,
                                       child: Text(
                                         '${widget.date.day} ${UserDatabase.monthNumberToName(widget.date.month)}',
                                         style: SafeGoogleFont(
                                           'Jost',
-                                          fontSize: 24 * ffem,
+                                          fontSize: 30 * ffem,
                                           fontWeight: FontWeight.w400,
                                           height: 1.445 * ffem / fem,
                                           color: Color(0xff4b3425),
@@ -261,6 +240,62 @@ class _ChallengeScreenState extends State<ChallengeScreen> {
                             onTap: ()async {
                               await UserDatabase.completeCalendarWish(widget.date, 'autoCalendar', !widget.isSelected);
                               setState(() {
+                                if(!widget.isSelected){showDialog(
+                                    barrierColor:
+                                    Colors.transparent,
+                                    context: context,
+                                    builder: (_) =>
+                                        BackdropFilter(
+                                          filter:
+                                          ImageFilter.blur(
+                                              sigmaX: 10,
+                                              sigmaY: 10),
+                                          child: GestureDetector(
+                                            onTap: () =>
+                                                Navigator.pop(
+                                                    context),
+                                            child: Dialog(
+                                              surfaceTintColor:
+                                              Colors
+                                                  .transparent,
+                                              backgroundColor:
+                                              Colors
+                                                  .transparent,
+                                              child: Container(
+                                                  decoration: BoxDecoration(
+                                                      image: DecorationImage(image: AssetImage('assets/dialog.png'))
+                                                  ),
+                                                  alignment:
+                                                  FractionalOffset
+                                                      .center,
+                                                  height:
+                                                  size.height /
+                                                      2.5,
+                                                  padding:
+                                                  const EdgeInsets
+                                                      .all(
+                                                      20.0),
+                                                  child:
+                                                  Column(
+                                                    mainAxisAlignment: MainAxisAlignment.start,
+                                                    children: [
+                                                      AutoSizeText('Поздравляем! Вы исполнили желание дня, и стали счастливее.\nВаше достижение добавилось в Журнал успеха. Открыть Журнал успеха?', style: theme.textTheme.bodySmall, textAlign: TextAlign.center,),
+                                                      Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                                        children: [
+                                                          TextButton(onPressed: (){
+                                                            Navigator.of(context).push(MaterialPageRoute(builder: (context) => SuccessForTime()));
+                                                          }, child: Text('Да', style: theme.textTheme.titleMedium,)),
+                                                          TextButton(onPressed: (){
+                                                            Navigator.of(context).pop();
+                                                          }, child: Text('Нет', style: theme.textTheme.titleMedium))
+
+                                                        ],
+                                                      )
+                                                    ],
+                                                  )),
+                                            ),
+                                          ),
+                                        ));};
                                 print('CHANGED');
                                 widget.isSelected = !widget.isSelected;
                               });

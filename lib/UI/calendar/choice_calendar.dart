@@ -184,7 +184,7 @@ class _ChoiceCalendarState extends State<ChoiceCalendar> {
                 'Выберите позитивное действие\nна каждый день вашего календаря.',
                 style: SafeGoogleFont(
                   'Jost',
-                  fontSize: 16 * ffem,
+                  fontSize: 20 * ffem,
                   fontWeight: FontWeight.w800,
                   height: 1.445 * ffem / fem,
                   color: Color(0xff000000),

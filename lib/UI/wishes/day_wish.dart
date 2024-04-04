@@ -3,7 +3,9 @@ import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ps/UI/wishes/day_wish_note.dart';
 import 'package:ps/UI/wishes/wish_bank.dart';
+import 'package:ps/UI/wishes/wish_sphere.dart';
 import 'package:ps/UI/wishes/wishlist.dart';
+import 'package:ps/UI/wishes/wishlist_sphere.dart';
 import 'package:ps/db/user_db.dart';
 import '../../page-1/utils.dart';
 import 'package:ps/UI/emotion_alarm/to_main_button.dart';
@@ -120,7 +122,47 @@ class DayWish extends StatelessWidget {
                     ),
                   ),
                   Container(
-                    height: size.height/30,
+                    height: size.height/60,
+                  ),
+                  GestureDetector(
+                    onTap: (){
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => WishListSphere()));
+                    },
+                    child: Container(
+                      // autogroupmpyt2n7 (KqnvTTEHwQPnZQcM6NMpYT)
+                      width: size.width/1.17,
+                      height: size.height/10.4,
+                      decoration: BoxDecoration (
+                        color: const Color(0xffEEA27D),
+                        borderRadius: BorderRadius.circular(26),
+                        boxShadow: [
+                          BoxShadow(
+                            color: const Color(0xff7c4b21),
+                            offset: Offset(0, 4),
+                            blurRadius: 4.5,
+                          ),
+                        ],
+                      ),
+                      child:
+                      Center(
+                        child: Container(
+                          child: Center(
+                            child: Text(
+                                'Выбрать желание из сфер жизни', textAlign: TextAlign.center,
+                                style: theme.textTheme.bodySmall!.copyWith( color: theme.textTheme.titleLarge!.color,
+                                    fontSize: 18, fontWeight: FontWeight.w600)
+                            ),
+                          ),
+                        ),
+                      ),
+
+
+                    ),
+                  ),
+                  Container(
+                    height: size.height/60,
                   ),
                   FutureBuilder(future: UserDatabase.isCompletedWishes(), builder: (context, snapshot) {
                     if(snapshot.hasData){
@@ -148,11 +190,12 @@ class DayWish extends StatelessWidget {
                           child:
                           Center(
                             child: Container(
-                              padding: EdgeInsets.only(top: size.height/70),
-                              child: Text(
-                                  'Посмотреть список\n выполненных желаний', textAlign: TextAlign.center,
-                                  style: theme.textTheme.bodySmall!.copyWith( color: theme.textTheme.titleLarge!.color,
-                                      fontSize: 18, fontWeight: FontWeight.w600)
+                              child: Center(
+                                child: Text(
+                                    'Посмотреть список\n выполненных желаний', textAlign: TextAlign.center,
+                                    style: theme.textTheme.bodySmall!.copyWith( color: theme.textTheme.titleLarge!.color,
+                                        fontSize: 18, fontWeight: FontWeight.w600)
+                                ),
                               ),
                             ),
                           ),

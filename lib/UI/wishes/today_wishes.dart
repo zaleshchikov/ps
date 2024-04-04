@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ps/UI/emotion_alarm/to_main_button.dart';
+import 'package:ps/UI/success/seccess_model.dart';
+import 'package:ps/UI/success/success_for_time.dart';
 import 'package:ps/UI/trackers/main_screen.dart';
 import 'package:ps/UI/wishes/day_wish_note.dart';
 import 'package:ps/UI/wishes/wish_bank.dart';
@@ -83,6 +85,7 @@ class _TodayWishesState extends State<TodayWishes> {
                                               child: SizedBox(
                                                 width: size.width / 1.2,
                                                 child: AutoSizeText(
+                                                  textAlign: TextAlign.center,
                                                   snapshot.data![index].wish,
                                                   style: theme.textTheme.titleLarge!
                                                       .copyWith(
@@ -136,6 +139,9 @@ class _TodayWishesState extends State<TodayWishes> {
                                                                     Colors
                                                                         .transparent,
                                                                 child: Container(
+                                                                  decoration: BoxDecoration(
+                                                                    image: DecorationImage(image: AssetImage('assets/dialog.png'))
+                                                                  ),
                                                                     alignment:
                                                                         FractionalOffset
                                                                             .center,
@@ -147,11 +153,23 @@ class _TodayWishesState extends State<TodayWishes> {
                                                                             .all(
                                                                             20.0),
                                                                     child:
-                                                                        Image.asset(
-                                                                      'assets/dialog_s.png',
-                                                                      fit: BoxFit
-                                                                          .cover,
-                                                                    )),
+                                                                        Column(
+                                                                          mainAxisAlignment: MainAxisAlignment.start,
+                                                                          children: [
+                                                                            AutoSizeText('Поздравляем! Вы исполнили желание дня, и стали счастливее.\nВаше достижение добавилось в Журнал успеха. Открыть Журнал успеха?', style: theme.textTheme.bodySmall, textAlign: TextAlign.center,),
+                                                                          Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                                                            children: [
+                                                                              TextButton(onPressed: (){
+                                                                                Navigator.of(context).push(MaterialPageRoute(builder: (context) => SuccessForTime()));
+                                                                              }, child: Text('Да', style: theme.textTheme.titleMedium,)),
+                                                                              TextButton(onPressed: (){
+                                                                                Navigator.of(context).pop();
+                                                                              }, child: Text('Нет', style: theme.textTheme.titleMedium))
+
+                                                                            ],
+                                                                          )
+                                                                          ],
+                                                                        )),
                                                               ),
                                                             ),
                                                           ));
