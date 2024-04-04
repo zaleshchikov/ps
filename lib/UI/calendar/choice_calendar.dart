@@ -193,52 +193,54 @@ class _ChoiceCalendarState extends State<ChoiceCalendar> {
               ),
               Container(
                 height: size.height / 2.3,
-                child: ListView.builder(
-                    padding: const EdgeInsets.all(8),
-                    itemCount: wishes.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return Center(
-                        child: Column(
-                          children: [
-                            Container(
-                              height: size.height / 50,
-                            ),
-                            StatefulBuilder(builder:
-                                (BuildContext context, StateSetter setState) {
-                              return InkWell(
-                                onTap: () {
-                                  lastIndex.contains(randInt + index) ? lastIndex.remove(randInt + index) : lastIndex.add(randInt + index);
-                                  listOfWish.contains(wishes[index])
-                                      ? listOfWish.remove(wishes[index])
-                                      : listOfWish.add(wishes[index]);
-                                  setPartState(() {});
-                                },
-                                child: Container(
-                                  height: size.height / 12,
-                                  width: size.width / 1.2,
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(20),
-                                      color: listOfWish.contains(wishes[index])
-                                          ? Color(0xffd2c752)
-                                          : Color(0xffA5B879)),
+                child: SingleChildScrollView(
+                  child: ListView.builder(
+                      padding: const EdgeInsets.all(8),
+                      itemCount: wishes.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return Center(
+                          child: Column(
+                            children: [
+                              Container(
+                                height: size.height / 50,
+                              ),
+                              StatefulBuilder(builder:
+                                  (BuildContext context, StateSetter setState) {
+                                return InkWell(
+                                  onTap: () {
+                                    lastIndex.contains(randInt + index) ? lastIndex.remove(randInt + index) : lastIndex.add(randInt + index);
+                                    listOfWish.contains(wishes[index])
+                                        ? listOfWish.remove(wishes[index])
+                                        : listOfWish.add(wishes[index]);
+                                    setPartState(() {});
+                                  },
                                   child: Container(
-                                    padding: EdgeInsets.all(10),
-                                    child: Center(
-                                      child: AutoSizeText(
-                                        wishes[index],
-                                        style: theme.textTheme.bodyLarge!
-                                            .copyWith(fontSize: 17),
-                                        textAlign: TextAlign.center,
+                                    height: size.height / 12,
+                                    width: size.width / 1.2,
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(20),
+                                        color: listOfWish.contains(wishes[index])
+                                            ? Color(0xffd2c752)
+                                            : Color(0xffA5B879)),
+                                    child: Container(
+                                      padding: EdgeInsets.all(10),
+                                      child: Center(
+                                        child: AutoSizeText(
+                                          activities[index],
+                                          style: theme.textTheme.bodyLarge!
+                                              .copyWith(fontSize: 17),
+                                          textAlign: TextAlign.center,
+                                        ),
                                       ),
                                     ),
                                   ),
-                                ),
-                              );
-                            }),
-                          ],
-                        ),
-                      );
-                    }),
+                                );
+                              }),
+                            ],
+                          ),
+                        );
+                      }),
+                ),
               ),
               Center(
                 child: InkWell(

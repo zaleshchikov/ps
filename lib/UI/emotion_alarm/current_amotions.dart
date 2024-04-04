@@ -1,7 +1,11 @@
+import 'dart:ui';
+
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../db/user_db.dart';
+import '../success/success_for_time.dart';
 import 'to_main_button.dart';
 import 'emotons_dairy.dart';
 import 'tracker_model.dart';
@@ -89,9 +93,64 @@ class _TestScreenState extends State<CurrentEmotions> {
                                 widget.user.sphere = listOfDegree[index];
                                 await UserDatabase.addEmotionsAlarm(DateTime.now(), widget.user);
                                 Future.delayed(const Duration(milliseconds: 1000), () async {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(builder: (context) => EmotionsDairy()));
+                                  showDialog(
+                                      barrierColor:
+                                      Colors.transparent,
+                                      context: context,
+                                      builder: (_) =>
+                                          BackdropFilter(
+                                            filter:
+                                            ImageFilter.blur(
+                                                sigmaX: 10,
+                                                sigmaY: 10),
+                                            child: GestureDetector(
+                                              onTap: () =>
+                                                  Navigator.pop(
+                                                      context),
+                                              child: Dialog(
+                                                surfaceTintColor:
+                                                Colors
+                                                    .transparent,
+                                                backgroundColor:
+                                                Colors
+                                                    .transparent,
+                                                child: Container(
+                                                    decoration: BoxDecoration(
+                                                        image: DecorationImage(image: AssetImage('assets/dialog.png'))
+                                                    ),
+                                                    alignment:
+                                                    FractionalOffset
+                                                        .center,
+                                                    height:
+                                                    size.height /
+                                                        2.5,
+                                                    padding:
+                                                    const EdgeInsets
+                                                        .all(
+                                                        20.0),
+                                                    child:
+                                                    Column(
+                                                      mainAxisAlignment: MainAxisAlignment.start,
+                                                      children: [
+                                                        AutoSizeText('Поздравляем! Вы исполнили желание дня, и стали счастливее.\nВаше достижение добавилось в Журнал успеха. Открыть Журнал успеха?', style: theme.textTheme.bodySmall, textAlign: TextAlign.center,),
+                                                        Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                                          children: [
+                                                            TextButton(onPressed: (){
+                                                              Navigator.of(context).push(MaterialPageRoute(builder: (context) => SuccessForTime()));
+                                                            }, child: Text('Да', style: theme.textTheme.titleMedium,)),
+                                                            TextButton(onPressed: (){
+                                                              Navigator.push(
+                                                                  context,
+                                                                  MaterialPageRoute(builder: (context) => EmotionsDairy()));
+                                                            }, child: Text('Нет', style: theme.textTheme.titleMedium))
+                                                          ],
+                                                        )
+                                                      ],
+                                                    )),
+                                              ),
+                                            ),
+                                          ));
+                                    ;
                                   });
 
                               },

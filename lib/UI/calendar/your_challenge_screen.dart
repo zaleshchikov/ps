@@ -254,7 +254,7 @@ class _ChallengeScreenState extends State<YourChallengeScreen> {
                                         '${widget.date.day} ${UserDatabase.monthNumberToName(widget.date.month)}',
                                         style: SafeGoogleFont(
                                           'Jost',
-                                          fontSize: 24 * ffem,
+                                          fontSize: 26 * ffem,
                                           fontWeight: FontWeight.w400,
                                           height: 1.445 * ffem / fem,
                                           color: Color(0xff4b3425),
