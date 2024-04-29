@@ -92,7 +92,7 @@ class _TestScreenState extends State<EmotionsAlarm> {
                         itemCount: listOfDegree.length,
                         itemBuilder: (BuildContext context, int index) {
                           return Container(
-                            height: size.height/9,
+                            height: size.height/11,
                             padding: EdgeInsets.only(bottom: 25),
                             width: size.width/1.5,
                             child: ElevatedButton(

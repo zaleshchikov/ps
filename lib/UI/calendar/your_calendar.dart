@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:ps/UI/calendar/your_challenge_screen.dart';
 import 'package:ps/UI/emotion_alarm/emotons_dairy.dart';
@@ -15,14 +16,10 @@ import 'package:ps/UI/emotion_alarm/to_main_button.dart';
 import 'auto_challenge_screen.dart';
 
 class YourCalendar extends StatelessWidget {
-
-  Future<Map<String, dynamic>>getWish(DateTime time)async{
+  Future<Map<String, dynamic>> getWish(DateTime time) async {
     var status = await UserDatabase.getStatusOfWish(time, 'yourCalendar');
     var wish = await UserDatabase.getCalendarWish(time, 'yourCalendar');
-    return {
-      'status': status,
-      'wish': wish
-    };
+    return {'status': status, 'wish': wish};
   }
 
   Random random = Random();
@@ -123,6 +120,7 @@ class YourCalendar extends StatelessWidget {
     'Прийти на встречу или мероприятие заранее и спокойно подготовиться',
     'Увидеть звездное небо'
   ];
+
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
@@ -133,88 +131,120 @@ class YourCalendar extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
           body: Center(
-            child: Container(
-              width: double.infinity,
-              decoration: const BoxDecoration(
-                image: DecorationImage(
-                    image: AssetImage("assets/auto_calendar_back.png",),
-                    fit: BoxFit.cover),
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Container(
-                      padding: EdgeInsets.only(top: 20),
-                      child: ToMainButton('Календарь Радости')),
-                  Container(height: size.height / 100),
-                  Center(
-                      child: Text(
-                        ' Чтобы посмотреть задание\nна сегодня, нажмите на дату.',
-                        style: theme.textTheme.titleMedium!.copyWith(
-                            fontWeight: FontWeight.w900,
-                            fontSize: 18
-                        ), textAlign: TextAlign.center,)),
-                  Container(height: size.height / 50),
-                  Container(
-                    height: size.height/2,
-                    child: Stack(
-                      children: [
-                        Positioned(
-                          // frame5pmR (191:5655)
-                          left: 32.999999993*fem,
-                          top: 0*fem,
-                          child: Container(
-                            padding: EdgeInsets.fromLTRB(2.5*fem, 25*fem, 2.5*fem, 74*fem),
-                            width: 372*fem,
-                            height: 400*fem,
-                            decoration: BoxDecoration (
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(40*fem),
-                            ),
-
-                          ),
+        child: Container(
+          width: double.infinity,
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage(
+                  "assets/auto_calendar_back.png",
+                ),
+                fit: BoxFit.cover),
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Container(
+                  padding: EdgeInsets.only(top: 20),
+                  child: ToMainButton('Календарь Радости')),
+              Container(height: size.height / 100),
+              Center(
+                  child: Text(
+                ' Чтобы посмотреть задание\nна сегодня, нажмите на дату.',
+                style: theme.textTheme.titleMedium!
+                    .copyWith(fontWeight: FontWeight.w900, fontSize: 18),
+                textAlign: TextAlign.center,
+              )),
+              Container(height: size.height / 50),
+              Container(
+                height: size.height / 1.5,
+                child: Stack(
+                  children: [
+                    Positioned(
+                      // frame5pmR (191:5655)
+                      left: 32.999999993 * fem,
+                      top: 0 * fem,
+                      child: Container(
+                        padding: EdgeInsets.fromLTRB(
+                            2.5 * fem, 25 * fem, 2.5 * fem, 74 * fem),
+                        width: 372 * fem,
+                        height: 550 * fem,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(40 * fem),
                         ),
-                        Positioned(
-                          child: Center(
-                            child: SizedBox(
-                                height: 1000,
+                      ),
+                    ),
+                    Positioned(
+                      child: Center(
+                        child: Column(
+                          children: [
+                            SizedBox(
+                                height: 370 * fem,
                                 width: 300,
                                 child: TableCalendar(
                                   calendarBuilders: CalendarBuilders(
-                                    todayBuilder: (context, day, focusedDay){
+                                    todayBuilder: (context, day, focusedDay) {
                                       return FutureBuilder(
                                         future: getWish(day),
-                                        builder: (context, snapshot){
-                                          if(snapshot.hasData){
+                                        builder: (context, snapshot) {
+                                          if (snapshot.hasData) {
                                             print('Данные есть');
                                             return Container(
                                               child: Center(
                                                 child: Column(
-                                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
                                                   children: [
-                                                    Text(
-                                                      '${day.day}',
-                                                      style:  SafeGoogleFont (
-                                                        'Jost',
-                                                        fontSize: 25*ffem,
-                                                        fontWeight: FontWeight.w400,
-                                                        height: 1.445*ffem/fem,
-                                                        color: Color(0xff4B3425),
+                                                    Container(
+                                                      height: size.height/25,
+                                                      width: size.height/25,
+                                                      decoration: BoxDecoration(
+                                                          borderRadius: BorderRadius.circular(100),
+                                                          border: Border.all(
+                                                              width: 2,
+                                                              color: Colors.black
+                                                          )
+                                                      ),
+                                                      child: Center(
+                                                        child: Text(
+                                                          '${day.day}',
+                                                          style: SafeGoogleFont(
+                                                            'Jost',
+                                                            fontSize: 25 * ffem,
+                                                            fontWeight:
+                                                                FontWeight.w400,
+                                                            height:
+                                                                1.445 * ffem / fem,
+                                                            color:
+                                                                Color(0xff4B3425),
+                                                          ),
+                                                        ),
                                                       ),
                                                     ),
-                                                    snapshot.data!['wish'] == 'Ничего не запланировано' ? Container() : Container(
-                                                      width: size.width/15,
-                                                      height: size.height/120,
-                                                      decoration: BoxDecoration(
-                                                          color: snapshot.data!['status']! ? Color(0xffA5B879) : Color(0xffEEA27D)
-                                                      ),
-                                                    )
+                                                    snapshot.data!['wish'] ==
+                                                            'Ничего не запланировано'
+                                                        ? Container()
+                                                        : Container(
+                                                            width:
+                                                                size.width / 15,
+                                                            height:
+                                                                size.height /
+                                                                    120,
+                                                            decoration: BoxDecoration(
+                                                                color: snapshot
+                                                                            .data![
+                                                                        'status']!
+                                                                    ? Color(
+                                                                        0xffA5B879)
+                                                                    : Color(
+                                                                        0xffEEA27D)),
+                                                          )
                                                   ],
                                                 ),
                                               ),
                                             );
-                                          }
-                                          else {
+                                          } else {
                                             print('Данных нет');
                                             return Container(
                                               decoration: BoxDecoration(
@@ -226,53 +256,69 @@ class YourCalendar extends StatelessWidget {
                                               child: Center(
                                                 child: Text(
                                                   '${day.day}',
-                                                  style:  SafeGoogleFont (
+                                                  style: SafeGoogleFont(
                                                     'Jost',
-                                                    fontSize: 25*ffem,
+                                                    fontSize: 25 * ffem,
                                                     fontWeight: FontWeight.w400,
-                                                    height: 1.445*ffem/fem,
+                                                    height: 1.445 * ffem / fem,
                                                     color: Color(0xff4B3425),
                                                   ),
                                                 ),
                                               ),
-                                            );}
+                                            );
+                                          }
                                         },
                                       );
                                     },
-                                    outsideBuilder: (context, day, focusedDay){
+                                    outsideBuilder: (context, day, focusedDay) {
                                       return FutureBuilder(
                                         future: getWish(day),
-                                        builder: (context, snapshot){
-                                          if(snapshot.hasData){
+                                        builder: (context, snapshot) {
+                                          if (snapshot.hasData) {
                                             print('Данные есть');
                                             return Container(
                                               child: Center(
                                                 child: Column(
-                                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
                                                   children: [
                                                     Text(
                                                       '${day.day}',
-                                                      style:  SafeGoogleFont (
+                                                      style: SafeGoogleFont(
                                                         'Jost',
-                                                        fontSize: 25*ffem,
-                                                        fontWeight: FontWeight.w400,
-                                                        height: 1.445*ffem/fem,
-                                                        color: Color(0xff4B3425),
+                                                        fontSize: 25 * ffem,
+                                                        fontWeight:
+                                                            FontWeight.w400,
+                                                        height:
+                                                            1.445 * ffem / fem,
+                                                        color:
+                                                            Color(0xff4B3425),
                                                       ),
                                                     ),
-                                                    snapshot.data!['wish'] == 'Ничего не запланировано' ? Container() : Container(
-                                                      width: size.width/15,
-                                                      height: size.height/120,
-                                                      decoration: BoxDecoration(
-                                                          color: snapshot.data!['status']! ? Color(0xffA5B879) : Color(0xffEEA27D)
-                                                      ),
-                                                    )
+                                                    snapshot.data!['wish'] ==
+                                                            'Ничего не запланировано'
+                                                        ? Container()
+                                                        : Container(
+                                                            width:
+                                                                size.width / 15,
+                                                            height:
+                                                                size.height /
+                                                                    120,
+                                                            decoration: BoxDecoration(
+                                                                color: snapshot
+                                                                            .data![
+                                                                        'status']!
+                                                                    ? Color(
+                                                                        0xffA5B879)
+                                                                    : Color(
+                                                                        0xffEEA27D)),
+                                                          )
                                                   ],
                                                 ),
                                               ),
                                             );
-                                          }
-                                          else {
+                                          } else {
                                             print('Данных нет');
                                             return Container(
                                               decoration: BoxDecoration(
@@ -284,53 +330,69 @@ class YourCalendar extends StatelessWidget {
                                               child: Center(
                                                 child: Text(
                                                   '${day.day}',
-                                                  style:  SafeGoogleFont (
+                                                  style: SafeGoogleFont(
                                                     'Jost',
-                                                    fontSize: 25*ffem,
+                                                    fontSize: 25 * ffem,
                                                     fontWeight: FontWeight.w400,
-                                                    height: 1.445*ffem/fem,
+                                                    height: 1.445 * ffem / fem,
                                                     color: Color(0xff4B3425),
                                                   ),
                                                 ),
                                               ),
-                                            );}
+                                            );
+                                          }
                                         },
                                       );
                                     },
-                                    defaultBuilder: (context, day, focusedDay){
+                                    defaultBuilder: (context, day, focusedDay) {
                                       return FutureBuilder(
                                         future: getWish(day),
-                                        builder: (context, snapshot){
-                                          if(snapshot.hasData){
+                                        builder: (context, snapshot) {
+                                          if (snapshot.hasData) {
                                             print('Данные есть');
                                             return Container(
                                               child: Center(
                                                 child: Column(
-                                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
                                                   children: [
                                                     Text(
                                                       '${day.day}',
-                                                      style:  SafeGoogleFont (
+                                                      style: SafeGoogleFont(
                                                         'Jost',
-                                                        fontSize: 25*ffem,
-                                                        fontWeight: FontWeight.w400,
-                                                        height: 1.445*ffem/fem,
-                                                        color: Color(0xff4B3425),
+                                                        fontSize: 25 * ffem,
+                                                        fontWeight:
+                                                            FontWeight.w400,
+                                                        height:
+                                                            1.445 * ffem / fem,
+                                                        color:
+                                                            Color(0xff4B3425),
                                                       ),
                                                     ),
-                                                    snapshot.data!['wish'] == 'Ничего не запланировано' ? Container() : Container(
-                                                      width: size.width/15,
-                                                      height: size.height/120,
-                                                      decoration: BoxDecoration(
-                                                          color: snapshot.data!['status']! ? Color(0xffA5B879) : Color(0xffEEA27D)
-                                                      ),
-                                                    )
+                                                    snapshot.data!['wish'] ==
+                                                            'Ничего не запланировано'
+                                                        ? Container()
+                                                        : Container(
+                                                            width:
+                                                                size.width / 15,
+                                                            height:
+                                                                size.height /
+                                                                    120,
+                                                            decoration: BoxDecoration(
+                                                                color: snapshot
+                                                                            .data![
+                                                                        'status']!
+                                                                    ? Color(
+                                                                        0xffA5B879)
+                                                                    : Color(
+                                                                        0xffEEA27D)),
+                                                          )
                                                   ],
                                                 ),
                                               ),
                                             );
-                                          }
-                                          else {
+                                          } else {
                                             print('Данных нет');
                                             return Container(
                                               decoration: BoxDecoration(
@@ -342,118 +404,197 @@ class YourCalendar extends StatelessWidget {
                                               child: Center(
                                                 child: Text(
                                                   '${day.day}',
-                                                  style:  SafeGoogleFont (
+                                                  style: SafeGoogleFont(
                                                     'Jost',
-                                                    fontSize: 25*ffem,
+                                                    fontSize: 25 * ffem,
                                                     fontWeight: FontWeight.w400,
-                                                    height: 1.445*ffem/fem,
+                                                    height: 1.445 * ffem / fem,
                                                     color: Color(0xff4B3425),
                                                   ),
                                                 ),
                                               ),
-                                            );}
+                                            );
+                                          }
                                         },
                                       );
                                     },
                                   ),
-                                  onDaySelected: (time, t)async {
-                                    var status = await UserDatabase.getStatusOfWish(time, 'yourCalendar');
-                                    var wish = await UserDatabase.getCalendarWish(time, 'yourCalendar');
+                                  onDaySelected: (time, t) async {
+                                    var status =
+                                        await UserDatabase.getStatusOfWish(
+                                            time, 'yourCalendar');
+                                    var wish =
+                                        await UserDatabase.getCalendarWish(
+                                            time, 'yourCalendar');
                                     Navigator.push(
                                         context,
                                         MaterialPageRoute(
                                             builder: (context) =>
-                                                BottomNavigationScreen(YourChallengeScreen(time, wish, status))));
+                                                BottomNavigationScreen(
+                                                    YourChallengeScreen(
+                                                        time, wish, status))));
                                   },
-                                  daysOfWeekHeight: size.height/20,
+                                  daysOfWeekHeight: size.height / 20,
                                   daysOfWeekStyle: DaysOfWeekStyle(
                                     weekdayStyle: SafeGoogleFont(
                                       'Jost',
-                                      fontSize: 25*ffem,
+                                      fontSize: 25 * ffem,
                                       fontWeight: FontWeight.w400,
                                       color: Color(0xff6b6969),
                                     ),
                                     weekendStyle: SafeGoogleFont(
                                       'Jost',
-                                      fontSize: 25*ffem,
+                                      fontSize: 25 * ffem,
                                       fontWeight: FontWeight.w400,
                                       color: Color(0xff6b6969),
                                     ),
                                   ),
                                   startingDayOfWeek: StartingDayOfWeek.monday,
                                   headerStyle: HeaderStyle(
-                                    titleTextStyle: theme.textTheme.titleMedium!.copyWith(
-                                        fontSize: 25*ffem
-                                    ),
+                                    titleTextStyle: theme.textTheme.titleMedium!
+                                        .copyWith(fontSize: 25 * ffem),
                                     titleCentered: true,
-                                    formatButtonVisible : false,
+                                    formatButtonVisible: false,
                                   ),
                                   calendarFormat: CalendarFormat.month,
-                                  rowHeight: size.height/20,
+                                  rowHeight: size.height / 20,
                                   locale: 'ru_RU',
-                                  firstDay: DateTime.utc(2010,10,20),
-                                  lastDay: DateTime.utc(2040,10,20),
+                                  firstDay: DateTime.utc(2010, 10, 20),
+                                  lastDay: DateTime.utc(2040, 10, 20),
                                   focusedDay: DateTime.now(),
                                   daysOfWeekVisible: true,
                                   calendarStyle: CalendarStyle(
-                                      weekendTextStyle: SafeGoogleFont (
+                                      weekendTextStyle: SafeGoogleFont(
                                         'Jost',
-                                        fontSize: 25*ffem,
+                                        fontSize: 25 * ffem,
                                         fontWeight: FontWeight.w400,
-                                        height: 1.445*ffem/fem,
+                                        height: 1.445 * ffem / fem,
                                         color: Color(0xff4B3425),
                                       ),
-                                      defaultTextStyle: SafeGoogleFont (
+                                      defaultTextStyle: SafeGoogleFont(
                                         'Jost',
-                                        fontSize: 25*ffem,
+                                        fontSize: 25 * ffem,
                                         fontWeight: FontWeight.w400,
-                                        height: 1.445*ffem/fem,
+                                        height: 1.445 * ffem / fem,
                                         color: Color(0xff4B3425),
                                       ),
-
-                                      outsideTextStyle: SafeGoogleFont (
+                                      outsideTextStyle: SafeGoogleFont(
                                         'Jost',
-                                        fontSize: 25*ffem,
+                                        fontSize: 25 * ffem,
                                         fontWeight: FontWeight.w400,
-                                        height: 1.445*ffem/fem,
+                                        height: 1.445 * ffem / fem,
                                         color: Color(0xff4B3425),
                                       ),
-                                      todayTextStyle: TextStyle(fontSize:20, color: Colors.white, fontWeight: FontWeight.bold )),
+                                      todayTextStyle: TextStyle(
+                                          fontSize: 20,
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold)),
                                 )),
-                          ),
+                            Container(height: size.height/50),
+                            Center(
+                              child: SizedBox(
+                                width: 330 * fem,
+                                child: Divider(
+                                  thickness: 2,
+                                  color: Colors.black,
+                                ),
+                              ),
+                            ),
+                            Row(
+                              children: [
+                                Container(width: size.width/7,),
+                                Text(textAlign: TextAlign.left,
+                                  "${DateTime.now().day} " +
+                                      UserDatabase.monthNumberToName(
+                                          DateTime.now().month),
+                                  style: theme.textTheme.bodyMedium!.copyWith(
+                                      color: theme.textTheme.bodySmall!.color),
+                                ),
+
+                              ],
+                            ),FutureBuilder(future: UserDatabase.getStatusOfWish(DateTime.now(), 'yourCalendar'), builder: (context, snapshot){
+                              if(snapshot.hasData){
+                              return Container(
+                                height: size.height/15,
+                                width: size.width/1.3,
+                                color: snapshot.data!? Color(0xa3a5b879) : Color(0xffF7D1BE),
+                                child: FutureBuilder(future: UserDatabase.getCalendarWish(DateTime.now(), 'yourCalendar'), builder: (context, snapshot){
+                                  if(snapshot.hasData){
+                                    return Text(textAlign: TextAlign.left,
+                                      snapshot.data.toString(),
+                                      style: theme.textTheme.bodyMedium!.copyWith(
+                                          color: theme.textTheme.bodyLarge!.color),
+                                    );
+                                  } else{
+                                    return Text(textAlign: TextAlign.left,
+                                      'Задания нет',
+                                      style: theme.textTheme.bodyMedium!.copyWith(
+                                          color: theme.textTheme.bodyLarge!.color),
+                                    );
+                                  }
+                                }),
+                              );
+                            }else{
+                              return Container();
+                            }}
+                            ),
+                            Container(height: size.height/200),
+                            FutureBuilder(future: UserDatabase.getStatusOfWish(DateTime.now(), 'yourCalendar'), builder: (context, snapshot){
+                              if(snapshot.hasData){
+                                return Container(
+                                  height: size.height/30,
+                                  width: size.width/1.3,
+                                  color: snapshot.data! ? Color(0xa3a5b879) :
+                                  Color(0xffF7D1BE),
+                                  child: Center(
+                                    child: Text(snapshot.data! ? 'Выполненно' : 'Не выполненно', style: theme.textTheme.bodyMedium!.copyWith(
+                                        color: theme.textTheme.bodyLarge!.color),),
+                                  )
+                                );
+                              }else{
+                                return Container();
+                              }}
+                            ),
+
+                          ],
                         ),
-                      ],
+                      ),
                     ),
-                  ),
-                  Container(
-                    width: size.width / 1.2,
-                    height: size.height / 14.5,
-                    child: ElevatedButton(
-                        onPressed: () {Navigator.push(
-                            context,
+                  ],
+                ),
+              ),
+              Container(
+                width: size.width / 1.2,
+                height: size.height / 14.5,
+                child: ElevatedButton(
+                    onPressed: () {
+
+                      Navigator.push(
+                          context,
                           MaterialPageRoute(
-                              builder: (context) => BottomNavigationScreen(Trackers())));
-                        },
-                        child: Text(
-                          'Перейти в главное меню',
-                          style: theme.textTheme.bodySmall!.copyWith(
-                              fontFamily: GoogleFonts.inter().fontFamily,
-                              fontSize: 20),
-                        ),
-                        style: ButtonStyle(
-                            backgroundColor:
+                              builder: (context) =>
+                                  BottomNavigationScreen(Trackers())));
+                    },
+                    child: Text(
+                      'Перейти в главное меню',
+                      style: theme.textTheme.bodySmall!.copyWith(
+                          fontFamily: GoogleFonts.inter().fontFamily,
+                          fontSize: 20),
+                    ),
+                    style: ButtonStyle(
+                        backgroundColor:
                             MaterialStateProperty.all<Color>(theme.hoverColor),
-                            shape:
+                        shape:
                             MaterialStateProperty.all<RoundedRectangleBorder>(
                                 RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(30),
                                     side:
-                                    BorderSide(color: theme.hoverColor))))),
-                  )
-                ],
-              ),
-            ),
-          )),
+                                        BorderSide(color: theme.hoverColor))))),
+              )
+            ],
+          ),
+        ),
+      )),
     );
   }
 }

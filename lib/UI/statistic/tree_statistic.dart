@@ -22,14 +22,14 @@ class _RoundStatisticState extends State<TreeStatistic> {
 
   Future<int> getSphereCount(DateTime start, DateTime end) async {
     Map<String, int> sphereCount = {
-      'Карьера': 0,
-      'Развитие': 0,
+      'Финансы/инвестиции': 0,
+      'Карьера/бизнес': 0,
+      'Здоровье/Спорт': 0,
+      'Семья/родные': 0,
+      'Любовь/отношения': 0,
+      'Саморазвитие/учеба': 0,
+      'Хобби/Отдых/Путешествия': 0,
       'Комфорт': 0,
-      'Хобби': 0,
-      'Друзья/Окружение': 0,
-      'Семья/Любовь': 0,
-      'Здоровье': 0,
-      'Финансы/Карьера': 0,
     };
 
     var users = await UserDatabase.users();

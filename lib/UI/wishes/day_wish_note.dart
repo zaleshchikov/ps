@@ -171,7 +171,7 @@ class _EmotionsNoteState extends State<DayWishNote> {
                                           width: 233 * fem,
                                           height: 76 * fem,
                                           child: Text(
-                                            'Напиши\nсвоё желание',
+                                            'Подумайте о том, что интересного и необычного  Вы хотели  бы сделать сегодня, чтобы стать счастливее',
                                             style: SafeGoogleFont(
                                               'Urbanist',
                                               fontSize: 30 * ffem,

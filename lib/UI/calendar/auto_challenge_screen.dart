@@ -194,9 +194,9 @@ class _ChallengeScreenState extends State<ChallengeScreen> {
                                                 BottomNavigationScreen(
                                                     AutoCalendar()))),
                                     child: SizedBox(
-                                      width: 200 * fem,
-                                      height: 50 * fem,
-                                      child: Text(
+                                      width: 120 * fem,
+                                      height: 40 * fem,
+                                      child: AutoSizeText(
                                         '${widget.date.day} ${UserDatabase.monthNumberToName(widget.date.month)}',
                                         style: SafeGoogleFont(
                                           'Jost',
@@ -279,6 +279,7 @@ class _ChallengeScreenState extends State<ChallengeScreen> {
                                                   Column(
                                                     mainAxisAlignment: MainAxisAlignment.start,
                                                     children: [
+                                                      Container(height: size.height/20),
                                                       AutoSizeText('Поздравляем! Вы исполнили желание дня, и стали счастливее.\nВаше достижение добавилось в Журнал успеха. Открыть Журнал успеха?', style: theme.textTheme.bodySmall, textAlign: TextAlign.center,),
                                                       Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                                         children: [

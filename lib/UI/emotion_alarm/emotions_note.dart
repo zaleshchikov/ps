@@ -192,7 +192,7 @@ class _EmotionsNoteState extends State<EmotionsNote> {
                                           width: 240 * fem,
                                           height: 130 * fem,
                                           child: Text(
-                                            'Напишите здесь, что вызвало эти\nЭмоции и чувства',
+                                            'Напишите здесь, что вызвало эти\nэмоции и чувства',
                                             style: SafeGoogleFont(
                                               'Urbanist',
                                               fontSize: 25 * ffem,

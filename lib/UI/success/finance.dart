@@ -16,23 +16,26 @@ class Finance extends StatefulWidget {
 
 class _TestScreenState extends State<Finance> {
 
-  final List<String> finance = [
-    'Повысили зарплату',
-    'Получил премию',
-    'Выполнил план',
-    'Заключил договор',
-    'Завел полезные знакомства на работе',
-    'Выросла прибыль',
-    'Появились свободные средства, чтобы откладывать',
-    'Предложили сотрудничество',
-    'Успешно прошел собеседование',
-    'Увеличил объем продаж',
-    'Устроился на работу',
-    'Успел на работу во время',
-    'Выполнил все задачи на день',
-    'Расширил клиентскую базу',
-    'Привлёк новых клиентов',
-    'Успешно провёл презентацию'
+  List<String> finance = [
+    'Повысили зарплату.',
+    'Получил премию.',
+    'Выросла прибыль.',
+    'Появились свободные средства, чтобы откладывать.'
+  ];
+
+  List<String> career = [
+    'Выполнил план.',
+    'Заключил договор.',
+    'Завел полезные знакомства на работе.',
+    'Предложили сотрудничество.',
+    'Успешно прошел собеседование.',
+    'Увеличил объем продаж.',
+    'Устроился на работу.',
+    'Успел на работу во  время.',
+    'Выполнил все задачи на день.',
+    'Расширил клиентскую базу.',
+    'Привлек новых клиентов.',
+    'Успешно провел презентацию.'
   ];
 
   final List<String> health = [
@@ -51,7 +54,7 @@ class _TestScreenState extends State<Finance> {
     'Вылечил простуду'
   ];
 
-  final List<String> love = [
+  final List<String> family = [
     'День без ссоры',
     'Удивил близкого',
     'Получил благодарность от близкого',
@@ -100,18 +103,20 @@ class _TestScreenState extends State<Finance> {
   Widget build(BuildContext context) {
 
     switch(widget.success.sphere){
-      case 'Финансы/Карьера':
+      case 'Финансы/инвестиции':
         listOfDegree = finance;
-      case 'Здоровье':
+      case 'Здоровье/Спорт':
         listOfDegree = health;
-      case 'Семья/Любовь':
-        listOfDegree = love;
-      case 'Друзья/Окружение':
+      case 'Семья/родные':
+        listOfDegree = family;
+      case 'Любовь/отношения':
         listOfDegree = friends;
-      case 'Развитие':
+      case 'Саморазвитие/учеба':
         listOfDegree = evolution;
-      case 'Хобби':
+      case 'Хобби/Отдых/Путешествия':
         listOfDegree = hobby;
+      case 'Карьера/бизнес':
+        listOfDegree = career;
     }
 
     _selectedIndex = listOfDegree.length+1;

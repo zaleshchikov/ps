@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/services.dart';
@@ -132,19 +133,23 @@ class _EmotionsNoteState extends State<WishBank> {
                                             Container(height: size.height/100),
 
                                             Center(
-                                                child: Text(
+                                                child: AutoSizeText(
                                                   snapshot.data![index].date,
                                                   style: theme.textTheme.bodySmall!.copyWith(fontSize: 15),
                                                   textAlign: TextAlign.center,
                                                 )),
-                                            Container(height: size.height/50),
+                                            Container(height: size.height/100),
                                             Center(
-                                                child: Text(
-                                                  snapshot.data![index].wish.wish,
-                                                  style: theme.textTheme.titleMedium!.copyWith(fontSize: 22),
-                                                  textAlign: TextAlign.center,
+                                                child: Container(
+                                                  height: size.height/17,
+                                                  child: Center(
+                                                    child: AutoSizeText(
+                                                      snapshot.data![index].wish.wish,
+                                                      style: theme.textTheme.titleMedium!.copyWith(fontSize: 22),
+                                                      textAlign: TextAlign.center,
+                                                    ),
+                                                  ),
                                                 )),
-                                            Container(height: size.height/120),
                                             Row(
                                               mainAxisAlignment: MainAxisAlignment.end,
                                               children: [

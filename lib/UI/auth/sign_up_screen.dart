@@ -32,7 +32,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
         password: form.control('password').value,
         testResult: [],
         calendar: {},
-        Wishes: []);
+        Wishes: [], lastQuestion: 1, isTestUsed: false, testSum: 0);
     await UserDatabase.update(user);
   }
 

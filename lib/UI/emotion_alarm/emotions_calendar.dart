@@ -32,17 +32,20 @@ class EmotionsCalendar extends StatelessWidget {
             children: [
               Container(
                   padding: EdgeInsets.only(top: 20),
-                  child: ToMainButton('Календарь эмоций')),
+                  child: ToMainButton.CustomWidget('Календарь эмоций', EmotionsDairy())),
               Container(height: size.height / 20),
-              Center(
-                  child: Text(
-                'Календарь отображает Ваше среднее состояние за день,\nсогласно вашим отметкам в трекере',
-                style: theme.textTheme.bodySmall!.copyWith(
-                    fontWeight: FontWeight.w400,
-                    fontSize: 18,
-                    fontStyle: FontStyle.italic),
-                textAlign: TextAlign.center,
-              )),
+              Padding(
+                padding: EdgeInsets.only(left: size.width/10, right: size.width/10),
+                child: Center(
+                    child: Text(
+                  'Календарь отображает Ваше среднее состояние за день,\nсогласно вашим отметкам в трекере',
+                  style: theme.textTheme.bodySmall!.copyWith(
+                      fontWeight: FontWeight.w400,
+                      fontSize: 18,
+                      fontStyle: FontStyle.italic),
+                  textAlign: TextAlign.center,
+                )),
+              ),
               Container(height: size.height / 50),
               Container(
                 height: size.height / 2,

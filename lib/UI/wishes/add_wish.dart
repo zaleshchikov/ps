@@ -102,26 +102,23 @@ class AddedWish extends StatelessWidget {
                           ),
                         ],
                       ),
-                    ),
-                  ),
-                ),
-              ),
-              Positioned(
-                // qNs (191:5589)
-                left: 69*fem,
-                top: 235*fem,
-                child: Align(
-                  child: SizedBox(
-                    width: 300*fem,
-                    height: 100*fem,
-                    child: AutoSizeText(
-                      wish,
-                      style: SafeGoogleFont (
-                        'Jost',
-                        fontSize: 20*ffem,
-                        fontWeight: FontWeight.w600,
-                        height: 1.445*ffem/fem,
-                        color: Color(0xff4b3425),
+                      child: Center(
+                        child: SizedBox(
+                          width: 320*fem,
+                          height: 100*fem,
+                          child: Center(
+                            child: AutoSizeText(
+                              wish,
+                              style: SafeGoogleFont (
+                                'Jost',
+                                fontSize: 20*ffem,
+                                fontWeight: FontWeight.w600,
+                                height: 1.445*ffem/fem,
+                                color: Color(0xff4b3425),
+                              ),
+                            ),
+                          ),
+                        ),
                       ),
                     ),
                   ),
@@ -255,6 +252,8 @@ class AddedWish extends StatelessWidget {
               Positioned(
                 // 4gs (212:4156)
                 left: 82*fem,
+                right: 82*fem,
+
                 top: 730*fem,
                 child: InkWell(
                   onTap: (){

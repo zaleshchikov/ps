@@ -84,7 +84,9 @@ class _TodayWishesState extends State<TodayWishes> {
                                             child: Center(
                                               child: SizedBox(
                                                 width: size.width / 1.2,
+                                                height: size.height / 14,
                                                 child: AutoSizeText(
+                                                  maxLines: 2,
                                                   textAlign: TextAlign.center,
                                                   snapshot.data![index].wish,
                                                   style: theme.textTheme.titleLarge!
@@ -105,16 +107,15 @@ class _TodayWishesState extends State<TodayWishes> {
                                           children: [
                                             InkWell(
                                                 onTap: () async {
-                                                  if (await UserDatabase
-                                                      .isRegister()) {
-                                                    await UserDatabase
+                                                  await UserDatabase.removeRandomWish(DateTime.now(), snapshot
+                                                      .data![index]!.wish);
+                                                  await UserDatabase
                                                         .addCompletedWish(
                                                             DateTime.now(),
                                                             snapshot
                                                                 .data![index]!.wish,
                                                             snapshot.data![index]!
                                                                 .sphere);
-                                                  }
                                                   await UserDatabase.deleteWish(
                                                       snapshot.data![index]);
                                                   showDialog(
@@ -147,7 +148,7 @@ class _TodayWishesState extends State<TodayWishes> {
                                                                             .center,
                                                                     height:
                                                                         size.height /
-                                                                            2.5,
+                                                                            3.5,
                                                                     padding:
                                                                         const EdgeInsets
                                                                             .all(
@@ -156,7 +157,10 @@ class _TodayWishesState extends State<TodayWishes> {
                                                                         Column(
                                                                           mainAxisAlignment: MainAxisAlignment.start,
                                                                           children: [
-                                                                            AutoSizeText('Поздравляем! Вы исполнили желание дня, и стали счастливее.\nВаше достижение добавилось в Журнал успеха. Открыть Журнал успеха?', style: theme.textTheme.bodySmall, textAlign: TextAlign.center,),
+                                                                            SizedBox(
+                                                                                height: size.height/7,
+                                                                                width: size.width/1.5,
+                                                                                child: AutoSizeText('Поздравляем! Вы исполнили желание дня, и стали счастливее.\nВаше достижение добавилось в Журнал успеха. Открыть Журнал успеха?', style: theme.textTheme.bodySmall, textAlign: TextAlign.center,)),
                                                                           Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                                                             children: [
                                                                               TextButton(onPressed: (){
@@ -202,6 +206,8 @@ class _TodayWishesState extends State<TodayWishes> {
                                                                         30))))),
                                             InkWell(
                                                 onTap: () async {
+                                                  await UserDatabase.removeRandomWish(DateTime.now(), snapshot
+                                                      .data![index]!.wish);
                                                   await UserDatabase.deleteWish(
                                                       snapshot.data![index]);
                                                   setState(() {});
@@ -245,35 +251,41 @@ class _TodayWishesState extends State<TodayWishes> {
                 )),
               ),
               Container(height: size.height / 40),
-              InkWell(
-                  onTap: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => WishList()));
-                  },
-                  child: Container(
-                      height: size.height / 11,
-                      width: size.width / 1.4,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(30),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Color(0xffA55A26),
+              FutureBuilder(future: UserDatabase.isRandomWish(DateTime.now()), builder: (context, snapshot){
+                if(snapshot.hasData && !snapshot.data!){
+                  return InkWell(
+                      onTap: () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) => WishList()));
+                      },
+                      child: Container(
+                          height: size.height / 11,
+                          width: size.width / 1.4,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(30),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Color(0xffA55A26),
+                              ),
+                              BoxShadow(
+                                offset: Offset(0, 3),
+                                color: Color(0xffEEA27D),
+                                spreadRadius: -3.0,
+                                blurRadius: 5.0,
+                              ),
+                            ],
                           ),
-                          BoxShadow(
-                            offset: Offset(0, 3),
-                            color: Color(0xffEEA27D),
-                            spreadRadius: -3.0,
-                            blurRadius: 5.0,
-                          ),
-                        ],
-                      ),
-                      child: Center(
-                          child: Text(
-                        'Выбрать случайное\n желание',
-                        style: theme.textTheme.bodySmall!
-                            .copyWith(fontWeight: FontWeight.w600),
-                        textAlign: TextAlign.center,
-                      )))),
+                          child: Center(
+                              child: Text(
+                                'Выбрать случайное\n желание',
+                                style: theme.textTheme.bodySmall!
+                                    .copyWith(fontWeight: FontWeight.w600),
+                                textAlign: TextAlign.center,
+                              ))));
+                } else{
+                  return Container();
+                }
+              }),
               Container(height: size.height / 50),
               InkWell(
                   onTap: () {

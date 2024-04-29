@@ -14,7 +14,8 @@ class UserDatabase {
       join(await getDatabasesPath(), 'user_database.db'),
       onCreate: (db, version) {
         return db.execute(
-          'CREATE TABLE users (id INTEGER PRIMARY KEY, username TEXT, password TEXT, testResult TEXT, calendar TEXT, Wishes TEXT)',
+          'CREATE TABLE users ('
+              'id INTEGER PRIMARY KEY, username TEXT, password TEXT, testResult TEXT, calendar TEXT, Wishes TEXT, LastTest TEXT)',
         );
       },
       version: 1,
@@ -36,7 +37,6 @@ class UserDatabase {
         '${time.day}/${weekNumber(time)}/${time.month}/${time.year}': {
           'emotionAlarm': [
 
-
           ],
           'wishesBank': [<String>[]],
           'successJournal': [[success, sphere]],
@@ -45,7 +45,8 @@ class UserDatabase {
             'autoCalendar': [],
             'yourCalendar': [],
             'smartCalendar': []
-          }
+          },
+          'randomWish': ''
         }
       };
       user.calendar.addEntries(entry.entries);
@@ -133,7 +134,7 @@ class UserDatabase {
     );
   }
 
-  static addCalendarWish(DateTime time, String calendar, String wish) async {
+  static addCalendarWish(DateTime time, String calendar, String wish, String sphere) async {
     await open();
     var _users = await users();
     User user = _users[0];
@@ -147,7 +148,7 @@ class UserDatabase {
       user.calendar[
       '${time.day}/${weekNumber(time)}/${time.month}/${time.year}']![
       'calendarWish']![calendar].addAll(
-        [wish, false]
+        [wish, false, sphere]
       );
     } else {
       final entry = {
@@ -161,16 +162,18 @@ class UserDatabase {
           'successJournal': [<String>[]],
           'completedWishes': [],
           'calendarWish':{
-            'autoCalendar': calendar == 'autoCalendar' ? [wish, false] : [
+            'autoCalendar': calendar == 'autoCalendar' ? [wish, false, sphere] : [
 
             ],
-            'yourCalendar': calendar == 'yourCalendar' ? [wish, false] : [
+            'yourCalendar': calendar == 'yourCalendar' ? [wish, false, sphere] : [
 
             ],
-            'smartCalendar': calendar == 'smartCalendar' ? [wish, false] : [
+            'smartCalendar': calendar == 'smartCalendar' ? [wish, false, sphere] : [
 
             ]
-          }
+          },
+          'randomWish': ''
+
         }
       };
       user.calendar.addEntries(entry.entries);
@@ -356,7 +359,9 @@ class UserDatabase {
             'autoCalendar': [],
             'yourCalendar': [],
             'smartCalendar': []
-          }
+          },
+          'randomWish': ''
+
         }
       };
       user.calendar.addEntries(entry.entries);
@@ -446,7 +451,8 @@ class UserDatabase {
             'autoCalendar': [],
             'yourCalendar': [],
             'smartCalendar': []
-          }
+          },
+          'randomWish': ''
         }
       };
       user.calendar.addEntries(entry.entries);
@@ -570,6 +576,51 @@ class UserDatabase {
     );
   }
 
+  static Future<bool> getTestStatus() async {
+    await open();
+    var _users = await users();
+    User user = _users[0];
+    return user.isTestUsed;
+  }
+
+  static Future<List<int>> getSumAndNumberStatus() async {
+    await open();
+    var _users = await users();
+    User user = _users[0];
+    if(!user.isTestUsed) return [0, 0];
+    return [user.lastQuestion, user.testSum];
+  }
+
+  static Future<int> resetTest() async {
+    await open();
+    var _users = await users();
+    User user = _users[0];
+    user.lastQuestion = 0;
+    user.isTestUsed = false;
+    user.testSum = 0;
+    return await _database!.update(
+      'users',
+      user.toMap(),
+      where: "id = ?",
+      whereArgs: [1],
+    );
+  }
+
+  static Future<int> changeTest(int lastQuestion, int sum) async {
+    await open();
+    var _users = await users();
+    User user = _users[0];
+    user.lastQuestion = lastQuestion;
+    user.isTestUsed = true;
+    user.testSum = sum;
+    return await _database!.update(
+      'users',
+      user.toMap(),
+      where: "id = ?",
+      whereArgs: [1],
+    );
+  }
+
   static Future<int> update(User user) async {
     await open();
     return await _database!.update(
@@ -578,7 +629,100 @@ class UserDatabase {
       where: "id = ?",
       whereArgs: [1],
     );
+
   }
+
+  static Future<int> removeRandomWish(DateTime time, String wish) async {
+    await open();
+    var _users = await users();
+    User user = _users[0];
+
+    if (user.calendar.keys.contains(
+        '${time.day}/${weekNumber(time)}/${time.month}/${time.year}')) {
+      if(user.calendar[
+      '${time.day}/${weekNumber(time)}/${time.month}/${time.year}']![
+      'randomWish'] == wish) {
+        user.calendar[
+        '${time.day}/${weekNumber(time)}/${time.month}/${time.year}']![
+        'randomWish'] = '';
+      }} else {
+      final entry = {
+        '${time.day}/${weekNumber(time)}/${time.month}/${time.year}': {
+          'emotionAlarm': [<String>[]],
+          'wishesBank': [<String>[]],
+          'successJournal': [<String>[]],
+          'completedWishes': [
+
+          ],
+          'calendarWish':{
+            'autoCalendar': [],
+            'yourCalendar': [],
+            'smartCalendar': []
+          },
+          'randomWish': ''
+        }
+      };
+      user.calendar.addEntries(entry.entries);
+    }
+
+    return await _database!.update(
+      'users',
+      user.toMap(),
+      where: "id = ?",
+      whereArgs: [1],
+    );
+  }
+
+  static Future<bool> isRandomWish(DateTime time) async {
+    await open();
+    var _users = await users();
+    User user = _users[0];
+    if (user.calendar.keys.contains(
+        '${time.day}/${weekNumber(time)}/${time.month}/${time.year}')){
+      return user.calendar['${time.day}/${weekNumber(time)}/${time.month}/${time.year}']['randomWish'] != '';
+    }
+    return false;
+  }
+
+  static Future<int> addRandomWish(DateTime time, String wish) async {
+    await open();
+    var _users = await users();
+    User user = _users[0];
+
+    if (user.calendar.keys.contains(
+        '${time.day}/${weekNumber(time)}/${time.month}/${time.year}')) {
+      user.calendar[
+      '${time.day}/${weekNumber(time)}/${time.month}/${time.year}']![
+      'randomWish'] = wish;
+    } else {
+      final entry = {
+        '${time.day}/${weekNumber(time)}/${time.month}/${time.year}': {
+          'emotionAlarm': [<String>[]],
+          'wishesBank': [<String>[]],
+          'successJournal': [<String>[]],
+          'completedWishes': [
+
+          ],
+          'calendarWish':{
+            'autoCalendar': [],
+            'yourCalendar': [],
+            'smartCalendar': []
+          },
+          'randomWish': wish
+        }
+      };
+      user.calendar.addEntries(entry.entries);
+    }
+
+    return await _database!.update(
+      'users',
+      user.toMap(),
+      where: "id = ?",
+      whereArgs: [1],
+    );
+  }
+
+
 
   static Future<List<User>> users() async {
     await open();
@@ -594,7 +738,11 @@ class UserDatabase {
                 .split('_')
                 .map((i) => Wish.fromString(i))
                 .toList()
-          ]);
+          ],
+        isTestUsed: json.decode(maps[i]['LastTest'])['isTestUsed'],
+        lastQuestion: json.decode(maps[i]['LastTest'])['lastQuestion'],
+        testSum: json.decode(maps[i]['LastTest'])['testSum']
+      );
     });
   }
 

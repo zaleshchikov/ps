@@ -1,3 +1,4 @@
+
 import 'dart:collection';
 
 import 'package:auto_size_text/auto_size_text.dart';
@@ -61,7 +62,9 @@ class _SuccessForTimeState extends State<SuccessForTime> {
         for (var calendarKey in user.calendar[date]!['calendarWish'].keys) {
           if (user.calendar[date]!['calendarWish'][calendarKey].isNotEmpty &&
               user.calendar[date]!['calendarWish'][calendarKey][1]) {
-            listOfAchievement.add(BankSuccess(date.split('/')[0],
+
+            listOfAchievement.add(BankSuccess(
+                '${date.split('/')[0]}.${date.split('/')[2].length == 1 ? '0' : ''}${date.split('/')[2]}.${date.split('/')[3]}',
                 user.calendar[date]!['calendarWish'][calendarKey][0]));
           }
         }
@@ -102,7 +105,7 @@ class _SuccessForTimeState extends State<SuccessForTime> {
                 height: size.height / 15,
               ),
               ToMainButton('Трекеры'),
-              Container(height: size.height / 100),
+              Container(height: size.height / 20),
               Center(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -110,40 +113,40 @@ class _SuccessForTimeState extends State<SuccessForTime> {
                     Container(
                       width: size.width / 20,
                     ),
-                    TextButton(
-                      onPressed: () {},
-                      //make onPressed callback empty
-                      child: DropdownButton(
-                        style:
-                            theme.textTheme.bodyLarge!.copyWith(fontSize: 20),
-                        //Dropdown font color
-                        icon: Container(
-                            padding: EdgeInsets.only(
-                                left: selectedName.length * size.height / 400),
-                            child: ImageIcon(
-                              AssetImage('assets/calendar_icon.png'),
-                              color: theme.highlightColor,
-                            )),
-                        //dropdown indicator icon
-                        underline: Container(),
-                        //make underline empty
-                        value: selectedName,
-                        onChanged: (value) {
-                          setState(() {
-                            selectedName = value.toString();
-                          });
-                        },
-                        items: ListOfName.map((itemone) {
-                          return DropdownMenuItem(
-                              value: itemone,
-                              child: AutoSizeText(
-                                itemone,
-                                style: theme.textTheme.bodyLarge!
-                                    .copyWith(fontSize: 20),
-                              ));
-                        }).toList(),
-                      ),
-                    ),
+                    // TextButton(
+                    //   onPressed: () {},
+                    //   //make onPressed callback empty
+                    //   child: DropdownButton(
+                    //     style:
+                    //         theme.textTheme.bodyLarge!.copyWith(fontSize: 20),
+                    //     //Dropdown font color
+                    //     icon: Container(
+                    //         padding: EdgeInsets.only(
+                    //             left: selectedName.length * size.height / 400),
+                    //         child: ImageIcon(
+                    //           AssetImage('assets/calendar_icon.png'),
+                    //           color: theme.highlightColor,
+                    //         )),
+                    //     //dropdown indicator icon
+                    //     underline: Container(),
+                    //     //make underline empty
+                    //     value: selectedName,
+                    //     onChanged: (value) {
+                    //       setState(() {
+                    //         selectedName = value.toString();
+                    //       });
+                    //     },
+                    //     items: ListOfName.map((itemone) {
+                    //       return DropdownMenuItem(
+                    //           value: itemone,
+                    //           child: AutoSizeText(
+                    //             itemone,
+                    //             style: theme.textTheme.bodyLarge!
+                    //                 .copyWith(fontSize: 20),
+                    //           ));
+                    //     }).toList(),
+                    //   ),
+                    // ),
                   ],
                 ),
               ),
@@ -158,25 +161,103 @@ class _SuccessForTimeState extends State<SuccessForTime> {
                     Positioned(
                       // rectangle34mdu (191:5300)
                       left: 59 * fem,
-                      top: 40 * fem,
+                      top: 20 * fem,
                       child: Align(
                         child: SizedBox(
                           width: 309 * fem,
-                          height: 463 * fem,
-                          child: Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(15 * fem),
-                              gradient: LinearGradient(
-                                begin: Alignment(-0.097, 0.104),
-                                end: Alignment(-0, -1.581),
-                                colors: <Color>[
-                                  Color(0xff4b3425),
-                                  Color(0x6be68442),
-                                  Color(0x004b3425)
+                          height: 500 * fem,
+                          child: Column(
+                            children: [
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  InkWell(
+                                    onTap: (){
+                                      setState(() {
+                                        selectedName = 'Сегодня';
+                                      });
+                                    },
+                                    child: Container(width: 100*fem,
+                                    height: 60*fem,
+                                    padding: EdgeInsets.all(5),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(20),
+                                      border: Border.all(
+                                        width: 3,
+                                        color: Color(0xff654631)
+                                      ),
+                                      color: selectedName == 'Сегодня' ? Color(0xffFFF1DA) : Color(0xffEFD8B4)
+                                    ),
+                                      child: AutoSizeText(
+                                        maxLines: 1,
+                                        'Сегодня', style:  theme.textTheme.bodyLarge!.copyWith(fontSize: 20),
+                                      ),
+                                    ),
+                                  ),
+                                  InkWell(
+                                    onTap: (){
+                                      setState(() {
+                                        selectedName = 'Неделя';
+                                      });
+                                    },
+                                    child: Container(width: 100*fem,
+                                      height: 60*fem,
+                                      padding: EdgeInsets.all(5),
+                                      decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(20),
+                                          border: Border.all(
+                                              width: 3,
+                                              color: Color(0xff654631)
+                                          ),
+                                          color: selectedName == 'Неделя' ? Color(0xffFFF1DA) : Color(0xffEFD8B4)
+                                      ),
+                                      child: AutoSizeText(
+                                        maxLines: 1,
+                                        'Неделя', style:  theme.textTheme.bodyLarge!.copyWith(fontSize: 20),
+                                      ),
+                                    ),
+                                  ),
+                                  InkWell(
+                                    onTap: (){
+                                      setState(() {
+                                        selectedName = 'Месяц';
+                                      });
+                                    },
+                                    child: Container(width: 100*fem,
+                                      height: 60*fem,
+                                      padding: EdgeInsets.all(5),
+                                      decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(20),
+                                          border: Border.all(
+                                              width: 3,
+                                              color: Color(0xff654631)
+                                          ),
+                                          color: selectedName == 'Месяц' ? Color(0xffFFF1DA) : Color(0xffEFD8B4)
+                                      ),
+                                      child: AutoSizeText(
+                                        maxLines: 1,
+                                        'Месяц', style:  theme.textTheme.bodyLarge!.copyWith(fontSize: 20),
+                                      ),
+                                    ),
+                                  ),
                                 ],
-                                stops: <double>[0.484, 0.726, 1],
                               ),
-                            ),
+                              Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(15 * fem),
+                                  gradient: LinearGradient(
+                                    begin: Alignment(-0.097, 0.104),
+                                    end: Alignment(-0, -1.581),
+                                    colors: <Color>[
+                                      Color(0xff4b3425),
+                                      Color(0x6be68442),
+                                      Color(0x004b3425)
+                                    ],
+                                    stops: <double>[0.484, 0.726, 1],
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                       ),

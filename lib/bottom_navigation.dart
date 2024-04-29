@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ps/UI/chats/chats.dart';
+import 'package:ps/UI/methodics/web_methodics.dart';
 import 'package:ps/UI/statistic/round_statistic.dart';
 import 'package:ps/UI/trackers/main_screen.dart';
 import 'package:ps/UI/trackers/trackers.dart';
@@ -26,17 +27,7 @@ class _BottomNavigationScreenState extends State<BottomNavigationScreen> {
   @override
   Widget build(BuildContext context) {
     var listOfBode = [
-      MainScreen(), Trackers(), Container(
-        decoration: BoxDecoration(
-          color: Color(0xffF5ECDF)
-        ),
-        child: Center(
-          child: Text('В разработке', style: GoogleFonts.jost(
-              color: const Color(0xff7C4B21),
-              fontSize: 36,
-              fontWeight: FontWeight.w700),),
-        ),
-      ),RoundStatistic() ,widget.body
+      MainScreen(), Trackers(), MethodicsWebView(),RoundStatistic() ,widget.body
     ];
     var theme = Theme.of(context);
     var size = MediaQuery.of(context).size;

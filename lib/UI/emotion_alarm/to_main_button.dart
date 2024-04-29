@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:ps/UI/trackers/main_screen.dart';
 import 'package:ps/bottom_navigation.dart';
@@ -23,8 +25,9 @@ class ToMainButton extends StatelessWidget {
       padding: EdgeInsets.only(left: 10),
       child: InkWell(
           onTap: () async {
+            Random random = Random();
             var isReg = await UserDatabase.isRegister();
-            if(!isReg){Navigator.push(
+            if(!isReg && random.nextInt(10) == 9){Navigator.push(
                 context,
               MaterialPageRoute(
                   builder: (context) => ShouldRegister(widget)));}

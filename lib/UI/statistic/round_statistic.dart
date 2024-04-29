@@ -22,19 +22,20 @@ class _RoundStatisticState extends State<RoundStatistic> {
 
   Future<Map> getSphereCount(DateTime start, DateTime end) async {
     Map sphereCount = {
-      'Карьера': 0,
-      'Развитие': 0,
+      'Финансы/инвестиции': 0,
+      'Карьера/бизнес': 0,
+      'Здоровье/Спорт': 0,
+      'Семья/родные': 0,
+      'Любовь/отношения': 0,
+      'Саморазвитие/учеба': 0,
+      'Хобби/Отдых/Путешествия': 0,
       'Комфорт': 0,
-      'Хобби': 0,
-      'Друзья/Окружение': 0,
-      'Семья/Любовь': 0,
-      'Здоровье': 0,
-      'Финансы/Карьера': 0,
     };
 
     var users = await UserDatabase.users();
     User user = users[0];
     for (var date in user.calendar.keys) {
+      print(date);
       var dateList = date.split('/');
       print(start);
       if (DateTime(int.parse(dateList[3]), int.parse(dateList[2]),
@@ -344,12 +345,10 @@ class _RoundStatisticState extends State<RoundStatistic> {
                   builder: (context, snapshot) {
                     if (snapshot.hasData) {
                       Map data = snapshot.data!;
-                      data['Карьера'] =
-                          ((data['Финансы/Карьера'] + data['Развитие']) / 2)
-                              .floor();
+
                       data['Комфорт'] =
-                          ((data['Хобби'] + data['Друзья/Окружение'] +
-                              data['Семья/Любовь'] + data['Карьера']) / 4)
+                          ((data['Хобби/Отдых/Путешествия'] + data['Любовь/отношения'] +
+                              data['Семья/родные'] + data['Карьера/бизнес']) / 4)
                               .floor();
 
 
@@ -358,7 +357,7 @@ class _RoundStatisticState extends State<RoundStatistic> {
                           Container(
                             child: Image(
                               image:
-                              AssetImage('assets/round_statstic_back.png'),
+                              AssetImage('assets/round_statstic_back_new.png'),
                               width: size.width,
                             ),
                           ),
@@ -374,11 +373,11 @@ class _RoundStatisticState extends State<RoundStatistic> {
                                   PieChartSectionData(value: 10,
                                       title: '',
                                       color: Color(0xff3C894B),
-                                      radius: ((data['Карьера'] == 1 ? 2 : data['Карьера']) /9) *160 * fem),
+                                      radius: ((data['Карьера/бизнес'] == 1 ? 2 : data['Карьера/бизнес']) /9) *160 * fem),
                                   PieChartSectionData(value: 10,
                                       title: '',
                                       color: Color(0xff3B8EBA),
-                                      radius: (data['Развитие']/9) *160 * fem),
+                                      radius: (data['Саморазвитие/учеба']/9) *160 * fem),
                                   PieChartSectionData(value: 10,
                                       title: '',
                                       color: Color(0xff31287B),
@@ -386,23 +385,23 @@ class _RoundStatisticState extends State<RoundStatistic> {
                                   PieChartSectionData(value: 10,
                                       title: '',
                                       color: Color(0xff5C1B8B),
-                                      radius: (data['Хобби']/9) *160 * fem),
+                                      radius: (data['Хобби/Отдых/Путешествия']/9) *160 * fem),
                                   PieChartSectionData(value: 10,
                                       title: '',
                                       color: Color(0xffC62F76),
-                                      radius: (data['Друзья/Окружение']/9) *160 * fem),
+                                      radius: (data['Любовь/отношения']/9) *160 * fem),
                                   PieChartSectionData(value: 10,
                                       title: '',
                                       color: Color(0xffC34002),
-                                      radius: (data['Семья/Любовь']/9) *160 * fem),
+                                      radius: (data['Семья/родные']/9) *160 * fem),
                                   PieChartSectionData(value: 10,
                                       title: '',
                                       color: Color(0xffD3702C),
-                                      radius: (data['Здоровье']/9) *160 * fem),
+                                      radius: (data['Здоровье/Спорт']/9) *160 * fem),
                                   PieChartSectionData(value: 10,
                                       title: '',
                                       color: Color(0xffE7CB44),
-                                      radius: (data['Финансы/Карьера']/9) *160 * fem),
+                                      radius: (data['Финансы/инвестиции']/9) *160 * fem),
                                 ])),
                           ),
                         ],

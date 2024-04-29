@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:ps/UI/trackers/main_screen.dart';
@@ -39,7 +41,8 @@ class ResultAn extends StatelessWidget {
             Container(height: size.height / 20),
             InkWell(
                 onTap: () async {
-                  if (!(await UserDatabase.isRegister())) {
+                  Random random = Random();
+                  if (!(await UserDatabase.isRegister()) && random.nextInt(10) == 9) {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -54,33 +57,6 @@ class ResultAn extends StatelessWidget {
                 child: const ToMainButton()),
             Container(
               height: size.height / 15,
-            ),
-            Card(
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20)),
-              elevation: 20,
-              shadowColor: Colors.black,
-              child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                      padding: EdgeInsets.zero,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20))),
-                  onPressed: () {},
-                  child: Ink(
-                      height: size.height / 14,
-                      width: size.width / 1.5,
-                      decoration: BoxDecoration(
-                          gradient: const LinearGradient(
-                              begin: Alignment.topCenter,
-                              end: Alignment.bottomCenter,
-                              colors: [
-                                Color(0xff7E9349),
-                                Color(0xffE8FEB7)
-                              ]),
-                          borderRadius: BorderRadius.circular(20)),
-                      child: Center(
-                          child: Text('Ваши показатели',
-                              style: theme.textTheme.titleMedium!.copyWith(fontSize: 30))))),
             ),
             Container(height: size.height / 15),
             Container(

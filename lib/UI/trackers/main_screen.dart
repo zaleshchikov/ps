@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ps/UI/happy_test/welcome_happy_test.dart';
+import 'package:ps/UI/methodics/web_methodics.dart';
 import 'package:ps/UI/statistic/tree_statistic.dart';
 import 'package:ps/UI/trackers/trackers.dart';
 
@@ -62,21 +63,33 @@ class MainScreen extends StatelessWidget {
               ),
             ),
             Container(height: size.height / 40),
-            Container(
-              child: Image(image: AssetImage('assets/method_img_new.png')),
-              height: size.height / 6.3,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(27),
-                boxShadow: const [
-                  BoxShadow(
-                    color: Colors.black12,
-                  ),
-                  BoxShadow(
-                    color: Colors.white,
-                    spreadRadius: -4.0,
-                    blurRadius: 5.0,
-                  ),
-                ],
+            InkWell(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  PageRouteBuilder(
+                    pageBuilder: (_, __, ___) => BottomNavigationScreen(MethodicsWebView()),
+                    transitionDuration: Duration(milliseconds: 400),
+                    transitionsBuilder: (_, a, __, c) =>
+                        FadeTransition(opacity: a, child: c),
+                  ),);
+              },
+              child: Container(
+                child: Image(image: AssetImage('assets/method_img_new.png')),
+                height: size.height / 6.3,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(27),
+                  boxShadow: const [
+                    BoxShadow(
+                      color: Colors.black12,
+                    ),
+                    BoxShadow(
+                      color: Colors.white,
+                      spreadRadius: -4.0,
+                      blurRadius: 5.0,
+                    ),
+                  ],
+                ),
               ),
             ),
             Container(height: size.height / 40),

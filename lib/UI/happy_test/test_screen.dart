@@ -102,6 +102,7 @@ class _TestScreenState extends State<TestScreen> {
                               () async {
                               print(widget.sum);
                               if (widget.number != 20) {
+                                await UserDatabase.changeTest(widget.number, widget.sum);
                                 Navigator.of(context).push(
                                   PageRouteBuilder(
                                     pageBuilder:
@@ -129,7 +130,8 @@ class _TestScreenState extends State<TestScreen> {
                                   ),
                                 );
                               } else {
-                                UserDatabase.addResult(
+                                await UserDatabase.resetTest();
+                                await UserDatabase.addResult(
                                     widget.sum + (4 - index));
                                 var users = await UserDatabase.users();
                                 var user = users[0];
@@ -140,7 +142,7 @@ class _TestScreenState extends State<TestScreen> {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => ShouldRegister(BottomNavigationScreen(ResultAn(
+                                        builder: (context) => (BottomNavigationScreen(ResultAn(
                                             widget.sum + (4 - index),
                                             user.testResult)))));
                               }

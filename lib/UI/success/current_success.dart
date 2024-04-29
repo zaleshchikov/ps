@@ -21,12 +21,13 @@ class _TestScreenState extends State<CurrentSuccess> {
   var _selectedIndex = 6;
 
   var listOfDegree = [
-    'Финансы/Карьера',
-    'Здоровье',
-    'Семья/Любовь',
-    'Друзья/Окружение',
-    'Развитие',
-    'Хобби'
+    'Финансы/инвестиции',
+    'Карьера/бизнес',
+    'Здоровье/Спорт',
+    'Семья/родные',
+    'Любовь/отношения',
+    'Саморазвитие/учеба',
+    'Хобби/Отдых/Путешествия',
   ];
 
   var listOfColors = [
@@ -36,6 +37,7 @@ class _TestScreenState extends State<CurrentSuccess> {
     Color(0xffFF83BE),
     Color(0xff86D0F7),
     Color(0xffA598F4),
+    Color(0xff7a66fd),
   ];
 
   var listOfColorsCircle = [
@@ -45,6 +47,7 @@ class _TestScreenState extends State<CurrentSuccess> {
     Color(0xffBC477E),
     Color(0xff3F82A5),
     Color(0xff584AAC),
+    Color(0xff2b2085),
   ];
 
   @override
@@ -82,7 +85,7 @@ class _TestScreenState extends State<CurrentSuccess> {
                         itemCount: listOfDegree.length,
                         itemBuilder: (BuildContext context, int index) {
                           return Container(
-                            height: size.height/9,
+                            height: size.height/11,
                             padding: EdgeInsets.only(bottom: 25),
                             width: size.width/1.5,
                             child: ElevatedButton(
