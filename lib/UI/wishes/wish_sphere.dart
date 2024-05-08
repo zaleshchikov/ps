@@ -5,6 +5,7 @@ import 'package:ps/UI/emotion_alarm/to_main_button.dart';
 import 'package:ps/UI/wishes/add_wish.dart';
 import 'package:ps/UI/wishes/sorted_wish_list.dart';
 
+import '../../bottom_navigation.dart';
 import '../../db/user_db.dart';
 
 class WishSphere extends StatefulWidget {
@@ -17,7 +18,7 @@ class WishSphere extends StatefulWidget {
 }
 
 class _TestScreenState extends State<WishSphere> {
-  var _selectedIndex = 6;
+  var _selectedIndex = 10;
 
   var listOfDegree = [
     'Финансы/инвестиции',
@@ -66,7 +67,7 @@ class _TestScreenState extends State<WishSphere> {
                 children: [
                   Container(
                       padding: EdgeInsets.only(top:20),
-                      child: ToMainButton('Будильник эмоций')),
+                      child: ToMainButton('Желание дня')),
                   Container(height: size.height/30),
                   Center(
                     child: Text(
@@ -96,7 +97,7 @@ class _TestScreenState extends State<WishSphere> {
                                   setState(() {
                                     Navigator.push(
                                         context,
-                                        MaterialPageRoute(builder: (context) => AddedWish(widget.wish)));
+                                        MaterialPageRoute(builder: (context) => BottomNavigationScreen(AddedWish(widget.wish))));
                                   });
                                 });
 

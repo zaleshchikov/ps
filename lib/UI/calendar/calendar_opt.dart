@@ -7,6 +7,7 @@ import 'package:ps/UI/calendar/your_calendar.dart';
 import 'package:ps/UI/emotion_alarm/to_main_button.dart';
 import 'dart:ui';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:ps/bottom_navigation.dart';
 import 'package:ps/db/user_db.dart';
 import '../../page-1/utils.dart';
 import 'choice_calendar.dart';
@@ -52,7 +53,7 @@ class CalendarOpt extends StatelessWidget {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => AutoCalendar()));
+                              builder: (context) => BottomNavigationScreen(AutoCalendar())));
                     },
                     child: Container(
                       child: Image(image: AssetImage('assets/auto_calendar.png'), fit: BoxFit.fitWidth,),

@@ -233,54 +233,8 @@ class AddedWish extends StatelessWidget {
                   ),
                 ),
               ),
-              Positioned(
-                // rectangle4181YiX (212:4155)
-                left: 60*fem,
-                top: 725*fem,
-                child: Align(
-                  child: SizedBox(
-                    width: 322*fem,
-                    height: 44*fem,
-                    child: Image.asset(
-                      'assets/page-1/images/rectangle-4181-sN3.png',
-                      width: 322*fem,
-                      height: 44*fem,
-                    ),
-                  ),
-                ),
-              ),
-              Positioned(
-                // 4gs (212:4156)
-                left: 82*fem,
-                right: 82*fem,
 
-                top: 730*fem,
-                child: InkWell(
-                  onTap: (){
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => BottomNavigationScreen(MainScreen())));
-                  },
-                  child: Align(
-                    child: SizedBox(
-                      width: 263*fem,
-                      height: 29*fem,
-                      child: Text(
-                        'Перейти в главное меню',
-                        textAlign: TextAlign.center,
-                        style: SafeGoogleFont (
-                          'Jost',
-                          fontSize: 20*ffem,
-                          fontWeight: FontWeight.w400,
-                          height: 1.445*ffem/fem,
-                          color: Color(0xff4b3425),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
+
             ],
           ),
         ),

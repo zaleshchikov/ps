@@ -3,6 +3,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ps/UI/emotion_alarm/emotons_dairy.dart';
+import 'package:ps/UI/emotion_alarm/to_main_button.dart';
 import 'package:ps/UI/trackers/main_screen.dart';
 import 'package:ps/bottom_navigation.dart';
 import 'dart:ui';
@@ -50,44 +51,13 @@ class _EmotionsNoteState extends State<EmotionsNote> {
               Container(
                 height: size.height / 20,
               ),
+              Row(
+                children: [
+                  ToMainButton('Будильник эмоций'),
+                ],
+              ),
               Container(
-                // autogroupz6mzedq (KqnvLd6LfmwouZ6bPkZ6MZ)
-                margin:
-                    EdgeInsets.fromLTRB(0 * fem, 0 * fem, 85.5 * fem, 29 * fem),
-                width: double.infinity,
-                child: GestureDetector(
-                  behavior: HitTestBehavior.translucent,
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                BottomNavigationScreen(MainScreen())));
-                  },
-                  child: Container(
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Container(
-                          margin: EdgeInsets.fromLTRB(
-                              0 * fem, 1 * fem, 26.67 * fem, 0 * fem),
-                          width: 18.33 * fem,
-                          height: 20 * fem,
-                          child: Image.asset(
-                            'assets/page-1/images/expandleftstop-uvK.png',
-                            width: 18.33 * fem,
-                            height: 20 * fem,
-                          ),
-                        ),
-                        Text(
-                            // V8f (191:5905)
-                            'Будильник эмоций ',
-                            style: theme.textTheme.bodyLarge!
-                                .copyWith(fontSize: 20)),
-                      ],
-                    ),
-                  ),
-                ),
+                height: size.height / 10,
               ),
               Container(
                 // bxP (191:5906)

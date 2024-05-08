@@ -1,5 +1,6 @@
 
 import 'dart:collection';
+import 'package:intl/intl.dart';
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
@@ -97,7 +98,7 @@ class _SuccessForTimeState extends State<SuccessForTime> {
               color: Color(0xfff5ecdf),
               image: DecorationImage(
                   image:
-                      AssetImage('assets/page-1/images/vector-312-NR9.png'))),
+                      AssetImage('assets/page-1/images/vector-312-NR9.png'), fit: BoxFit.fill)),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
@@ -354,7 +355,13 @@ class _SuccessForTimeState extends State<SuccessForTime> {
                                         children: [
                                           Container(height: size.height / 70),
                                           selectedName != 'Неделя'
-                                              ? Container()
+                                              ? selectedName == 'Сегодня' ? Center(
+                                            child: Text(DateFormat('yyyy-MM-dd').format(DateTime.now()),
+                                                textAlign: TextAlign.center,
+                                                style: theme
+                                                    .textTheme.titleMedium!
+                                                    .copyWith(fontSize: 26)),
+                                          ) : Container()
                                               : AutoSizeText(
                                                   '${start.day}.${start.month}.${start.year}- ${end.day}.${end.month}.${end.year}',
                                                   style: theme
@@ -363,11 +370,7 @@ class _SuccessForTimeState extends State<SuccessForTime> {
                                                     fontWeight: FontWeight.w400,
                                                   )),
                                           Container(height: size.height / 70),
-                                          AutoSizeText('Ваш успех',
-                                              textAlign: TextAlign.center,
-                                              style: theme
-                                                  .textTheme.titleMedium!
-                                                  .copyWith(fontSize: 26)),
+
                                           Scrollbar(
                                           thumbVisibility: true,
                                             child: SingleChildScrollView(
@@ -485,7 +488,7 @@ class _SuccessForTimeState extends State<SuccessForTime> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => SuccessNote()));
+                              builder: (context) => SuccessNote(DateTime.now())));
                     },
                     child: Container(
                       width: size.width / 2.6,

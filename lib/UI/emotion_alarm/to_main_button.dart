@@ -27,7 +27,7 @@ class ToMainButton extends StatelessWidget {
           onTap: () async {
             Random random = Random();
             var isReg = await UserDatabase.isRegister();
-            if(!isReg && random.nextInt(10) == 9){Navigator.push(
+            if(!isReg && random.nextInt(10) == 90){Navigator.push(
                 context,
               MaterialPageRoute(
                   builder: (context) => ShouldRegister(widget)));}

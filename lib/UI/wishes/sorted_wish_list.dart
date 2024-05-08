@@ -4,12 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:ps/bottom_navigation.dart';
 import 'dart:ui';
 import '../../db/user_db.dart';
 import '../../page-1/utils.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:ps/db/wish_model.dart';
 
+import '../emotion_alarm/to_main_button.dart';
 import 'add_wish.dart';
 
 class SortedWishList extends StatefulWidget {
@@ -297,41 +299,8 @@ class _EmotionsNoteState extends State<SortedWishList> {
               Container(
                 height: size.height / 20,
               ),
-              Container(
-                // autogroupz6mzedq (KqnvLd6LfmwouZ6bPkZ6MZ)
-                margin:
-                EdgeInsets.fromLTRB(0 * fem, 0 * fem, 85.5 * fem, 29 * fem),
-                width: double.infinity,
-                child: GestureDetector(
-                  behavior: HitTestBehavior.translucent,
-                  onTap: () {
-                    print(1);
-                  },
-                  child: Container(
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Container(
-                          margin: EdgeInsets.fromLTRB(
-                              0 * fem, 1 * fem, 26.67 * fem, 0 * fem),
-                          width: 18.33 * fem,
-                          height: 20 * fem,
-                          child: Image.asset(
-                            'assets/page-1/images/expandleftstop-uvK.png',
-                            width: 18.33 * fem,
-                            height: 20 * fem,
-                          ),
-                        ),
-                        Text(
-                          // V8f (191:5905)
-                            'Желание дня ',
-                            style: theme.textTheme.bodyLarge!
-                                .copyWith(fontSize: 20)),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
+              ToMainButton('Желание дня'),
+
               Container(
                 // bxP (191:5906)
                 margin:
@@ -362,7 +331,7 @@ class _EmotionsNoteState extends State<SortedWishList> {
                                     Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                            builder: (context) => AddedWish(listOfWishes[ind])));
+                                            builder: (context) =>BottomNavigationScreen(AddedWish(listOfWishes[ind]))));
                                   },
                                   child: Container(
                                       height: size.height / 11,

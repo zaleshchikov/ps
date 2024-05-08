@@ -10,8 +10,9 @@ import 'package:ps/db/user_db.dart';
 class CurrentSuccess extends StatefulWidget {
 
   Success success = Success('', '');
+  DateTime date = DateTime.now();
   CurrentSuccess();
-  CurrentSuccess.Note(this.success);
+  CurrentSuccess.Note(this.success, this.date);
 
   @override
   State<CurrentSuccess> createState() => _TestScreenState();
@@ -95,7 +96,7 @@ class _TestScreenState extends State<CurrentSuccess> {
                                 });
                                 if(widget.success.success != '') {
                                   await UserDatabase.addSuccessToBank(
-                                      DateTime.now(), widget.success.success,
+                                      widget.date, widget.success.success,
                                       listOfDegree[index]);
                                   Future.delayed(
                                       const Duration(milliseconds: 1000), () {

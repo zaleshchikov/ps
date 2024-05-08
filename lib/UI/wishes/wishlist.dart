@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:ps/UI/emotion_alarm/to_main_button.dart';
 import 'package:ps/UI/wishes/add_wish.dart';
 import 'package:ps/UI/wishes/wish_sphere.dart';
 import 'package:ps/UI/wishes/wishlist_sphere.dart';
@@ -256,6 +257,8 @@ class _EmotionsNoteState extends State<WishList> {
     'Желание 8'
   ];
 
+  List oldWishes = [];
+
   @override
   Widget build(BuildContext context) {
 
@@ -293,44 +296,7 @@ class _EmotionsNoteState extends State<WishList> {
               Container(
                 height: size.height / 20,
               ),
-              Container(
-                // autogroupz6mzedq (KqnvLd6LfmwouZ6bPkZ6MZ)
-                margin:
-                    EdgeInsets.fromLTRB(0 * fem, 0 * fem, 85.5 * fem, 29 * fem),
-                width: double.infinity,
-                child: GestureDetector(
-                  behavior: HitTestBehavior.translucent,
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => BottomNavigationScreen(MainScreen())));
-                  },
-                  child: Container(
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Container(
-                          margin: EdgeInsets.fromLTRB(
-                              0 * fem, 1 * fem, 26.67 * fem, 0 * fem),
-                          width: 18.33 * fem,
-                          height: 20 * fem,
-                          child: Image.asset(
-                            'assets/page-1/images/expandleftstop-uvK.png',
-                            width: 18.33 * fem,
-                            height: 20 * fem,
-                          ),
-                        ),
-                        Text(
-                            // V8f (191:5905)
-                            'Желание дня ',
-                            style: theme.textTheme.bodyLarge!
-                                .copyWith(fontSize: 20)),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
+              ToMainButton('Желание дня'),
               Container(
                 // bxP (191:5906)
                 margin:
@@ -344,7 +310,8 @@ class _EmotionsNoteState extends State<WishList> {
                     style: theme.textTheme.titleLarge!.copyWith(
                         fontSize: 28, color: theme.textTheme.bodySmall!.color)),
               ),
-              RawScrollbar(
+              Scrollbar(
+                thumbVisibility: true,
                 child: SingleChildScrollView(
                     child: Container(
                         height: size.height / 2.2,
@@ -375,7 +342,7 @@ class _EmotionsNoteState extends State<WishList> {
                                       Navigator.push(
                                           context,
                                           MaterialPageRoute(
-                                              builder: (context) => AddedWish(listOfWishes[ind])));
+                                              builder: (context) => BottomNavigationScreen(AddedWish(listOfWishes[ind]))));
                               },
                                     child: Container(
                                         height: size.height / 11,

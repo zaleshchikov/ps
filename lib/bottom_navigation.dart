@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ps/UI/chats/chats.dart';
 import 'package:ps/UI/methodics/web_methodics.dart';
+import 'package:ps/UI/statistic/choose_statistic.dart';
 import 'package:ps/UI/statistic/round_statistic.dart';
 import 'package:ps/UI/trackers/main_screen.dart';
 import 'package:ps/UI/trackers/trackers.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class BottomNavigationScreen extends StatefulWidget {
   BottomNavigationScreen(this.body);
@@ -18,14 +20,28 @@ class BottomNavigationScreen extends StatefulWidget {
 class _BottomNavigationScreenState extends State<BottomNavigationScreen> {
   var _selectedIndex = 4;
 
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
+
 
   @override
   Widget build(BuildContext context) {
+    void _onItemTapped(int index) async {
+      if(index == 3){
+        final SharedPreferences prefs = await SharedPreferences.getInstance();
+        var isUsed = prefs.getBool('statistic');
+        if(isUsed == null || !isUsed){
+          Navigator.of(context).push(
+              MaterialPageRoute(builder: (context) =>
+                  ChooseStatistic()));
+        } else{
+          setState(() {
+            _selectedIndex = index;
+          });
+        }
+      } else{
+      setState(() {
+        _selectedIndex = index;
+      });
+    }}
     var listOfBode = [
       MainScreen(), Trackers(), MethodicsWebView(),RoundStatistic() ,widget.body
     ];

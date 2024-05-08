@@ -149,7 +149,7 @@ class YourCalendar extends StatelessWidget {
               Container(height: size.height / 100),
               Center(
                   child: Text(
-                ' Чтобы посмотреть задание\nна сегодня, нажмите на дату.',
+                'Чтобы поставить отметку о \nвыполнении задания,нажмите на дату.',
                 style: theme.textTheme.titleMedium!
                     .copyWith(fontWeight: FontWeight.w900, fontSize: 18),
                 textAlign: TextAlign.center,
@@ -563,34 +563,7 @@ class YourCalendar extends StatelessWidget {
                   ],
                 ),
               ),
-              Container(
-                width: size.width / 1.2,
-                height: size.height / 14.5,
-                child: ElevatedButton(
-                    onPressed: () {
 
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) =>
-                                  BottomNavigationScreen(Trackers())));
-                    },
-                    child: Text(
-                      'Перейти в главное меню',
-                      style: theme.textTheme.bodySmall!.copyWith(
-                          fontFamily: GoogleFonts.inter().fontFamily,
-                          fontSize: 20),
-                    ),
-                    style: ButtonStyle(
-                        backgroundColor:
-                            MaterialStateProperty.all<Color>(theme.hoverColor),
-                        shape:
-                            MaterialStateProperty.all<RoundedRectangleBorder>(
-                                RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(30),
-                                    side:
-                                        BorderSide(color: theme.hoverColor))))),
-              )
             ],
           ),
         ),

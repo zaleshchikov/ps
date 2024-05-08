@@ -17,7 +17,7 @@ class Scene extends StatelessWidget {
         width: double.infinity,
         height: 165*fem,
         child: Text(
-          'Поздравляем, Вы добавили отличное желание дня. Позже Вам нужно сделать отметку о его выполнении. Мы напомним Вам об этом',
+          'Поздравляем, Вы добавили отличное желание дня. Позже Вам нужно сделать отметку о его выполнении. Мы напомним Вам об этом.',
           textAlign: TextAlign.center,
           style: SafeGoogleFont (
             'Jost',

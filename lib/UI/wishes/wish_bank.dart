@@ -158,7 +158,7 @@ class _EmotionsNoteState extends State<WishBank> {
                                                   Navigator.push(
                                                       context,
                                                       MaterialPageRoute(
-                                                          builder: (context) => AddedWish(snapshot.data![index].wish.wish)));
+                                                          builder: (context) => BottomNavigationScreen(AddedWish(snapshot.data![index].wish.wish))));
                                                 }, child: Text('Повторить', style: theme.textTheme.bodySmall!.copyWith(fontSize: 15))),Container(width: size.width/10,)
                                               ],
                                             )

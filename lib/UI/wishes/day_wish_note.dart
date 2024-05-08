@@ -8,6 +8,7 @@ import '../../db/user_db.dart';
 import '../../page-1/utils.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
+import '../emotion_alarm/to_main_button.dart';
 import 'add_wish.dart';
 
 class DayWishNote extends StatefulWidget {
@@ -34,7 +35,7 @@ class _EmotionsNoteState extends State<DayWishNote> {
           // 47u (191:5904)
           padding: EdgeInsets.fromLTRB(26 * fem, 8 * fem, 26.5 * fem, 76 * fem),
           width: double.infinity,
-          decoration: const BoxDecoration(
+          decoration:  BoxDecoration(
             image: DecorationImage(
                 image: AssetImage("assets/daywish.png"), fit: BoxFit.cover),
             color: Color(0xfff5ecdf),
@@ -45,41 +46,7 @@ class _EmotionsNoteState extends State<DayWishNote> {
               Container(
                 height: size.height / 20,
               ),
-              Container(
-                // autogroupz6mzedq (KqnvLd6LfmwouZ6bPkZ6MZ)
-                margin:
-                    EdgeInsets.fromLTRB(0 * fem, 0 * fem, 85.5 * fem, 29 * fem),
-                width: double.infinity,
-                child: GestureDetector(
-                  behavior: HitTestBehavior.translucent,
-                  onTap: () {
-                    print(1);
-                  },
-                  child: Container(
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Container(
-                          margin: EdgeInsets.fromLTRB(
-                              0 * fem, 1 * fem, 26.67 * fem, 0 * fem),
-                          width: 18.33 * fem,
-                          height: 20 * fem,
-                          child: Image.asset(
-                            'assets/page-1/images/expandleftstop-uvK.png',
-                            width: 18.33 * fem,
-                            height: 20 * fem,
-                          ),
-                        ),
-                        Text(
-                            // V8f (191:5905)
-                            'Желание дня ',
-                            style: theme.textTheme.bodyLarge!
-                                .copyWith(fontSize: 20)),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
+              ToMainButton('Желание дня'),
               Container(
                 // bxP (191:5906)
                 margin:

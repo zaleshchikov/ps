@@ -190,11 +190,11 @@ class AutoCalendar extends StatelessWidget {
     'Сделать 10-минутную разминку.',
     'Лечь спать до 23:00 и выспаться.',
     'Постоять под теплым душем.',
-    'Пока кататься на коньках или лыжах.',
+    'Пора кататься на коньках или лыжах.',
     'Выйти утром на прогулку до завтрака.',
     'Сходить на прогулку в лес.',
-    'Пока кататься на велосипеде.',
-    'Пока кататься на роликах.',
+    'Пора кататься на велосипеде.',
+    'Пора кататься на роликах.',
     'Сходить на тренировку.',
     'Сходить на массаж.',
     'Поиграть в пляжный волейбол или футбол.',
@@ -231,7 +231,8 @@ class AutoCalendar extends StatelessWidget {
     'Завести копилку.'
   ];
 
-  
+
+
   @override
   Widget build(BuildContext context) {
 
@@ -244,7 +245,17 @@ class AutoCalendar extends StatelessWidget {
       ...evolution.map((e) => [e, 'Саморазвитие/учеба']),
       ...hobby.map((e) => [e, 'Хобби/Отдых/Путешествия']),
     ];
-    
+
+    Future getTodayWish() async{
+      var wish = await UserDatabase.getCalendarWish(DateTime.now(), 'autoCalendar');
+      if(wish=='Ничего не запланировано'){
+        var randIndex = random.nextInt(activities.length);
+        await UserDatabase.addCalendarWish(DateTime.now(), 'autoCalendar', activities[randIndex][0], activities[randIndex][1] );
+      }
+      wish = await UserDatabase.getCalendarWish(DateTime.now(), 'autoCalendar');
+      return wish;
+    }
+
     var theme = Theme.of(context);
     var size = MediaQuery.of(context).size;
     double baseWidth = 430;
@@ -276,7 +287,7 @@ class AutoCalendar extends StatelessWidget {
                         ), textAlign: TextAlign.center)),
                   Container(height: size.height / 50),
                   Container(
-                    height: size.height/2,
+                    height: size.height/1.5,
                     child: Stack(
                       children: [
                         Positioned(
@@ -286,7 +297,7 @@ class AutoCalendar extends StatelessWidget {
                           child: Container(
                             padding: EdgeInsets.fromLTRB(2.5*fem, 25*fem, 2.5*fem, 74*fem),
                             width: 372*fem,
-                            height: 400*fem,
+                            height: 550*fem,
                             decoration: BoxDecoration (
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(40*fem),
@@ -296,312 +307,365 @@ class AutoCalendar extends StatelessWidget {
                         ),
                         Positioned(
                           child: Center(
-                            child: SizedBox(
-                                height: 1000,
-                                width: 300,
-                                child: TableCalendar(
-                                  calendarBuilders: CalendarBuilders(
-                                    todayBuilder: (context, day, focusedDay){
-                                      return FutureBuilder(
-                                        future: UserDatabase.getStatusOfWish(day, 'autoCalendar'),
-                                        builder: (context, snapshot){
-                                          if(snapshot.hasData){
-                                            print('Данные есть');
-                                            return Container(
-                                              child: Center(
-                                                child: Column(
-                                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                  children: [
-                                                    Text(
+                            child: Column(
+                              children: [
+                                SizedBox(
+                                    height: 370*fem,
+                                    width: 300,
+                                    child: TableCalendar(
+                                      calendarBuilders: CalendarBuilders(
+                                        todayBuilder: (context, day, focusedDay){
+                                          return FutureBuilder(
+                                            future: UserDatabase.getStatusOfWish(day, 'autoCalendar'),
+                                            builder: (context, snapshot){
+                                              if(snapshot.hasData){
+                                                print('Данные есть');
+                                                return Container(
+                                                  child: Center(
+                                                    child: Column(
+                                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                      children: [
+                                                        Container(
+                                                          height: size.height/25,
+                                                          width: size.height/25,
+                                                          decoration: BoxDecoration(
+                                                              borderRadius: BorderRadius.circular(100),
+                                                              border: Border.all(
+                                                                  width: 2,
+                                                                  color: Colors.black
+                                                              )
+                                                          ),
+                                                          child: Center(
+                                                            child: Text(
+                                                              '${day.day}',
+                                                              style: SafeGoogleFont(
+                                                                'Jost',
+                                                                fontSize: 25 * ffem,
+                                                                fontWeight:
+                                                                FontWeight.w400,
+                                                                height:
+                                                                1.445 * ffem / fem,
+                                                                color:
+                                                                Color(0xff4B3425),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        Container(
+                                                          width: size.width/15,
+                                                          height: size.height/120,
+                                                          decoration: BoxDecoration(
+                                                            color: snapshot.data == true ? Color(0xffA5B879) : Color(0xffEEA27D)
+                                                          ),
+                                                        )
+                                                      ],
+                                                    ),
+                                                  ),
+                                                );
+                                              }
+                                              else {
+                                                print('Данных нет');
+                                                return Container(
+                                                  height: size.height/25,
+                                                  width: size.height/25,
+                                                  decoration: BoxDecoration(
+                                                      borderRadius: BorderRadius.circular(100),
+                                                      border: Border.all(
+                                                          width: 2,
+                                                          color: Colors.black
+                                                      )
+                                                  ),
+                                                  child: Center(
+                                                    child: Text(
                                                       '${day.day}',
-                                                      style:  SafeGoogleFont (
+                                                      style: SafeGoogleFont(
                                                         'Jost',
-                                                        fontSize: 25*ffem,
-                                                        fontWeight: FontWeight.w400,
-                                                        height: 1.445*ffem/fem,
-                                                        color: Color(0xff4B3425),
+                                                        fontSize: 25 * ffem,
+                                                        fontWeight:
+                                                        FontWeight.w400,
+                                                        height:
+                                                        1.445 * ffem / fem,
+                                                        color:
+                                                        Color(0xff4B3425),
                                                       ),
                                                     ),
-                                                    Container(
-                                                      width: size.width/15,
-                                                      height: size.height/120,
-                                                      decoration: BoxDecoration(
-                                                        color: snapshot.data == true ? Color(0xffA5B879) : Color(0xffEEA27D)
-                                                      ),
-                                                    )
-                                                  ],
-                                                ),
-                                              ),
-                                            );
-                                          }
-                                          else {
-                                            print('Данных нет');
-                                            return Container(
-                                              child: Center(
-                                                child: Column(
-                                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                  children: [
-                                                    Text(
-                                                      '${day.day}',
-                                                      style:  SafeGoogleFont (
-                                                        'Jost',
-                                                        fontSize: 25*ffem,
-                                                        fontWeight: FontWeight.w400,
-                                                        height: 1.445*ffem/fem,
-                                                        color: Color(0xff4B3425),
-                                                      ),
-                                                    ),
-                                                    Container(
-                                                      width: size.width/15,
-                                                      height: size.height/120,
-                                                      decoration: BoxDecoration(
-                                                          color: Color(0xffEEA27D)
-                                                      ),
-                                                    )
-                                                  ],
-                                                ),
-                                              ),
-                                            );
-                                          }
+                                                  ),
+                                                );
+                                              }
+                                            },
+                                          );
                                         },
-                                      );
-                                    },
-                                    outsideBuilder: (context, day, focusedDay){
-                                      return FutureBuilder(
-                                        future: UserDatabase.getStatusOfWish(day, 'autoCalendar'),
-                                        builder: (context, snapshot){
-                                          if(snapshot.hasData){
-                                            print('Данные есть');
-                                            return Container(
-                                              child: Center(
-                                                child: Column(
-                                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                  children: [
-                                                    Text(
-                                                      '${day.day}',
-                                                      style:  SafeGoogleFont (
-                                                        'Jost',
-                                                        fontSize: 25*ffem,
-                                                        fontWeight: FontWeight.w400,
-                                                        height: 1.445*ffem/fem,
-                                                        color: Color(0xff4B3425),
-                                                      ),
+                                        outsideBuilder: (context, day, focusedDay){
+                                          return FutureBuilder(
+                                            future: UserDatabase.getStatusOfWish(day, 'autoCalendar'),
+                                            builder: (context, snapshot){
+                                              if(snapshot.hasData){
+                                                print('Данные есть');
+                                                return Container(
+                                                  child: Center(
+                                                    child: Column(
+                                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                      children: [
+                                                        Text(
+                                                          '${day.day}',
+                                                          style:  SafeGoogleFont (
+                                                            'Jost',
+                                                            fontSize: 25*ffem,
+                                                            fontWeight: FontWeight.w400,
+                                                            height: 1.445*ffem/fem,
+                                                            color: Color(0xff4B3425),
+                                                          ),
+                                                        ),
+                                                        Container(
+                                                          width: size.width/15,
+                                                          height: size.height/120,
+                                                          decoration: BoxDecoration(
+                                                              color: snapshot.data == true ? Color(0xffA5B879) : Color(0xffEEA27D)
+                                                          ),
+                                                        )
+                                                      ],
                                                     ),
-                                                    Container(
-                                                      width: size.width/15,
-                                                      height: size.height/120,
-                                                      decoration: BoxDecoration(
-                                                          color: snapshot.data == true ? Color(0xffA5B879) : Color(0xffEEA27D)
-                                                      ),
-                                                    )
-                                                  ],
-                                                ),
-                                              ),
-                                            );
-                                          }
-                                          else {
-                                            print('Данных нет');
-                                            return Container(
-                                              child: Center(
-                                                child: Column(
-                                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                  children: [
-                                                    Text(
-                                                      '${day.day}',
-                                                      style:  SafeGoogleFont (
-                                                        'Jost',
-                                                        fontSize: 25*ffem,
-                                                        fontWeight: FontWeight.w400,
-                                                        height: 1.445*ffem/fem,
-                                                        color: Color(0xff4B3425),
-                                                      ),
+                                                  ),
+                                                );
+                                              }
+                                              else {
+                                                print('Данных нет');
+                                                return Container(
+                                                  child: Center(
+                                                    child: Column(
+                                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                      children: [
+                                                        Text(
+                                                          '${day.day}',
+                                                          style:  SafeGoogleFont (
+                                                            'Jost',
+                                                            fontSize: 25*ffem,
+                                                            fontWeight: FontWeight.w400,
+                                                            height: 1.445*ffem/fem,
+                                                            color: Color(0xff4B3425),
+                                                          ),
+                                                        ),
+                                                        Container(
+                                                          width: size.width/15,
+                                                          height: size.height/120,
+                                                          decoration: BoxDecoration(
+                                                              color: Color(0xffEEA27D)
+                                                          ),
+                                                        )
+                                                      ],
                                                     ),
-                                                    Container(
-                                                      width: size.width/15,
-                                                      height: size.height/120,
-                                                      decoration: BoxDecoration(
-                                                          color: Color(0xffEEA27D)
-                                                      ),
-                                                    )
-                                                  ],
-                                                ),
-                                              ),
-                                            );
-                                          }
+                                                  ),
+                                                );
+                                              }
+                                            },
+                                          );
                                         },
-                                      );
-                                    },
-                                    defaultBuilder: (context, day, focusedDay){
-                                      return FutureBuilder(
-                                        future: UserDatabase.getStatusOfWish(day, 'autoCalendar'),
-                                        builder: (context, snapshot){
-                                          if(snapshot.hasData){
-                                            print('Данные есть');
-                                            return Container(
-                                              child: Center(
-                                                child: Column(
-                                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                  children: [
-                                                    Text(
-                                                      '${day.day}',
-                                                      style:  SafeGoogleFont (
-                                                        'Jost',
-                                                        fontSize: 25*ffem,
-                                                        fontWeight: FontWeight.w400,
-                                                        height: 1.445*ffem/fem,
-                                                        color: Color(0xff4B3425),
-                                                      ),
+                                        defaultBuilder: (context, day, focusedDay){
+                                          return FutureBuilder(
+                                            future: UserDatabase.getStatusOfWish(day, 'autoCalendar'),
+                                            builder: (context, snapshot){
+                                              if(snapshot.hasData){
+                                                print('Данные есть');
+                                                return Container(
+                                                  child: Center(
+                                                    child: Column(
+                                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                      children: [
+                                                        Text(
+                                                          '${day.day}',
+                                                          style:  SafeGoogleFont (
+                                                            'Jost',
+                                                            fontSize: 25*ffem,
+                                                            fontWeight: FontWeight.w400,
+                                                            height: 1.445*ffem/fem,
+                                                            color: Color(0xff4B3425),
+                                                          ),
+                                                        ),
+                                                        Container(
+                                                          width: size.width/15,
+                                                          height: size.height/120,
+                                                          decoration: BoxDecoration(
+                                                              color: snapshot.data == true ? Color(0xffA5B879) : Color(0xffEEA27D)
+                                                          ),
+                                                        )
+                                                      ],
                                                     ),
-                                                    Container(
-                                                      width: size.width/15,
-                                                      height: size.height/120,
-                                                      decoration: BoxDecoration(
-                                                          color: snapshot.data == true ? Color(0xffA5B879) : Color(0xffEEA27D)
-                                                      ),
-                                                    )
-                                                  ],
-                                                ),
-                                              ),
-                                            );
-                                          }
-                                          else {
-                                            print('Данных нет');
-                                            return Container(
-                                              child: Center(
-                                                child: Column(
-                                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                  children: [
-                                                    Text(
-                                                      '${day.day}',
-                                                      style:  SafeGoogleFont (
-                                                        'Jost',
-                                                        fontSize: 25*ffem,
-                                                        fontWeight: FontWeight.w400,
-                                                        height: 1.445*ffem/fem,
-                                                        color: Color(0xff4B3425),
-                                                      ),
+                                                  ),
+                                                );
+                                              }
+                                              else {
+                                                print('Данных нет');
+                                                return Container(
+                                                  child: Center(
+                                                    child: Column(
+                                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                      children: [
+                                                        Text(
+                                                          '${day.day}',
+                                                          style:  SafeGoogleFont (
+                                                            'Jost',
+                                                            fontSize: 25*ffem,
+                                                            fontWeight: FontWeight.w400,
+                                                            height: 1.445*ffem/fem,
+                                                            color: Color(0xff4B3425),
+                                                          ),
+                                                        ),
+                                                        Container(
+                                                          width: size.width/15,
+                                                          height: size.height/120,
+                                                          decoration: BoxDecoration(
+                                                              color: Color(0xffEEA27D)
+                                                          ),
+                                                        )
+                                                      ],
                                                     ),
-                                                    Container(
-                                                      width: size.width/15,
-                                                      height: size.height/120,
-                                                      decoration: BoxDecoration(
-                                                          color: Color(0xffEEA27D)
-                                                      ),
-                                                    )
-                                                  ],
-                                                ),
-                                              ),
-                                            );
-                                          }
+                                                  ),
+                                                );
+                                              }
+                                            },
+                                          );
                                         },
-                                      );
-                                    },
-                                  ),
-                                  onDaySelected: (time, t)async {
-                                    var randIndex = random.nextInt(activities.length);
-                                    await UserDatabase.addCalendarWish(time, 'autoCalendar', activities[randIndex][0], activities[randIndex][1] );
-                                    var status = await UserDatabase.getStatusOfWish(time, 'autoCalendar');
-                                    var wish = await UserDatabase.getCalendarWish(time, 'autoCalendar');
-                                    print(wish+ status.toString());
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                            BottomNavigationScreen(ChallengeScreen(time, wish, status))));
-                                  },
-                                  daysOfWeekHeight: size.height/20,
-                                  daysOfWeekStyle: DaysOfWeekStyle(
-                                    weekdayStyle: SafeGoogleFont(
-                                      'Jost',
-                                      fontSize: 25*ffem,
-                                      fontWeight: FontWeight.w400,
-                                      color: Color(0xff6b6969),
+                                      ),
+                                      onDaySelected: (time, t)async {
+                                        var randIndex = random.nextInt(activities.length);
+                                        await UserDatabase.addCalendarWish(time, 'autoCalendar', activities[randIndex][0], activities[randIndex][1] );
+                                        var status = await UserDatabase.getStatusOfWish(time, 'autoCalendar');
+                                        var wish = await UserDatabase.getCalendarWish(time, 'autoCalendar');
+                                        print(wish+ status.toString());
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                BottomNavigationScreen(ChallengeScreen(time, wish, status))));
+                                      },
+                                      daysOfWeekHeight: size.height/20,
+                                      daysOfWeekStyle: DaysOfWeekStyle(
+                                        weekdayStyle: SafeGoogleFont(
+                                          'Jost',
+                                          fontSize: 25*ffem,
+                                          fontWeight: FontWeight.w400,
+                                          color: Color(0xff6b6969),
+                                        ),
+                                        weekendStyle: SafeGoogleFont(
+                                          'Jost',
+                                          fontSize: 25*ffem,
+                                          fontWeight: FontWeight.w400,
+                                          color: Color(0xff6b6969),
+                                        ),
+                                      ),
+                                      startingDayOfWeek: StartingDayOfWeek.monday,
+                                      headerStyle: HeaderStyle(
+                                        titleTextStyle: theme.textTheme.titleMedium!.copyWith(
+                                            fontSize: 25*ffem
+                                        ),
+                                        titleCentered: true,
+                                        formatButtonVisible : false,
+                                      ),
+                                      calendarFormat: CalendarFormat.month,
+                                      rowHeight: size.height/20,
+                                      locale: 'ru_RU',
+                                      firstDay: DateTime.utc(2010,10,20),
+                                      lastDay: DateTime.utc(2040,10,20),
+                                      focusedDay: DateTime.now(),
+                                      daysOfWeekVisible: true,
+                                      calendarStyle: CalendarStyle(
+                                
+                                          weekendTextStyle: SafeGoogleFont (
+                                            'Jost',
+                                            fontSize: 25*ffem,
+                                            fontWeight: FontWeight.w400,
+                                            height: 1.445*ffem/fem,
+                                            color: Color(0xff4B3425),
+                                          ),
+                                          defaultTextStyle: SafeGoogleFont (
+                                            'Jost',
+                                            fontSize: 25*ffem,
+                                            fontWeight: FontWeight.w400,
+                                            height: 1.445*ffem/fem,
+                                            color: Color(0xff4B3425),
+                                          ),
+                                
+                                          outsideTextStyle: SafeGoogleFont (
+                                            'Jost',
+                                            fontSize: 25*ffem,
+                                            fontWeight: FontWeight.w400,
+                                            height: 1.445*ffem/fem,
+                                            color: Color(0xff4B3425),
+                                          ),
+                                          todayTextStyle: TextStyle(fontSize:20, color: Colors.white, fontWeight: FontWeight.bold )),
+                                    )),
+                                Container(height: size.height/50),
+                                Center(
+                                  child: SizedBox(
+                                    width: 330 * fem,
+                                    child: Divider(
+                                      thickness: 2,
+                                      color: Colors.black,
                                     ),
-                                    weekendStyle: SafeGoogleFont(
-                                      'Jost',
-                                      fontSize: 25*ffem,
-                                      fontWeight: FontWeight.w400,
-                                      color: Color(0xff6b6969),
-                                    ),
                                   ),
-                                  startingDayOfWeek: StartingDayOfWeek.monday,
-                                  headerStyle: HeaderStyle(
-                                    titleTextStyle: theme.textTheme.titleMedium!.copyWith(
-                                        fontSize: 25*ffem
+                                ),
+                                Row(
+                                  children: [
+                                    Container(width: size.width/7,),
+                                    Text(textAlign: TextAlign.left,
+                                      "${DateTime.now().day} " +
+                                          UserDatabase.monthNumberToName(
+                                              DateTime.now().month),
+                                      style: theme.textTheme.bodyMedium!.copyWith(
+                                          color: theme.textTheme.bodySmall!.color),
                                     ),
-                                    titleCentered: true,
-                                    formatButtonVisible : false,
-                                  ),
-                                  calendarFormat: CalendarFormat.month,
-                                  rowHeight: size.height/20,
-                                  locale: 'ru_RU',
-                                  firstDay: DateTime.utc(2010,10,20),
-                                  lastDay: DateTime.utc(2040,10,20),
-                                  focusedDay: DateTime.now(),
-                                  daysOfWeekVisible: true,
-                                  calendarStyle: CalendarStyle(
 
-                                      weekendTextStyle: SafeGoogleFont (
-                                        'Jost',
-                                        fontSize: 25*ffem,
-                                        fontWeight: FontWeight.w400,
-                                        height: 1.445*ffem/fem,
-                                        color: Color(0xff4B3425),
-                                      ),
-                                      defaultTextStyle: SafeGoogleFont (
-                                        'Jost',
-                                        fontSize: 25*ffem,
-                                        fontWeight: FontWeight.w400,
-                                        height: 1.445*ffem/fem,
-                                        color: Color(0xff4B3425),
-                                      ),
-
-                                      outsideTextStyle: SafeGoogleFont (
-                                        'Jost',
-                                        fontSize: 25*ffem,
-                                        fontWeight: FontWeight.w400,
-                                        height: 1.445*ffem/fem,
-                                        color: Color(0xff4B3425),
-                                      ),
-                                      todayTextStyle: TextStyle(fontSize:20, color: Colors.white, fontWeight: FontWeight.bold )),
-                                )),
+                                  ],
+                                ),FutureBuilder(future: UserDatabase.getStatusOfWish(DateTime.now(), 'autoCalendar'), builder: (context, snapshot){
+                                  if(snapshot.hasData){
+                                    return Container(
+                                      height: size.height/15,
+                                      width: size.width/1.3,
+                                      color: snapshot.data!? Color(0xa3a5b879) : Color(0xffF7D1BE),
+                                      child: FutureBuilder(future: getTodayWish(), builder: (context, snapshot){
+                                        if(snapshot.hasData){
+                                          return Text(textAlign: TextAlign.left,
+                                            snapshot.data.toString(),
+                                            style: theme.textTheme.bodyMedium!.copyWith(
+                                                color: theme.textTheme.bodyLarge!.color),
+                                          );
+                                        } else{
+                                          return Text(textAlign: TextAlign.left,
+                                            'Задания нет',
+                                            style: theme.textTheme.bodyMedium!.copyWith(
+                                                color: theme.textTheme.bodyLarge!.color),
+                                          );
+                                        }
+                                      }),
+                                    );
+                                  }else{
+                                    return Container();
+                                  }}
+                                ),
+                                Container(height: size.height/200),
+                                FutureBuilder(future: UserDatabase.getStatusOfWish(DateTime.now(), 'autoCalendar'), builder: (context, snapshot){
+                                  if(snapshot.hasData){
+                                    return Container(
+                                        height: size.height/30,
+                                        width: size.width/1.3,
+                                        color: snapshot.data! ? Color(0xa3a5b879) :
+                                        Color(0xffF7D1BE),
+                                        child: Center(
+                                          child: Text(snapshot.data! ? 'Выполненно' : 'Не выполненно', style: theme.textTheme.bodyMedium!.copyWith(
+                                              color: theme.textTheme.bodyLarge!.color),),
+                                        )
+                                    );
+                                  }else{
+                                    return Container();
+                                  }}
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ],
                     ),
                   ),
-                  Container(
-                    width: size.width / 1.2,
-                    height: size.height / 14.5,
-                    child: ElevatedButton(
-                        onPressed: () async {
-                          Random random = Random();
-                          var isReg = await UserDatabase.isRegister();
-                          if(!isReg && random.nextInt(10) == 9){
-                            Navigator.push(context,
-                          MaterialPageRoute(
-                              builder: (context) => ShouldRegister(MainScreen())));}
-                          else{Navigator.push(context,
-                            MaterialPageRoute(
-                                builder: (context) => BottomNavigationScreen(MainScreen())));
-                          }
-                        },
-                        child: Text(
-                          'Перейти в главное меню',
-                          style: theme.textTheme.bodySmall!.copyWith(
-                              fontFamily: GoogleFonts.inter().fontFamily,
-                              fontSize: 20),
-                        ),
-                        style: ButtonStyle(
-                            backgroundColor:
-                            MaterialStateProperty.all<Color>(theme.hoverColor),
-                            shape:
-                            MaterialStateProperty.all<RoundedRectangleBorder>(
-                                RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(30),
-                                    side:
-                                    BorderSide(color: theme.hoverColor))))),
-                  )
                 ],
               ),
             ),

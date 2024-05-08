@@ -41,45 +41,47 @@ class TextResult extends StatelessWidget {
 
     var theme = Theme.of(context);
     var size = MediaQuery.of(context).size;
-    return Scaffold(
-        body: Center(
-      child: Container(
-        width: double.infinity,
-        decoration: const BoxDecoration(
-          image: DecorationImage(
-              image: AssetImage("assets/result.png"), fit: BoxFit.cover),
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            Container(height: size.height / 40),
-            ToMainButton(),
-            Text(
-              title,
-              textAlign: TextAlign.center,
-              style: theme.textTheme.titleLarge!.copyWith(
-                  fontSize: 28, color: theme.textTheme.bodySmall!.color),
-            ),
-              Container(
-                height: 500,
-                child: SingleChildScrollView(
-                  scrollDirection: Axis.vertical,
-
-                  child: Container(
-                    padding: EdgeInsets.all(30),
-                    child: Text(
-                      text,
-                      style: theme.textTheme.bodySmall!
-                          .copyWith(fontWeight: FontWeight.w400, fontSize: 18),
-                      textAlign: TextAlign.center,
+    return Material(
+      child: Scaffold(
+          body: Center(
+        child: Container(
+          width: double.infinity,
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage("assets/result.png"), fit: BoxFit.cover),
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Container(height: size.height / 40),
+              ToMainButton(),
+              Text(
+                title,
+                textAlign: TextAlign.center,
+                style: theme.textTheme.titleLarge!.copyWith(
+                    fontSize: 28, color: theme.textTheme.bodySmall!.color),
+              ),
+                Container(
+                  height: 500,
+                  child: SingleChildScrollView(
+                    scrollDirection: Axis.vertical,
+      
+                    child: Container(
+                      padding: EdgeInsets.all(30),
+                      child: Text(
+                        text,
+                        style: theme.textTheme.bodySmall!
+                            .copyWith(fontWeight: FontWeight.w400, fontSize: 18),
+                        textAlign: TextAlign.center,
+                      ),
                     ),
                   ),
                 ),
-              ),
-            Container(),
-          ],
+              Container(),
+            ],
+          ),
         ),
-      ),
-    ));
+      )),
+    );
   }
 }

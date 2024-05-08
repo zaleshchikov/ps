@@ -24,6 +24,8 @@ import 'package:ps/UI/trackers/main_screen.dart';
 import 'package:ps/UI/welcome_screen.dart';
 import 'package:ps/UI/wishes/day_wish_note.dart';
 import 'package:ps/bottom_navigation.dart';
+import 'package:sqflite/sqflite.dart';
+import 'UI/statistic/choose_statistic.dart';
 import 'UI/wishes/today_wishes.dart';
 import 'UI/wishes/wish_bank.dart';
 import 'db/user_model.dart';
@@ -42,7 +44,6 @@ void main() async {
     await UserDatabase.insertUser(User(
         username: '', password: '', testResult: [], calendar: {}, Wishes: [], isTestUsed: false, lastQuestion: 1, testSum: 0));
   }
-
   // var s = await UserDatabase.addEmotionsAlarm(DateTime(2024, 2, 24), TrackerUser('13:45', 2, 'Негатив', '', 'sphere'));
   initializeDateFormatting('ru_RU', null);
   runApp(const MyApp());

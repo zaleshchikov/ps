@@ -222,7 +222,7 @@ class _ChallengeScreenState extends State<YourChallengeScreen> {
                                     width: 330 * fem,
                                     height: 87 * fem,
                                     child: Text(
-                                      'Выполняя позитивные действия каждый день, Вы становитесь счастливее',
+                                      'У вас отличное задание на сегодня. Позже Вам нужно сделать отметку\nо его выполнении. Мы напомним Вам об этом',
                                       textAlign: TextAlign.center,
                                       style: SafeGoogleFont(
                                         'Jost',

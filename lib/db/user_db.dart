@@ -8,7 +8,8 @@ import 'wish_model.dart';
 
 class UserDatabase {
   static Database? _database;
-
+  static Future<void> deleteDatabase(String path) =>
+      databaseFactory.deleteDatabase(path);
   static Future open() async {
     _database ??= await openDatabase(
       join(await getDatabasesPath(), 'user_database.db'),
@@ -75,6 +76,18 @@ class UserDatabase {
     }
     return false;
   }
+  static int daysBetween(DateTime from, DateTime to) {
+    from = DateTime(from.year, from.month, from.day);
+    to = DateTime(to.year, to.month, to.day);
+    return (to.difference(from).inHours / 24).round();
+  }
+static Future<int> getDifference() async {
+  await open();
+  var _users = await users();
+  User user = _users[0];
+  var t = user.calendar.keys.first.split('/');
+  return daysBetween(DateTime.utc(int.parse(t[3]), int.parse(t[2]), int.parse(t[0])), DateTime.now());
+}
 
   static Future<String> getCalendarWish(DateTime time, String calendar)async{
     await open();

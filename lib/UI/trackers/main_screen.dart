@@ -23,15 +23,19 @@ class MainScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text('4 простых шага, чтобы стать счастливым',
-                style: SafeGoogleFont(
-                  'Jost',
-                  fontSize: 20 * ffem,
-                  fontWeight: FontWeight.w400,
-                  height: 1.445 * ffem / fem,
-                  letterSpacing: -0.2 * fem,
-                  color: Color(0xff4b3425),
-                )),
+            Container(
+              width: size.width/1.1,
+              child: Text('Трекеры помогут сохранить мотивацию, улучшить \nрезультат, и с легкостью обрести счастье',
+                  textAlign: TextAlign.center,
+                  style: SafeGoogleFont(
+                    'Jost',
+                    fontSize: 18 * ffem,
+                    fontWeight: FontWeight.w400,
+                    height: 1.445 * ffem / fem,
+                    letterSpacing: -0.2 * fem,
+                    color: Color(0xff4b3425),
+                  )),
+            ),
             Container(height: size.height / 100),
             InkWell(
               onTap: () {

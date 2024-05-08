@@ -4,6 +4,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:ps/UI/emotion_alarm/to_main_button.dart';
 import 'package:ps/UI/wishes/sorted_wish_list.dart';
 
+import '../../bottom_navigation.dart';
+
 class WishListSphere extends StatefulWidget {
 
 
@@ -17,7 +19,7 @@ class _TestScreenState extends State<WishListSphere> {
 
 
 
-  var _selectedIndex = 6;
+  var _selectedIndex = 10;
 
   var listOfDegree = [
     'Финансы/инвестиции',
@@ -67,7 +69,7 @@ class _TestScreenState extends State<WishListSphere> {
                 children: [
                   Container(
                       padding: EdgeInsets.only(top:20),
-                      child: ToMainButton('Будильник эмоций')),
+                      child: ToMainButton('Желание дня')),
                   Container(height: size.height/30),
                   Center(
                     child: Text(
@@ -79,53 +81,56 @@ class _TestScreenState extends State<WishListSphere> {
                   Container(
                     height: size.height/1.5,
                     width: size.width/1.1,
-                    child: ListView.builder(
-                        padding: const EdgeInsets.all(8),
-                        itemCount: listOfDegree.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          return Container(
-                            height: size.height/11,
-                            padding: EdgeInsets.only(bottom: 25),
-                            width: size.width/1.5,
-                            child: ElevatedButton(
-                              onPressed: () {
-                                setState(() {
-                                  _selectedIndex = index;
-                                });
-                                Future.delayed(const Duration(milliseconds: 1000), () {
+                    child: Scrollbar(
+                      thumbVisibility: true,
+                      child: ListView.builder(
+                          padding: const EdgeInsets.all(8),
+                          itemCount: listOfDegree.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            return Container(
+                              height: size.height/11,
+                              padding: EdgeInsets.only(bottom: 25),
+                              width: size.width/1.5,
+                              child: ElevatedButton(
+                                onPressed: () {
                                   setState(() {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(builder: (context) => SortedWishList(listOfDegree[index])));
+                                    _selectedIndex = index;
                                   });
-                                });
+                                  Future.delayed(const Duration(milliseconds: 1000), () {
+                                    setState(() {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(builder: (context) => BottomNavigationScreen(SortedWishList(listOfDegree[index]))));
+                                    });
+                                  });
 
-                              },
-                              child: Container(
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(listOfDegree[index], style: theme.textTheme.bodySmall!.copyWith(
-                                        color: Colors.black,
-                                        fontFamily: GoogleFonts.inter().fontFamily,
-                                        fontSize: 20
-                                    )),
-                                    SvgPicture.asset(
-                                        _selectedIndex != index ? 'assets/Check_round_fill.svg' : 'assets/enabledSVG.svg',color:
-                                    _selectedIndex != index ? listOfColorsCircle[index] : Color(0xffE5EAD7),
-                                        semanticsLabel: 'Acme Logo'
-                                    )
-                                    // Image(image: AssetImage(_selectedIndex == index? 'assets/enabledTest.png' : 'assets/alarn_circle.png'),
+                                },
+                                child: Container(
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(listOfDegree[index], style: theme.textTheme.bodySmall!.copyWith(
+                                          color: Colors.black,
+                                          fontFamily: GoogleFonts.inter().fontFamily,
+                                          fontSize: 20
+                                      )),
+                                      SvgPicture.asset(
+                                          _selectedIndex != index ? 'assets/Check_round_fill.svg' : 'assets/enabledSVG.svg',color:
+                                      _selectedIndex != index ? listOfColorsCircle[index] : Color(0xffE5EAD7),
+                                          semanticsLabel: 'Acme Logo'
+                                      )
+                                      // Image(image: AssetImage(_selectedIndex == index? 'assets/enabledTest.png' : 'assets/alarn_circle.png'),
 
-                                  ],
+                                    ],
+                                  ),
                                 ),
+                                style: ElevatedButton.styleFrom(
+                                    backgroundColor: listOfColors[index],
+                                    shape: StadiumBorder()),
                               ),
-                              style: ElevatedButton.styleFrom(
-                                  backgroundColor: listOfColors[index],
-                                  shape: StadiumBorder()),
-                            ),
-                          );
-                        }
+                            );
+                          }
+                      ),
                     ),
                   ),
                 ],

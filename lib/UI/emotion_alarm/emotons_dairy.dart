@@ -378,7 +378,7 @@ class _EmotionsDairyState extends State<EmotionsDairy> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => BottomNavigationScreen(EmotionsCalendar())));
+                                    builder: (context) => BottomNavigationScreen(EmotionsCalendar(genericEmotion))));
                           },
                           child: Text(
                             'Календарь эмоций',
@@ -627,7 +627,7 @@ class _EmotionsDairyState extends State<EmotionsDairy> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => BottomNavigationScreen(EmotionsCalendar())));
+                                  builder: (context) => BottomNavigationScreen(EmotionsCalendar(genericEmotion))));
                         },
                         child: Text(
                           'Календарь эмоций',

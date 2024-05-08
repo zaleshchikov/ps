@@ -2,18 +2,52 @@ import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:ps/UI/emotion_alarm/to_main_button.dart';
 import 'package:ps/UI/success/current_success.dart';
 import 'package:ps/UI/success/seccess_model.dart';
+import 'package:table_calendar/table_calendar.dart';
 import 'dart:ui';
 import '../../page-1/utils.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 class SuccessNote extends StatefulWidget {
+
+  DateTime date;
+  SuccessNote(this.date);
+
   @override
   State<SuccessNote> createState() => _EmotionsNoteState();
 }
 
 class _EmotionsNoteState extends State<SuccessNote> {
+  static monthNumberToName(int number) {
+    switch (number) {
+      case 1:
+        return 'Января';
+      case 2:
+        return 'Февраля';
+      case 3:
+        return 'Марта';
+      case 4:
+        return 'Апреля';
+      case 5:
+        return 'Мая';
+      case 6:
+        return 'Июня';
+      case 7:
+        return 'Июля';
+      case 8:
+        return 'Августа';
+      case 9:
+        return 'Сентебря';
+      case 10:
+        return 'Октября';
+      case 11:
+        return 'Ноября';
+      case 12:
+        return 'Декабря';
+    }
+  }
   final form = FormGroup({
     'text': FormControl<String>(),
   });
@@ -43,61 +77,9 @@ class _EmotionsNoteState extends State<SuccessNote> {
               Container(
                 height: size.height / 20,
               ),
+              ToMainButton('Журнал успеха'),
               Container(
-                // autogroupz6mzedq (KqnvLd6LfmwouZ6bPkZ6MZ)
-                margin:
-                    EdgeInsets.fromLTRB(0 * fem, 0 * fem, 85.5 * fem, 29 * fem),
-                width: double.infinity,
-                child: GestureDetector(
-                  behavior: HitTestBehavior.translucent,
-                  onTap: () {
-                    print(1);
-                  },
-                  child: Container(
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Container(
-                          margin: EdgeInsets.fromLTRB(
-                              0 * fem, 1 * fem, 26.67 * fem, 0 * fem),
-                          width: 18.33 * fem,
-                          height: 20 * fem,
-                          child: Image.asset(
-                            'assets/page-1/images/expandleftstop-uvK.png',
-                            width: 18.33 * fem,
-                            height: 20 * fem,
-                          ),
-                        ),
-                        Text(
-                            // V8f (191:5905)
-                            'Журнал успеха ',
-                            style: theme.textTheme.bodyLarge!
-                                .copyWith(fontSize: 20)),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-              Center(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Container(
-                      height: size.height / 25.9,
-                      width: size.width / 3.3,
-                      decoration: BoxDecoration(
-                          color: Color(0xffEFD8B4),
-                          borderRadius: BorderRadius.circular(30)),
-                      child: Center(
-                        child: Text('выбор дат',
-                            style: theme.textTheme.bodySmall!.copyWith(
-                                fontSize: 20, fontWeight: FontWeight.w400)),
-                      ),
-                    ),
-                    Container(width: size.width / 20),
-                    Image(image: AssetImage('assets/calendar_icon.png')),
-                  ],
-                ),
+                height: size.height / 20,
               ),
               Container(
                 // bxP (191:5906)
@@ -106,10 +88,91 @@ class _EmotionsNoteState extends State<SuccessNote> {
                 constraints: BoxConstraints(
                   maxWidth: 344 * fem,
                 ),
-                child: Text('Ваши успешные\n действия за сегодня',
+                child: Text('Ваши успешные\n действия за...',
                     textAlign: TextAlign.center,
                     style: theme.textTheme.titleLarge!.copyWith(
                         fontSize: 28, color: theme.textTheme.bodySmall!.color)),
+              ),
+            Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                border: Border.all(color: theme.dividerColor)
+              ),
+              child: FittedBox(
+                  fit: BoxFit.cover,
+                  child: Container(
+                      width: size.width * 2,
+                      height: size.height / 2.8,
+                      decoration: BoxDecoration(
+                          color: Color(0xfff5ecdf),
+                          borderRadius: BorderRadius.circular(1000)),
+                      child: SizedBox(
+                        width: size.width / 1.2,
+                        child: TableCalendar(
+                                onDaySelected: (day, focusedDay){
+                                  setState(() {
+                                    widget.date = day;
+                                  });
+
+                                },
+                                selectedDayPredicate: (day) => isSameDay(day, widget.date),
+                                focusedDay: widget.date,
+                                locale: 'ru_RU',
+                                daysOfWeekStyle: DaysOfWeekStyle(
+                                    weekendStyle: theme.textTheme.titleLarge!
+                                        .copyWith(color: theme.hoverColor),
+                                    weekdayStyle: theme.textTheme.titleLarge!
+                                        .copyWith(color: theme.hoverColor)),
+                                daysOfWeekHeight: size.height / 15,
+                                rowHeight: 100,
+                                startingDayOfWeek: StartingDayOfWeek.monday,
+                                headerStyle: HeaderStyle(
+                                  titleTextFormatter: (day, f) {
+                                    return "${widget.date.day} " + monthNumberToName(widget.date.month);
+                                  },
+                                  rightChevronPadding: EdgeInsets.only(
+                                      top: size.width / 10, right: size.width / 10),
+                                  leftChevronPadding: EdgeInsets.only(
+                                      top: size.width / 10, left: size.width / 10),
+                                  rightChevronIcon: Icon(
+                                    Icons.chevron_right,
+                                    size: size.height / 15,
+                                  ),
+                                  leftChevronIcon: Icon(
+                                    Icons.chevron_left,
+                                    size: size.height / 15,
+                                  ),
+                                  titleTextStyle: theme.textTheme.titleLarge!,
+                                  titleCentered: true,
+                                  formatButtonVisible: false,
+                                ),
+                                calendarStyle: CalendarStyle(
+                                  rangeStartTextStyle: theme.textTheme.titleLarge!,
+                                  rangeEndTextStyle: theme.textTheme.titleLarge!,
+                                  outsideTextStyle: theme.textTheme.titleLarge!,
+                                  todayTextStyle: theme.textTheme.titleLarge!,
+                                  defaultTextStyle: theme.textTheme.titleLarge!,
+                                  holidayTextStyle: theme.textTheme.titleLarge!,
+                                  weekNumberTextStyle: theme.textTheme.titleLarge!,
+                                  weekendTextStyle: theme.textTheme.titleLarge!,
+                                  todayDecoration: BoxDecoration(
+                                    color: theme.backgroundColor,
+                                    shape: BoxShape.circle,
+                                  ),
+                                  selectedTextStyle: theme.textTheme.titleLarge!,
+                                  selectedDecoration: BoxDecoration(
+                                    color: theme.dialogBackgroundColor,
+                                    shape: BoxShape.circle,
+                                  ),
+                                ),
+                                calendarFormat: CalendarFormat.week,
+                                firstDay: DateTime.utc(2010, 10, 16),
+                                lastDay: DateTime.utc(2030, 3, 14),
+                              )
+                      ))),
+            ),
+              Container(
+                height: size.height / 20,
               ),
               Container(
                 margin: EdgeInsets.fromLTRB(
@@ -362,7 +425,7 @@ class _EmotionsNoteState extends State<SuccessNote> {
                         context,
                         MaterialPageRoute(
                             builder: (context) =>
-                                CurrentSuccess.Note(success)));
+                                CurrentSuccess.Note(success, widget.date)));
                   }
                 },
                 child: Container(

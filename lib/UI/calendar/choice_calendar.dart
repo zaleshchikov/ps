@@ -315,57 +315,63 @@ class _ChoiceCalendarState extends State<ChoiceCalendar> {
                 textAlign: TextAlign.center,
               ),
               Container(
+                height: size.height / 10,
+              ),
+              Container(
                 padding: EdgeInsets.only(bottom: 20),
                 height: size.height / 1.8,
                 child: SingleChildScrollView(
                   child: Container(
                     height: size.height / 1.8,
-                    child: ListView.builder(
-                        padding: const EdgeInsets.all(8),
-                        itemCount: activities.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          return Center(
-                            child: Column(
-                              children: [
-                                Container(
-                                  height: size.height / 50,
-                                ),
-                                StatefulBuilder(builder:
-                                    (BuildContext context, StateSetter setState) {
-                                  return InkWell(
-                                    onTap: () {
-                                      lastIndex.contains(index) ? lastIndex.remove(index) : lastIndex.add(index);
-                                      listOfWish.contains(activities[index])
-                                          ? listOfWish.remove(activities[index])
-                                          : listOfWish.add(activities[index]);
-                                      setPartState(() {});
-                                    },
-                                    child: Container(
-                                      height: size.height / 12,
-                                      width: size.width / 1.2,
-                                      decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(20),
-                                          color: listOfWish.contains(activities[index])
-                                              ? Color(0xffd2c752)
-                                              : Color(0xffA5B879)),
+                    child: Scrollbar(
+                      thumbVisibility: true,
+                      child: ListView.builder(
+                          padding: const EdgeInsets.all(8),
+                          itemCount: activities.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            return Center(
+                              child: Column(
+                                children: [
+                                  Container(
+                                    height: size.height / 50,
+                                  ),
+                                  StatefulBuilder(builder:
+                                      (BuildContext context, StateSetter setState) {
+                                    return InkWell(
+                                      onTap: () {
+                                        lastIndex.contains(index) ? lastIndex.remove(index) : lastIndex.add(index);
+                                        listOfWish.contains(activities[index])
+                                            ? listOfWish.remove(activities[index])
+                                            : listOfWish.add(activities[index]);
+                                        setPartState(() {});
+                                      },
                                       child: Container(
-                                        padding: EdgeInsets.all(10),
-                                        child: Center(
-                                          child: AutoSizeText(
-                                            activities[index][0],
-                                            style: theme.textTheme.bodyLarge!
-                                                .copyWith(fontSize: 17),
-                                            textAlign: TextAlign.center,
+                                        height: size.height / 12,
+                                        width: size.width / 1.2,
+                                        decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.circular(20),
+                                            color: listOfWish.contains(activities[index])
+                                                ? Color(0xffd2c752)
+                                                : Color(0xffA5B879)),
+                                        child: Container(
+                                          padding: EdgeInsets.all(10),
+                                          child: Center(
+                                            child: AutoSizeText(
+                                              activities[index][0],
+                                              style: theme.textTheme.bodyLarge!
+                                                  .copyWith(fontSize: 17),
+                                              textAlign: TextAlign.center,
+                                            ),
                                           ),
                                         ),
                                       ),
-                                    ),
-                                  );
-                                }),
-                              ],
-                            ),
-                          );
-                        }),
+                                    );
+                                  }),
+                                ],
+                              ),
+                            );
+                          }),
+                    ),
                   ),
                 ),
               ),

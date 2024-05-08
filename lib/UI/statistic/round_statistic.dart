@@ -6,6 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:ps/UI/statistic/tree_statistic.dart';
 import 'package:ps/bottom_navigation.dart';
 import 'package:ps/page-1/utils.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../db/user_db.dart';
 import '../../db/user_model.dart';
@@ -77,6 +78,14 @@ class _RoundStatisticState extends State<RoundStatistic> {
     sphereCount.forEach((key, value) {
       value = (value / K).floor();
     });
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    for(var el in sphereCount.keys){
+      sphereCount[el] += prefs.getInt(el)??0;
+      if(sphereCount[el] >= 9){
+        sphereCount[el] = 9;
+      }
+    }
 
     return sphereCount;
   }

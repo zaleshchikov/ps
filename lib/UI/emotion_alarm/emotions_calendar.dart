@@ -11,6 +11,8 @@ import '../../page-1/utils.dart';
 import 'to_main_button.dart';
 
 class EmotionsCalendar extends StatelessWidget {
+  String genericEmotion;
+  EmotionsCalendar(this.genericEmotion);
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
@@ -54,6 +56,8 @@ class EmotionsCalendar extends StatelessWidget {
                     Positioned(
                       // frame5pmR (191:5655)
                       left: 32.999999993 * fem,
+                      right: 32.999999993 * fem,
+
                       top: 0 * fem,
                       child: Container(
                         padding: EdgeInsets.fromLTRB(
@@ -302,7 +306,9 @@ class EmotionsCalendar extends StatelessWidget {
                               daysOfWeekVisible: true,
                               calendarStyle: CalendarStyle(
                                   todayDecoration: BoxDecoration(
-                                      color: Color(0x7c9bb068),
+                                      color: ['Расслабленность', 'Радость', 'Счастье', 'Эйфория'].contains(genericEmotion) ? Color(0x7cb7ff37) :
+                                      ['Скука', 'Рутина', 'Меланхолия', 'Пассивность'].contains(genericEmotion) ? Color(0xffd2b75d) :
+                                      Color(0xffc75050),
                                       borderRadius: BorderRadius.circular(20)),
                                   weekendTextStyle: SafeGoogleFont(
                                     'Jost',

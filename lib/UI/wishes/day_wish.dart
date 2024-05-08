@@ -7,6 +7,7 @@ import 'package:ps/UI/wishes/wish_sphere.dart';
 import 'package:ps/UI/wishes/wishlist.dart';
 import 'package:ps/UI/wishes/wishlist_sphere.dart';
 import 'package:ps/db/user_db.dart';
+import '../../bottom_navigation.dart';
 import '../../page-1/utils.dart';
 import 'package:ps/UI/emotion_alarm/to_main_button.dart';
 
@@ -56,7 +57,7 @@ class DayWish extends StatelessWidget {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => WishList()));
+                                builder: (context) => BottomNavigationScreen(WishList())));
                       },
                       child: Container(
                           height: size.height / 7.26,
