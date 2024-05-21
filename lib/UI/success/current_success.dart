@@ -7,6 +7,8 @@ import 'package:ps/UI/success/seccess_model.dart';
 import 'package:ps/UI/success/success_for_time.dart';
 import 'package:ps/db/user_db.dart';
 
+import '../../bottom_navigation.dart';
+
 class CurrentSuccess extends StatefulWidget {
 
   Success success = Success('', '');
@@ -19,7 +21,7 @@ class CurrentSuccess extends StatefulWidget {
 }
 
 class _TestScreenState extends State<CurrentSuccess> {
-  var _selectedIndex = 6;
+  var _selectedIndex = 10;
 
   var listOfDegree = [
     'Финансы/инвестиции',
@@ -105,7 +107,7 @@ class _TestScreenState extends State<CurrentSuccess> {
                                           context,
                                           MaterialPageRoute(
                                               builder: (context) =>
-                                                  SuccessForTime()));
+                                                  BottomNavigationScreen(SuccessForTime())));
                                     });
                                   });
                                 } else{

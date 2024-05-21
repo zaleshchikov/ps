@@ -316,7 +316,7 @@ class AutoCalendar extends StatelessWidget {
                                       calendarBuilders: CalendarBuilders(
                                         todayBuilder: (context, day, focusedDay){
                                           return FutureBuilder(
-                                            future: UserDatabase.getStatusOfWish(day, 'autoCalendar'),
+                                            future: getTodayWish(),
                                             builder: (context, snapshot){
                                               if(snapshot.hasData){
                                                 print('Данные есть');

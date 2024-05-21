@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'dart:ui';
@@ -88,44 +89,23 @@ class SmartCalendar extends StatelessWidget {
                         ),
                       ),
                     ),
-                    Positioned(
-                      // 875 (191:5302)
-                      left: 52*fem,
-                      top: 415*fem,
-                      child: Align(
-                        child: SizedBox(
-                          width: 332*fem,
-                          height: 159*fem,
-                          child: Text(
-                            'Используйте “дневник эмоций”\nи “желание дня” на протяжении месяца и получайте доступ к календарю. ',
-                            textAlign: TextAlign.center,
-                            style: SafeGoogleFont (
-                              'Jost',
-                              fontSize: 22*ffem,
-                              fontWeight: FontWeight.w500,
-                              height: 1.445*ffem/fem,
-                              color: Color(0xff000000),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
+
                     Positioned(
                       // x67 (191:5303)
                       left: 70*fem,
                       top: 85*fem,
                       child: Align(
                         child: SizedBox(
-                          width: 287*fem,
-                          height: 350*fem,
-                          child: Text(
-                            'Умный календарь - наполнен событиями, которые сделают Вас счастливее каждый день. При постоянном использовании трекеров “Будильник эмоций” и “Список желаний” приложение создаст базу знаний и настроит «Умный календарь» лично под Вас, после чего будет открыт доступ к этому трекеру.',
+                          width: 300*fem,
+                          height: 500*fem,
+                          child: AutoSizeText(
+                            'Умный календарь - наполнен событиями, которые сделают Вас счастливее каждый день.\n\nПри постоянном использовании трекеров “Будильник эмоций” и “Список желаний” приложение создаст базу знаний и настроит «Умный календарь» лично под Вас, после чего будет открыт доступ к этому трекеру.',
                             textAlign: TextAlign.center,
                             style: SafeGoogleFont (
                               'Jost',
                               fontSize: 25*ffem,
                               fontWeight: FontWeight.w500,
-                              height: 2*ffem/fem,
+                              height: 1.7*ffem/fem,
                               color: Color(0xff000000),
                             ),
                           ),

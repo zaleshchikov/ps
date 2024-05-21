@@ -356,14 +356,14 @@ class _SuccessForTimeState extends State<SuccessForTime> {
                                           Container(height: size.height / 70),
                                           selectedName != 'Неделя'
                                               ? selectedName == 'Сегодня' ? Center(
-                                            child: Text(DateFormat('yyyy-MM-dd').format(DateTime.now()),
+                                            child: Text(DateFormat('dd-MM-yyyy').format(DateTime.now()),
                                                 textAlign: TextAlign.center,
                                                 style: theme
                                                     .textTheme.titleMedium!
                                                     .copyWith(fontSize: 26)),
                                           ) : Container()
                                               : AutoSizeText(
-                                                  '${start.day}.${start.month}.${start.year}- ${end.day}.${end.month}.${end.year}',
+                                                  '${start.day}.${start.month}.${start.year} - ${end.day}.${end.month}.${end.year}',
                                                   style: theme
                                                       .textTheme.bodySmall!
                                                       .copyWith(

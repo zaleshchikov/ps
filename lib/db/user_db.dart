@@ -12,7 +12,7 @@ class UserDatabase {
       databaseFactory.deleteDatabase(path);
   static Future open() async {
     _database ??= await openDatabase(
-      join(await getDatabasesPath(), 'user_database.db'),
+      join(await getDatabasesPath(), 'user_database_2.db'),
       onCreate: (db, version) {
         return db.execute(
           'CREATE TABLE users ('

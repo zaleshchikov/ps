@@ -136,7 +136,7 @@ class _EmotionsNoteState extends State<DayWishNote> {
                                       child: Align(
                                         child: SizedBox(
                                           width: 233 * fem,
-                                          height: 76 * fem,
+                                          height: 150 * fem,
                                           child: Text(
                                             'Подумайте о том, что интересного и необычного  Вы хотели  бы сделать сегодня, чтобы стать счастливее',
                                             style: SafeGoogleFont(

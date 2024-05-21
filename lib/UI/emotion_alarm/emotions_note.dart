@@ -10,6 +10,7 @@ import 'dart:ui';
 import 'current_amotions.dart';
 import '../../page-1/utils.dart';
 import 'package:reactive_forms/reactive_forms.dart';
+import 'emotions_alarm_smile.dart';
 import 'tracker_model.dart';
 import 'package:ps/db/user_db.dart';
 
@@ -53,8 +54,7 @@ class _EmotionsNoteState extends State<EmotionsNote> {
               ),
               Row(
                 children: [
-                  ToMainButton('Будильник эмоций'),
-                ],
+                  ToMainButton.CustomWidget('Будильник эмоций', BottomNavigationScreen(EmotionsAlarmSmile()))                ],
               ),
               Container(
                 height: size.height / 10,

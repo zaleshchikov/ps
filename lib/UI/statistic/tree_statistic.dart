@@ -300,6 +300,7 @@ class _RoundStatisticState extends State<TreeStatistic> {
                   ),
                   builder: (context, snapshot) {
                     if (snapshot.hasData) {
+                      print(snapshot.data);
                       return Stack(
                         children: [
                           Container(

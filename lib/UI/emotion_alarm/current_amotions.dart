@@ -4,8 +4,10 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../../bottom_navigation.dart';
 import '../../db/user_db.dart';
 import '../success/success_for_time.dart';
+import 'emotions_alarm_smile.dart';
 import 'to_main_button.dart';
 import 'emotons_dairy.dart';
 import 'tracker_model.dart';
@@ -20,7 +22,7 @@ class CurrentEmotions extends StatefulWidget {
 }
 
 class _TestScreenState extends State<CurrentEmotions> {
-  var _selectedIndex = 6;
+  var _selectedIndex = 10;
 
   var listOfDegree = [
     'Финансы/инвестиции',
@@ -70,7 +72,7 @@ class _TestScreenState extends State<CurrentEmotions> {
             children: [
               Container(
                   padding: EdgeInsets.only(top: 20),
-                  child: ToMainButton('Будильник эмоций')),
+                  child: ToMainButton.CustomWidget('Будильник эмоций', BottomNavigationScreen(EmotionsAlarmSmile()))),
               Container(height: size.height / 30),
               Center(
                 child: Text(
@@ -91,7 +93,7 @@ class _TestScreenState extends State<CurrentEmotions> {
                     itemCount: listOfDegree.length,
                     itemBuilder: (BuildContext context, int index) {
                       return Container(
-                        height: size.height / 9,
+                        height: size.height / 11,
                         padding: EdgeInsets.only(bottom: 25),
                         width: size.width / 1.5,
                         child: ElevatedButton(
@@ -107,7 +109,7 @@ class _TestScreenState extends State<CurrentEmotions> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => EmotionsDairy()));
+                                      builder: (context) => BottomNavigationScreen(EmotionsDairy())));
                               ;
                             });
                           },

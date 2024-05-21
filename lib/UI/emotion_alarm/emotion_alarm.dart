@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:ps/UI/emotion_alarm/emotions_alarm_smile.dart';
+import '../../bottom_navigation.dart';
 import 'to_main_button.dart';
 import 'emotions_note.dart';
 import 'tracker_model.dart';
@@ -65,7 +67,8 @@ class _TestScreenState extends State<EmotionsAlarm> {
                 children: [
                   Container(
                       padding: EdgeInsets.only(top:20),
-                      child: ToMainButton('Будильник эмоций')),
+                      child: ToMainButton.CustomWidget('Будильник эмоций', BottomNavigationScreen(EmotionsAlarmSmile()))
+                  ),
                   Container(height: size.height/30),
                   Row(
                     children: [

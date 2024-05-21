@@ -284,7 +284,7 @@ class _ChallengeScreenState extends State<ChallengeScreen> {
                                                       Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                                         children: [
                                                           TextButton(onPressed: (){
-                                                            Navigator.of(context).push(MaterialPageRoute(builder: (context) => SuccessForTime()));
+                                                            Navigator.of(context).push(MaterialPageRoute(builder: (context) => BottomNavigationScreen(SuccessForTime())));
                                                           }, child: Text('Да', style: theme.textTheme.titleMedium,)),
                                                           TextButton(onPressed: (){
                                                             Navigator.of(context).pop();

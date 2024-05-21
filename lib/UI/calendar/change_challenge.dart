@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
+import 'package:ps/UI/calendar/auto_challenge_screen.dart';
 import 'package:ps/UI/calendar/choose_day.dart';
 import 'package:ps/UI/calendar/your_calendar.dart';
 import 'package:ps/UI/calendar/your_challenge_screen.dart';
@@ -262,12 +263,13 @@ class _ChoiceCalendarState extends State<ChangeChallenge> {
                       onTap: () async{
                         if(listOfWish.length > 0){
                         await UserDatabase.changeCalendarWish(widget.time, widget.calendar, listOfWish[0]);
-                        Navigator.pushReplacement(
+
+                        Navigator.push(
                             context,
                             MaterialPageRoute(
                                 builder: (context) =>
                                     BottomNavigationScreen(
-                                        YourChallengeScreen(widget.time, listOfWish[0], false))));
+                                        ChallengeScreen(widget.time, listOfWish[0], false))));
                       }},
                       child: Container(
                         height: size.height / 20,

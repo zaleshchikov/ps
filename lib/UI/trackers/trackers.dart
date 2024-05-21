@@ -26,15 +26,19 @@ class Trackers extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text('4 простых шага, чтобы стать счастливым',
-                style: SafeGoogleFont(
-                  'Jost',
-                  fontSize: 20 * ffem,
-                  fontWeight: FontWeight.w400,
-                  height: 1.445 * ffem / fem,
-                  letterSpacing: -0.2 * fem,
-                  color: Color(0xff4b3425),
-                )),
+            Container(
+              height: size.height/18,
+              child: Text(
+                  'Трекеры помогут сохранить мотивацию, улучшить \nрезультат, и с легкостью обрести счастье',
+                  style: SafeGoogleFont(
+                    'Jost',
+                    fontSize: 18 * ffem,
+                    fontWeight: FontWeight.w400,
+                    height: 1.445 * ffem / fem,
+                    letterSpacing: -0.2 * fem,
+                    color: Color(0xff4b3425),
+                  )),
+            ),
             InkWell(
               onTap: () { WidgetsBinding.instance.addPostFrameCallback((_){
                   Navigator.push(
@@ -44,7 +48,7 @@ class Trackers extends StatelessWidget {
                             BottomNavigationScreen(EmotionsAlarmSmile())));});
               },
               child: Container(
-                child: Image(image: AssetImage('assets/emalarm_new.png')),
+                child: Image(image: AssetImage('assets/alarm_new.png')),
                 height: size.height / 6.3,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(27),
@@ -77,7 +81,7 @@ class Trackers extends StatelessWidget {
                 }
               },
               child: Container(
-                child: Image(image: AssetImage('assets/wishlist_new.png'), fit: BoxFit.fill,),
+                child: Image(image: AssetImage('assets/wish_new.png'), fit: BoxFit.fill,),
                 height: size.height / 6.3,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(27),
@@ -103,7 +107,7 @@ class Trackers extends StatelessWidget {
                         builder: (context) => BottomNavigationScreen( CalendarOpt())));
               },
               child: Container(
-                child: Image(image: AssetImage('assets/happycalender_new.png')),
+                child: Image(image: AssetImage('assets/cale_new.png')),
                 height: size.height / 6.3,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(27),
@@ -126,10 +130,10 @@ class Trackers extends StatelessWidget {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => SuccessForTime()));
+                        builder: (context) => BottomNavigationScreen(SuccessForTime())));
               },
               child: Container(
-                child: Image(image: AssetImage('assets/sucsessm_new.png')),
+                child: Image(image: AssetImage('assets/maga_new.png')),
                 height: size.height / 6.3,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(40),

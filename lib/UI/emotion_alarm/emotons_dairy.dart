@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ps/UI/emotion_alarm/emotions_alarm_smile.dart';
 import 'package:ps/bottom_navigation.dart';
 import 'package:ps/db/user_db.dart';
 import 'emotions_calendar.dart';
@@ -27,8 +28,8 @@ class _EmotionsDairyState extends State<EmotionsDairy> {
   var selectedName = 'Сегодня';
   int maxLenght = 5;
 
-  Future<Map<String, List>> getDate() async {
-    var s = await UserDatabase.groupData(widget.time, selectedName);
+  Future<Map<String, List>> getDate(DateTime time) async {
+    var s = await UserDatabase.groupData(time, selectedName);
     return s;
   }
 
@@ -78,7 +79,7 @@ class _EmotionsDairyState extends State<EmotionsDairy> {
             Container(
               child: Center(
                   child: Text(
-                date,
+                date.length == 0 ? '' : date.substring(0, 3) + (date.length == 5 ? date.substring(3, 5) : '0${date.substring(3,4)}'),
                 style: TextStyle(color: theme.focusColor),
               )),
               height: size.height / 18,
@@ -149,7 +150,7 @@ class _EmotionsDairyState extends State<EmotionsDairy> {
     }
 
     return FutureBuilder(
-      future: getDate(),
+      future: getDate(widget.time),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           var TableRows = [];
@@ -178,6 +179,10 @@ class _EmotionsDairyState extends State<EmotionsDairy> {
             }
           }
 
+          if(TableRows.length > 5){
+            TableRows = TableRows.sublist(0, 5);
+          }
+
           genericEmotion = UserDatabase.sortState(statesToSort)[0];
 
           return SafeArea(
@@ -195,7 +200,7 @@ class _EmotionsDairyState extends State<EmotionsDairy> {
                   children: [
                     Container(
                         padding: EdgeInsets.only(top: 20),
-                        child: ToMainButton('Будильник эмоций')),
+                        child: ToMainButton.CustomWidget('Будильник эмоций', BottomNavigationScreen(EmotionsAlarmSmile()))),
                     Container(height: size.height / 20),
                     Center(
                       child: Row(
@@ -370,32 +375,40 @@ class _EmotionsDairyState extends State<EmotionsDairy> {
                     Container(
                       height: size.height / 7,
                     ),
-                    Container(
-                      width: size.width / 1.6,
-                      height: size.height / 14.5,
-                      child: ElevatedButton(
-                          onPressed: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => BottomNavigationScreen(EmotionsCalendar(genericEmotion))));
-                          },
-                          child: Text(
-                            'Календарь эмоций',
-                            style: theme.textTheme.bodySmall!.copyWith(
-                                fontFamily: GoogleFonts.inter().fontFamily,
-                                fontSize: 20),
-                          ),
-                          style: ButtonStyle(
-                              backgroundColor: MaterialStateProperty.all<Color>(
-                                  theme.hoverColor),
-                              shape: MaterialStateProperty.all<
-                                      RoundedRectangleBorder>(
-                                  RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(18.0),
-                                      side: BorderSide(
-                                          color: theme.hoverColor))))),
-                    )
+                    // Container(
+                    //   width: size.width / 1.6,
+                    //   height: size.height / 14.5,
+                    //   child: ElevatedButton(
+                    //       onPressed: () async {
+                    //         var s = await getDate(DateTime.now());
+                    //         var states = [];
+                    //         for (var element in s.entries) {
+                    //           if (element.value.isNotEmpty) {
+                    //             states.add(element.value[0]);
+                    //           }
+                    //         }
+                    //         var genericEmotionCalendar = UserDatabase.sortState(states)[0];
+                    //         Navigator.push(
+                    //             context,
+                    //             MaterialPageRoute(
+                    //                 builder: (context) => BottomNavigationScreen(EmotionsCalendar(genericEmotionCalendar))));
+                    //       },
+                    //       child: Text(
+                    //         'Календарь эмоций',
+                    //         style: theme.textTheme.bodySmall!.copyWith(
+                    //             fontFamily: GoogleFonts.inter().fontFamily,
+                    //             fontSize: 20),
+                    //       ),
+                    //       style: ButtonStyle(
+                    //           backgroundColor: MaterialStateProperty.all<Color>(
+                    //               theme.hoverColor),
+                    //           shape: MaterialStateProperty.all<
+                    //                   RoundedRectangleBorder>(
+                    //               RoundedRectangleBorder(
+                    //                   borderRadius: BorderRadius.circular(18.0),
+                    //                   side: BorderSide(
+                    //                       color: theme.hoverColor))))),
+                    // )
                   ],
                 ),
               ),
@@ -619,32 +632,40 @@ class _EmotionsDairyState extends State<EmotionsDairy> {
                   Container(
                     height: size.height / 7,
                   ),
-                  Container(
-                    width: size.width / 1.6,
-                    height: size.height / 14.5,
-                    child: ElevatedButton(
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => BottomNavigationScreen(EmotionsCalendar(genericEmotion))));
-                        },
-                        child: Text(
-                          'Календарь эмоций',
-                          style: theme.textTheme.bodySmall!.copyWith(
-                              fontFamily: GoogleFonts.inter().fontFamily,
-                              fontSize: 20),
-                        ),
-                        style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all<Color>(
-                                theme.hoverColor),
-                            shape: MaterialStateProperty.all<
-                                    RoundedRectangleBorder>(
-                                RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(18.0),
-                                    side:
-                                        BorderSide(color: theme.hoverColor))))),
-                  )
+                  // Container(
+                  //   width: size.width / 1.6,
+                  //   height: size.height / 14.5,
+                  //   child: ElevatedButton(
+                  //       onPressed: () async {
+                  //         var s = await getDate(DateTime.now());
+                  //         var states = [];
+                  //         for (var element in s.entries) {
+                  //           if (element.value.isNotEmpty) {
+                  //             states.add(element.value[0]);
+                  //           }
+                  //         }
+                  //         var genericEmotionCalendar = UserDatabase.sortState(states)[0];
+                  //         Navigator.push(
+                  //             context,
+                  //             MaterialPageRoute(
+                  //                 builder: (context) => BottomNavigationScreen(EmotionsCalendar(genericEmotionCalendar))));
+                  //       },
+                  //       child: Text(
+                  //         'Календарь эмоций',
+                  //         style: theme.textTheme.bodySmall!.copyWith(
+                  //             fontFamily: GoogleFonts.inter().fontFamily,
+                  //             fontSize: 20),
+                  //       ),
+                  //       style: ButtonStyle(
+                  //           backgroundColor: MaterialStateProperty.all<Color>(
+                  //               theme.hoverColor),
+                  //           shape: MaterialStateProperty.all<
+                  //                   RoundedRectangleBorder>(
+                  //               RoundedRectangleBorder(
+                  //                   borderRadius: BorderRadius.circular(18.0),
+                  //                   side:
+                  //                       BorderSide(color: theme.hoverColor))))),
+                  // )
                 ],
               ),
             ),

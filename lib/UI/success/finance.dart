@@ -5,6 +5,7 @@ import 'package:ps/UI/emotion_alarm/to_main_button.dart';
 import 'package:ps/UI/success/seccess_model.dart';
 import 'package:ps/UI/success/success_for_time.dart';
 
+import '../../bottom_navigation.dart';
 import '../../db/user_db.dart';
 
 class Finance extends StatefulWidget {
@@ -177,7 +178,7 @@ class _TestScreenState extends State<Finance> {
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) =>
-                                            SuccessForTime()));
+                                            BottomNavigationScreen(SuccessForTime())));
                               });
                             });
                             },

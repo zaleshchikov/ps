@@ -169,7 +169,7 @@ class _TodayWishesState extends State<TodayWishes> {
                                                                             Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                                                               children: [
                                                                                 TextButton(onPressed: (){
-                                                                                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => SuccessForTime()));
+                                                                                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => BottomNavigationScreen(SuccessForTime())));
                                                                                 }, child: Text('Да', style: theme.textTheme.titleMedium,)),
                                                                                 TextButton(onPressed: (){
                                                                                   Navigator.of(context).pop();
@@ -292,34 +292,34 @@ class _TodayWishesState extends State<TodayWishes> {
                   }
                 }),
                 Container(height: size.height / 50),
-                InkWell(
-                    onTap: () {
-
-                    },
-                    child: Container(
-                        height: size.height / 17.5,
-                        width: size.width / 1.4,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(50),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Color(0xffA55A26),
-                            ),
-                            BoxShadow(
-                              offset: Offset(0, 3),
-                              color: Color(0xffEEA27D),
-                              spreadRadius: -3.0,
-                              blurRadius: 5.0,
-                            ),
-                          ],
-                        ),
-                        child: Center(
-                            child: Text(
-                          'Заменить желание',
-                          style: theme.textTheme.bodySmall!
-                              .copyWith(fontWeight: FontWeight.w600),
-                          textAlign: TextAlign.center,
-                        )))),
+                // InkWell(
+                //     onTap: () {
+                //
+                //     },
+                //     child: Container(
+                //         height: size.height / 17.5,
+                //         width: size.width / 1.4,
+                //         decoration: BoxDecoration(
+                //           borderRadius: BorderRadius.circular(50),
+                //           boxShadow: [
+                //             BoxShadow(
+                //               color: Color(0xffA55A26),
+                //             ),
+                //             BoxShadow(
+                //               offset: Offset(0, 3),
+                //               color: Color(0xffEEA27D),
+                //               spreadRadius: -3.0,
+                //               blurRadius: 5.0,
+                //             ),
+                //           ],
+                //         ),
+                //         child: Center(
+                //             child: Text(
+                //           'Заменить желание',
+                //           style: theme.textTheme.bodySmall!
+                //               .copyWith(fontWeight: FontWeight.w600),
+                //           textAlign: TextAlign.center,
+                //         )))),
                 Container(height: size.height / 100),
                 FutureBuilder(
                     future: UserDatabase.isCompletedWishes(),

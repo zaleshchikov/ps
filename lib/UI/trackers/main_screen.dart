@@ -24,8 +24,9 @@ class MainScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
-              width: size.width/1.1,
-              child: Text('Трекеры помогут сохранить мотивацию, улучшить \nрезультат, и с легкостью обрести счастье',
+              width: size.width / 1.1,
+              height: size.height / 18,
+              child: Text('4 простых шага, чтобы стать счастливым',
                   textAlign: TextAlign.center,
                   style: SafeGoogleFont(
                     'Jost',
@@ -36,20 +37,20 @@ class MainScreen extends StatelessWidget {
                     color: Color(0xff4b3425),
                   )),
             ),
-            Container(height: size.height / 100),
             InkWell(
               onTap: () {
                 Navigator.push(
-                    context,
+                  context,
                   PageRouteBuilder(
                     pageBuilder: (_, __, ___) => WelcomeHappyTest(),
                     transitionDuration: Duration(milliseconds: 400),
                     transitionsBuilder: (_, a, __, c) =>
                         FadeTransition(opacity: a, child: c),
-                  ),);
+                  ),
+                );
               },
               child: Container(
-                child: Image(image: AssetImage('assets/test_img.png')),
+                child: Image(image: AssetImage('assets/test_new.png')),
                 height: size.height / 6.3,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(40),
@@ -72,14 +73,48 @@ class MainScreen extends StatelessWidget {
                 Navigator.push(
                   context,
                   PageRouteBuilder(
-                    pageBuilder: (_, __, ___) => BottomNavigationScreen(MethodicsWebView()),
+                    pageBuilder: (_, __, ___) =>
+                        BottomNavigationScreen(MethodicsWebView()),
                     transitionDuration: Duration(milliseconds: 400),
                     transitionsBuilder: (_, a, __, c) =>
                         FadeTransition(opacity: a, child: c),
-                  ),);
+                  ),
+                );
               },
               child: Container(
-                child: Image(image: AssetImage('assets/method_img_new.png')),
+                child: Image(image: AssetImage('assets/meth_new.png')),
+                height: size.height / 6.3,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(27),
+                  boxShadow: const [
+                    BoxShadow(
+                      color: Colors.black12,
+                    ),
+                    BoxShadow(
+                      color: Colors.white,
+                      spreadRadius: -4.0,
+                      blurRadius: 5.0,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            Container(height: size.height / 40),
+            InkWell(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  PageRouteBuilder(
+                    pageBuilder: (_, __, ___) =>
+                        BottomNavigationScreen(Trackers()),
+                    transitionDuration: Duration(milliseconds: 400),
+                    transitionsBuilder: (_, a, __, c) =>
+                        FadeTransition(opacity: a, child: c),
+                  ),
+                );
+              },
+              child: Container(
+                child: Image(image: AssetImage('assets/trac_new.png')),
                 height: size.height / 6.3,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(27),
@@ -102,44 +137,15 @@ class MainScreen extends StatelessWidget {
                 Navigator.push(
                     context,
                     PageRouteBuilder(
-                      pageBuilder: (_, __, ___) => BottomNavigationScreen(Trackers()),
-                      transitionDuration: Duration(milliseconds: 400),
-                      transitionsBuilder: (_, a, __, c) =>
-                          FadeTransition(opacity: a, child: c),
-                    ),);
-              },
-              child: Container(
-                child: Image(image: AssetImage('assets/trackers_img_new.png')),
-                height: size.height / 6.3,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(27),
-                  boxShadow: const [
-                    BoxShadow(
-                      color: Colors.black12,
-                    ),
-                    BoxShadow(
-                      color: Colors.white,
-                      spreadRadius: -4.0,
-                      blurRadius: 5.0,
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            Container(height: size.height / 40),
-            InkWell(
-              onTap: () {
-                Navigator.push(
-                    context,
-                    PageRouteBuilder(
-                      pageBuilder: (_, __, ___) => BottomNavigationScreen(TreeStatistic()),
+                      pageBuilder: (_, __, ___) =>
+                          BottomNavigationScreen(TreeStatistic()),
                       transitionDuration: Duration(milliseconds: 400),
                       transitionsBuilder: (_, a, __, c) =>
                           FadeTransition(opacity: a, child: c),
                     ));
               },
               child: Container(
-                child: Image(image: AssetImage('assets/statistic_img_new.png')),
+                child: Image(image: AssetImage('assets/stat_new.png')),
                 height: size.height / 6.3,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(27),
