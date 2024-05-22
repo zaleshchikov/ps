@@ -84,7 +84,8 @@ class MyApp extends StatelessWidget {
                   color: const Color(0xff4B3425),
                   fontSize: 32,
                   fontWeight: FontWeight.w500))),
-      home: Container(child: BottomNavigationScreen(MainScreen())),
+      home:
+      Container(child: BottomNavigationScreen(MainScreen())),
     );
   }
 }

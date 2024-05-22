@@ -28,7 +28,7 @@ class _EmotionsDairyState extends State<EmotionsDairy> {
   var selectedName = 'Сегодня';
   int maxLenght = 5;
 
-  Future<Map<String, List>> getDate(DateTime time) async {
+  Future getDate(DateTime time) async {
     var s = await UserDatabase.groupData(time, selectedName);
     return s;
   }
@@ -156,7 +156,7 @@ class _EmotionsDairyState extends State<EmotionsDairy> {
           var TableRows = [];
           var statesToSort = [];
           if (selectedName == 'Сегодня') {
-            for (var element in snapshot.data!.entries) {
+            for (var element in snapshot.data!) {
               if (element.value.isNotEmpty) {
                 statesToSort.add(element.value[0]);
                 TableRows.add(tableRow(1, element.key, element.value[0],

@@ -266,14 +266,16 @@ static Future<int> getDifference() async {
   static groupData(DateTime time, String grade) async {
     var data = await getDataByDate(time, grade);
     Map<String, List> result = {};
+    List<MapEntry<String, List>> todayResult = [];
     var statesToSort = [];
     switch (grade) {
       case 'Сегодня':
         for (var element in data.entries) {
           for(List alarmList in element.value){
+            todayResult.add(MapEntry(alarmList[0], alarmList.sublist(1)));
           result.addEntries({MapEntry(alarmList[0], alarmList.sublist(1))});}
         }
-        break;
+        return todayResult;
       case 'Неделя':
         int weekBegin = DateTime.now().day - DateTime.now().weekday+1;
 

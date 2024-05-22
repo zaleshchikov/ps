@@ -99,6 +99,7 @@ class ResultAn extends StatelessWidget {
                             width: size.width / 1.3,
                             child: LineChart(
                               LineChartData(
+                                  minY: 0,
                                   maxY: 80,
                                   gridData: FlGridData(show: false),
                                   titlesData: FlTitlesData(
@@ -112,7 +113,7 @@ class ResultAn extends StatelessWidget {
                                         dotData: FlDotData(
                                           show: false,
                                         ),
-                                        spots: spots)
+                                        spots: spots.sublist(0, spots.length-1))
                                   ]),
                             ),
                           ),
