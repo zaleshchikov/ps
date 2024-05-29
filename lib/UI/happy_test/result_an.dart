@@ -2,8 +2,8 @@ import 'dart:math';
 
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:ps/UI/emotion_alarm/to_main_button.dart';
 import 'package:ps/UI/trackers/main_screen.dart';
-import 'to_main_button.dart';
 import 'result_text.dart';
 import 'package:ps/bottom_navigation.dart';
 import '../should_register.dart';
@@ -45,24 +45,7 @@ class ResultAn extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Container(height: size.height / 20),
-                InkWell(
-                    onTap: () async {
-                      Random random = Random();
-                      if (!(await UserDatabase.isRegister()) &&
-                          random.nextInt(10) == 9) {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) =>
-                                    ShouldRegister(MainScreen())));
-                      } else {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const MainScreen()));
-                      }
-                    },
-                    child: const ToMainButton()),
+                ToMainButton('На главную'),
                 Container(
                   height: size.height / 15,
                 ),
@@ -101,6 +84,7 @@ class ResultAn extends StatelessWidget {
                               LineChartData(
                                   minY: 0,
                                   maxY: 80,
+
                                   gridData: FlGridData(show: false),
                                   titlesData: FlTitlesData(
                                     show: false,
@@ -110,10 +94,8 @@ class ResultAn extends StatelessWidget {
                                     LineChartBarData(
                                         barWidth: 3,
                                         color: theme.textTheme.bodySmall!.color,
-                                        dotData: FlDotData(
-                                          show: false,
-                                        ),
-                                        spots: spots.sublist(0, spots.length-1))
+
+                                        spots: spots.length > 1 ? spots.sublist(0, spots.length-1) : spots)
                                   ]),
                             ),
                           ),

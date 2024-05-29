@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'dart:ui';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:ps/UI/happy_test/result_an.dart';
 import 'package:ps/UI/statistic/tree_statistic.dart';
 import 'package:ps/bottom_navigation.dart';
 import 'package:ps/page-1/utils.dart';
@@ -268,11 +269,13 @@ class _RoundStatisticState extends State<RoundStatistic> {
                       left: 169 * fem,
                       top: 21 * fem,
                       child: InkWell(
-                        onTap: () {
+                        onTap: () async {
+                          var users = await UserDatabase.users();
+                          var user = users[0];
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => WelcomeHappyTest()));
+                                  builder: (context) => BottomNavigationScreen(ResultAn(int.parse(user.testResult.last), user.testResult))));
                         },
                         child: Align(
                           child: SizedBox(

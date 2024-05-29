@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ps/UI/happy_test/test_webview.dart';
 import 'to_main_button.dart';
 import 'package:flutter/material.dart';
 
@@ -55,27 +56,12 @@ class TextResult extends StatelessWidget {
             children: [
               Container(height: size.height / 40),
               ToMainButton(),
-              Text(
-                title,
-                textAlign: TextAlign.center,
-                style: theme.textTheme.titleLarge!.copyWith(
-                    fontSize: 28, color: theme.textTheme.bodySmall!.color),
-              ),
-                Container(
-                  height: 500,
-                  child: SingleChildScrollView(
-                    scrollDirection: Axis.vertical,
-      
-                    child: Container(
-                      padding: EdgeInsets.all(30),
-                      child: Text(
-                        text,
-                        style: theme.textTheme.bodySmall!
-                            .copyWith(fontWeight: FontWeight.w400, fontSize: 18),
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                  ),
+              Text('Ваш результат:\n$sum баллов', style: theme.textTheme.titleMedium!.copyWith(
+                fontSize: 25
+              ), textAlign: TextAlign.center,),
+              Container(
+                  height: size.height/1.5,
+                  child: HappyTestWebView()
                 ),
               Container(),
             ],

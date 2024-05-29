@@ -10,6 +10,7 @@ import 'package:ps/page-1/utils.dart';
 import '../../bottom_navigation.dart';
 import '../../db/user_db.dart';
 import '../../db/user_model.dart';
+import '../happy_test/result_an.dart';
 
 class TreeStatistic extends StatefulWidget {
   @override
@@ -243,11 +244,13 @@ class _RoundStatisticState extends State<TreeStatistic> {
                       left: 174 * fem,
                       top: 21 * fem,
                       child: InkWell(
-                        onTap: () {
+                        onTap: () async {
+                          var users = await UserDatabase.users();
+                          var user = users[0];
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => WelcomeHappyTest()));
+                                  builder: (context) => BottomNavigationScreen(ResultAn(int.parse(user.testResult.last), user.testResult))));
                         },
                         child: Align(
                           child: SizedBox(
