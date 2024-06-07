@@ -19,8 +19,12 @@ class ResultAn extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if(result[0][0] == ''){
+      result = result.skip(1).toList();
+    }
     for (int i = 0; i < result.length; i++) {
-      spots.add(FlSpot((i + 1).toDouble(), int.parse(result[i]).toDouble()));
+      if(result[i][0] != ''){
+      spots.add(FlSpot((i + 1).toDouble(), int.parse(result[i][0]).toDouble()));}
     }
 
     double baseWidth = 430;
@@ -84,7 +88,47 @@ class ResultAn extends StatelessWidget {
                               LineChartData(
                                   minY: 0,
                                   maxY: 80,
+                                  lineTouchData: LineTouchData(
+                                  enabled: true,
+                                  touchCallback:
+                                      (FlTouchEvent event, LineTouchResponse? touchResponse) {
 
+                                  },
+                                  touchTooltipData: LineTouchTooltipData(
+                                    tooltipBgColor: const Color(0xffffe4c9),
+                                    tooltipRoundedRadius: 20.0,
+                                    showOnTopOfTheChartBoxArea: true,
+                                    fitInsideHorizontally: true,
+                                    tooltipMargin: 0,
+                                    getTooltipItems: (touchedSpots) {
+                                      return touchedSpots.map(
+                                            (LineBarSpot touchedSpot) {
+
+                                          return LineTooltipItem(
+                                            result[touchedSpot.spotIndex][1],
+                                            theme.textTheme.bodySmall!.copyWith(color: const Color(0xff4B3425)),
+                                          );
+                                        },
+                                      ).toList();
+                                    },
+                                  ),
+                                  getTouchedSpotIndicator:
+                                      (LineChartBarData barData, List<int> indicators) {
+                                    return indicators.map(
+                                          (int index) {
+                                        final line = FlLine(
+                                            color: Colors.grey,
+                                            strokeWidth: 1,
+                                            dashArray: [2, 4]);
+                                        return TouchedSpotIndicatorData(
+                                          line,
+                                          FlDotData(show: false),
+                                        );
+                                      },
+                                    ).toList();
+                                  },
+                                  getTouchLineEnd: (_, __) => double.infinity
+                              ),
                                   gridData: FlGridData(show: false),
                                   titlesData: FlTitlesData(
                                     show: false,
@@ -92,10 +136,11 @@ class ResultAn extends StatelessWidget {
                                   borderData: FlBorderData(show: false),
                                   lineBarsData: [
                                     LineChartBarData(
+                                      dotData: FlDotData(),
                                         barWidth: 3,
                                         color: theme.textTheme.bodySmall!.color,
 
-                                        spots: spots.length > 1 ? spots.sublist(0, spots.length-1) : spots)
+                                        spots: spots)
                                   ]),
                             ),
                           ),

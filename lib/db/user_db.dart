@@ -12,7 +12,7 @@ class UserDatabase {
       databaseFactory.deleteDatabase(path);
   static Future open() async {
     _database ??= await openDatabase(
-      join(await getDatabasesPath(), 'user_database_3.db'),
+      join(await getDatabasesPath(), 'user_database_5.db'),
       onCreate: (db, version) {
         return db.execute(
           'CREATE TABLE users ('
@@ -409,11 +409,11 @@ static Future<int> getDifference() async {
     return user.username != '';
   }
 
-  static Future<int> addResult(int result) async {
+  static Future<int> addResult(int result, String date) async {
     await open();
     var _users = await users();
     User user = _users[0];
-    user.testResult.add(result.toString());
+    user.testResult.add([result.toString(), date]);
     if (user.testResult.length > 0 && user.testResult[0].toString() == '') {
       user.testResult = user.testResult.sublist(1);
     }
@@ -746,7 +746,7 @@ static Future<int> getDifference() async {
       return User(
           username: maps[i]['username'],
           password: maps[i]['password'],
-          testResult: maps[i]['testResult'].split('_'),
+          testResult: <List<String>>[...maps[i]['testResult'].split('_').map((e) => e.split('+')).toList()],
           calendar: json.decode(maps[i]['calendar']),
           Wishes: <Wish>[
             ...maps[i]['Wishes']

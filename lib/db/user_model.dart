@@ -4,7 +4,7 @@ import 'wish_model.dart';
 class User {
   String username;
   String password;
-  List testResult;
+  List<List<String>> testResult;
   Map<String, dynamic> calendar;
   List<Wish> Wishes;
   bool isTestUsed;
@@ -25,7 +25,7 @@ class User {
     return {
       'username': username,
       'password': password,
-      'testResult': testResult.map((i) => i.toString()).join("_"),
+      'testResult': testResult.map((e) => e.join('+')).join('_'),
       'calendar': json.encode(calendar),
       'Wishes': Wishes.map((i) => i.toString()).join("_"),
       'LastTest':

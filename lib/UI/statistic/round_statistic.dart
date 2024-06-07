@@ -275,7 +275,7 @@ class _RoundStatisticState extends State<RoundStatistic> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => BottomNavigationScreen(ResultAn(int.parse(user.testResult.last), user.testResult))));
+                                  builder: (context) => user.testResult.isEmpty ? WelcomeHappyTest() : BottomNavigationScreen(ResultAn(int.parse(user.testResult.last[0]), user.testResult))));
                         },
                         child: Align(
                           child: SizedBox(

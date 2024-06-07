@@ -49,6 +49,7 @@ dependencies:
   permission_handler: ^11.3.1
   webview_flutter: ^4.7.0
   shared_preferences: ^2.2.3
+  flutter_launcher_icons: ^0.13.1
 
 dev_dependencies:
   flutter_test:
@@ -63,6 +64,10 @@ dev_dependencies:
   build_runner: ^2.4.8
   json_serializable: ^6.7.1
 
+flutter_icons:
+  image_path: "assets/Happy_logo.jpg"
+  android: true
+  ios: true
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 

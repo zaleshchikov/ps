@@ -351,13 +351,18 @@ class AutoCalendar extends StatelessWidget {
                                                             ),
                                                           ),
                                                         ),
-                                                        Container(
-                                                          width: size.width/15,
-                                                          height: size.height/120,
-                                                          decoration: BoxDecoration(
-                                                            color: snapshot.data == true ? Color(0xffA5B879) : Color(0xffEEA27D)
-                                                          ),
-                                                        )
+                                                        FutureBuilder(future: UserDatabase.getStatusOfWish(DateTime.now(), 'autoCalendar'), builder: (context, snapshot){
+                                                          return Container(
+                                                            width: size.width/15,
+                                                            height: size.height/120,
+                                                            decoration: BoxDecoration(
+                                                                color: snapshot.hasData ? snapshot.data! ?
+                                                                Color(0xffA5B879) :
+                                                                Color(0xffEEA27D) : Color(0xffEEA27D)
+                                                            ),
+                                                          );
+                                                        })
+
                                                       ],
                                                     ),
                                                   ),

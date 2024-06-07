@@ -41,6 +41,8 @@ class _SuccessForTimeState extends State<SuccessForTime> {
     User user = users[0];
     for (var date in user.calendar.keys) {
       var dateList = date.split('/');
+      var dateString = DateFormat('dd.MM.yyyy').format(DateTime(int.parse(dateList[3]), int.parse(dateList[2]),
+          int.parse(dateList[0])));
       print(start);
       if (DateTime(int.parse(dateList[3]), int.parse(dateList[2]),
                       int.parse(dateList[0]))
@@ -51,13 +53,13 @@ class _SuccessForTimeState extends State<SuccessForTime> {
                   .compareTo(DateTime(end.year, end.month, end.day)) <=
               0) {
         for (var completedWish in user.calendar[date]!['completedWishes']) {
-          listOfAchievement.add(BankSuccess(dateList[0], completedWish[0]));
+          listOfAchievement.add(BankSuccess(dateString, completedWish[0]));
         }
         for (var emotionAlarm in user.calendar[date]!['emotionAlarm']) {
           if (emotionAlarm.length > 0 &&
               listOfHappiness.contains(emotionAlarm[1])) {
             listOfAchievement.add(
-                BankSuccess(date.split('/')[0], 'Позитивый результат теста'));
+                BankSuccess(dateString, 'Позитивый результат теста'));
           }
         }
         for (var calendarKey in user.calendar[date]!['calendarWish'].keys) {
@@ -65,13 +67,13 @@ class _SuccessForTimeState extends State<SuccessForTime> {
               user.calendar[date]!['calendarWish'][calendarKey][1]) {
 
             listOfAchievement.add(BankSuccess(
-                '${date.split('/')[0]}.${date.split('/')[2].length == 1 ? '0' : ''}${date.split('/')[2]}.${date.split('/')[3]}',
+                dateString,
                 user.calendar[date]!['calendarWish'][calendarKey][0]));
           }
         }
         for (List success in user.calendar[date]!['successJournal']) {
           if(success.isNotEmpty){
-          listOfAchievement.add(BankSuccess(dateList[0], success[0]));}
+          listOfAchievement.add(BankSuccess(dateString, success[0]));}
           print(listOfAchievement);
         }
       }

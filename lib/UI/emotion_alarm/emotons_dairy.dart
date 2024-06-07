@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:ps/UI/emotion_alarm/emotions_alarm_smile.dart';
 import 'package:ps/bottom_navigation.dart';
@@ -73,13 +74,15 @@ class _EmotionsDairyState extends State<EmotionsDairy> {
 
     tableRow(
         int index, String date, String name, String emotions, String feelings) {
+      var splitDate = date.split(':');
       return TableRow(
           decoration: BoxDecoration(color: theme.indicatorColor),
           children: [
             Container(
               child: Center(
-                  child: Text(
-                date.length == 0 ? '' : date.substring(0, 3) + (date.length == 5 ? date.substring(3, 5) : '0${date.substring(3,4)}'),
+                  child: AutoSizeText(
+                    maxLines: 1,
+                splitDate.length == 1 || splitDate.isEmpty ? date : splitDate[0] + ':' +(splitDate[1].length == 2 ? splitDate[1] : '0${splitDate[1]}'),
                 style: TextStyle(color: theme.focusColor),
               )),
               height: size.height / 18,
@@ -148,6 +151,8 @@ class _EmotionsDairyState extends State<EmotionsDairy> {
             )
           ]);
     }
+
+    var d = getDate(widget.time);
 
     return FutureBuilder(
       future: getDate(widget.time),

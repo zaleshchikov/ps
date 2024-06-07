@@ -133,7 +133,7 @@ class _RoundStatisticState extends State<TreeStatistic> {
               Container(
                 // autogrouptjqmcgs (Kqn7tYKh1Cihow1AKPTjqM)
                 margin:
-                    EdgeInsets.fromLTRB(11 * fem, 0 * fem, 29 * fem, 92 * fem),
+                    EdgeInsets.fromLTRB(11 * fem, 0 * fem, 29 * fem, 30 * fem),
                 width: double.infinity,
                 height: 61 * fem,
                 child: Stack(
@@ -250,7 +250,9 @@ class _RoundStatisticState extends State<TreeStatistic> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => BottomNavigationScreen(ResultAn(int.parse(user.testResult.last), user.testResult))));
+                                  builder: (context) => BottomNavigationScreen(
+                                      user.testResult.isEmpty ? WelcomeHappyTest() :
+                                      ResultAn(int.parse(user.testResult.last[0]), user.testResult))));
                         },
                         child: Align(
                           child: SizedBox(
@@ -272,6 +274,20 @@ class _RoundStatisticState extends State<TreeStatistic> {
                     ),
                   ],
                 ),
+              ),
+              Container(
+                width: size.width / 1.2,
+                height: size.height / 18,
+                child: Text('Чтобы повысить уровень счастья  используйте трекеры',
+                    textAlign: TextAlign.center,
+                    style: SafeGoogleFont(
+                      'Jost',
+                      fontSize: 18 * ffem,
+                      fontWeight: FontWeight.w400,
+                      height: 1.445 * ffem / fem,
+                      letterSpacing: -0.2 * fem,
+                      color: Color(0xff4b3425),
+                    )),
               ),
               FutureBuilder(
                   future: getSphereCount(
